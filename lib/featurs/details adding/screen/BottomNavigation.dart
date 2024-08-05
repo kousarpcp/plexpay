@@ -2,6 +2,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/History_Bottom.dart';
@@ -37,6 +38,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: Scaffold(
         body: Ann[selectedIndex],
         bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor:  colorConst.blue,
           key: _bottomNavigationKey,
           // elevation: 0,
           // type: BottomNavigationBarType.fixed,
@@ -63,7 +65,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     color: Colors.white,
                   ),
                   decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: colorConst.blue,
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 label: ""),
