@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:maxx_sunmi_printer/maxx_sunmi_printer.dart';
-import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/imageConst.dart';
 import 'package:screenshot/screenshot.dart';
 

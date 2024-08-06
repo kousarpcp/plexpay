@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/country_field.dart';
 
 import '../../../main.dart';
@@ -118,36 +119,30 @@ class _internationalState extends State<international> {
                     ),
                   ));
             },
-            child: Stack(
-              children: [
-                Container(
-                  height: width * 0.13,
-                  width: width * 0.82,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(width * 0.03)),
-                ),
-                Positioned(
-                  right: width * 0.0,
-                  child: Container(
-                    height: width * 0.13,
-                    width: width * 0.14,
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    decoration: BoxDecoration(
-                        color: Colors.indigoAccent,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(width * 0.03),
-                            bottomRight: Radius.circular(width * 0.03))),
+            child: Container(
+                height: height * 0.055,
+                width: width*0.84,
+                decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    borderRadius: BorderRadius.circular(width*0.03)),
+                child: Padding(
+                  padding: const EdgeInsets.all(9.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.search_rounded),
+                      SizedBox(width: width*0.02,),
+                      Text("Search",style: TextStyle(
+                        fontSize: width * 0.04,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                      ),)
+                    ],
                   ),
-                ),
-              ],
+                )
             ),
           ),
           SizedBox(
-            height: width * 0.02,
+            height: width * 0.04,
           ),
           Expanded(
             child: GridView.builder(
@@ -157,9 +152,9 @@ class _internationalState extends State<international> {
                   decelerationRate: ScrollDecelerationRate.fast),
               scrollDirection: Axis.vertical,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.80,
-                  crossAxisSpacing: 17,
-                  mainAxisSpacing: 2,
+                  childAspectRatio: 1.1,
+                  crossAxisSpacing: width*0.01,
+                  mainAxisSpacing: width*0.01,
                   crossAxisCount: 4),
               itemBuilder: (context, index) {
                 return Column(
@@ -175,8 +170,8 @@ class _internationalState extends State<international> {
                             ));
                       },
                       child: Container(
-                        height: 65.02,
-                        width: 65,
+                        height: width*0.16,
+                        width: width*0.16,
                         decoration: BoxDecoration(
                             // color: Colors.blue,
                             borderRadius: BorderRadius.circular(width * 0.04),

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
-import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_custom.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
 

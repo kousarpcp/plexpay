@@ -2,12 +2,14 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
+// import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/History_Bottom.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Share.dart';
+import 'package:plexpay/featurs/responsive/responsive__layout.dart';
 
+import '../Const/colorConst.dart';
 import 'blank_page4.dart';
 import 'collections.dart';
 
@@ -68,7 +70,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       color: colorConst.blue,
                       borderRadius: BorderRadius.circular(10)),
                 ),
-                label: ""),
+                label: "",
+                
+            ),
             CurvedNavigationBarItem(
               child: Icon(Icons.history),
               label: 'History',

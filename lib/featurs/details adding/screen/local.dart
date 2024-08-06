@@ -50,9 +50,7 @@ class _localState extends State<local> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(
-            height: width * 0.035,
-          ),
+
           Expanded(
             child: GridView.builder(
               itemCount: images.length,
@@ -60,9 +58,9 @@ class _localState extends State<local> {
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.73,
-                  crossAxisSpacing: 17,
-                  mainAxisSpacing: 15,
+                  childAspectRatio: 0.9,
+                  crossAxisSpacing: width*0.01,
+                  mainAxisSpacing: width*0.01,
                   crossAxisCount: 4),
               itemBuilder: (context, index) {
                 return Column(
@@ -76,8 +74,8 @@ class _localState extends State<local> {
                             ));
                       },
                       child: Container(
-                        height: 71.02,
-                        width: 100,
+                        height: width*0.17,
+                        width: width*0.17,
                         decoration: BoxDecoration(
                             // color: Colors.blue,
                             borderRadius: BorderRadius.circular(width * 0.04),
@@ -88,7 +86,7 @@ class _localState extends State<local> {
                       ),
                     ),
                     SizedBox(
-                      height: width * 0.015,
+                      height: width * 0.01,
                     ),
                     Text(
                       images[index]["text"],

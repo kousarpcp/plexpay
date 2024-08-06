@@ -53,13 +53,20 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   maxx_sunmi_printer: ^0.0.6
   custom_date_range_picker: ^1.1.0
+  google_fonts: ^6.2.1
+  animations: ^2.0.8
+  flutter_staggered_animations: ^1.1.1
+
+
 #  flutter_launcher_icons: ^0.13.1
   http:
 
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
+
 #  flutter_screenutil: ^5.9.3
 
   # The "flutter_lints" package below contains a set of recommended lints to

@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/international.dart';
@@ -57,7 +61,9 @@ class _home_pageState extends State<home_page> {
           actions: [
             Row(
               children: [
-                GestureDetector(
+                InkWell(
+                  borderRadius: BorderRadius.circular(width*0.06),
+                  splashColor: colorConst.blue,
                   onTap: () {
                     Navigator.push(
                         context,
@@ -66,19 +72,22 @@ class _home_pageState extends State<home_page> {
                         ));
                   },
                   child: CircleAvatar(
-                    radius: width * 0.035,
-                    backgroundColor: Colors.white,
-                    child: Image.asset(
-                      ImageConst.bellicon,
-                      width: width * 0.055,
+                    radius: width*0.04,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(
+                      Icons.notifications_rounded,
+                      color: colorConst.blue,
+                      size: width*0.065,
                     ),
-                  ),
+                  )
                 ),
                 SizedBox(
                   width: width * 0.01,
                 ),
-                GestureDetector(
-                  onTap: () {
+                InkWell(
+                    borderRadius: BorderRadius.circular(width*0.06),
+                    splashColor: colorConst.blue,
+                    onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -86,13 +95,14 @@ class _home_pageState extends State<home_page> {
                         ));
                   },
                   child: CircleAvatar(
-                    radius: width * 0.035,
-                    backgroundColor: Colors.white,
-                    child: Image.asset(
-                      ImageConst.contact,
-                      width: width * 0.055,
+                    radius: width*0.05,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(
+                      CupertinoIcons.person_circle_fill,
+                      color: colorConst.blue,
+                      size: width*0.065,
                     ),
-                  ),
+                  )
                 ),
               ],
             ),
@@ -104,134 +114,158 @@ class _home_pageState extends State<home_page> {
         body:
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                  height: width * 0.26,
-                  width: width * 0.93,
-                  decoration: BoxDecoration(
-                      color: Colors.indigoAccent,
-                      borderRadius: BorderRadius.circular(width * 0.03)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: width * 0.05,
-                          ),
-                          Text(
-                            "Free Vouchers",
-                            style: TextStyle(
-                                fontSize: width * 0.075, color: Colors.white),
-                          ),
-                          Text(
-                            "Tap here to claim yourfree discount vouchers",
-                            style: TextStyle(
-                                fontSize: width * 0.03, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "0",
-                            style: TextStyle(
-                                fontSize: width * 0.2, color: Colors.white),
-                          ),
-                          Text(
-                            "%",
-                            style: TextStyle(
-                                fontSize: width * 0.15,
-                                color: Colors.lightBlueAccent),
-                          ),
-                        ],
-                      ),
-                    ],
+          child: AnimationLimiter(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children:  AnimationConfiguration.toStaggeredList(
+                  duration: const Duration(milliseconds: 500),
+                  childAnimationBuilder: (widget) => SlideAnimation(
+                      horizontalOffset: 50.0,
+                      child: FadeInAnimation(
+                        child: widget,
+                      )
                   ),
-                ),
-              ),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // SizedBox(width: width*0.06,),
-                  Container(
-                    height: width * 0.2,
-                    width: width * 0.84,
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Column(
+                  gap,
+                  Center(
+                    child: Container(
+                      height: width * 0.26,
+                      width: width * 0.93,
+                      decoration: BoxDecoration(
+                          color: colorConst.blue,
+                          borderRadius: BorderRadius.circular(width * 0.06)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              CircleAvatar(
-                                radius: width * 0.072,
+                              Text(
+                                "Free Vouchers",
+                                style: TextStyle(
+                                    fontSize: width * 0.06, color: Colors.white),
+                              ),
+                              Text(
+                                "Tap here to claim yourfree discount vouchers",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                    fontSize: width * 0.027, color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: width*0.02,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "0",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: width*0.15,
+                                )
+                              ),
+                              Text(
+                                "%",
+                                style: GoogleFonts.poppins(
+                                    fontSize: width * 0.12,
+                                    color: Colors.lightBlue.shade200),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  gap,
+                  gap,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // SizedBox(width: width*0.06,),
+                      Container(
+                        height: width * 0.2,
+                        width: width * 0.78,
+                        child: ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return CircleAvatar(
+                                radius: width * 0.065,
                                 backgroundColor: Colors.black,
                                 backgroundImage: AssetImage(a[index]["image1"]),
-                              )
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: width * 0.03,
-                          );
-                        },
-                        itemCount: a.length),
-                  )
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: width * 0.03,
+                              );
+                            },
+                            itemCount: a.length),
+                      )
+                    ],
+                  ),
+                  gap,
+                  Container(
+                    height: width * 0.10,
+                    width: width * 0.56,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(width * 0.04)),
+                    child: TabBar(
+                        indicatorColor: Colors.transparent,
+                        labelColor: CupertinoColors.white,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicator: BoxDecoration(
+                            color: colorConst.blue,
+                            borderRadius: BorderRadius.circular(width*0.04)
+                        ),
+                        dividerColor: Colors.transparent,
+                        labelStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: width*0.033,
+                            fontWeight: FontWeight.w500
+                        ),
+                        unselectedLabelStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: width*0.03,
+                            fontWeight: FontWeight.w400
+                        ),
+                        tabs: [
+                          Tab(
+                            child: Center(
+                                child: Text(
+                              "Local",
+                              style: TextStyle(fontSize: width * 0.04),
+                            )),
+                          ),
+                          Tab(
+                            child: Center(
+                                child: Text("International",
+                                    // style: TextStyle(fontSize: width * 0.033)
+                                )),
+                          ),
+                        ]),
+                  ),
+                  SizedBox(
+                    height: width * 0.03,
+                  ),
+                  Container(
+                    height: width *0.8,
+                    child: Padding(
+                      padding: EdgeInsets.all(width * 0.03),
+                      child: TabBarView(children: [
+                        local(),
+                        international(),
+                      ]),
+                    ),
+                  ),
                 ],
               ),
-              Container(
-                height: width * 0.10,
-                width: width * 0.56,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(width * 0.03)),
-                child: TabBar(
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black,
-                    indicatorColor: Colors.transparent,
-                    dividerColor: Colors.transparent,
-                    // indicatorPadding: EdgeInsets.symmetric(horizontal: 2,),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: BoxDecoration(
-                        color: Colors.indigoAccent,
-                        borderRadius: BorderRadius.circular(width * 0.03)),
-                    tabs: [
-                      Tab(
-                        child: Center(
-                            child: Text(
-                          "local",
-                          style: TextStyle(fontSize: width * 0.06),
-                        )),
-                      ),
-                      Tab(
-                        child: Center(
-                            child: Text("International",
-                                style: TextStyle(fontSize: width * 0.033))),
-                      ),
-                    ]),
               ),
-              SizedBox(
-                height: width * 0.03,
-              ),
-              Container(
-                height: width *1.02,
-                child: Padding(
-                  padding: EdgeInsets.all(width * 0.03),
-                  child: TabBarView(children: [
-                    local(),
-                    international(),
-                  ]),
-                ),
-              ),
-            ],
+            )
           ),
         ),
       ),

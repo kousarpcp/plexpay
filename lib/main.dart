@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
 import 'package:plexpay/featurs/details%20adding/screen/splashScreen.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
       child:
           MaterialApp(
             theme: ThemeData(
+              textTheme: GoogleFonts.muktaVaaniTextTheme()
             ),
               debugShowCheckedModeBanner: false,
               home: Collections()),

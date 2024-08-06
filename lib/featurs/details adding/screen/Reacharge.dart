@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/Const/NetWork.dart';
 import 'package:plexpay/featurs/details%20adding/screen/blank1.dart';
-import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_Tab.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
 import 'package:quickalert/models/quickalert_type.dart';
