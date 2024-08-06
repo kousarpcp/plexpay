@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
               textTheme: GoogleFonts.muktaVaaniTextTheme()
             ),
               debugShowCheckedModeBanner: false,
-              home: Collections()),
+              home: Splashscreen()),
     );
   }
 }
