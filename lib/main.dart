@@ -11,6 +11,7 @@ import 'featurs/details adding/screen/PrintPage.dart';
 import 'featurs/details adding/screen/Reacharge.dart';
 import 'featurs/details adding/screen/Recharge bill genarate.dart';
 import 'featurs/details adding/screen/blank1.dart';
+import 'featurs/details adding/screen/collections.dart';
 import 'featurs/details adding/screen/collectionsReciept.dart';
 import 'featurs/details adding/screen/country_field.dart';
 import 'featurs/details adding/screen/dataPacks.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
             ),
               debugShowCheckedModeBanner: false,
-              home: Splashscreen()),
+              home: Collections()),
     );
   }
 }
