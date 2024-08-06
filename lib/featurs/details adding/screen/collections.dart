@@ -1,10 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 
 import '../../../main.dart';
+import '../Const/widgets.dart';
 import 'imageConst.dart';
 
 class Collections extends StatefulWidget {
@@ -15,6 +15,24 @@ class Collections extends StatefulWidget {
 }
 
 class _CollectionsState extends State<Collections> {
+
+  List c=[
+    {
+      "Text1":"Transaction ID :",
+      "Text2":"PXYDUE603",
+      "Text3":"10.00"
+    },
+    {
+      "Text1":"Transaction ID :",
+      "Text2":"PXYDUE603",
+      "Text3":"20.00"
+    },
+    {
+      "Text1":"Transaction ID :",
+      "Text2":"PXYDUE603",
+      "Text3":"30.00"
+    },
+  ];
 
   var start = DateTime.now().year.toString() +
       "-" +
@@ -34,12 +52,8 @@ class _CollectionsState extends State<Collections> {
           start: DateTime.now(),
           end: DateTime.now(),
         ),
-        firstDate: DateTime(DateTime
-            .now()
-            .year + -5),
-        lastDate: DateTime(DateTime
-            .now()
-            .year + 2),
+        firstDate: DateTime(DateTime.now().year + -5),
+        lastDate: DateTime(DateTime.now().year + 2),
         helpText: 'Select Date Range',
         cancelText: 'CANCEL',
         confirmText: 'OK',
@@ -48,8 +62,7 @@ class _CollectionsState extends State<Collections> {
         errorInvalidText: 'Out of range.',
         errorInvalidRangeText: 'Invalid range.',
         fieldStartHintText: 'Start Date',
-        fieldEndLabelText: 'End Date')
-    );
+        fieldEndLabelText: 'End Date'));
 
     if (pickedRange != null) {
       setState(() {
@@ -65,8 +78,8 @@ class _CollectionsState extends State<Collections> {
             pickedRange.end.day.toString();
       });
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,25 +120,23 @@ class _CollectionsState extends State<Collections> {
                       Border.all(width: width * 0.001, color: colorConst.grey),
                   borderRadius: BorderRadius.circular(width * 0.03)),
               child: Padding(
-                padding:  EdgeInsets.all(width*0.03),
+                padding: EdgeInsets.all(width * 0.03),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
                       Icons.date_range_outlined,
                       color: Colors.lightBlueAccent,
-                      size: width*0.053,
+                      size: width * 0.053,
                     ),
                     SizedBox(
-                      width: width*0.03,
+                      width: width * 0.03,
                     ),
                     Expanded(
                       child: Text(
                         start + "  to  " + end,
                         maxLines: 2,
-                        style: TextStyle(
-                          fontSize: width*0.043
-                        ),
+                        style: TextStyle(fontSize: width * 0.043),
                         // style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
@@ -134,7 +145,7 @@ class _CollectionsState extends State<Collections> {
                         selectDateRange(context);
                       },
                       child: Container(
-                        height: width * 0.075,
+                        height: width * 0.077,
                         width: width * 0.23,
                         decoration: BoxDecoration(
                             color: Colors.blue,
@@ -146,12 +157,18 @@ class _CollectionsState extends State<Collections> {
                                 child: Text(
                               "FILTER",
                               style: TextStyle(
-                                  fontSize: width * 0.046,
+                                  fontSize: width * 0.044,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white),
                             )),
-                            SizedBox(width: width*0.012,),
-                            Icon(Icons.filter_alt,color: Colors.white,size:width*0.042 ,),
+                            SizedBox(
+                              width: width * 0.012,
+                            ),
+                            Icon(
+                              Icons.filter_alt,
+                              color: Colors.white,
+                              size: width * 0.038,
+                            ),
                           ],
                         ),
                       ),
@@ -160,25 +177,91 @@ class _CollectionsState extends State<Collections> {
                 ),
               ),
             ),
-          )
+          ),
+          ListView.separated(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CollectionList(c: c, index:index ,);
+              },
+              separatorBuilder: (context, index) {
+                return
+                 gap;
+              },
+              itemCount: c.length)
         ],
       ),
     );
   }
 }
-// class CollectionList extends StatefulWidget {
-//   const CollectionList({super.key});
-//
-//   @override
-//   State<CollectionList> createState() => _CollectionListState();
-// }
-//
-// class _CollectionListState extends State<CollectionList> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: width*0.08,
-//
-//     );
-//   }
-// }
+
+class CollectionList extends StatefulWidget {
+  final List c;
+  final int index;
+  const CollectionList({super.key,
+    required this.c,
+    required this.index});
+
+  @override
+  State<CollectionList> createState() => _CollectionListState();
+}
+
+class _CollectionListState extends State<CollectionList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        gap,
+        Container(
+          height: width * 0.18,
+          margin: EdgeInsets.only(left: width * 0.068, right: width * 0.068),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    blurStyle: BlurStyle.normal,
+                    color: Colors.black.withOpacity(0.09),
+                    offset: Offset(0, 2),
+                    spreadRadius: 1,
+                    blurRadius: 9)
+              ],
+              borderRadius: BorderRadius.circular(width * 0.03)),
+          child: Padding(
+            padding:  EdgeInsets.all(width*0.03),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(widget.c[widget.index]["Text1"]),
+                    Text(
+                      widget.c[widget.index]["Text2"],
+                      style: TextStyle(
+                          fontSize: width * 0.06, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: width * 0.09,
+                  width: width * 0.2,
+                  decoration: BoxDecoration(
+                      color: colorConst.lightgrey1,
+                      borderRadius: BorderRadius.circular(width * 0.015)),
+                  child: Center(
+                      child: Text(
+                        widget.c[widget.index]["Text3"],
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: width * 0.057),
+                  )),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+      ],
+    );
+  }
+}
