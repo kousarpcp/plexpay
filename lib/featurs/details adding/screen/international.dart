@@ -105,48 +105,48 @@ class _internationalState extends State<international> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(
-            height: width * 0.02,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => countryField(
-                      initialCountryCode: "",
-                    ),
-                  ));
-            },
-            child: Container(
-                height: height * 0.055,
-                width: width*0.84,
-                decoration: BoxDecoration(
-                    color: colorConst.lightgrey1,
-                    borderRadius: BorderRadius.circular(width*0.03)),
-                child: Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.search_rounded),
-                      SizedBox(width: width*0.02,),
-                      Text("Search",style: TextStyle(
-                        fontSize: width * 0.04,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                      ),)
-                    ],
-                  ),
-                )
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: width * 0.02,
             ),
-          ),
-          SizedBox(
-            height: width * 0.04,
-          ),
-          Expanded(
-            child: GridView.builder(
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => countryField(
+                        initialCountryCode: "",
+                      ),
+                    ));
+              },
+              child: Container(
+                  height: height * 0.055,
+                  width: width*0.84,
+                  decoration: BoxDecoration(
+                      color: colorConst.lightgrey1,
+                      borderRadius: BorderRadius.circular(width*0.03)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(9.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search_rounded),
+                        SizedBox(width: width*0.02,),
+                        Text("Search",style: TextStyle(
+                          fontSize: width * 0.04,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                        ),)
+                      ],
+                    ),
+                  )
+              ),
+            ),
+            SizedBox(
+              height: width * 0.04,
+            ),
+            GridView.builder(
               itemCount: Country.length,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(
@@ -186,9 +186,9 @@ class _internationalState extends State<international> {
                 );
               },
             ),
-          ),
-
-        ],
+        
+          ],
+        ),
       ),
     );
   }

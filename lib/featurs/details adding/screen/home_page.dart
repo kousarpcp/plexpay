@@ -257,7 +257,10 @@ class _home_pageState extends State<home_page> {
                     child: TabBarView(children: [
                       local(),
                       international(),
-                    ]),
+                    ],
+                      physics: BouncingScrollPhysics(),
+
+                    ),
                   ),
                 ],
               ),
