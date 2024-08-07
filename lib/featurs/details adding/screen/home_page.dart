@@ -254,13 +254,10 @@ class _home_pageState extends State<home_page> {
                   ),
                   Container(
                     height: width *0.8,
-                    child: Padding(
-                      padding: EdgeInsets.all(width * 0.03),
-                      child: TabBarView(children: [
-                        local(),
-                        international(),
-                      ]),
-                    ),
+                    child: TabBarView(children: [
+                      local(),
+                      international(),
+                    ]),
                   ),
                 ],
               ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/country_field.dart';
 
 import '../../../main.dart';
@@ -185,6 +186,9 @@ class _internationalState extends State<international> {
                 );
               },
             ),
+          ),
+          SizedBox(
+            height: width*0.08,
           )
         ],
       ),

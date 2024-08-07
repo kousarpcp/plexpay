@@ -186,8 +186,7 @@ class _CollectionsState extends State<Collections> {
                 return CollectionList(c: c, index:index ,);
               },
               separatorBuilder: (context, index) {
-                return
-                 gap;
+                return SizedBox();
               },
               itemCount: c.length)
         ],
@@ -215,7 +214,7 @@ class _CollectionListState extends State<CollectionList> {
         gap,
         Container(
           height: width * 0.18,
-          margin: EdgeInsets.only(left: width * 0.068, right: width * 0.068),
+          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.03),
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -235,11 +234,15 @@ class _CollectionListState extends State<CollectionList> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(widget.c[widget.index]["Text1"]),
+                    Text(widget.c[widget.index]["Text1"],
+                      style: TextStyle(
+                        fontSize: width*0.03
+                      ),
+                    ),
                     Text(
                       widget.c[widget.index]["Text2"],
                       style: TextStyle(
-                          fontSize: width * 0.06, fontWeight: FontWeight.w700),
+                          fontSize: width * 0.05, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -253,7 +256,7 @@ class _CollectionListState extends State<CollectionList> {
                       child: Text(
                         widget.c[widget.index]["Text3"],
                     style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: width * 0.057),
+                        fontWeight: FontWeight.w600, fontSize: width * 0.045),
                   )),
                 ),
               ],
