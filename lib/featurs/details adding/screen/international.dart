@@ -115,7 +115,7 @@ class _internationalState extends State<international> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                       builder: (context) => countryField(
                         initialCountryCode: "",
                       ),
@@ -146,45 +146,48 @@ class _internationalState extends State<international> {
             SizedBox(
               height: width * 0.04,
             ),
-            GridView.builder(
-              itemCount: Country.length,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(
-                  decelerationRate: ScrollDecelerationRate.fast),
-              scrollDirection: Axis.vertical,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.1,
-                  crossAxisSpacing: width*0.01,
-                  mainAxisSpacing: width*0.01,
-                  crossAxisCount: 4),
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => countryField(
-                                initialCountryCode: Country[index]["code"]!,
-                              ),
-                            ));
-                      },
-                      child: Container(
-                        height: width*0.16,
-                        width: width*0.16,
-                        decoration: BoxDecoration(
-                            // color: Colors.blue,
-                            borderRadius: BorderRadius.circular(width * 0.04),
-                            border: Border.all(width: width * 0.0001),
-                            image: DecorationImage(
-                                image: AssetImage(Country[index]["image1"]!))),
-                        // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+            Container(
+              height: width*1.3,
+              child: GridView.builder(
+                itemCount: Country.length,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(
+                    decelerationRate: ScrollDecelerationRate.fast),
+                scrollDirection: Axis.vertical,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1.1,
+                    crossAxisSpacing: width*0.01,
+                    mainAxisSpacing: width*0.01,
+                    crossAxisCount: 4),
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => countryField(
+                                  initialCountryCode: Country[index]["code"]!,
+                                ),
+                              ));
+                        },
+                        child: Container(
+                          height: width*0.16,
+                          width: width*0.16,
+                          decoration: BoxDecoration(
+                              // color: Colors.blue,
+                              borderRadius: BorderRadius.circular(width * 0.04),
+                              border: Border.all(width: width * 0.0001),
+                              image: DecorationImage(
+                                  image: AssetImage(Country[index]["image1"]!))),
+                          // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
         
           ],

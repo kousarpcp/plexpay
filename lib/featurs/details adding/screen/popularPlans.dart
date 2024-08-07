@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
@@ -7,7 +8,8 @@ import '../../../main.dart';
 import 'Reacharge.dart';
 
 class popular extends StatefulWidget {
-  const popular({super.key});
+  const popular({super.key, required this.number});
+  final String number;
 
   @override
   State<popular> createState() => _popularState();
@@ -264,13 +266,15 @@ class _popularState extends State<popular> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => reacharge(
-                                    key: Key(""),
+                                    text:AED[index]["Text1"],
+                                    amount:AED[index]["Text2"],
+                                    number:widget.number
                                   ),
                                 ));
                           },
@@ -284,6 +288,7 @@ class _popularState extends State<popular> {
                                     BoxShadow(
                                       color: Colors.black12,
                                       blurRadius: width * 0.007,
+                                      offset: Offset(width*0.00, width*0.02)
                                     )
                                   ],
                                   borderRadius:
@@ -455,11 +460,13 @@ class _popularState extends State<popular> {
                                                         onTap: () {
                                                           Navigator.push(
                                                               context,
-                                                              MaterialPageRoute(
+                                                              CupertinoPageRoute(
                                                                 builder:
                                                                     (context) =>
                                                                         reacharge(
-                                                                  key: Key(""),
+                                                                            number:widget.number,
+                                                                          text:AED[index]["Text1"],
+                                                                          amount:AED[index]["Text2"],
                                                                 ),
                                                               ));
                                                         },

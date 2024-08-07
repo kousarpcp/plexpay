@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../main.dart';
 
 class page1 extends StatefulWidget {
-  const page1({super.key});
+  final String number;
+  const page1({super.key, required this.number});
 
   @override
   State<page1> createState() => _page1State();

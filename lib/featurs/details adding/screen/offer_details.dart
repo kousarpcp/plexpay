@@ -1,4 +1,5 @@
 
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,16 +16,18 @@ import '../Const/SharedPref.dart';
 import '../Const/Snackbar_toast_helper.dart';
 import 'imageConst.dart';
 
-class Etisalat1 extends StatefulWidget {
-  const Etisalat1({
-    super.key,
+class OfferDetails extends StatefulWidget {
+  const OfferDetails({
+    super.key, required this.name, required this.image,
   });
+  final String name;
+  final String image;
 
   @override
-  State<Etisalat1> createState() => _Etisalat1State();
+  State<OfferDetails> createState() => _OfferDetailsState();
 }
 
-class _Etisalat1State extends State<Etisalat1> {
+class _OfferDetailsState extends State<OfferDetails> {
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,6 @@ class _Etisalat1State extends State<Etisalat1> {
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNavigation()));
             },
             child: Container(
               height: width * 0.05,
@@ -53,25 +55,37 @@ class _Etisalat1State extends State<Etisalat1> {
             ),
           ),
           title: Text(
-            "Etisalat",
+            widget.name,
             style:
                 TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
           ),
-          actions: [Image.asset(ImageConst.etisalatuae,width: width*0.2,),SizedBox(width: width*0.07,)],
+          actions: [
+            CircleAvatar(
+              radius: width*0.045,
+                backgroundImage:AssetImage(widget.image,),
+              backgroundColor: Colors.white,
+                ),
+            SizedBox(width: width*0.05,)],
 
         ),
         body: Column(
           children: [
             Center(
               child: Container(
-                height: width * 0.10,
+                height: width * 0.09,
                 width: width * 0.56,
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(width * 0.03)),
                 child: TabBar(
-
+                  physics: BouncingScrollPhysics(),
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
                     labelColor: Colors.white,
+                    unselectedLabelStyle: TextStyle(
+                      fontWeight: FontWeight.w400,
+                    ),
                     unselectedLabelColor: Colors.black,
                     indicatorColor: Colors.transparent,
                     dividerColor: Colors.transparent,
@@ -84,14 +98,14 @@ class _Etisalat1State extends State<Etisalat1> {
                       Tab(
                         child: Center(
                             child: Text(
-                          "Offer",
-                          style: TextStyle(fontSize: width * 0.05),
-                        )),
+                              "Offer",
+                              style: TextStyle(fontSize: width * 0.04),
+                            )),
                       ),
                       Tab(
                         child: Center(
                             child: Text("Custom",
-                                style: TextStyle(fontSize: width * 0.05))),
+                                style: TextStyle(fontSize: width * 0.04))),
                       ),
                     ]),
               ),

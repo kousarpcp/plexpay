@@ -63,71 +63,67 @@ class _offerState extends State<offer> {
               ),
               Center(
                 child: Container(
-                  height: width * 0.12,
+                  height: width * 0.11,
                   width: width * 0.8,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: width * 0.66),
-                        child: GestureDetector(
-                          onTap: toggleTabs,
-                          child: Container(
-                            height: width * 0.12,
-                            width: width * 0.14,
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: colorConst.blue,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(width * 0.05),
-                                bottomRight: Radius.circular(width * 0.05),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      TextFormField(
-                        controller: numController,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(9)
-                        ],
-                        style: TextStyle(
-                          fontSize: width * 0.053,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        decoration: InputDecoration(
-                          prefixText: "+ 971 ",
-                          prefixStyle: TextStyle(
-                            fontSize: width * 0.05,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          hintText: "Please Enter Your Number",
-                          hintStyle: TextStyle(
-                            fontSize: width * 0.038,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                            borderRadius: BorderRadius.circular(width * 0.05),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                            ),
-                            borderRadius: BorderRadius.circular(width * 0.05),
-                          ),
-                        ),
-                        focusNode: _focusNode,
-                      ),
+                  child: TextFormField(
+                    controller: numController,
+                    keyboardType: TextInputType.number,
+                    autofocus: true,
+                    textInputAction: TextInputAction.next,
+                    cursorColor: colorConst.blue,
+                    cursorHeight: width*0.05,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(9)
                     ],
+                    style: TextStyle(
+                      fontSize: width * 0.05,
+                      fontWeight: FontWeight.w600,
+                      color: colorConst.grey
+                    ),
+                    decoration: InputDecoration(
+                      prefixText: "+ 971 ",
+                      prefixStyle: TextStyle(
+                        fontSize: width * 0.045,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                      ),
+
+                      suffixIcon: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(width*0.05),
+                            topRight: Radius.circular(width*0.05),
+                          ),
+                          color: colorConst.blue
+                        ),
+
+                        child: IconButton(
+                          onPressed: () {
+                            toggleTabs();
+                          },
+                          icon: Icon(Icons.search,color: Colors.white,),
+                        ),
+                      ),
+                      hintText: "Please Enter Your Number",
+                      hintStyle: TextStyle(
+                        fontSize: width * 0.038,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.05),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.05),
+                      ),
+                    ),
+                    focusNode: _focusNode,
                   ),
                 ),
               ),
@@ -188,9 +184,17 @@ class _offerState extends State<offer> {
                       height: height * 0.69,
                       child: TabBarView(
                         children: [
-                          popular(),
-                          dataPacks(),
-                          page1(),
+                          popular(
+                            number:numController.text
+                          ),
+                          dataPacks(
+                              number:numController.text
+
+                          ),
+                          page1(
+                              number:numController.text
+
+                          ),
                         ],
                       ),
                     ),

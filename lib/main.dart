@@ -17,7 +17,7 @@ import 'featurs/details adding/screen/collectionsReciept.dart';
 import 'featurs/details adding/screen/country_field.dart';
 import 'featurs/details adding/screen/dataPacks.dart';
 import 'featurs/details adding/screen/debit&credit.dart';
-import 'featurs/details adding/screen/etisalat_Tab.dart';
+import 'featurs/details adding/screen/offer_details.dart';
 import 'featurs/details adding/screen/etisalat_custom.dart';
 import 'featurs/details adding/screen/etisalat_offer.dart';
 import 'featurs/details adding/screen/funds.dart';

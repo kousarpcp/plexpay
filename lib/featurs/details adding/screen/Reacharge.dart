@@ -6,7 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/Const/NetWork.dart';
 import 'package:plexpay/featurs/details%20adding/screen/blank1.dart';
 import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/etisalat_Tab.dart';
+import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -19,75 +19,19 @@ import 'PrintPage.dart';
 import 'imageConst.dart';
 
 class reacharge extends StatefulWidget {
-  final id;
-  final AED;
-  final amt;
-  final voucher;
-  final inr;
-  final title;
-  const reacharge({
-    required Key key,
-    this.id,
-    this.AED,
-    this.amt,
-    this.voucher,
-    this.inr,
-    this.title,
-  }) : super(key: key);
+
+  const reacharge({super.key, required this.number, required this.text, required this.amount});
+  final String number;
+  final String text;
+  final String amount;
 
   @override
   State<reacharge> createState() => _reachargeState();
 }
 
 class _reachargeState extends State<reacharge> {
-  var arrProdList = [];
-  var arrBannerList = [];
-  var isLoading = true;
+
   var isTap = false;
-  var ProviderLogo;
-  var ProviderCode;
-  var ProviderName;
-  var DialInfo;
-  var SkuCode;
-  var CoupenTitle;
-  var SendValue;
-  var SendCurrencyIso;
-  var OurCommission;
-  var Our_SendValue;
-  var ReceiveValue;
-  var ReceiveCurrencyIso;
-  var Country_Iso;
-
-  AlertDialog() {
-    if (isTap == true) {
-      showToast("Recharge is processing , don't quit the page!");
-    } else {
-      Navigator.pop(context);
-    }
-  }
-
-  Future<bool> _onBackPressed() async {
-    return await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(),
-        ) ??
-        false;
-  }
-
-  dynamic added;
-  List a = [];
-  totalprice() {
-    for (int i = 0; i < widget.AED.length; i++) {
-      if (widget.AED[i] > 0) {
-        added = widget.AED[i];
-        a.add(added);
-      }
-      // print(a);
-      // print("oooooooooooooooooooooooooooooooo");
-    }
-
-    setState(() {});
-  }
 
   @override
   void initState() {
@@ -102,6 +46,7 @@ class _reachargeState extends State<reacharge> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -109,12 +54,9 @@ class _reachargeState extends State<reacharge> {
         backgroundColor: Colors.white,
         leading: isTap == true
             ? Container()
-            : GestureDetector(
+            : InkWell(
                 onTap: () {
-                  _onBackPressed();
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Etisalat1()));
                 },
                 child: Container(
                   height: width * 0.05,
@@ -169,20 +111,7 @@ class _reachargeState extends State<reacharge> {
                           SizedBox(
                             height: width * 0.03,
                           ),
-                          // widget.title!=null?Text(
-                          //   "Receivable amount : "+widget.title.toString(),
-                          //   style: TextStyle(
-                          //       fontSize: width * 0.08,
-                          //       fontWeight: FontWeight.w800,
-                          //       color: colorConst.darkblue),
-                          // ):Container(),
-                          // SendValue!=null?Text(
-                          //   "Send amount : AED "+SendValue.toString(),
-                          //   style: TextStyle(
-                          //       fontSize: width * 0.08,
-                          //       fontWeight: FontWeight.w800,
-                          //       color: colorConst.darkblue),
-                          // ):Container(),
+
                           SizedBox(
                             height: width * 0.03,
                           ),
@@ -201,7 +130,7 @@ class _reachargeState extends State<reacharge> {
                                       fontSize: width * 0.042,
                                       color: colorConst.grey,
                                       fontWeight: FontWeight.w500)),
-                              Text(" 971569429454",
+                              Text(" +971${widget.number}",
                                   style: TextStyle(
                                       fontSize: width * 0.042,
                                       color: colorConst.grey,
@@ -211,7 +140,7 @@ class _reachargeState extends State<reacharge> {
                                       fontSize: width * 0.042,
                                       color: colorConst.grey,
                                       fontWeight: FontWeight.w500)),
-                              Text(" AED 42.85",
+                              Text(" ${widget.text} ${widget.amount}",
                                   style: TextStyle(
                                       fontSize: width * 0.042,
                                       color: colorConst.grey,
@@ -242,13 +171,7 @@ class _reachargeState extends State<reacharge> {
                                   ? Container()
                                   : InkWell(
                                       onTap: () {
-                                        _onBackPressed();
                                         Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Etisalat1(),
-                                            ));
                                       },
                                       child: Container(
                                         height: width * 0.12,
@@ -278,85 +201,23 @@ class _reachargeState extends State<reacharge> {
                                     )
                                   : InkWell(
                                       onTap: () async {
-                                        Future.delayed(
-                                            const Duration(seconds: 1), () {
-                                          // setState(() {
-                                          setState(() {
-                                            isTap = false;
-                                            // });
-                                          });
-                                        });
                                         setState(() {
                                           isTap = true;
                                         });
-                                        var rsp;
+                                        Future.delayed(
+                                            const Duration(seconds: 1), () {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                              backgroundColor:
+                                              Colors.black,
+                                              content: Text(
+                                                  "Recharge failed ")));
 
-                                        if (widget.voucher == "1") {
-                                          print("itssss int vouchwer");
-                                          rsp = await voucherIntRecharge(
-                                              SkuCode,
-                                              ProviderCode,
-                                              SendValue,
-                                              Our_SendValue,
-                                              ReceiveValue);
-                                        } else {
-                                          Future.delayed(
-                                              const Duration(seconds: 1), () {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    backgroundColor:
-                                                        Colors.black,
-                                                    content: Text(
-                                                        "Recharge failed ")));
-
-                                            // setState(() {
-                                            setState(() {
-                                              // });
-                                            });
+                                          // setState(() {
+                                          setState(() {
+                                            // });
                                           });
-
-                                          print("itssss int rc");
-
-                                          rsp = await RechargeApi(
-                                              SkuCode,
-                                              ProviderCode,
-                                              widget.AED.toString(),
-                                              SendValue,
-                                              ReceiveValue,
-                                              Our_SendValue,
-                                              Country_Iso,
-                                              CoupenTitle);
-                                        }
-
-                                        if (rsp != 0 && rsp['status'] == true) {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Print1(
-                                                      id: rsp['transaction_id']
-                                                          .toString(),
-                                                      type: "HOME",
-                                                    )),
-                                          );
-                                          showToast(rsp['message'].toString());
-                                        } else {
-                                          showToast(rsp['message'].toString());
-                                        }
-
-                                        setState(() {
-                                          isTap = false;
                                         });
-
-                                        // QuickAlert.show(
-                                        //   titleColor: Colors.indigoAccent,
-                                        //   textColor: colorConst.blue,
-                                        //
-                                        //   context: context,
-                                        //   type: QuickAlertType.success,
-                                        //   text: 'Transaction Completed Successfully!',
-                                        //   autoCloseDuration: const Duration(seconds: 2),
-                                        //   showConfirmBtn: false,
-                                        // );
                                       },
                                       child: Container(
                                         height: width * 0.12,

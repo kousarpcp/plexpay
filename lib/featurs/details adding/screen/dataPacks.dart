@@ -4,7 +4,8 @@ import '../../../main.dart';
 import '../Const/colorConst.dart';
 
 class dataPacks extends StatefulWidget {
-  const dataPacks({super.key});
+  const dataPacks({super.key, required this.number});
+  final String number;
 
   @override
   State<dataPacks> createState() => _dataPacksState();

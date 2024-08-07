@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plexpay/featurs/details%20adding/Const/NetWork.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 
 import '../../../main.dart';
 import 'du_Tab.dart';
-import 'etisalat_Tab.dart';
+import 'offer_details.dart';
 import 'imageConst.dart';
 
 class local extends StatefulWidget {
@@ -30,20 +31,7 @@ class _localState extends State<local> {
     {"image1": ImageConst.amazone, "text": "Amazon"},
   ];
 
-  List page = [
-    Etisalat1(),
-    duTab(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-    page1(),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +57,11 @@ class _localState extends State<local> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => page[index],
+                            CupertinoPageRoute(
+                              builder: (context) => OfferDetails(
+                                name:images[index]["text"],
+                                image:images[index]["image1"]
+                              ),
                             ));
                       },
                       child: Container(
