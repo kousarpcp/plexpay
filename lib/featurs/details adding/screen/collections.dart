@@ -148,7 +148,7 @@ class _CollectionsState extends State<Collections> {
                         height: width * 0.077,
                         width: width * 0.23,
                         decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: colorConst.blue,
                             borderRadius: BorderRadius.circular(width * 0.35)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
