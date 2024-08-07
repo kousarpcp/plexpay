@@ -252,14 +252,16 @@ class _home_pageState extends State<home_page> {
                   SizedBox(
                     height: width * 0.03,
                   ),
-                  Container(
-                    height: width *0.73,
-                    child: TabBarView(children: [
-                      local(),
-                      international(),
-                    ],
-                      physics: BouncingScrollPhysics(),
-
+                  Expanded(
+                    child: Container(
+                      height: width *0.9,
+                      child: TabBarView(children: [
+                        local(),
+                        international(),
+                      ],
+                        physics: BouncingScrollPhysics(),
+                    
+                      ),
                     ),
                   ),
                 ],
