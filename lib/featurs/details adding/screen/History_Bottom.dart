@@ -9,12 +9,6 @@ import 'package:screenshot/screenshot.dart';
 import '../../../main.dart';
 import '../../../Const/colorConst.dart';
 import 'Constants.dart';
-// import 'package:plexpay/Helper/resources.dart';
-// import 'package:plexpay/Screens/PrintPage.dart';
-
-
-
-import 'Resources.dart';
 import '../../../Const/imageConst.dart';
 
 class HistoryBottom3 extends StatefulWidget {
@@ -153,7 +147,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
       //   backgroundColor: arrProdList.length==0?Colors.grey:themeColor,
       // ),
       appBar: AppBar(
-        backgroundColor: darkBlue,
+        backgroundColor: Colors.indigo,
         // brightness: Brightness.dark,
         automaticallyImplyLeading: false,
         title: Container(

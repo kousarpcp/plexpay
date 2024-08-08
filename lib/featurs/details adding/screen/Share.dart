@@ -5,12 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:plexpay/Helper/resources.dart';
-// import 'package:url_launcher/url_launcher.dart';
-
-
 import '../../../Const/Snackbar_toast_helper.dart';
-import 'Resources.dart';
 
 class share extends StatefulWidget {
   const share({key}) : super(key: key);
@@ -23,13 +18,13 @@ class _shareState extends State<share> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkBlue,
+      backgroundColor: Colors.indigo,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.1),
         child: AppBar(
           // brightness: Brightness.dark,
           elevation: 0,
-          backgroundColor: darkBlue,
+          backgroundColor: Colors.indigo,
         ),
       ),
       body: Container(
