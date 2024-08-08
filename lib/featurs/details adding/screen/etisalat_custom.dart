@@ -125,7 +125,6 @@ class _customState extends State<custom> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     textAlign: TextAlign.justify,
-
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(5)

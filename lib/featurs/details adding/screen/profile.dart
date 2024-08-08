@@ -8,7 +8,6 @@ import 'package:plexpay/featurs/details%20adding/screen/due_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
-import 'package:plexpay/featurs/details%20adding/screen/transactions.dart';
 
 import '../../../main.dart';
 import 'History_Bottom.dart';

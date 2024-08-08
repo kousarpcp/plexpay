@@ -10,8 +10,7 @@ import 'package:plexpay/featurs/details%20adding/screen/etisalat_custom.dart';
 import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
 
 import '../../../main.dart';
-import '../Api/FetchCountryCodeApi.dart';
-import '../Api/PlansByNumberApi.dart';
+
 import '../Const/SharedPref.dart';
 import '../Const/Snackbar_toast_helper.dart';
 import 'imageConst.dart';

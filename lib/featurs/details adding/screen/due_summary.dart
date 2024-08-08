@@ -1,120 +1,82 @@
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//
-// import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-// import 'package:plexpay/Api/dueApi.dart';
-// import 'package:plexpay/Api/fundsApi.dart';
-// import 'package:plexpay/Api/transactionSaleApi.dart';
-// import 'package:plexpay/Const/Constants.dart';
-// import 'package:plexpay/Helper/resources.dart';
+import 'package:flutter_svg/svg.dart';
 
-// import '../Api/DueApi.dart';
-// import '../Const/Constants.dart';
-import '../Api/DueApi.dart';
-import 'Resources.dart';
-
-
+import '../../../main.dart';
+import '../Const/colorConst.dart';
+import '../Const/widgets.dart';
+import 'imageConst.dart';
 
 class dueSummary extends StatefulWidget {
+  const dueSummary({super.key});
+
   @override
-  _TransState createState() => _TransState();
+  State<dueSummary> createState() => _dueSummaryState();
 }
 
-class _TransState extends State<dueSummary> {
+class _dueSummaryState extends State<dueSummary> {
+
+  List D=[
+    {
+      "Text1":"OPEN BALANCE",
+      "Text2":"ENTRY",
+      "Text3":"COLLECTED",
+      "Text4":"CLOSED BALANCE",
+      "Text5":"FULL NAME",
+      "Text6":":",
+      "Text7":":",
+      "Text8":":",
+      "Text9":":",
+      "Text10":":",
+      "Text11":"100.00",
+      "Text12":"2023-03-23 12:02:12",
+      "Text13":"10.00",
+      "Text14":"90.00",
+      "Text15":"TEST",
+
+    },
+    {
+      "Text1":"OPEN BALANCE",
+      "Text2":"ENTRY",
+      "Text3":"COLLECTED",
+      "Text4":"CLOSED BALANCE",
+      "Text5":"FULL NAME",
+      "Text6":":",
+      "Text7":":",
+      "Text8":":",
+      "Text9":":",
+      "Text10":":",
+      "Text11":"100.00",
+      "Text12":"2023-03-23 12:02:12",
+      "Text13":"10.00",
+      "Text14":"90.00",
+      "Text15":"TEST",
+
+    },
+  ];
 
 
-  var purchaseDate ="0";
-
-
-
-  var start =DateTime.now().year.toString()+"-"+DateTime.now().month.toString()+"-"+DateTime.now().day.toString();
-  var end =DateTime.now().year.toString()+"-"+DateTime.now().month.toString()+"-"+DateTime.now().day.toString();
-
-
-  var arrProdList = [];
-
-  var  isLoading = true;
-  var  totalSale = "";
-  var  totalProfit = "";
-
-
-  //List<dynamic> data = [];
-  @override
-  void initState() {
-
-    super.initState();
-
-    print("xoxoxo");
-    this.getHome();
-
-
-    setState(() {});
-
-
-  }
-
-  Future<String> getHome() async {
-
-    setState(() {
-      isLoading = true;
-    });
-    print("xoxoxo");
-
-    var rsp = await dueApi(start,end);
-    print(rsp);
-
-
-    // arrProdList = data;
-    //
-    if(rsp['status']==true && rsp['result']!="Empty"){
-
-
-
-      setState(() {
-
-        arrProdList = rsp['result'];
-
-        // totalSale = rsp['total_card_sale'].toString();
-        // totalProfit = "₹"+rsp['total_profit'].toString();
-
-      });
-      print("arrProdList");
-      print(arrProdList);
-    }
-
-
-    setState(() {
-      isLoading = false;
-    });
-
-    return "";
-  }
-
-
-
-
-
-
-
-
+  var start = DateTime.now().year.toString() +
+      "-" +
+      DateTime.now().month.toString() +
+      "-" +
+      DateTime.now().day.toString();
+  var end = DateTime.now().year.toString() +
+      "-" +
+      DateTime.now().month.toString() +
+      "-" +
+      DateTime.now().day.toString();
 
   Future selectDateRange(BuildContext context) async {
-    DateTimeRange? pickedRange = (await showDateRangePicker(
 
+    DateTimeRange? pickedRange = (await showDateRangePicker(
         context: context,
         initialDateRange: DateTimeRange(
           start: DateTime.now(),
           end: DateTime.now(),
         ),
-        firstDate: DateTime(DateTime
-            .now()
-            .year + -5),
-        lastDate: DateTime(DateTime
-            .now()
-            .year + 2),
-
+        firstDate: DateTime(DateTime.now().year + -5),
+        lastDate: DateTime(DateTime.now().year + 2),
         helpText: 'Select Date Range',
-
         cancelText: 'CANCEL',
         confirmText: 'OK',
         saveText: 'SAVE',
@@ -126,457 +88,222 @@ class _TransState extends State<dueSummary> {
 
     if (pickedRange != null) {
       setState(() {
-        start =pickedRange.start.year.toString()+"-"+pickedRange.start.month.toString()+"-"+pickedRange.start.day.toString();
-        end =pickedRange.end.year.toString()+"-"+pickedRange.end.month.toString()+"-"+pickedRange.end.day.toString();
+        start = pickedRange.start.year.toString() +
+            "-" +
+            pickedRange.start.month.toString() +
+            "-" +
+            pickedRange.start.day.toString();
+        end = pickedRange.end.year.toString() +
+            "-" +
+            pickedRange.end.month.toString() +
+            "-" +
+            pickedRange.end.day.toString();
       });
-
-      getHome();
-
-      print(pickedRange.start.day);
-      print(pickedRange.start.month);
-      print(pickedRange.start.year);
     }
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50]?.withOpacity(0.99),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed:arrProdList.length==0?null: () {
-      //     _showDialog(context);
-      //     // Navigator.push(
-      //     //   context,
-      //     //   MaterialPageRoute(builder: (context) => TransactionPrint()),
-      //     // );
-      //   },
-      //   child: const Icon(Icons.print),
-      //   backgroundColor: arrProdList.length==0?Colors.grey:themeColor,
-      // ),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: darkBlue,
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
         elevation: 0,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_outlined,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            height: width * 0.05,
+            width: width * 0.08,
+            child: Padding(
+              padding: EdgeInsets.all(width * 0.03),
+              child: SvgPicture.asset(
+                ImageConst.back,
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          "Due Summary",
+          style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
+        ),
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Container(
+              height: width * 0.125,
+              width: width * 0.86,
+              decoration: BoxDecoration(
+                // color: Colors.red,
+                  border:
+                  Border.all(width: width * 0.001, color: colorConst.grey),
+                  borderRadius: BorderRadius.circular(width * 0.03)),
+              child: Padding(
+                padding: EdgeInsets.all(width * 0.03),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.date_range_outlined,
+                      color: Colors.lightBlueAccent,
+                      size: width * 0.053,
+                    ),
+                    SizedBox(
+                      width: width * 0.03,
+                    ),
+                    Expanded(
+                      child: Text(
+                        start + "  to  " + end,
+                        maxLines: 2,
+                        style: TextStyle(fontSize: width * 0.043),
+                        // style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        selectDateRange(context);
+                      },
+                      child: Container(
+                        height: width * 0.077,
+                        width: width * 0.23,
+                        decoration: BoxDecoration(
+                            color: colorConst.blue,
+                            borderRadius: BorderRadius.circular(width * 0.35)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                                child: Text(
+                                  "FILTER",
+                                  style: TextStyle(
+                                      fontSize: width * 0.044,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                )),
+                            SizedBox(
+                              width: width * 0.012,
+                            ),
+                            Icon(
+                              Icons.filter_alt,
+                              color: Colors.white,
+                              size: width * 0.038,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          ListView.separated(
+            scrollDirection: Axis.vertical,
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return dueSummaryList(D: D, index: index,);
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox();
+              },
+              itemCount: D.length
+          )
+        ],
+      ),
+    );
+  }
+}
+class dueSummaryList extends StatefulWidget {
+  final List D;
+  final int  index;
+  const dueSummaryList({
+    super.key,
+    required this.D,
+    required this.index
+  });
+
+  @override
+  State<dueSummaryList> createState() => _dueSummaryListState();
+}
+
+class _dueSummaryListState extends State<dueSummaryList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        gap,
+        Container(
+          height: width * 0.37,
+          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+          decoration: BoxDecoration(
               color: Colors.white,
-            )),
-        title: Row(
-          children: [
-            // Container(
-            //   decoration: BoxDecoration(
-            //       shape: BoxShape.circle,
-            //       border: Border.all(color: Colors.black45)),
-            //   child: Padding(
-            //       padding: const EdgeInsets.all(5.0),
-            //       child: Icon(
-            //         FontAwesomeIcons.handHoldingUsd,
-            //         color: Colors.grey[400],
-            //         size: 15,
-            //       )),
-            // ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              "Due Summary",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 23),
-            )
-          ],
-        ),
-      ),
-      body:isLoading==true?Container(
-          child: Center(child: CircularProgressIndicator())): SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(15),
-          child: Wrap(
-            runSpacing: 15,
-            alignment: WrapAlignment.center,
-            children: [
-
-              FilterSection(),
-              //  totalSales(),
-              ListView.separated(
-                scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => SizedBox(
-                  height: 10,
-                ),
-                shrinkWrap: true,
-                itemCount: arrProdList != null ? arrProdList.length: 0,
-                itemBuilder: (context, index) {
-                  final item = arrProdList != null ? arrProdList[index] : null;
-
-                  return Details(index,item);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget FilterSection() {
-    return   Padding(
-      padding: const EdgeInsets.only(top:5.0),
-      child: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.date_range,
-                size: 15,
-                color: Colors.green,
-              ),
-              SizedBox(width: 10,),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  start +" to "+end,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-              returnRangePicker(context),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget returnRangePicker(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          shadowColor: Colors.green,
-          primaryColor: Colors.blue,
-          buttonTheme: ButtonThemeData(
-              highlightColor: Colors.green,
-              buttonColor: Colors.green,
-              colorScheme: Theme.of(context).colorScheme.copyWith(
-                  secondary: Colors.redAccent,
-                  background: Colors.white,
-                  primary: Colors.green,
-                  onPrimary: Colors.green,
-                  brightness: Brightness.dark,
-                  onBackground: Colors.green),
-              textTheme: ButtonTextTheme.accent)),
-      child: Builder(
-        builder: (context) => SizedBox(
-          height: 30,
-          child: ElevatedButton(
-            onPressed: ()async {
-
-              selectDateRange(context);
-            },
-            child: Text(
-              "FILTER",
-              style: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
-            ),
-            // color:themeColor,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget totalSales(){
-    return    Padding(
-      padding: const EdgeInsets.only(top:8.0),
-      child: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.sync_alt_sharp,
-                size: 15,
-                color: Colors.green,
-              ),
-              SizedBox(width: 16,),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Total Card Sales : "+ purchaseDate,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-
-  Widget Button() {
-    return SizedBox(
-      height: 20,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          "FILTER",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),
-        ),
-        // color: themeColor,
-      ),
-    );
-  }
-
-  Details(int index,var item) {
-    return GestureDetector(
-      onTap: () {
-        // pushNewScreen(
-        //   context,
-        //   screen: Print(id: item['sale_id'].toString(),),
-        //   withNavBar: false, // OPTIONAL VALUE. True by default.
-        //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        // );
-      },
-      child:Padding(
-        padding: const EdgeInsets.only(top:5.0),
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child:Column(
-              children: [
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Text(
-                //         "ID :",
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     ),
-                //     Expanded(
-                //       child: Text(
-                //         item['id'].toString(),
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     )
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Text(
-                //         "ENTRY DATE",
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     ),
-                //     Expanded(
-                //       child: Text(
-                //         item['entry_date'].toString(),
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     )
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Text(
-                //         "USER ID :",
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     ),
-                //     Expanded(
-                //       child: Text(
-                //         item['user_id'].toString(),
-                //         style: Theme.of(context).textTheme.subtitle2,
-                //       ),
-                //     )
-                //   ],
-                // ),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "OPEN BALANCE :",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        item['open_bal'].toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "ENTRY :",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        item['entry_date'].toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "COLLECTED :",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        item['collected'].toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "CLOSED BALANCE :",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        item['close_bal'].toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "FULL NAME :",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        item['fullname'].toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ),
+              boxShadow: [
+                BoxShadow(
+                    blurStyle: BlurStyle.normal,
+                    color: Colors.black.withOpacity(0.09),
+                    offset: Offset(0, 2),
+                    spreadRadius: 1,
+                    blurRadius: 9)
               ],
-            ),
-          ),
-        ),
-      ),
-
-
-
-
-    );
-  }
-
-
-  void _showDialog(BuildContext context) {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)),
-            child: Stack(
-              clipBehavior: Clip.none, alignment: Alignment.topCenter,
+              borderRadius: BorderRadius.circular(width * 0.03)),
+          child: Padding(
+            padding:  EdgeInsets.all(width*0.03),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 200,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 70, 10, 10),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 5,
-                        ),
-                        // Text(
-                        //   'Confirm Purchase?',
-                        //   style: TextStyle(fontSize: 20),
-                        // ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ElevatedButton(
-                                onPressed: ()async {
-
-
-
-
-
-                                },
-                                // color:themeColor,
-                                child: Text(
-                                  'SUNMI V2',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              // Spacer(
-                              //   flex: 1,
-                              // ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => BtTestListPrint(data:arrProdList,nwdate: start +" to "+end,title: "Transactions",)),
-                                  // );
-                                },
-                                // color: themeColor,
-                                child: Text(
-                                  'BT PRINT',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              )
-                            ]),
-                      ],
-                    ),
+                  height: width*0.35,
+                  width: width*0.48,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(widget.D[widget.index]["Text1"],style: TextStyle(fontSize: width*0.043),),
+                          Text(widget.D[widget.index]["Text2"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text3"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text4"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text5"],style: TextStyle(fontSize: width*0.043)),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(widget.D[widget.index]["Text6"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text7"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text8"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text9"],style: TextStyle(fontSize: width*0.043)),
+                          Text(widget.D[widget.index]["Text10"],style: TextStyle(fontSize: width*0.043)),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                Positioned(
-                  top: 20,
-                  child: Text(
-                    'Choose Printer',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                Container(
+                  height: width*0.35,
+                  width: width*0.39,
+                  child:  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(widget.D[widget.index]["Text11"],style: TextStyle(fontSize: width*0.043)),
+                      Text(widget.D[widget.index]["Text12"],style: TextStyle(fontSize: width*0.043)),
+                      Text(widget.D[widget.index]["Text13"],style: TextStyle(fontSize: width*0.043),),
+                      Text(widget.D[widget.index]["Text14"],style: TextStyle(fontSize: width*0.043)),
+                      Text(widget.D[widget.index]["Text15"],style: TextStyle(fontSize: width*0.043)),
+                    ],
                   ),
-                ),
+                )
               ],
-            ));
-      },
+            ),
+          ),
+        )
+      ],
     );
   }
-
 }

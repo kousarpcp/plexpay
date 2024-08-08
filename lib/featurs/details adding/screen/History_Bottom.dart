@@ -12,9 +12,8 @@ import 'Constants.dart';
 // import 'package:plexpay/Helper/resources.dart';
 // import 'package:plexpay/Screens/PrintPage.dart';
 
-import '../Api/TransactionSaleApi.dart';
-import '../Api/TransactionSearchApi.dart';
-import '../screen/PrintPage.dart';
+
+
 import 'Resources.dart';
 import 'imageConst.dart';
 

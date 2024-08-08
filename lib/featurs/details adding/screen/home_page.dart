@@ -253,7 +253,7 @@ class _home_pageState extends State<home_page> {
                     height: width * 0.03,
                   ),
                   Container(
-                    height: width *0.9,
+                    height: width *0.88,
                     child: TabBarView(children: [
                       local(),
                       international(),

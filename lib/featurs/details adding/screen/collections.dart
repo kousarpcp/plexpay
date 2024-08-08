@@ -214,7 +214,7 @@ class _CollectionListState extends State<CollectionList> {
         gap,
         Container(
           height: width * 0.18,
-          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.03),
+          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [

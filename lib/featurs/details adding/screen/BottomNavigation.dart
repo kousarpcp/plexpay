@@ -10,7 +10,7 @@ import 'package:plexpay/featurs/details%20adding/screen/Share.dart';
 import 'package:plexpay/featurs/responsive/responsive__layout.dart';
 
 import '../Const/colorConst.dart';
-import 'blank_page4.dart';
+import 'blank1.dart';
 import 'collections.dart';
 
 class BottomNavigation extends StatefulWidget {
