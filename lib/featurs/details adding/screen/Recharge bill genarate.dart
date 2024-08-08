@@ -75,9 +75,6 @@ class _billState extends State<bill> {
   BluetoothManager bluetoothManager = BluetoothManager.instance;
 
   void capture(){
-
-
-
     screenshotController
         .capture(delay: Duration(milliseconds: 10)).then(
             (Uint8List? image) async {
@@ -149,111 +146,114 @@ class _billState extends State<bill> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Container(
-              height: width*1.6,
-              width: width*0.75,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: colorConst.lightgrey,
-                    spreadRadius: 0.01,
-                    blurRadius: 2,
-                    offset: Offset(0,01)
-                  )
-                ],
-                borderRadius: BorderRadius.circular(width*0.015)
-              ),
-              child: Padding(
-                padding:  EdgeInsets.all(width*0.02),
-                child: Column(
-                  children: [
-                    Image.asset(ImageConst.plexpay,width: width*0.47,),
-                    SizedBox(
-                      height: width*0.025,
-                    ),
-                    Text(
-                      "www.plexpay.in",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: width*0.028,
-                          letterSpacing: 0.3),
-                    ),
-                    // SizedBox(
-                    //   height: width*0.01,
-                    // ),
-                    Image(
-                      image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png"),
-                      height: width * 0.13,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Text("17-Jul-2024  ",style: TextStyle(fontSize: width*0.03)),
-                            Container(
-                              height: width*0.04,
-                              width: width*0.004,color: Colors.black,
-                            ),
-                            Text("  11:22 AM",style: TextStyle(fontSize: width*0.03),),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: width*0.04,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: width*0.055,
-                                      width: width*0.33,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(a[index]["Text1"]),
-                                          Text(" :  "),
-                                        ],
-                                      ),
-                                    ),
-                                    Text(a[index]["Text2"]),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: width*0.03,
-                                ),
-                              ],
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(
-                              width: width*0.02,
-                            );
-                          },
-                          itemCount: a.length
-                      ),
-                    ),
-                    SizedBox(
-                      height: width*0.05,
-                    ),
-                    Text("Help & Support",style: TextStyle(fontSize: width*0.06,fontWeight: FontWeight.w800),),
-                    SizedBox(
-                      height: width*0.04,
-                    ),
-                    Text("WhatsApp Support: +971589692115"),
-                    SizedBox(
-                      height: width*0.06,
-                    ),
+            child: Screenshot(
+              controller: screenshotController,
+              child: Container(
+                height: width*1.6,
+                width: width*0.75,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: colorConst.lightgrey,
+                      spreadRadius: 0.01,
+                      blurRadius: 2,
+                      offset: Offset(0,01)
+                    )
                   ],
+                  borderRadius: BorderRadius.circular(width*0.015)
+                ),
+                child: Padding(
+                  padding:  EdgeInsets.all(width*0.02),
+                  child: Column(
+                    children: [
+                      Image.asset(ImageConst.plexpay,width: width*0.47,),
+                      SizedBox(
+                        height: width*0.025,
+                      ),
+                      Text(
+                        "www.plexpay.in",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: width*0.028,
+                            letterSpacing: 0.3),
+                      ),
+                      // SizedBox(
+                      //   height: width*0.01,
+                      // ),
+                      Image(
+                        image: NetworkImage(
+                            "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png"),
+                        height: width * 0.13,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Text("17-Jul-2024  ",style: TextStyle(fontSize: width*0.03)),
+                              Container(
+                                height: width*0.04,
+                                width: width*0.004,color: Colors.black,
+                              ),
+                              Text("  11:22 AM",style: TextStyle(fontSize: width*0.03),),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: width*0.04,
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: width*0.055,
+                                        width: width*0.33,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(a[index]["Text1"]),
+                                            Text(" :  "),
+                                          ],
+                                        ),
+                                      ),
+                                      Text(a[index]["Text2"]),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: width*0.03,
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: width*0.02,
+                              );
+                            },
+                            itemCount: a.length
+                        ),
+                      ),
+                      SizedBox(
+                        height: width*0.05,
+                      ),
+                      Text("Help & Support",style: TextStyle(fontSize: width*0.06,fontWeight: FontWeight.w800),),
+                      SizedBox(
+                        height: width*0.04,
+                      ),
+                      Text("WhatsApp Support: +971589692115"),
+                      SizedBox(
+                        height: width*0.06,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

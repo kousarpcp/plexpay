@@ -210,7 +210,7 @@ class _Page1State extends State<Print1> {
 
 
       MaxxSunmiPrinter.printText(
-         "RECEIPT NO    :  " + DateTime
+        "RECEIPT NO    :  " + DateTime
             .now()
             .millisecond
             .toString(),
@@ -218,19 +218,19 @@ class _Page1State extends State<Print1> {
       );
       if (name.toString() != "null") {
         MaxxSunmiPrinter.printText(
-           "POINT NAME    :  " + name.toString(),
+          "POINT NAME    :  " + name.toString(),
           styles: SunmiStyles(alignment: SunmiAlign.left, isBold: true),
         );
       }
       if (TransactionID.toString() != "null") {
         MaxxSunmiPrinter.printText(
-           "RECHARGE ID   :  " + TransactionID.toString(),
+          "RECHARGE ID   :  " + TransactionID.toString(),
           styles: SunmiStyles(alignment: SunmiAlign.left, isBold: true),
         );
       }
       if (provider_name.toString() != "null") {
         MaxxSunmiPrinter.printText(
-           "OPERATOR      :  " + provider_name.toString(),
+          "OPERATOR      :  " + provider_name.toString(),
           styles: SunmiStyles(alignment: SunmiAlign.left, isBold: true),
         );
       }

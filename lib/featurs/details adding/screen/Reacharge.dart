@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/Const/NetWork.dart';
+import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 import 'package:plexpay/featurs/details%20adding/screen/blank1.dart';
 import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
@@ -167,9 +169,8 @@ class _reachargeState extends State<reacharge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              isTap == true
-                                  ? Container()
-                                  : InkWell(
+
+                                  InkWell(
                                       onTap: () {
                                         Navigator.pop(context);
                                       },
@@ -191,33 +192,47 @@ class _reachargeState extends State<reacharge> {
                                         )),
                                       ),
                                     ),
-                              isTap == true
-                                  ? Container(
-                                      height: width * 0.1,
-                                      child: Center(
-                                          child: CircularProgressIndicator(
-                                        strokeWidth: width * 0.01,
-                                      )),
-                                    )
-                                  : InkWell(
+                                  InkWell(
                                       onTap: () async {
                                         setState(() {
                                           isTap = true;
                                         });
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                backgroundColor: Colors.white,
+                                                surfaceTintColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(width * 0.05)),
+                                                content: Container(
+                                                  height: height * 0.5,
+                                                  width: width * 1,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                      borderRadius:
+                                                      BorderRadius.circular(width * 0.03)),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Lottie.asset(ImageConst.lottie1),
+                                                      Text(
+                                                        "Recharge Successfull!!",
+                                                        style:
+                                                        TextStyle(fontSize: width * 0.045),
+                                                      ),
+
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            });
                                         Future.delayed(
                                             const Duration(seconds: 1), () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                              backgroundColor:
-                                              Colors.black,
-                                              content: Text(
-                                                  "Recharge failed ")));
-
-                                          // setState(() {
-                                          setState(() {
-                                            // });
-                                          });
-                                        });
+                                        }).then((value) {
+                                          Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => bill(),));
+                                        },);
                                       },
                                       child: Container(
                                         height: width * 0.12,

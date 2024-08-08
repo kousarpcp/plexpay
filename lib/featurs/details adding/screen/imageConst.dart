@@ -70,7 +70,8 @@
    static const remove = "assets/images/remove.png";
 
 
-
+///lottie
+   static const lottie1='assets/animations/success.json';
 
 
 
