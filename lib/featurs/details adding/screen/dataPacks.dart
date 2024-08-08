@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../main.dart';
 import '../Const/colorConst.dart';
+import 'Reacharge.dart';
 
 class dataPacks extends StatefulWidget {
   const dataPacks({super.key, required this.number});
@@ -218,145 +219,158 @@ class _dataPacksState extends State<dataPacks> {
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Center(
-                          child: Container(
-                            height: width * 0.362,
-                            width: width * 0.84,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: width * 0.007,
-                                  )
-                                ],
-                                borderRadius:
-                                BorderRadius.circular(width * 0.06)),
-                            child: Padding(
-                              padding: EdgeInsets.all(width * 0.03),
-                              child: Column(
-                                children: [
-                                  // Row(
-                                  //   children: [
-                                  //     // Container(
-                                  //     //   height: width*0.07,
-                                  //     //   width: width*0.22,
-                                  //     //   decoration: BoxDecoration(
-                                  //     //       color: Colors.red,
-                                  //     //       borderRadius: BorderRadius.circular(width*0.05)
-                                  //     //   ),
-                                  //     //   // child: Center(child: Text("Unlimited 5G",style: TextStyle(fontWeight: FontWeight.w900,color: Colors.white),)),
-                                  //     // ),
-                                  //     // SizedBox(width: width*0.032,),
-                                  //     // Text("Popular Plan",style: TextStyle(color:Colors.blue,fontWeight: FontWeight.w600),)
-                                  //   ],
-                                  // ),
-                                  SizedBox(
-                                    height: width * 0.02,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(datapacks[index]["Text1"],
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => reacharge(
+                                  text: datapacks[index]["Text1"],
+                                  amount: datapacks[index]["Text2"],
+                                  number: widget.number
+                              ),
+                            ));
+                      },
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Container(
+                              height: width * 0.362,
+                              width: width * 0.84,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: width * 0.007,
+                                    )
+                                  ],
+                                  borderRadius:
+                                  BorderRadius.circular(width * 0.06)),
+                              child: Padding(
+                                padding: EdgeInsets.all(width * 0.03),
+                                child: Column(
+                                  children: [
+                                    // Row(
+                                    //   children: [
+                                    //     // Container(
+                                    //     //   height: width*0.07,
+                                    //     //   width: width*0.22,
+                                    //     //   decoration: BoxDecoration(
+                                    //     //       color: Colors.red,
+                                    //     //       borderRadius: BorderRadius.circular(width*0.05)
+                                    //     //   ),
+                                    //     //   // child: Center(child: Text("Unlimited 5G",style: TextStyle(fontWeight: FontWeight.w900,color: Colors.white),)),
+                                    //     // ),
+                                    //     // SizedBox(width: width*0.032,),
+                                    //     // Text("Popular Plan",style: TextStyle(color:Colors.blue,fontWeight: FontWeight.w600),)
+                                    //   ],
+                                    // ),
+                                    SizedBox(
+                                      height: width * 0.02,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(datapacks[index]["Text1"],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: width * 0.06)),
+                                            SizedBox(
+                                              width: width * 0.02,
+                                            ),
+                                            Text(
+                                              datapacks[index]["Text2"],
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w900,
-                                                  fontSize: width * 0.06)),
-                                          SizedBox(
-                                            width: width * 0.02,
-                                          ),
-                                          Text(
-                                            datapacks[index]["Text2"],
+                                                  fontSize: width * 0.065),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          datapacks[index]["Text3"],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.indigo),
+                                        )
+                                      ],
+                                    ),
+                                    Divider(
+                                      thickness: width * 0.002,
+                                      // indent: width * 0.035,
+                                      // endIndent: width * 0.035,
+                                    ),
+                                    SizedBox(
+                                      height: width * 0.01,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(datapacks[index]["Text4"],
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: width * 0.065),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        datapacks[index]["Text3"],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.indigo),
-                                      )
-                                    ],
-                                  ),
-                                  Divider(
-                                    thickness: width * 0.002,
-                                    indent: width * 0.035,
-                                    endIndent: width * 0.035,
-                                  ),
-                                  SizedBox(
-                                    height: width * 0.01,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(datapacks[index]["Text4"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                      Text(datapacks[index]["Text5"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                      Text(datapacks[index]["Text6"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: width * 0.01,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(datapacks[index]["Text7"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: width * 0.048)),
-                                      Text(datapacks[index]["Text8"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: width * 0.048)),
-                                      Text(datapacks[index]["Text9"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: width * 0.048)),
-                                    ],
-                                  ),
-                                  // Container(
-                                  //   height: width*0.09,
-                                  //   width: width*0.68,
-                                  //   decoration: BoxDecoration(
-                                  //       color: Colors.indigo,
-                                  //       borderRadius: BorderRadius.circular(width*0.05)
-                                  //   ),
-                                  //   child: Center(
-                                  //     child: Text("Recharge",
-                                  //       style: TextStyle(
-                                  //           color: Colors.white,
-                                  //           fontWeight: FontWeight.w800,
-                                  //           fontSize: width*0.06
-                                  //       ),),
-                                  //   ),
-                                  // )
-                                ],
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                        Text(datapacks[index]["Text5"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                        Text(datapacks[index]["Text6"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: width * 0.01,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(datapacks[index]["Text7"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: width * 0.048)),
+                                        Text(datapacks[index]["Text8"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: width * 0.048)),
+                                        Text(datapacks[index]["Text9"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: width * 0.048)),
+                                      ],
+                                    ),
+                                    // Container(
+                                    //   height: width*0.09,
+                                    //   width: width*0.68,
+                                    //   decoration: BoxDecoration(
+                                    //       color: Colors.indigo,
+                                    //       borderRadius: BorderRadius.circular(width*0.05)
+                                    //   ),
+                                    //   child: Center(
+                                    //     child: Text("Recharge",
+                                    //       style: TextStyle(
+                                    //           color: Colors.white,
+                                    //           fontWeight: FontWeight.w800,
+                                    //           fontSize: width*0.06
+                                    //       ),),
+                                    //   ),
+                                    // )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: width * 0.04,
-                        ),
-                      ],
+                          SizedBox(
+                            height: width * 0.04,
+                          ),
+                        ],
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) {

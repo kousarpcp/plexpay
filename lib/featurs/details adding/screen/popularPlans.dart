@@ -272,10 +272,9 @@ class _popularState extends State<popular> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => reacharge(
-                                    text:AED[index]["Text1"],
-                                    amount:AED[index]["Text2"],
-                                    number:widget.number
-                                  ),
+                                      text: AED[index]["Text1"],
+                                      amount: AED[index]["Text2"],
+                                      number: widget.number),
                                 ));
                           },
                           child: Center(
@@ -286,10 +285,10 @@ class _popularState extends State<popular> {
                                   color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: width * 0.007,
-                                      offset: Offset(width*0.00, width*0.02)
-                                    )
+                                        color: Colors.black12,
+                                        blurRadius: width * 0.007,
+                                        offset:
+                                            Offset(width * 0.00, width * 0.02))
                                   ],
                                   borderRadius:
                                       BorderRadius.circular(width * 0.06)),
@@ -464,9 +463,14 @@ class _popularState extends State<popular> {
                                                                 builder:
                                                                     (context) =>
                                                                         reacharge(
-                                                                            number:widget.number,
-                                                                          text:AED[index]["Text1"],
-                                                                          amount:AED[index]["Text2"],
+                                                                  number: widget
+                                                                      .number,
+                                                                  text: AED[
+                                                                          index]
+                                                                      ["Text1"],
+                                                                  amount: AED[
+                                                                          index]
+                                                                      ["Text2"],
                                                                 ),
                                                               ));
                                                         },
@@ -525,8 +529,8 @@ class _popularState extends State<popular> {
                                     ),
                                     Divider(
                                       thickness: width * 0.002,
-                                      indent: width * 0.035,
-                                      endIndent: width * 0.035,
+                                      // indent: width * 0.035,
+                                      // endIndent: width * 0.035,
                                     ),
                                     SizedBox(
                                       height: width * 0.016,
