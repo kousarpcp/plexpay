@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../main.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class debitcredit extends StatefulWidget {
   const debitcredit({super.key});

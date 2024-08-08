@@ -5,8 +5,6 @@ import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
 import 'package:plexpay/featurs/details%20adding/screen/splashScreen.dart';
 
-import 'featurs/details adding/Const/NetWork.dart';
-import 'featurs/details adding/Const/video lexpay.dart';
 import 'featurs/details adding/screen/BottomNavigation.dart';
 
 import 'featurs/details adding/screen/Reacharge.dart';

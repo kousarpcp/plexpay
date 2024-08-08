@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import 'package:plexpay/featurs/details%20adding/Const/widgets.dart';
+import 'package:plexpay/Const/widgets.dart';
 import 'package:screenshot/screenshot.dart';
 // import 'package:plexpay/Api/transactionSaleApi.dart';
 // import 'package:plexpay/Api/transactionSearchApi.dart';
 import '../../../main.dart';
-import '../Const/colorConst.dart';
+import '../../../Const/colorConst.dart';
 import 'Constants.dart';
 // import 'package:plexpay/Helper/resources.dart';
 // import 'package:plexpay/Screens/PrintPage.dart';
@@ -15,7 +15,7 @@ import 'Constants.dart';
 
 
 import 'Resources.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class HistoryBottom3 extends StatefulWidget {
   @override

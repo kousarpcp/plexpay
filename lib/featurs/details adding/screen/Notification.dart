@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../main.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});

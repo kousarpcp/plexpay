@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
-import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/imageConst.dart';
+import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/imageConst.dart';
 
 import '../../../main.dart';
 

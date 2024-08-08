@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plexpay/main.dart';
 
-import '../Const/colorConst.dart';
+import '../../../Const/colorConst.dart';
 
 class custom extends StatefulWidget {
   const custom({super.key});

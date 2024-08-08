@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:maxx_sunmi_printer/maxx_sunmi_printer.dart';
-import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/imageConst.dart';
+import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/imageConst.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../../main.dart';
-import '../Const/NetWork.dart';
+import '../../../Const/NetWork.dart';
 
 class bill extends StatefulWidget {
   const bill({super.key});
@@ -307,17 +307,6 @@ class _billState extends State<bill> {
           child: Row(
             children: [
               Expanded(child: Button1("Print")),
-              Container(
-                height: width*0.14,
-                width: width*0.01,
-                color: Colors.white,
-              ),
-
-              Container(
-                height: width*0.14,
-                width: width*0.01,
-                color: Colors.white,
-              ),
               Expanded(child: Button2("Share"))
             ],
           ),
@@ -326,39 +315,7 @@ class _billState extends State<bill> {
       ),
     );
   }
-  Widget Details(String label1, String label2) {
-    return Row(
-      children: [
-        Expanded(
-            child: Text(
-              label1.toUpperCase(),
-            )),
-        Text(":  "),
-        Expanded(
-            child: Text(
-              label2.toUpperCase(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ))
-      ],
-    );
-  }
-  Widget DetailsB(String label1, String label2) {
-    return Row(
-      children: [
-        Expanded(
-            child: Text(
-              label1.toUpperCase(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-        Text(":  "),
-        Expanded(
-            child: Text(
-              label2.toUpperCase(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ))
-      ],
-    );
-  }
+
 
   Widget Button1(String label) {
     return GestureDetector(
@@ -369,6 +326,11 @@ class _billState extends State<bill> {
         printOut();
       } ,
       child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(width*0.06),
+            color:isTap==true?Colors.grey: colorConst.blue
+        ),
+        margin: EdgeInsets.all(width*0.03),
         alignment: Alignment.center,
         height: width*0.14,
         child: Text(
@@ -376,7 +338,7 @@ class _billState extends State<bill> {
           style: TextStyle(
               color: Colors.white, fontSize: width*0.052, fontWeight: FontWeight.w600),
         ),
-        color:isTap==true?Colors.grey: Colors.indigo,
+
       ),
     );
   }
@@ -386,14 +348,19 @@ class _billState extends State<bill> {
         capture();
       } ,
       child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width*0.06),
+          color: colorConst.blue,
+
+        ),
         alignment: Alignment.center,
+        margin: EdgeInsets.all(width*0.03),
         height: width*0.14,
         child: Text(
           label,
           style: TextStyle(
               color: Colors.white, fontSize:  width*0.052, fontWeight: FontWeight.w600),
         ),
-        color: Colors.indigo,
       ),
     );
   }

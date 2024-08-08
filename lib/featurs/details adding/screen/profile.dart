@@ -3,7 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/collections.dart';
-import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
+import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/due_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
@@ -13,7 +13,7 @@ import '../../../main.dart';
 import 'History_Bottom.dart';
 import 'debit&credit.dart';
 import 'funds.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});

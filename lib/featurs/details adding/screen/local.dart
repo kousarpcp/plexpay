@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plexpay/featurs/details%20adding/Const/NetWork.dart';
+import 'package:plexpay/Const/NetWork.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 
 import '../../../main.dart';
-import 'du_Tab.dart';
 import 'offer_details.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class local extends StatefulWidget {
   const local({super.key});

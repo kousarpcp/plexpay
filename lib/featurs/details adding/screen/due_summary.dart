@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../main.dart';
-import '../Const/colorConst.dart';
-import '../Const/widgets.dart';
-import 'imageConst.dart';
+import '../../../Const/colorConst.dart';
+import '../../../Const/widgets.dart';
+import '../../../Const/imageConst.dart';
 
 class dueSummary extends StatefulWidget {
   const dueSummary({super.key});

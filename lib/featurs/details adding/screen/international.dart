@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/Const/widgets.dart';
+import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/country_field.dart';
 
 import '../../../main.dart';
-import 'imageConst.dart';
+import '../../../Const/imageConst.dart';
 
 class international extends StatefulWidget {
   const international({super.key});

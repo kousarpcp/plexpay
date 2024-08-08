@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:plexpay/featurs/details%20adding/Const/widgets.dart';
+import 'package:plexpay/Const/widgets.dart';
 
 import '../../../main.dart';
-import '../Const/colorConst.dart';
-import 'imageConst.dart';
+import '../../../Const/colorConst.dart';
+import '../../../Const/imageConst.dart';
 
 class Funds extends StatefulWidget {
   const Funds({super.key});

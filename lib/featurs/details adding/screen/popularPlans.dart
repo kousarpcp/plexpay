@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:plexpay/featurs/details%20adding/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/imageConst.dart';
+import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/imageConst.dart';
 
 import '../../../main.dart';
 import 'Reacharge.dart';
