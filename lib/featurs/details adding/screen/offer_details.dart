@@ -6,8 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/etisalat_custom.dart';
-import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
+import 'package:plexpay/featurs/details%20adding/screen/costom.dart';
+import 'package:plexpay/featurs/details%20adding/screen/offer.dart';
 
 import '../../../main.dart';
 
@@ -110,8 +110,13 @@ class _OfferDetailsState extends State<OfferDetails> {
             ),
             Expanded(
               child: TabBarView(children: [
-                offer(),
-                custom(),
+                offer(
+                  name:widget.name,
+                  image:widget.image
+                ),
+                custom(
+                  name:widget.name,
+                ),
               ]),
             ),
           ],

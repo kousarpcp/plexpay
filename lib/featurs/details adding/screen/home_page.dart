@@ -119,9 +119,9 @@ class _home_pageState extends State<home_page> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children:  AnimationConfiguration.toStaggeredList(
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 300),
                   childAnimationBuilder: (widget) => SlideAnimation(
-                      horizontalOffset: 50.0,
+                      verticalOffset: 30.0,
                       child: FadeInAnimation(
                         child: widget,
                       )

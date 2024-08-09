@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 
 import '../../../main.dart';
 import '../../../Const/widgets.dart';
@@ -108,88 +110,102 @@ class _CollectionsState extends State<Collections> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Container(
-              height: width * 0.125,
-              width: width * 0.86,
-              decoration: BoxDecoration(
-                  // color: Colors.red,
-                  border:
-                      Border.all(width: width * 0.001, color: colorConst.grey),
-                  borderRadius: BorderRadius.circular(width * 0.03)),
-              child: Padding(
-                padding: EdgeInsets.all(width * 0.03),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.date_range_outlined,
-                      color: Colors.lightBlueAccent,
-                      size: width * 0.053,
-                    ),
-                    SizedBox(
-                      width: width * 0.03,
-                    ),
-                    Expanded(
-                      child: Text(
-                        start + "  to  " + end,
-                        maxLines: 2,
-                        style: TextStyle(fontSize: width * 0.043),
-                        // style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        selectDateRange(context);
-                      },
-                      child: Container(
-                        height: width * 0.077,
-                        width: width * 0.23,
-                        decoration: BoxDecoration(
-                            color: colorConst.blue,
-                            borderRadius: BorderRadius.circular(width * 0.35)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                                child: Text(
-                              "FILTER",
-                              style: TextStyle(
-                                  fontSize: width * 0.044,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            )),
-                            SizedBox(
-                              width: width * 0.012,
-                            ),
-                            Icon(
-                              Icons.filter_alt,
-                              color: Colors.white,
-                              size: width * 0.038,
-                            ),
-                          ],
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: AnimationLimiter(
+          child: Column(
+    children:  AnimationConfiguration.toStaggeredList(
+    duration: const Duration(milliseconds: 300),
+    childAnimationBuilder: (widget) => SlideAnimation(
+    horizontalOffset: 30.0,
+    child: FadeInAnimation(
+    child: widget,
+    )
+    ),
+            children: [
+              Center(
+                child: Container(
+                  height: width * 0.125,
+                  width: width * 0.86,
+                  decoration: BoxDecoration(
+                      // color: Colors.red,
+                      border:
+                          Border.all(width: width * 0.001, color: colorConst.grey),
+                      borderRadius: BorderRadius.circular(width * 0.03)),
+                  child: Padding(
+                    padding: EdgeInsets.all(width * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.date_range_outlined,
+                          color: Colors.lightBlueAccent,
+                          size: width * 0.053,
                         ),
-                      ),
-                    )
-                  ],
+                        SizedBox(
+                          width: width * 0.03,
+                        ),
+                        Expanded(
+                          child: Text(
+                            start + "  to  " + end,
+                            maxLines: 2,
+                            style: TextStyle(fontSize: width * 0.043),
+                            // style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            selectDateRange(context);
+                          },
+                          child: Container(
+                            height: width * 0.077,
+                            width: width * 0.23,
+                            decoration: BoxDecoration(
+                                color: colorConst.blue,
+                                borderRadius: BorderRadius.circular(width * 0.35)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                    child: Text(
+                                  "FILTER",
+                                  style: TextStyle(
+                                      fontSize: width * 0.044,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                )),
+                                SizedBox(
+                                  width: width * 0.012,
+                                ),
+                                Icon(
+                                  Icons.filter_alt,
+                                  color: Colors.white,
+                                  size: width * 0.038,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
+              ListView.separated(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return CollectionList(c: c, index:index ,);
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox();
+                  },
+                  itemCount: c.length)
+            ],
           ),
-          ListView.separated(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return CollectionList(c: c, index:index ,);
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox();
-              },
-              itemCount: c.length)
-        ],
+          )
+        ),
       ),
     );
   }
@@ -212,54 +228,59 @@ class _CollectionListState extends State<CollectionList> {
     return Column(
       children: [
         gap,
-        Container(
-          height: width * 0.18,
-          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    blurStyle: BlurStyle.normal,
-                    color: Colors.black.withOpacity(0.09),
-                    offset: Offset(0, 2),
-                    spreadRadius: 1,
-                    blurRadius: 9)
-              ],
-              borderRadius: BorderRadius.circular(width * 0.03)),
-          child: Padding(
-            padding:  EdgeInsets.all(width*0.03),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(widget.c[widget.index]["Text1"],
-                      style: TextStyle(
-                        fontSize: width*0.03
+        InkWell(
+          onTap: () {
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
+          },
+          child: Container(
+            height: width * 0.18,
+            margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      blurStyle: BlurStyle.normal,
+                      color: Colors.black.withOpacity(0.09),
+                      offset: Offset(0, 2),
+                      spreadRadius: 1,
+                      blurRadius: 9)
+                ],
+                borderRadius: BorderRadius.circular(width * 0.03)),
+            child: Padding(
+              padding:  EdgeInsets.all(width*0.03),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(widget.c[widget.index]["Text1"],
+                        style: TextStyle(
+                          fontSize: width*0.03
+                        ),
                       ),
-                    ),
-                    Text(
-                      widget.c[widget.index]["Text2"],
+                      Text(
+                        widget.c[widget.index]["Text2"],
+                        style: TextStyle(
+                            fontSize: width * 0.05, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: width * 0.09,
+                    width: width * 0.2,
+                    decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        borderRadius: BorderRadius.circular(width * 0.015)),
+                    child: Center(
+                        child: Text(
+                          widget.c[widget.index]["Text3"],
                       style: TextStyle(
-                          fontSize: width * 0.05, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: width * 0.09,
-                  width: width * 0.2,
-                  decoration: BoxDecoration(
-                      color: colorConst.lightgrey1,
-                      borderRadius: BorderRadius.circular(width * 0.015)),
-                  child: Center(
-                      child: Text(
-                        widget.c[widget.index]["Text3"],
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: width * 0.045),
-                  )),
-                ),
-              ],
+                          fontWeight: FontWeight.w600, fontSize: width * 0.045),
+                    )),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

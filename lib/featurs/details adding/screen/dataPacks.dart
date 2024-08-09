@@ -5,8 +5,10 @@ import '../../../Const/colorConst.dart';
 import 'Reacharge.dart';
 
 class dataPacks extends StatefulWidget {
-  const dataPacks({super.key, required this.number});
+  const dataPacks({super.key, required this.number, required this.name});
   final String number;
+  final String name;
+
 
   @override
   State<dataPacks> createState() => _dataPacksState();
@@ -227,7 +229,8 @@ class _dataPacksState extends State<dataPacks> {
                               builder: (context) => reacharge(
                                   text: datapacks[index]["Text1"],
                                   amount: datapacks[index]["Text2"],
-                                  number: widget.number
+                                  number: widget.number,
+                                name: widget.name,
                               ),
                             ));
                       },

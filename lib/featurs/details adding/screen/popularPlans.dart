@@ -8,8 +8,9 @@ import '../../../main.dart';
 import 'Reacharge.dart';
 
 class popular extends StatefulWidget {
-  const popular({super.key, required this.number});
+  const popular({super.key, required this.number, required this.name, });
   final String number;
+  final String name;
 
   @override
   State<popular> createState() => _popularState();
@@ -272,6 +273,7 @@ class _popularState extends State<popular> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => reacharge(
+                                      name:widget.name,
                                       text: AED[index]["Text1"],
                                       amount: AED[index]["Text2"],
                                       number: widget.number),
@@ -285,10 +287,8 @@ class _popularState extends State<popular> {
                                   color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: width * 0.007,
-                                        offset:
-                                            Offset(width * 0.00, width * 0.02))
+                                      color: Colors.black12,
+                                      blurRadius: width * 0.007,)
                                   ],
                                   borderRadius:
                                       BorderRadius.circular(width * 0.06)),
@@ -465,6 +465,7 @@ class _popularState extends State<popular> {
                                                                         reacharge(
                                                                   number: widget
                                                                       .number,
+                                                                          name:widget.name,
                                                                   text: AED[
                                                                           index]
                                                                       ["Text1"],

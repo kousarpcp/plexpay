@@ -16,8 +16,8 @@ import 'featurs/details adding/screen/country_field.dart';
 import 'featurs/details adding/screen/dataPacks.dart';
 import 'featurs/details adding/screen/debit&credit.dart';
 import 'featurs/details adding/screen/offer_details.dart';
-import 'featurs/details adding/screen/etisalat_custom.dart';
-import 'featurs/details adding/screen/etisalat_offer.dart';
+import 'featurs/details adding/screen/costom.dart';
+import 'featurs/details adding/screen/offer.dart';
 import 'featurs/details adding/screen/funds.dart';
 import 'featurs/details adding/screen/home_page.dart';
 

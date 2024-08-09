@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,8 +7,10 @@ import 'package:plexpay/featurs/details%20adding/screen/collections.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/due_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
+import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../main.dart';
 import 'History_Bottom.dart';
@@ -543,9 +546,10 @@ class _profileState extends State<profile> {
                                   fontSize: 20,fontWeight: FontWeight.w600)),
                             ),
                             SizedBox(height: width*0.05,),
-                            InkWell(onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context, MaterialPageRoute(builder: (context) => BottomNavigation(),),(route) => false);
+                            InkWell(onTap: () async {
+                              SharedPreferences _prefs = await SharedPreferences.getInstance();
+                              _prefs.clear();
+                              Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
                             },
                               child: Container(
                                 height: width*0.1,

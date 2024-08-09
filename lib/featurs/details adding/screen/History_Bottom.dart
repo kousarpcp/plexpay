@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 // import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:plexpay/Const/widgets.dart';
+import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 import 'package:screenshot/screenshot.dart';
 // import 'package:plexpay/Api/transactionSaleApi.dart';
 // import 'package:plexpay/Api/transactionSearchApi.dart';
@@ -294,104 +296,124 @@ class _HistoryDataState extends State<HistoryData> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: width*0.2,
-      margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.03),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(width*0.03),
-        boxShadow: [
-          BoxShadow(
-              blurStyle: BlurStyle.normal,
-              color: Colors.black.withOpacity(0.09),
-              offset: Offset(0, 2),
-              spreadRadius: 1,
-              blurRadius: 9)
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return AnimationLimiter(
+      child: Column(
+        children:  AnimationConfiguration.toStaggeredList(
+        duration: const Duration(milliseconds: 300),
+        childAnimationBuilder: (widget) => SlideAnimation(
+        horizontalOffset: 30.0,
+            child: FadeInAnimation(
+              child: widget,
+    )
+    ),
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: width*0.1,
-                width: width*0.1,
-                margin: EdgeInsets.only(
-                  right: width*0.03,
-                  left: width*0.03
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width*0.9),
-                    image: DecorationImage(image: AssetImage(widget.history[widget.index]["service"]))
-                ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
+            },
+            child: Container(
+              height: width*0.2,
+              margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.03),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(width*0.03),
+                boxShadow: [
+                  BoxShadow(
+                      blurStyle: BlurStyle.normal,
+                      color: Colors.black.withOpacity(0.09),
+                      offset: Offset(0, 2),
+                      spreadRadius: 1,
+                      blurRadius: 9)
+                ],
               ),
-              Text(
-                widget.history[widget.index]["text"],
-                style: TextStyle(
-                  fontSize: width*0.025
-                ),
-              )
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  widget.history[widget.index]["transaction id"],
-                style: TextStyle(
-                  fontSize: width*0.04,
-                  fontWeight: FontWeight.bold
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: width*0.1,
+                        width: width*0.1,
+                        margin: EdgeInsets.only(
+                          right: width*0.03,
+                          left: width*0.03
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(width*0.9),
+                            image: DecorationImage(image: AssetImage(widget.history[widget.index]["service"]))
+                        ),
+                      ),
+                      Text(
+                        widget.history[widget.index]["text"],
+                        style: TextStyle(
+                          fontSize: width*0.025
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                          widget.history[widget.index]["transaction id"],
+                        style: TextStyle(
+                          fontSize: width*0.04,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Text(
+                        widget.history[widget.index]["date"],
+                        style: TextStyle(
+                          fontSize: width*0.025,
+                          color: colorConst.grey,
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.history[widget.index]["cash"].toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        widget.history[widget.index]["recieved"].toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: width*0.08,
+                    width: width*0.17,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(width*0.03),
+                      color: CupertinoColors.systemGreen,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Success",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              Text(
-                widget.history[widget.index]["date"],
-                style: TextStyle(
-                  fontSize: width*0.025,
-                  color: colorConst.grey,
-                ),
-              )
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.history[widget.index]["cash"].toString(),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                widget.history[widget.index]["recieved"].toString(),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green
-                ),
-              )
-            ],
-          ),
-          Container(
-            height: width*0.08,
-            width: width*0.17,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(width*0.03),
-              color: CupertinoColors.systemGreen,
             ),
-            child: Center(
-              child: Text(
-                "Success",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
-          )
+          ),
         ],
       ),
+      )
     );
   }
 }

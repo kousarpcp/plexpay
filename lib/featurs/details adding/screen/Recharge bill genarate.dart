@@ -33,32 +33,33 @@ class _billState extends State<bill> {
     try {
       Uint8List byteImage1 = await networkImageToByte(pluspayImgUrl);
       final imgData1 = base64.encode(byteImage1);
-      MaxxSunmiPrinter.printImage(imgData1, align: SunmiAlign.center);
-
+      MaxxSunmiPrinter.printImage(imgData1, align: SunmiAlign.center,);
       MaxxSunmiPrinter.printText("www.plexpay.in",
           styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
 
       MaxxSunmiPrinter.printBarcode(
         "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png",);
-
-      MaxxSunmiPrinter.printText("17-Jul-2024  ",
+      MaxxSunmiPrinter.printTextLine();
+      MaxxSunmiPrinter.printText("17-Jul-2024",
           styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
-      MaxxSunmiPrinter.printText("  11:22 AM",
+      MaxxSunmiPrinter.printText("11:22 AM",
           styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
-
-
       // MaxxSunmiPrinter.printText(nowDate,
       //     styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
       //
       // MaxxSunmiPrinter.paperFeed(number: 1);
-
       for (var item in a) {
         MaxxSunmiPrinter.printText(
-          "${item['Text1']}: ${item['Text2']}",
+          "${item['Text1']}    :  ${item['Text2']}",
           styles: SunmiStyles(alignment: SunmiAlign.left),
         );
       }
-      MaxxSunmiPrinter.paperFeed(number: 1);
+      MaxxSunmiPrinter.printTextLine();
+      // MaxxSunmiPrinter.paperFeed(number: 1);
+      MaxxSunmiPrinter.printText("Help & Support",styles: SunmiStyles(alignment: SunmiAlign.center,isBold: true));
+      MaxxSunmiPrinter.printText("Whatsapp Support: +971589692115",styles: SunmiStyles(
+        alignment: SunmiAlign.center
+      ));
     }catch (e) {
       print("Error during print: $e");
     }
@@ -149,8 +150,9 @@ class _billState extends State<bill> {
             child: Screenshot(
               controller: screenshotController,
               child: Container(
-                height: width*1.6,
+                height: width*1.55,
                 width: width*0.75,
+                margin: EdgeInsets.only(top: width*0.03),
                 decoration: BoxDecoration(
                     color: Colors.white,
                   boxShadow: [
@@ -161,7 +163,7 @@ class _billState extends State<bill> {
                       offset: Offset(0,01)
                     )
                   ],
-                  borderRadius: BorderRadius.circular(width*0.015)
+                  borderRadius: BorderRadius.circular(width*0.02)
                 ),
                 child: Padding(
                   padding:  EdgeInsets.all(width*0.02),
@@ -184,7 +186,6 @@ class _billState extends State<bill> {
                       Image(
                         image: NetworkImage(
                             "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png"),
-                        height: width * 0.13,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

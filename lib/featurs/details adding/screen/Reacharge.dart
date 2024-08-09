@@ -9,7 +9,7 @@ import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genara
 import 'package:plexpay/featurs/details%20adding/screen/blank1.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
-import 'package:plexpay/featurs/details%20adding/screen/etisalat_offer.dart';
+import 'package:plexpay/featurs/details%20adding/screen/offer.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
@@ -21,10 +21,11 @@ import '../../../Const/imageConst.dart';
 
 class reacharge extends StatefulWidget {
 
-  const reacharge({super.key, required this.number, required this.text, required this.amount});
+  const reacharge({super.key, required this.number, required this.text, required this.amount, required this.name, });
   final String number;
   final String text;
   final String amount;
+  final String name;
 
   @override
   State<reacharge> createState() => _reachargeState();
@@ -156,7 +157,7 @@ class _reachargeState extends State<reacharge> {
                             ],
                           ),
                           Text(
-                            "Etisalat UAE",
+                            widget.name,
                             style: TextStyle(
                                 fontSize: width * 0.042,
                                 color: colorConst.grey,

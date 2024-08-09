@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
+import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../main.dart';
 
@@ -13,13 +16,22 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
+  bool login = false;
+
+  getData() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    login = _prefs.getBool("login") ?? false;
+    Future.delayed(Duration(
+        seconds: 6
+    )).then((value) => Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => login?BottomNavigation():Login(),)));
+    setState(() {
+
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
-    Future.delayed(Duration(
-        seconds: 3
-    )).then((value) =>
-        Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavigation(),)));
+    getData();
     super.initState();
   }
   Widget build(BuildContext context) {

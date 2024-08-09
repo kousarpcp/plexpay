@@ -68,6 +68,7 @@
    static const refundhistory = "assets/images/refund history.png";
    static const etisalatuae = "assets/images/etisalat uae.jpeg";
    static const remove = "assets/images/remove.png";
+   static const login = "assets/images/login.jpg";
 
 
 ///lottie
