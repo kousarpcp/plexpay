@@ -90,21 +90,6 @@ class _CollectionsState extends State<Collections> {
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            height: width * 0.05,
-            width: width * 0.08,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.03),
-              child: SvgPicture.asset(
-                ImageConst.back,
-              ),
-            ),
-          ),
-        ),
         title: Text(
           "Collections",
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),

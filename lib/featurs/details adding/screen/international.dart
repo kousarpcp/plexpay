@@ -22,82 +22,102 @@ class _internationalState extends State<international> {
     {
       "image1": ImageConst.india1, "text": "India",
       'code': 'IN',
+      "country code":"+91"
     },
     {
       "image1": ImageConst.usa,"text": "USA",
       'code': 'US',
+      "country code":"+1"
     },
     {
       "image1": ImageConst.italy,"text": "Italy",
       'code': 'IT',
+      "country code":"+41"
     },
     {
       "image1": ImageConst.armenia,"text": "Armenia",
       'code': 'AM',
+      "country code":"+374"
     },
     {
       "image1": ImageConst.ecuador,"text": "Ecuador",
       'code': 'EC',
+      "country code":"+593"
     },
     {
       "image1": ImageConst.peru,"text": "Peru",
       'code': 'PE',
+      "country code":"+51"
     },
     {
       "image1": ImageConst.uruguay,"text": "Uruguay",
       'code': 'UY',
+      "country code":"+598"
     },
     {
       "image1": ImageConst.hungary,"text": "Hungary",
       'code': 'HU',
+      "country code":"+36"
     },
     {
       "image1": ImageConst.croatia,"text": "Croatia",
       'code': 'HR',
+      "country code":"+385"
     },
     {
       "image1": ImageConst.egypt,"text": "Egypt",
       'code': 'EG',
+      "country code":"+20"
     },
     {
       "image1": ImageConst.australia,"text": "Australia",
       'code': 'AU',
+      "country code":"+61"
     },
     {
       "image1": ImageConst.vietnam,"text": "Vietnam",
       'code': 'VN',
+      "country code":"+84"
     },
     {
       "image1": ImageConst.zimbabwe,"text": "Zimbabwe",
       'code': 'ZW',
+      "country code":"+263"
     },
     {
       "image1": ImageConst.bolivia,"text": "Bolivia",
       'code': 'BO',
+      "country code":"+591"
     },
     {
       "image1": ImageConst.sweden,"text": "Sweden",
       'code': 'SE',
+      "country code":"+46"
     },
     {
       "image1": ImageConst.spain,"text": "Spain",
       'code': 'ES',
+      "country code":"+34"
     },
     {
       "image1": ImageConst.thailand,"text": "Thailand",
       'code': 'TH',
+      "country code":"+66"
     },
     {
       "image1": ImageConst.monaco,"text": "Monaco",
       'code': 'MC',
+      "country code":"+377"
     },
     {
       "image1": ImageConst.lebanon,"text": "Lebanon",
       'code': 'LB',
+      "country code":"+961"
     },
     {
       "image1": ImageConst.portugal,"text": "Portugal",
       'code': 'PT',
+      "country code":"+351"
     },
   ];
 
@@ -171,6 +191,7 @@ class _internationalState extends State<international> {
                                   initialCountryCode: Country[index]["code"]!,
                                   name: Country[index]["text"],
                                   image: Country[index]["image1"],
+                                  code: Country[index]["country code"]
                                 ),
                               ));
                         },
