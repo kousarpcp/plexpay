@@ -346,7 +346,7 @@ class _popularState extends State<popular> {
                                                           width * 0.07)),
                                               builder: (context) {
                                                 return Container(
-                                                  height: width * 0.7,
+                                                  height: width * 0.9,
                                                   width: width * 1,
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,

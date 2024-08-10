@@ -76,7 +76,7 @@ flutter_launcher_icons:
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/plexpay_logo.jpg"
     background_color: "#hexcode"
     theme_color: "#hexcode"
   windows:
