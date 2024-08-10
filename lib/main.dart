@@ -15,6 +15,7 @@ import 'featurs/details adding/screen/collectionsReciept.dart';
 import 'featurs/details adding/screen/country_field.dart';
 import 'featurs/details adding/screen/dataPacks.dart';
 import 'featurs/details adding/screen/debit&credit.dart';
+import 'featurs/details adding/screen/login_page.dart';
 import 'featurs/details adding/screen/offer_details.dart';
 import 'featurs/details adding/screen/costom.dart';
 import 'featurs/details adding/screen/offer.dart';

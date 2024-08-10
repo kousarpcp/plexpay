@@ -136,15 +136,16 @@ class _home_pageState extends State<home_page> {
                           color: colorConst.blue,
                           borderRadius: BorderRadius.circular(width * 0.06)),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Column(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "Free Vouchers",
                                 style: TextStyle(
-                                    fontSize: width * 0.06, color: Colors.white),
+                                    fontSize: 24, color: Colors.white),
                               ),
                               Text(
                                 "Tap here to claim yourfree discount vouchers",

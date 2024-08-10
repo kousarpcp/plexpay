@@ -73,6 +73,7 @@ class _reachargeState extends State<reacharge> {
               ),
       ),
       body: Column(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: width * 0.9,
