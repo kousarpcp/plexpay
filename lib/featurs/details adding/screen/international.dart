@@ -20,83 +20,83 @@ class international extends StatefulWidget {
 class _internationalState extends State<international> {
   List Country = [
     {
-      "image1": ImageConst.india1,
+      "image1": ImageConst.india1, "text": "India",
       'code': 'IN',
     },
     {
-      "image1": ImageConst.usa,
+      "image1": ImageConst.usa,"text": "USA",
       'code': 'US',
     },
     {
-      "image1": ImageConst.italy,
+      "image1": ImageConst.italy,"text": "Italy",
       'code': 'IT',
     },
     {
-      "image1": ImageConst.armenia,
+      "image1": ImageConst.armenia,"text": "Armenia",
       'code': 'AM',
     },
     {
-      "image1": ImageConst.ecuador,
+      "image1": ImageConst.ecuador,"text": "Ecuador",
       'code': 'EC',
     },
     {
-      "image1": ImageConst.peru,
+      "image1": ImageConst.peru,"text": "Peru",
       'code': 'PE',
     },
     {
-      "image1": ImageConst.uruguay,
+      "image1": ImageConst.uruguay,"text": "Uruguay",
       'code': 'UY',
     },
     {
-      "image1": ImageConst.hungary,
+      "image1": ImageConst.hungary,"text": "Hungary",
       'code': 'HU',
     },
     {
-      "image1": ImageConst.croatia,
+      "image1": ImageConst.croatia,"text": "Croatia",
       'code': 'HR',
     },
     {
-      "image1": ImageConst.egypt,
+      "image1": ImageConst.egypt,"text": "Egypt",
       'code': 'EG',
     },
     {
-      "image1": ImageConst.australia,
+      "image1": ImageConst.australia,"text": "Australia",
       'code': 'AU',
     },
     {
-      "image1": ImageConst.vietnam,
+      "image1": ImageConst.vietnam,"text": "Vietnam",
       'code': 'VN',
     },
     {
-      "image1": ImageConst.zimbabwe,
+      "image1": ImageConst.zimbabwe,"text": "Zimbabwe",
       'code': 'ZW',
     },
     {
-      "image1": ImageConst.bolivia,
+      "image1": ImageConst.bolivia,"text": "Bolivia",
       'code': 'BO',
     },
     {
-      "image1": ImageConst.sweden,
+      "image1": ImageConst.sweden,"text": "Sweden",
       'code': 'SE',
     },
     {
-      "image1": ImageConst.spain,
+      "image1": ImageConst.spain,"text": "Spain",
       'code': 'ES',
     },
     {
-      "image1": ImageConst.thailand,
+      "image1": ImageConst.thailand,"text": "Thailand",
       'code': 'TH',
     },
     {
-      "image1": ImageConst.monaco,
+      "image1": ImageConst.monaco,"text": "Monaco",
       'code': 'MC',
     },
     {
-      "image1": ImageConst.lebanon,
+      "image1": ImageConst.lebanon,"text": "Lebanon",
       'code': 'LB',
     },
     {
-      "image1": ImageConst.portugal,
+      "image1": ImageConst.portugal,"text": "Portugal",
       'code': 'PT',
     },
   ];
@@ -117,7 +117,7 @@ class _internationalState extends State<international> {
                     context,
                     CupertinoPageRoute(
                       builder: (context) => countryField(
-                        initialCountryCode: "",
+                        initialCountryCode: "", name: '', image: '',
                       ),
                     ));
               },
@@ -169,6 +169,8 @@ class _internationalState extends State<international> {
                               CupertinoPageRoute(
                                 builder: (context) => countryField(
                                   initialCountryCode: Country[index]["code"]!,
+                                  name: Country[index]["text"],
+                                  image: Country[index]["image1"],
                                 ),
                               ));
                         },

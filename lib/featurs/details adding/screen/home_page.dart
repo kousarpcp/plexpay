@@ -216,6 +216,7 @@ class _home_pageState extends State<home_page> {
                         color: Colors.grey.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(width * 0.04)),
                     child: TabBar(
+                      splashBorderRadius:BorderRadius.circular(width*0.04),
                         indicatorColor: Colors.transparent,
                         labelColor: CupertinoColors.white,
                         indicatorSize: TabBarIndicatorSize.tab,
