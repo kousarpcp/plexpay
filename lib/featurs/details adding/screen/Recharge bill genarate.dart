@@ -31,6 +31,7 @@ class _billState extends State<bill> {
 
   Future<void> printOut () async {
     try {
+
       Uint8List byteImage1 = await networkImageToByte(pluspayImgUrl);
       final imgData1 = base64.encode(byteImage1);
       MaxxSunmiPrinter.printImage(imgData1, align: SunmiAlign.center,);

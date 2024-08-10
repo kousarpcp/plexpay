@@ -23,7 +23,7 @@ class _offerState extends State<offer> {
   FocusNode _focusNode = FocusNode();
 
   void toggleTabs() {
-    if (numController.text.isNotEmpty) {
+    if (numController.text.length==9) {
       setState(() {
         showTabs = !showTabs;
       });
@@ -38,7 +38,7 @@ class _offerState extends State<offer> {
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         setState(() {
-          showTabs = numController.text.isNotEmpty;
+          showTabs = numController.text.length==9;
         });
       }
     });

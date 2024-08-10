@@ -149,7 +149,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
       //   backgroundColor: arrProdList.length==0?Colors.grey:themeColor,
       // ),
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: colorConst.blue,
         // brightness: Brightness.dark,
         automaticallyImplyLeading: false,
         title: Container(
@@ -164,7 +164,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
               keyboardType: TextInputType.number,
               autofocus: false,
               focusNode: numFocus,
-              cursorColor: Colors.indigo,
+              cursorColor: colorConst.blue,
               onChanged: (key) async {
               },
               onSubmitted: (key) async {
@@ -236,7 +236,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                             height: width * 0.075,
                             width: width * 0.23,
                             decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: colorConst.blue,
                                 borderRadius: BorderRadius.circular(width * 0.35)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
