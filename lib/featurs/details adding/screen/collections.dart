@@ -216,7 +216,7 @@ class _CollectionListState extends State<CollectionList> {
         gap,
         InkWell(
           onTap: () {
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => CollectionsReceipt(),));
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
           },
           child: Container(
             height: width * 0.18,
