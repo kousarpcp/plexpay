@@ -29,13 +29,11 @@ class countryField extends StatefulWidget {
 class _countryFieldState extends State<countryField> {
   bool showTabs = false;
   TextEditingController numberController = TextEditingController();
-  final phoneValidation = RegExp(r"[0-9]{10}$");
-  final formKey = GlobalKey<FormState>();
+  // final phoneValidation = RegExp(r"[0-9]{10}$");
+  // final formKey = GlobalKey<FormState>();
 
   FocusNode _focusNode = FocusNode();
-
   void toggleTabs() {
-    bool showTabs = false;
     if (numberController.text.isNotEmpty) {
       setState(() {
         showTabs = !showTabs;
@@ -106,56 +104,122 @@ class _countryFieldState extends State<countryField> {
               ),
               Center(
                 child: Container(
-                  height: width * 0.21,
-                  width: width * 0.85,
-                  child: IntlPhoneField(
-                    initialCountryCode: widget.initialCountryCode,
+                  height: width * 0.12,
+                  width: width * 0.8,
+                  child: TextFormField(
                     controller: numberController,
-                    // showDropdownIcon: false,
                     keyboardType: TextInputType.number,
+                    autofocus: true,
                     textInputAction: TextInputAction.next,
-                    autovalidateMode: AutovalidateMode.disabled,
-
+                    cursorColor: colorConst.blue,
+                    cursorHeight: width*0.05,
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    //   LengthLimitingTextInputFormatter(9)
+                    // ],
                     style: TextStyle(
-                        fontSize: width * 0.05, fontWeight: FontWeight.w600),
+                        fontSize: width * 0.05,
+                        fontWeight: FontWeight.w600,
+                        color: colorConst.grey
+                    ),
                     decoration: InputDecoration(
-                      // labelText: "Number",
-                      // label: Text(""),
-                      labelStyle: TextStyle(
-                          fontSize: width * 0.045,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.black),
-                      hintText: "Please Enter Your Number",
-                      hintStyle: TextStyle(
-                        fontSize: width * 0.04,
+                      prefixText: widget.code ,
+                      prefixStyle: TextStyle(
+                        fontSize: width * 0.05,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          toggleTabs();
-                        },
-                        icon: Icon(
-                            Icons.search,
-                            color: colorConst.blue,
+
+                      suffixIcon: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(width*0.05),
+                              topRight: Radius.circular(width*0.05),
+                            ),
+                            color: colorConst.blue
                         ),
+
+                        child: IconButton(
+                          onPressed: () {
+                            toggleTabs();
+                          },
+                          icon: Icon(Icons.search,color: Colors.white,),
+                        ),
+                      ),
+                      hintText: "Please Enter Your Number",
+                      hintStyle: TextStyle(
+                        fontSize: width * 0.038,
+                        fontWeight: FontWeight.w600,
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: colorConst.blue,
+                          color: Colors.red,
                         ),
-                        borderRadius: BorderRadius.circular(width * 0.03),
+                        borderRadius: BorderRadius.circular(width * 0.05),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: colorConst.blue,
+                          color: Colors.black,
                         ),
-                        borderRadius: BorderRadius.circular(width * 0.03),
+                        borderRadius: BorderRadius.circular(width * 0.05),
                       ),
                     ),
                     focusNode: _focusNode,
                   ),
                 ),
               ),
+              // Center(
+              //   child: Container(
+              //     height: width * 0.21,
+              //     width: width * 0.85,
+              //     child: IntlPhoneField(
+              //       initialCountryCode: widget.initialCountryCode,
+              //       controller: numberController,
+              //       // showDropdownIcon: false,
+              //       keyboardType: TextInputType.number,
+              //       textInputAction: TextInputAction.next,
+              //       autovalidateMode: AutovalidateMode.disabled,
+              //
+              //       style: TextStyle(
+              //           fontSize: width * 0.05, fontWeight: FontWeight.w600),
+              //       decoration: InputDecoration(
+              //         // labelText: "Number",
+              //         // label: Text(""),
+              //         labelStyle: TextStyle(
+              //             fontSize: width * 0.045,
+              //             fontWeight: FontWeight.w300,
+              //             color: Colors.black),
+              //         hintText: "Please Enter Your Number",
+              //         hintStyle: TextStyle(
+              //           fontSize: width * 0.04,
+              //           fontWeight: FontWeight.w600,
+              //         ),
+              //         suffixIcon: IconButton(
+              //           onPressed: () {
+              //             toggleTabs();
+              //           },
+              //           icon: Icon(
+              //               Icons.search,
+              //               color: colorConst.blue,
+              //           ),
+              //         ),
+              //         border: OutlineInputBorder(
+              //           borderSide: BorderSide(
+              //             color: colorConst.blue,
+              //           ),
+              //           borderRadius: BorderRadius.circular(width * 0.03),
+              //         ),
+              //         focusedBorder: OutlineInputBorder(
+              //           borderSide: BorderSide(
+              //             color: colorConst.blue,
+              //           ),
+              //           borderRadius: BorderRadius.circular(width * 0.03),
+              //         ),
+              //       ),
+              //       focusNode: _focusNode,
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: width * 0.03,
               ),

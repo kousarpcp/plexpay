@@ -1,8 +1,6 @@
 import 'dart:convert';
 // import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
 import 'dart:typed_data';
-
-
 import 'package:esys_flutter_share_plus/esys_flutter_share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +37,7 @@ class _billState extends State<bill> {
           styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
 
       MaxxSunmiPrinter.printBarcode(
-        "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png",);
+        "https://pngimg.com/uploads/barcode/barcode_PNG19.png",position: SunmiTypePositionBarcode.textNull);
       MaxxSunmiPrinter.printTextLine();
       MaxxSunmiPrinter.printText("17-Jul-2024",
           styles: SunmiStyles(alignment: SunmiAlign.center, isBold: true));
@@ -186,7 +184,7 @@ class _billState extends State<bill> {
                       // ),
                       Image(
                         image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2014/04/02/16/19/barcode-306926_960_720.png"),
+                            "https://pngimg.com/uploads/barcode/barcode_PNG19.png"),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
