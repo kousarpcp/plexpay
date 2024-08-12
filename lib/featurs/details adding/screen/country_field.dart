@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -113,17 +114,17 @@ class _countryFieldState extends State<countryField> {
                     textInputAction: TextInputAction.next,
                     cursorColor: colorConst.blue,
                     cursorHeight: width*0.05,
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.digitsOnly,
-                    //   LengthLimitingTextInputFormatter(9)
-                    // ],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10)
+                    ],
                     style: TextStyle(
                         fontSize: width * 0.05,
                         fontWeight: FontWeight.w600,
                         color: colorConst.grey
                     ),
                     decoration: InputDecoration(
-                      prefixText: widget.code ,
+                      prefixText: "${widget.code} " ,
                       prefixStyle: TextStyle(
                         fontSize: width * 0.05,
                         color: Colors.black,
@@ -146,7 +147,7 @@ class _countryFieldState extends State<countryField> {
                           icon: Icon(Icons.search,color: Colors.white,),
                         ),
                       ),
-                      hintText: "Please Enter Your Number",
+                      hintText: " Please Enter Your Number",
                       hintStyle: TextStyle(
                         fontSize: width * 0.038,
                         fontWeight: FontWeight.w600,
