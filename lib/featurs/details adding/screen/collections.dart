@@ -4,6 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
+import 'package:plexpay/featurs/details%20adding/screen/collectionsReciept.dart';
 
 import '../../../main.dart';
 import '../../../Const/widgets.dart';
@@ -215,7 +216,7 @@ class _CollectionListState extends State<CollectionList> {
         gap,
         InkWell(
           onTap: () {
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => CollectionsReceipt(),));
           },
           child: Container(
             height: width * 0.18,

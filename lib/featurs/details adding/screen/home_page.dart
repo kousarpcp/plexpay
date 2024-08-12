@@ -114,160 +114,150 @@ class _home_pageState extends State<home_page> {
         body:
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: AnimationLimiter(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children:  AnimationConfiguration.toStaggeredList(
-                  duration: const Duration(milliseconds: 300),
-                  childAnimationBuilder: (widget) => SlideAnimation(
-                      verticalOffset: 30.0,
-                      child: FadeInAnimation(
-                        child: widget,
-                      )
-                  ),
-                children: [
-                  gap,
-                  Center(
-                    child: Container(
-                      height: width * 0.26,
-                      width: width * 0.93,
-                      decoration: BoxDecoration(
-                          color: colorConst.blue,
-                          borderRadius: BorderRadius.circular(width * 0.06)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Free Vouchers",
-                                style: TextStyle(
-                                    fontSize: 24, color: Colors.white),
-                              ),
-                              Text(
-                                "Tap here to claim yourfree discount vouchers",
-                                style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                    fontSize: width * 0.027, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: width*0.02,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "0",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: width*0.15,
-                                )
-                              ),
-                              Text(
-                                "%",
-                                style: GoogleFonts.poppins(
-                                    fontSize: width * 0.12,
-                                    color: Colors.lightBlue.shade200),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  gap,
-                  gap,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // SizedBox(width: width*0.06,),
-                      Container(
-                        height: width * 0.2,
-                        width: width * 0.78,
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return CircleAvatar(
-                                radius: width * 0.065,
-                                backgroundColor: Colors.black,
-                                backgroundImage: AssetImage(a[index]["image1"]),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                width: width * 0.03,
-                              );
-                            },
-                            itemCount: a.length),
-                      )
-                    ],
-                  ),
-                  gap,
-                  Container(
-                    height: width * 0.10,
-                    width: width * 0.56,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                gap,
+                Center(
+                  child: Container(
+                    height: width * 0.26,
+                    width: width * 0.93,
                     decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(width * 0.04)),
-                    child: TabBar(
-                      splashBorderRadius:BorderRadius.circular(width*0.04),
-                        indicatorColor: Colors.transparent,
-                        labelColor: CupertinoColors.white,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicator: BoxDecoration(
-                            color: colorConst.blue,
-                            borderRadius: BorderRadius.circular(width*0.04)
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width * 0.06)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Free Vouchers",
+                              style: TextStyle(
+                                  fontSize: 24, color: Colors.white),
+                            ),
+                            Text(
+                              "Tap here to claim yourfree discount vouchers",
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                  fontSize: width * 0.027, color: Colors.white),
+                            ),
+                          ],
                         ),
-                        dividerColor: Colors.transparent,
-                        labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: width*0.033,
-                            fontWeight: FontWeight.w500
+                        SizedBox(
+                          width: width*0.02,
                         ),
-                        unselectedLabelStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: width*0.03,
-                            fontWeight: FontWeight.w400
+                        Row(
+                          children: [
+                            Text(
+                              "0",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: width*0.15,
+                              )
+                            ),
+                            Text(
+                              "%",
+                              style: GoogleFonts.poppins(
+                                  fontSize: width * 0.12,
+                                  color: Colors.lightBlue.shade200),
+                            ),
+                          ],
                         ),
-                        tabs: [
-                          Tab(
-                            child: Center(
-                                child: Text(
-                              "Local",
-                              style: TextStyle(fontSize: width * 0.04),
-                            )),
-                          ),
-                          Tab(
-                            child: Center(
-                                child: Text("International",
-                                    // style: TextStyle(fontSize: width * 0.033)
-                                )),
-                          ),
-                        ]),
-                  ),
-                  SizedBox(
-                    height: width * 0.03,
-                  ),
-                  Container(
-                    height: width *0.88,
-                    child: TabBarView(children: [
-                      local(),
-                      international(),
-                    ],
-                      physics: BouncingScrollPhysics(),
-
+                      ],
                     ),
                   ),
-                ],
-              ),
-              ),
-            )
+                ),
+                gap,
+                gap,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // SizedBox(width: width*0.06,),
+                    Container(
+                      height: width * 0.2,
+                      width: width * 0.78,
+                      child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return CircleAvatar(
+                              radius: width * 0.065,
+                              backgroundColor: Colors.black,
+                              backgroundImage: AssetImage(a[index]["image1"]),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: width * 0.03,
+                            );
+                          },
+                          itemCount: a.length),
+                    )
+                  ],
+                ),
+                gap,
+                Container(
+                  height: width * 0.10,
+                  width: width * 0.56,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(width * 0.04)),
+                  child: TabBar(
+                    splashBorderRadius:BorderRadius.circular(width*0.04),
+                      indicatorColor: Colors.transparent,
+                      labelColor: CupertinoColors.white,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicator: BoxDecoration(
+                          color: colorConst.blue,
+                          borderRadius: BorderRadius.circular(width*0.04)
+                      ),
+                      dividerColor: Colors.transparent,
+                      labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: width*0.033,
+                          fontWeight: FontWeight.w500
+                      ),
+                      unselectedLabelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: width*0.03,
+                          fontWeight: FontWeight.w400
+                      ),
+                      tabs: [
+                        Tab(
+                          child: Center(
+                              child: Text(
+                            "Local",
+                            style: TextStyle(fontSize: width * 0.04),
+                          )),
+                        ),
+                        Tab(
+                          child: Center(
+                              child: Text("International",
+                                  // style: TextStyle(fontSize: width * 0.033)
+                              )),
+                        ),
+                      ]),
+                ),
+                SizedBox(
+                  height: width * 0.03,
+                ),
+                Container(
+                  height: width *0.88,
+                  child: TabBarView(children: [
+                    local(),
+                    international(),
+                  ],
+                    physics: BouncingScrollPhysics(),
+
+                  ),
+                ),
+              ],
+
+            ),
           ),
         ),
       ),
