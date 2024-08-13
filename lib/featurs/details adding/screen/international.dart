@@ -175,7 +175,7 @@ class _internationalState extends State<international> {
                     decelerationRate: ScrollDecelerationRate.fast),
                 scrollDirection: Axis.vertical,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1.1,
+                    childAspectRatio: 0.99,
                     crossAxisSpacing: width*0.01,
                     mainAxisSpacing: width*0.01,
                     crossAxisCount: 4),
@@ -207,6 +207,14 @@ class _internationalState extends State<international> {
                           // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
                         ),
                       ),
+                      SizedBox(
+                        height: width * 0.01,
+                      ),
+                      Text(
+                        Country[index]["text"],
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: width * 0.03),
+                      )
                     ],
                   );
                 },

@@ -34,6 +34,11 @@ class _home_pageState extends State<home_page> {
     {"image1": ImageConst.kuwait},
   ];
 
+  bool k = false;
+  bool b = false;
+  bool c = false;
+  bool d = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -256,7 +261,6 @@ class _home_pageState extends State<home_page> {
                   ),
                 ),
               ],
-
             ),
           ),
         ),
