@@ -68,7 +68,7 @@ class _localState extends State<local> {
                         width: width*0.17,
                         decoration: BoxDecoration(
                             // color: Colors.blue,
-                            borderRadius: BorderRadius.circular(width * 0.04),
+                            borderRadius: BorderRadius.circular(width * 0.03),
                             border: Border.all(width: width * 0.0001),
                             image: DecorationImage(
                                 image: AssetImage(images[index]["image1"]))),

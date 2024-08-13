@@ -125,7 +125,7 @@ class _home_pageState extends State<home_page> {
                     width: width * 0.93,
                     decoration: BoxDecoration(
                         color: colorConst.blue,
-                        borderRadius: BorderRadius.circular(width * 0.06)),
+                        borderRadius: BorderRadius.circular(width * 0.03)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -205,15 +205,15 @@ class _home_pageState extends State<home_page> {
                   width: width * 0.56,
                   decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(width * 0.04)),
+                      borderRadius: BorderRadius.circular(width * 0.03)),
                   child: TabBar(
-                    splashBorderRadius:BorderRadius.circular(width*0.04),
+                    splashBorderRadius:BorderRadius.circular(width*0.03),
                       indicatorColor: Colors.transparent,
                       labelColor: CupertinoColors.white,
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicator: BoxDecoration(
                           color: colorConst.blue,
-                          borderRadius: BorderRadius.circular(width*0.04)
+                          borderRadius: BorderRadius.circular(width*0.03)
                       ),
                       dividerColor: Colors.transparent,
                       labelStyle: TextStyle(
