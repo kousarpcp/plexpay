@@ -27,11 +27,11 @@ class _home_pageState extends State<home_page> {
 
 
   List a = [
-    {"image1": ImageConst.uae},
-    {"image1": ImageConst.oman},
-    {"image1": ImageConst.bahrain},
-    {"image1": ImageConst.india},
-    {"image1": ImageConst.kuwait},
+    {"image1": ImageConst.cart1},
+    {"image1": ImageConst.cart2},
+    {"image1": ImageConst.cart3},
+    {"image1": ImageConst.cart4},
+    {"image1": ImageConst.cart5},
   ];
 
   bool k = false;
@@ -176,23 +176,37 @@ class _home_pageState extends State<home_page> {
                   ),
                 ),
                 gap,
-                gap,
+                SizedBox(
+                  height: width*0.02,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // SizedBox(width: width*0.06,),
                     Container(
-                      height: width * 0.2,
-                      width: width * 0.78,
+                      height: width * 0.18,
+                      width: width * 0.82,
                       child: ListView.separated(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return CircleAvatar(
-                              radius: width * 0.065,
-                              backgroundColor: Colors.black,
-                              backgroundImage: AssetImage(a[index]["image1"]),
+                            return Column(
+                              children: [
+                              Container(
+                              height: width*0.14,
+                              width: width*0.14,
+                              decoration: BoxDecoration(
+                                  color: Colors.indigo.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(width*0.03),
+                              ),
+                                  child: Padding(
+                                    padding:  EdgeInsets.all(width*0.03),
+                                    child: Image(image: AssetImage(a[index]["image1"],),
+                                    ),
+                                  )
+                            ),
+                              ]
                             );
                           },
                           separatorBuilder: (context, index) {
@@ -204,7 +218,6 @@ class _home_pageState extends State<home_page> {
                     )
                   ],
                 ),
-                gap,
                 Container(
                   height: width * 0.10,
                   width: width * 0.56,
@@ -250,13 +263,13 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   height: width * 0.03,
                 ),
-                Container(
-                  height: width *0.88,
+                SizedBox(
+                  height: height*0.45,
                   child: TabBarView(children: [
                     local(),
                     international(),
                   ],
-                    physics: BouncingScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
 
                   ),
                 ),

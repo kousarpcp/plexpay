@@ -76,6 +76,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                     color: Colors.grey.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(width * 0.03)),
                 child: TabBar(
+                    splashBorderRadius:BorderRadius.circular(width*0.03),
                   physics: BouncingScrollPhysics(),
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold
