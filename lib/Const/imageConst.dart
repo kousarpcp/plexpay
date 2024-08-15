@@ -74,6 +74,10 @@
    static const cart3 = "assets/images/ecommerce.png";
    static const cart4 = "assets/images/watch.png";
    static const cart5 = "assets/images/fashion.png";
+   static const PUBG = "assets/images/PUBG.jpg";
+   static const fifa = "assets/images/fifa.jpg";
+   static const airteltv = "assets/images/airtel tv.webp";
+   static const dishtv = "assets/images/dishtv.jpg";
 
 
 ///lottie

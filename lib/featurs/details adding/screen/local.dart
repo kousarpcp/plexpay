@@ -64,6 +64,62 @@ class _localState extends State<local> {
       "text":"DTH",
     },
   ];
+   List prepaid=[
+     {
+       'image':ImageConst.etisalat,
+       "text":"Etisalat"
+     },
+     {
+       'image':ImageConst.du,
+       "text":"DU"
+     },
+   ];
+   List voucher=[
+     {
+       'image':ImageConst.lebanese,
+       "text":"Lebanese"
+     },
+     {
+       'image':ImageConst.knpc,
+       "text":"KNPC"
+     },
+   ];
+   List gaming=[
+     {
+       'image':ImageConst.PUBG,
+       "text":"PUBG"
+     },
+     {
+       'image':ImageConst.fifa,
+       "text":"FIFA"
+     },
+   ];
+   List electricity=[
+     {
+       'image':ImageConst.kseb,
+       "text":"KSEB"
+     },
+   ];
+   List gift=[
+     {
+       'image':ImageConst.amazone,
+       "text":"Amazone"
+     },
+     {
+       'image':ImageConst.mosaik,
+       "text":"Mosaik"
+     },
+   ];
+   List dth=[
+     {
+       'image':ImageConst.airteltv,
+       "text":"Airtel"
+     },
+     {
+       'image':ImageConst.dishtv,
+       "text":"Dish TV"
+     },
+   ];
   int _selectedIndex = 0;
   bool tap=false;
   @override
@@ -112,10 +168,16 @@ class _localState extends State<local> {
                     width:width*0.01
                   );
                 },
-                itemCount: 6
+                itemCount: All.length
             ),
           ),
-          Expanded(
+          _selectedIndex==6? DTH():SizedBox(),
+          _selectedIndex==5? Gift():SizedBox(),
+          _selectedIndex==4? Electricity():SizedBox(),
+          _selectedIndex==3? Gaming():SizedBox(),
+          _selectedIndex==2? Voucher():SizedBox(),
+          _selectedIndex==1? Prepaid():SizedBox(),
+          _selectedIndex==0? Expanded(
             child: GridView.builder(
               itemCount: images.length,
               shrinkWrap: true,
@@ -164,9 +226,294 @@ class _localState extends State<local> {
                 );
               },
             ),
-          )
+          ):SizedBox()
         ],
       ),
     );
+
+  }
+  Widget Prepaid (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("Prepaid",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(height: width*0.02,),
+        GridView.builder(
+          itemCount: prepaid.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                        image: DecorationImage(image: AssetImage(prepaid[index]["image"]),fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(prepaid[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
+  }
+  Widget Voucher (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("Voucher",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: width*0.013,
+        ),
+        GridView.builder(
+          itemCount: voucher.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          image: DecorationImage(image: AssetImage(voucher[index]["image"]),fit: BoxFit.fill),
+                          borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(voucher[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
+  }
+  Widget Gaming  (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("Gaming Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: width*0.013,
+        ),
+        GridView.builder(
+          itemCount: gaming.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          image: DecorationImage(image: AssetImage(gaming[index]["image"]),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(gaming[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
+  }
+  Widget Electricity (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("Electricity",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: width*0.013,
+        ),
+        GridView.builder(
+          itemCount: electricity.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          image: DecorationImage(image: AssetImage(electricity[index]["image"]),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(electricity[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
+  }
+  Widget Gift (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("Gift Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: width*0.013,
+        ),
+        GridView.builder(
+          itemCount: gift.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          image: DecorationImage(image: AssetImage(gift[index]["image"]),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(gift[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
+  }
+  Widget DTH (){
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            Text("DTH",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        GridView.builder(
+          itemCount: dth.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: width*0.35,
+                      width: width*0.37,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          image: DecorationImage(image: AssetImage(dth[index]["image"]),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(width*0.03)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(dth[index]["text"],style: TextStyle(fontSize: width*0.053),)
+              ],
+            );
+          },
+        )
+      ],
+    );
   }
 }
+

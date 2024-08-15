@@ -219,7 +219,7 @@ class _home_pageState extends State<home_page> {
                   ],
                 ),
                 Container(
-                  height: width * 0.10,
+                  height: width * 0.125,
                   width: width * 0.56,
                   decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.15),
@@ -264,12 +264,12 @@ class _home_pageState extends State<home_page> {
                   height: width * 0.03,
                 ),
                 SizedBox(
-                  height: height*0.45,
+                  height: height*0.482,
                   child: TabBarView(children: [
                     local(),
                     international(),
                   ],
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
 
                   ),
                 ),
