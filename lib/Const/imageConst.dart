@@ -69,6 +69,7 @@
    static const etisalatuae = "assets/images/etisalat uae.jpeg";
    static const remove = "assets/images/remove.png";
    static const login = "assets/images/login.jpg";
+   static const xpay = "assets/images/xpay_logo.png";
    static const cart1 = "assets/images/shopping-cart.png";
    static const cart2 = "assets/images/shopping-bag.png";
    static const cart3 = "assets/images/ecommerce.png";
@@ -82,6 +83,7 @@
 
 ///lottie
    static const lottie1='assets/animations/success.json';
+   static const loading='assets/animations/comingsoon.json';
 
 
 

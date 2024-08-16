@@ -2,6 +2,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plexpay/Const/imageConst.dart';
 // import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
@@ -10,7 +11,8 @@ import 'package:plexpay/featurs/details%20adding/screen/Share.dart';
 
 
 import '../../../Const/colorConst.dart';
-import 'blank1.dart';
+import '../../../main.dart';
+import '../../xpay/screen/xpay_page.dart';
 import 'collections.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -27,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> Ann = [
     home_page(),
     Collections(),
-    blank(),
+    XpayPage(),
     HistoryBottom3(),
     share(),
   ];
@@ -60,14 +62,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 child:  Icon(CupertinoIcons.chart_pie), label: 'Collections'),
             CurvedNavigationBarItem(
                 child: Container(
-                  height: 40,
-                  width: 40,
-                  child: Icon(
-                    CupertinoIcons.add,
-                    color: Colors.white,
-                  ),
+                  height: width*0.08,
+                  width: width*0.2,
+                  child: Image(image:AssetImage(ImageConst.xpay), fit: BoxFit.cover,),
                   decoration: BoxDecoration(
-                      color: colorConst.blue,
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 label: "",

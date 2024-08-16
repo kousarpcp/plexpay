@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/NetWork.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
-import 'package:plexpay/featurs/details%20adding/screen/blank1.dart';
+import 'package:plexpay/featurs/xpay/screen/xpay_page.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer.dart';

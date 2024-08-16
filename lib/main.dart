@@ -9,7 +9,7 @@ import 'featurs/details adding/screen/BottomNavigation.dart';
 
 import 'featurs/details adding/screen/Reacharge.dart';
 import 'featurs/details adding/screen/Recharge bill genarate.dart';
-import 'featurs/details adding/screen/blank1.dart';
+import 'featurs/xpay/screen/xpay_page.dart';
 import 'featurs/details adding/screen/collections.dart';
 import 'featurs/details adding/screen/collectionsReciept.dart';
 import 'featurs/details adding/screen/country_field.dart';
