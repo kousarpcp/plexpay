@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/Const/widgets.dart';
+import 'package:plexpay/api/login_api.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Const/Snackbar_toast_helper.dart';
+import '../../../Const/shared_preference.dart';
 import '../../../main.dart';
 
 class Login extends StatefulWidget {
@@ -23,6 +26,30 @@ class _LoginState extends State<Login> {
   final formKey =GlobalKey<FormState>();
   TextEditingController userController =TextEditingController();
   TextEditingController passwordController =TextEditingController();
+  var isCheck = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    getHome();
+    super.initState();
+  }
+
+ Future<dynamic> getHome() async {
+    var ck = await getSharedPrefrence(chek);
+    print("checkkkkkk");
+    print(ck);
+    if(ck=="true"){
+      var us = await getSharedPrefrence(currentusername);
+      var pws =await getSharedPrefrence(currentpassword);
+
+      setState(() {
+        userController.text=us;
+        passwordController.text=pws;
+        isCheck=true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -175,16 +202,79 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 gap,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child:   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: Theme(
+                          data: ThemeData(
+                              unselectedWidgetColor: Color(0xff00C8E8) // Your color
+                          ),
+                          child: Checkbox(
+                              activeColor: Color(0xff00C8E8),
+                              value: isCheck,
+                              onChanged: (v)async{
+                                setState(() {
+                                  isCheck=v!;
+
+
+                                });
+
+                                if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
+                                  var un = await sharedPrefrence(currentusername, userController.text.toString() );
+                                  var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
+                                  var ck = await sharedPrefrence(chek, "true");
+                                }else{
+                                  var un = await sharedPrefrence(userController, null );
+                                  var pass = await sharedPrefrence(passwordController, null);
+                                  var ck = await sharedPrefrence(chek, null);
+
+                                }
+                              }),
+                        )),
+                    SizedBox(width: 10.0),
+                    Text("Remember Me",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,))
+                  ]),
+                ),
+                gap,
                 InkWell(
                   onTap: () async {
 
                     if(userController.text.isNotEmpty&&
                     passwordController.text.isNotEmpty)
                     {
-                      SharedPreferences _prefs = await SharedPreferences.getInstance();
-                      _prefs.setBool("login", true);
+                      var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
 
-                      Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+                      print("rspppp");
+                      print(rsp);
+                      if (rsp['success'] == true) {
+                        var id = await sharedPrefrence("userId", rsp['user_id']);
+                        var token =
+                        await sharedPrefrence("token", rsp['access_token']);
+
+                        var name = await sharedPrefrence(shopname, rsp['name']);
+
+                        Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+
+                        showToast("Login Success!");
+                        print("wrking");
+                        print(rsp['user_id']);
+                        print(rsp['access_token']);
+
+                      } else {
+                        showToast("Invalid Credentials!");
+                        setState(() {
+                        });
+                      }
+
+
+
                     }else{
                       if(userController.text ==""){
                         QuickAlert.show(
