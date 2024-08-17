@@ -126,7 +126,10 @@ class _LoginState extends State<Login> {
                             filled: true,
                             fillColor: Colors.blueGrey.shade50,
                             border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  strokeAlign: width*0.01
+                                ),
                                 borderRadius: BorderRadius.circular(width*0.03)
                             ),
                           ),
