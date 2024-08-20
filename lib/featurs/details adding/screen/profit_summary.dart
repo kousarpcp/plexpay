@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../api/Profit_api.dart';
 import '../../../main.dart';
 import '../../../Const/colorConst.dart';
 import '../../../Const/widgets.dart';
@@ -86,6 +87,8 @@ class _profitSummaryState extends State<profitSummary> {
     },
   ];
 
+
+
   var start = DateTime.now().year.toString() +
       "-" +
       DateTime.now().month.toString() +
@@ -96,7 +99,6 @@ class _profitSummaryState extends State<profitSummary> {
       DateTime.now().month.toString() +
       "-" +
       DateTime.now().day.toString();
-
   Future selectDateRange(BuildContext context) async {
 
     DateTimeRange? pickedRange = (await showDateRangePicker(
@@ -132,6 +134,43 @@ class _profitSummaryState extends State<profitSummary> {
       });
     }
   }
+
+  var arrProdList = [];
+  var  isLoading = true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.getHome();
+
+    setState(() {});
+  }
+  Future<String> getHome() async {
+
+    setState(() {
+      isLoading = true;
+    });
+    print("xoxoxo");
+
+    var rsp = await profitApi(start,end);
+    print(rsp);
+
+    if(rsp['status']==true && rsp['result']!="Empty"){
+
+      setState(() {
+        arrProdList = rsp['result'];
+
+      });
+      print("arrProdList");
+      print(arrProdList);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return "";
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,6 +203,7 @@ class _profitSummaryState extends State<profitSummary> {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
+
             Center(
               child: Container(
                 height: width * 0.125,
@@ -232,20 +272,93 @@ class _profitSummaryState extends State<profitSummary> {
                 ),
               ),
             ),
+
             ListView.separated(
+              itemCount: arrProdList != null ? arrProdList.length: 0,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return profitSummaryList(P: P, index: index,
-
+                  final item = arrProdList != null ? arrProdList[index] : null;
+                  return Column(
+                    children: [
+                      gap,
+                      Container(
+                        height: width * 0.37,
+                        margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  blurStyle: BlurStyle.normal,
+                                  color: Colors.black.withOpacity(0.09),
+                                  offset: Offset(0, 2),
+                                  spreadRadius: 1,
+                                  blurRadius: 9)
+                            ],
+                            borderRadius: BorderRadius.circular(width * 0.03)),
+                        child: Padding(
+                          padding:  EdgeInsets.all(width*0.03),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: width*0.35,
+                                width: width*0.48,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("NAME",style: TextStyle(fontSize: width*0.035),),
+                                        Text("RECHARGE TIME",style: TextStyle(fontSize: width*0.035)),
+                                        Text("BUYING COST",style: TextStyle(fontSize: width*0.035)),
+                                        Text(" MRP",style: TextStyle(fontSize: width*0.035)),
+                                        Text("PROFIT",style: TextStyle(fontSize: width*0.035)),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(":",style: TextStyle(fontSize: width*0.035)),
+                                        Text(":",style: TextStyle(fontSize: width*0.035)),
+                                        Text(":",style: TextStyle(fontSize: width*0.035)),
+                                        Text(":",style: TextStyle(fontSize: width*0.035)),
+                                        Text(":",style: TextStyle(fontSize: width*0.035)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: width*0.35,
+                                width: width*0.39,
+                                child:  Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(item['Name'],style: TextStyle(fontSize: width*0.035)),
+                                    Text(item['RechargedTime'],style: TextStyle(fontSize: width*0.035)),
+                                    Text(item['buyingCost'],style: TextStyle(fontSize: width*0.035)),
+                                    Text(item['MRP'],style: TextStyle(fontSize: width*0.035)),
+                                    Text(item['profit'],style: TextStyle(fontSize: width*0.035)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   );
 
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox();
                 },
-                itemCount: P.length
+
             )
           ],
         ),
@@ -253,94 +366,58 @@ class _profitSummaryState extends State<profitSummary> {
     );
   }
 }
-class profitSummaryList extends StatefulWidget {
-  final List P;
-  final int  index;
-  const profitSummaryList({
-    super.key,
-    required this.P,
-    required this.index
-  });
-
-  @override
-  State<profitSummaryList> createState() => _profitSummaryListState();
-}
-
-class _profitSummaryListState extends State<profitSummaryList> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        gap,
-        Container(
-          height: width * 0.37,
-          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    blurStyle: BlurStyle.normal,
-                    color: Colors.black.withOpacity(0.09),
-                    offset: Offset(0, 2),
-                    spreadRadius: 1,
-                    blurRadius: 9)
-              ],
-              borderRadius: BorderRadius.circular(width * 0.03)),
-          child: Padding(
-            padding:  EdgeInsets.all(width*0.03),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: width*0.35,
-                  width: width*0.48,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(widget.P[widget.index]["Text1"],style: TextStyle(fontSize: width*0.035),),
-                          Text(widget.P[widget.index]["Text2"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text3"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text4"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text5"],style: TextStyle(fontSize: width*0.035)),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(widget.P[widget.index]["Text6"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text7"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text8"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text9"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.P[widget.index]["Text10"],style: TextStyle(fontSize: width*0.035)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: width*0.35,
-                  width: width*0.39,
-                  child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.P[widget.index]["Text11"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.P[widget.index]["Text12"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.P[widget.index]["Text13"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.P[widget.index]["Text14"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.P[widget.index]["Text15"],style: TextStyle(fontSize: width*0.035)),
-                    ],
-                  ),
-                )
-              ],
+var purchaseDate;
+Widget totalSales(){
+  return    Padding(
+    padding: const EdgeInsets.only(top:8.0),
+    child: Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.sync_alt_sharp,
+              size: 15,
+              color: Colors.green,
             ),
-          ),
-        )
-      ],
-    );
-  }
+            SizedBox(width: 16,),
+            Expanded(
+              flex: 1,
+              child: Text(
+                "Total Card Sales : "+ purchaseDate,
+                maxLines: 2,
+                // style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
+// class profitSummaryList extends StatefulWidget {
+//   final List P;
+//   final int  index;
+//   const profitSummaryList({
+//     super.key,
+//     required this.P,
+//     required this.index
+//   });
+//
+//   @override
+//   State<profitSummaryList> createState() => _profitSummaryListState();
+// }
+//
+// class _profitSummaryListState extends State<profitSummaryList> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         gap,
+//
+//       ],
+//     );
+//   }
+// }

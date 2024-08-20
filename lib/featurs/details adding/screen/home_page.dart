@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -138,13 +139,16 @@ class _home_pageState extends State<home_page> {
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            LocaleText(
                               "Free Vouchers",
                               style: TextStyle(
-                                  fontSize: 24, color: Colors.white),
+                                  // softWrap: true, // Allows text to wrap to the next line
+                                  // maxLines: null, // Allows unlimited lines
+                                  overflow: TextOverflow.visible,
+                                  fontSize: width*0.068, color: Colors.white),
                             ),
-                            Text(
-                              "Tap here to claim yourfree discount vouchers",
+                            LocaleText(
+                              "Tap here to claim your free discount vouchers",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                   fontSize: width * 0.027, color: Colors.white),
@@ -247,14 +251,14 @@ class _home_pageState extends State<home_page> {
                       tabs: [
                         Tab(
                           child: Center(
-                              child: Text(
+                              child: LocaleText(
                             "Local",
                             style: TextStyle(fontSize: width * 0.04),
                           )),
                         ),
                         Tab(
                           child: Center(
-                              child: Text("International",
+                              child: LocaleText("International",
                                   // style: TextStyle(fontSize: width * 0.033)
                               )),
                         ),

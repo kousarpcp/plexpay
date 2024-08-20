@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
@@ -31,8 +32,28 @@ var height;
 var width;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Locales.init(['ar', 'en', 'hi']);
+
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     width = MediaQuery.of(context).size.width;
+//     height = MediaQuery.of(context).size.height;
+//     return LocaleBuilder(
+//       builder: (locale) => MaterialApp(
+//         title: 'Flutter Locales',
+//         localizationsDelegates: Locales.delegates,
+//         supportedLocales: Locales.supportedLocales,
+//         locale: locale,
+//         home: Splashscreen(),
+//       ),
+//     );
+//   }
+// }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -46,12 +67,18 @@ class MyApp extends StatelessWidget {
         FocusManager.instance.primaryFocus!.unfocus();
       },
       child:
-          MaterialApp(
-            theme: ThemeData(
-              textTheme: GoogleFonts.muktaVaaniTextTheme()
-            ),
-              debugShowCheckedModeBanner: false,
-              home: Splashscreen()),
+          LocaleBuilder(
+            builder:(locale) => MaterialApp(
+              theme: ThemeData(
+                textTheme: GoogleFonts.muktaVaaniTextTheme()
+              ),
+                title: 'Flutter Locales',
+                localizationsDelegates: Locales.delegates,
+                supportedLocales: Locales.supportedLocales,
+                locale: locale,
+                debugShowCheckedModeBanner: false,
+                home: Splashscreen()),
+          ),
     );
   }
 }

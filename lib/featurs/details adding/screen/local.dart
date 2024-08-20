@@ -1,6 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/NetWork.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/widgets.dart';
@@ -153,7 +154,7 @@ class _localState extends State<local> {
                         borderRadius: BorderRadius.circular(width*0.03)
                       ),
                       child: Center(
-                        child: Text(
+                        child: LocaleText(
                           All[index]["text"],
                           style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
                         ),
