@@ -4,13 +4,18 @@ import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/popularPlans.dart';
 import 'package:plexpay/featurs/details%20adding/screen/topUp.dart';
+import '../../../api/country_code_API.dart';
+import '../../../api/plans_by_prov_API.dart';
 import 'dataPacks.dart';
 
 class offer extends StatefulWidget {
 
   final String name;
   final String image;
-  const offer({super.key, required this.name, required this.image});
+  final String code;
+  final String iso;
+  final String dash;
+  const offer({super.key, required this.name, required this.image, required this.code, required this.dash, required this.iso});
 
   @override
   State<offer> createState() => _offerState();
@@ -18,23 +23,72 @@ class offer extends StatefulWidget {
 
 class _offerState extends State<offer> {
   bool showTabs = false;
+  var isCountry = false;
+  var isLoading = false;
+  var planLIst=[];
+  var provinfo;
+
   TextEditingController numController = TextEditingController();
 
   FocusNode _focusNode = FocusNode();
 
   void toggleTabs() {
-    if (numController.text.length==9) {
+    if (numController.text.length==12) {
       setState(() {
         showTabs = !showTabs;
       });
     }
   }
 
+  Future<String> getCountryCode() async {
+    print("countryyy");
+    setState(() {
+      isCountry=false;
+    });
+    var rsp = await fetchCountryCodeApi(widget.iso);
+    print("countryyy");
+    print(rsp['country']);
+    setState(() {
+      numController.text=rsp['country'].toString();
+
+    });
+
+    setState(() {
+      isCountry=true;
+    });
+    return "";
+  }
+
+  Future<String> getHome() async {
+
+    setState(() {
+      isLoading = true;
+    });
+
+    var rsp = await plansByProviderApi(widget.code.toString(),widget.dash);
+    print("providersssss");
+    print(rsp);
+    if (rsp['status'] != false) {
+      setState(() {
+        planLIst = rsp['products']['PlanInfo'];
+        provinfo = rsp['products']['ProviderInfo'];
+      });
+    }
+
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return " ";
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getCountryCode();
+    getHome();
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         setState(() {
@@ -73,12 +127,13 @@ class _offerState extends State<offer> {
                     controller: numController,
                     keyboardType: TextInputType.number,
                     autofocus: true,
+                    enabled: isCountry,
                     textInputAction: TextInputAction.next,
                     cursorColor: colorConst.blue,
                     cursorHeight: width*0.05,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(9)
+                      LengthLimitingTextInputFormatter(12)
                     ],
                     style: TextStyle(
                       fontSize: width * 0.05,
@@ -86,13 +141,6 @@ class _offerState extends State<offer> {
                       color: colorConst.grey
                     ),
                     decoration: InputDecoration(
-                      prefixText: "+ 971 ",
-                      prefixStyle: TextStyle(
-                        fontSize: width * 0.045,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                      ),
-
                       suffixIcon: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -135,7 +183,11 @@ class _offerState extends State<offer> {
                 height: width * 0.03,
               ),
               if (showTabs)
-                Column(
+                isLoading?Container(
+                  child: Center(child: CircularProgressIndicator(
+                    color: colorConst.blue,
+                  )),
+                ):Column(
                   children: [
                     Container(
                       height: width * 0.11,
@@ -191,6 +243,9 @@ class _offerState extends State<offer> {
                           popular(
                             number:numController.text,
                               name:widget.name,
+                            plan:planLIst,
+                            providerinfo:provinfo,
+                            dash:widget.dash
 
                           ),
                           dataPacks(

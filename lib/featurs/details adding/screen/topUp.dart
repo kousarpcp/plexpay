@@ -272,10 +272,8 @@ class _topUpState extends State<topUp> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => reacharge(
-                                      name:widget.name,
-                                      text: AED[index]["Text1"],
-                                      amount: AED[index]["Text2"],
-                                      number: widget.number),
+
+                                      number: widget.number, dash: '', code: '',),
                                 ));
                           },
                           child: Center(
@@ -463,14 +461,7 @@ class _topUpState extends State<topUp> {
                                                                     (context) =>
                                                                     reacharge(
                                                                       number: widget
-                                                                          .number,
-                                                                      name:widget.name,
-                                                                      text: AED[
-                                                                      index]
-                                                                      ["Text1"],
-                                                                      amount: AED[
-                                                                      index]
-                                                                      ["Text2"],
+                                                                          .number, dash: '', code: '',
                                                                     ),
                                                               ));
                                                         },

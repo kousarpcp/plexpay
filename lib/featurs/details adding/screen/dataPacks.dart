@@ -227,10 +227,7 @@ class _dataPacksState extends State<dataPacks> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => reacharge(
-                                  text: datapacks[index]["Text1"],
-                                  amount: datapacks[index]["Text2"],
-                                  number: widget.number,
-                                name: widget.name,
+                                  dash: '', code: '', number: '',
                               ),
                             ));
                       },

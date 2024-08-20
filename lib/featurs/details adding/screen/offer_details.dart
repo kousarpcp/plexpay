@@ -16,10 +16,13 @@ import '../../../Const/imageConst.dart';
 
 class OfferDetails extends StatefulWidget {
   const OfferDetails({
-    super.key, required this.name, required this.image,
+    super.key, required this.name, required this.image, required this.code, required this.dash, required this.iso,
   });
   final String name;
   final String image;
+  final String code;
+  final String iso;
+  final String dash;
 
   @override
   State<OfferDetails> createState() => _OfferDetailsState();
@@ -60,7 +63,7 @@ class _OfferDetailsState extends State<OfferDetails> {
           actions: [
             CircleAvatar(
               radius: width*0.045,
-                backgroundImage:AssetImage(widget.image,),
+                backgroundImage:NetworkImage(widget.image,),
               backgroundColor: Colors.white,
                 ),
             SizedBox(width: width*0.05,)],
@@ -113,7 +116,11 @@ class _OfferDetailsState extends State<OfferDetails> {
               child: TabBarView(children: [
                 offer(
                   name:widget.name,
-                  image:widget.image
+                  image:widget.image,
+                  code:widget.code,
+                  dash:widget.dash,
+                  iso:widget.iso
+
                 ),
                 custom(
                   name:widget.name,

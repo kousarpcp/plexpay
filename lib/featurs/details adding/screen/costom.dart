@@ -127,8 +127,8 @@ class _customState extends State<custom> {
 
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(context, CupertinoPageRoute(builder: (context) => reacharge(
-                                number: numController.text, text: "", amount: numController1.text, name: widget.name),));
+                            Navigator.push(context, CupertinoPageRoute(builder: (context) => reacharge(number: '', dash: '', code: '',
+                                ),));
                           },
                           icon: Icon(CupertinoIcons.right_chevron,color: Colors.white,),
                         ),

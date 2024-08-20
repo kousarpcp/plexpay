@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/widgets.dart';
+import 'package:plexpay/api/home_api.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/international.dart';
@@ -14,6 +15,8 @@ import 'package:plexpay/featurs/details%20adding/screen/local.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profile.dart';
 
 import '../../../main.dart';
+int _selectedIndex = 0;
+
 
 class home_page extends StatefulWidget {
   const home_page({super.key});
@@ -24,8 +27,16 @@ class home_page extends StatefulWidget {
 
 class _home_pageState extends State<home_page> {
 
-  var isLoading = true;
-
+  var isLoading = false;
+  var data ;
+  var prepaid ;
+  var postpaid;
+  var voucher ;
+  var giftcard ;
+  var electricity  ;
+  var DTH  ;
+  var GamingCard  ;
+  var isCatLoading = true;
 
 
   List a = [
@@ -40,6 +51,33 @@ class _home_pageState extends State<home_page> {
   bool b = false;
   bool c = false;
   bool d = false;
+
+  Future<String> getHome() async {
+    setState(() {
+      isCatLoading = true;
+    });
+    var rsp =await fetchHomeApi();
+
+    data=rsp['data'];
+    // postpaid = rsp['data']['Postpaid'];
+    // voucher = rsp['data']['Voucher'];
+    // giftcard =rsp['data']['Gift Card'];
+    // electricity = rsp['data']['Electricity'];
+    // DTH = rsp['data']['DTH'];
+    // GamingCard = rsp['data']['Gaming Card'];
+    setState(() {
+      isCatLoading = false;
+    });
+    print(data);
+    print("uuuuuuuuuuuuuuuuuuu");
+    return "";
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    getHome();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +156,11 @@ class _home_pageState extends State<home_page> {
             )
           ],
         ),
-        body:
+        body:isCatLoading?Container(
+          child: Center(child: CircularProgressIndicator(
+            color: colorConst.blue,
+          )),
+        ):
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
@@ -268,10 +310,13 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   height: width * 0.03,
                 ),
+
                 SizedBox(
-                  height: height*0.482,
+                  height: height*0.9,
                   child: TabBarView(children: [
-                    local(),
+                    local(
+                      data:data
+                    ),
                     international(),
                   ],
                     physics: BouncingScrollPhysics(),

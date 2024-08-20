@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus
   maxx_sunmi_printer
   smart_auth
   url_launcher_windows

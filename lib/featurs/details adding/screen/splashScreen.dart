@@ -6,6 +6,7 @@ import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Const/shared_preference.dart';
 import '../../../main.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -19,11 +20,13 @@ class _SplashscreenState extends State<Splashscreen> {
   bool login = false;
 
   getData() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    login = _prefs.getBool("login") ?? false;
+    var prefs = await getSharedPrefrence('userId');
+    var token = await getSharedPrefrence('token');
+    var name = await sharedPrefrence("dash", "0");
+    print(prefs);
     Future.delayed(Duration(
-        seconds: 6
-    )).then((value) => Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => login?BottomNavigation():Login(),)));
+        seconds: 1
+    )).then((value) => Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => prefs==null?Login():BottomNavigation(),)));
     setState(() {
 
     });

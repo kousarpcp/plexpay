@@ -13,6 +13,7 @@ import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Const/shared_preference.dart';
 import '../../../main.dart';
 import 'History_Bottom.dart';
 import 'debit&credit.dart';
@@ -640,8 +641,10 @@ class _profileState extends State<profile> {
                             ),
                             SizedBox(height: width*0.05,),
                             InkWell(onTap: () async {
-                              SharedPreferences _prefs = await SharedPreferences.getInstance();
-                              _prefs.clear();
+                              var id = await removesharedPrefrence("userId", null);
+                              var token = await removesharedPrefrence("token", null);
+
+                              var name = await removesharedPrefrence("name", null);
                               Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
                             },
                               child: Container(

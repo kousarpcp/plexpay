@@ -213,10 +213,10 @@ class _LoginState extends State<Login> {
                         width: 24.0,
                         child: Theme(
                           data: ThemeData(
-                              unselectedWidgetColor: Color(0xff00C8E8) // Your color
+                              unselectedWidgetColor: colorConst.blue // Your color
                           ),
                           child: Checkbox(
-                              activeColor: Color(0xff00C8E8),
+                              activeColor: colorConst.blue,
                               value: isCheck,
                               onChanged: (v)async{
                                 setState(() {
@@ -240,7 +240,7 @@ class _LoginState extends State<Login> {
                     SizedBox(width: 10.0),
                     Text("Remember Me",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,))
                   ]),
@@ -264,7 +264,6 @@ class _LoginState extends State<Login> {
                         var name = await sharedPrefrence(shopname, rsp['name']);
 
                         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
-
                         showToast("Login Success!");
                         print("wrking");
                         print(rsp['user_id']);

@@ -8,9 +8,12 @@ import '../../../main.dart';
 import 'Reacharge.dart';
 
 class popular extends StatefulWidget {
-  const popular({super.key, required this.number, required this.name, });
+  const popular({super.key, required this.number, required this.name, this.plan, this.providerinfo, required this.dash, });
   final String number;
   final String name;
+  final String dash;
+  final plan;
+  final providerinfo;
 
   @override
   State<popular> createState() => _popularState();
@@ -273,10 +276,10 @@ class _popularState extends State<popular> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => reacharge(
-                                      name:widget.name,
-                                      text: AED[index]["Text1"],
-                                      amount: AED[index]["Text2"],
-                                      number: widget.number),
+                                      code:widget.plan[index]["SkuCode"],
+                                      number: widget.number,
+                                    dash:widget.dash
+                                  ),
                                 ));
                           },
                           child: Center(
@@ -320,7 +323,7 @@ class _popularState extends State<popular> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text(AED[index]["Text1"],
+                                            Text(widget.plan[index]["SendCurrencyIso"],
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w900,
                                                     fontSize: width * 0.06)),
@@ -328,204 +331,204 @@ class _popularState extends State<popular> {
                                               width: width * 0.02,
                                             ),
                                             Text(
-                                              AED[index]["Text2"],
+                                              widget.plan[index]["SendValue"].toString(),
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w900,
                                                   fontSize: width * 0.07),
                                             ),
                                           ],
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          width * 0.07)),
-                                              builder: (context) {
-                                                return Container(
-                                                  height: width * 0.9,
-                                                  width: width * 1,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                          width * 0.07,
-                                                        ),
-                                                        topRight:
-                                                            Radius.circular(
-                                                          width * 0.07,
-                                                        ),
-                                                      )),
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: width * 0.033,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          InkWell(
-                                                            onTap: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Image.asset(
-                                                              ImageConst.remove,
-                                                              width:
-                                                                  width * 0.05,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width:
-                                                                width * 0.042,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(
-                                                            width * 0.042),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  AED[index][
-                                                                      "Text10"],
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w900,
-                                                                      fontSize:
-                                                                          width *
-                                                                              0.07),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height:
-                                                                  width * 0.03,
-                                                            ),
-                                                            Text(
-                                                              AED[index]
-                                                                  ["Text11"],
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      width *
-                                                                          0.045,
-                                                                  color: Colors
-                                                                      .grey),
-                                                            ),
-                                                            SizedBox(
-                                                                height: width *
-                                                                    0.03),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons
-                                                                      .calendar_month_outlined,
-                                                                  weight:
-                                                                      width *
-                                                                          0.03,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: width *
-                                                                      0.025,
-                                                                ),
-                                                                Text(
-                                                                    AED[index][
-                                                                        "Text12"],
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            width *
-                                                                                0.045,
-                                                                        color: Colors
-                                                                            .grey))
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: width * 0.06,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              CupertinoPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        reacharge(
-                                                                  number: widget
-                                                                      .number,
-                                                                          name:widget.name,
-                                                                  text: AED[
-                                                                          index]
-                                                                      ["Text1"],
-                                                                  amount: AED[
-                                                                          index]
-                                                                      ["Text2"],
-                                                                ),
-                                                              ));
-                                                        },
-                                                        child: Container(
-                                                          height: width * 0.1,
-                                                          width: width * 0.68,
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                                  Colors.indigo,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          width *
-                                                                              0.05)),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Recharge",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  fontSize:
-                                                                      width *
-                                                                          0.06),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height: width * 0.052,
-                                            width: width * 0.2,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  AED[index]["Text3"],
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.indigo),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
+                                        // InkWell(
+                                        //   onTap: () {
+                                        //     showModalBottomSheet(
+                                        //       context: context,
+                                        //       isScrollControlled: true,
+                                        //       shape: RoundedRectangleBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   width * 0.07)),
+                                        //       builder: (context) {
+                                        //         return Container(
+                                        //           height: width * 0.9,
+                                        //           width: width * 1,
+                                        //           decoration: BoxDecoration(
+                                        //               color: Colors.white,
+                                        //               borderRadius:
+                                        //                   BorderRadius.only(
+                                        //                 topLeft:
+                                        //                     Radius.circular(
+                                        //                   width * 0.07,
+                                        //                 ),
+                                        //                 topRight:
+                                        //                     Radius.circular(
+                                        //                   width * 0.07,
+                                        //                 ),
+                                        //               )),
+                                        //           child: Column(
+                                        //             children: [
+                                        //               SizedBox(
+                                        //                 height: width * 0.033,
+                                        //               ),
+                                        //               Row(
+                                        //                 mainAxisAlignment:
+                                        //                     MainAxisAlignment
+                                        //                         .end,
+                                        //                 children: [
+                                        //                   InkWell(
+                                        //                     onTap: () {
+                                        //                       Navigator.pop(
+                                        //                           context);
+                                        //                     },
+                                        //                     child: Image.asset(
+                                        //                       ImageConst.remove,
+                                        //                       width:
+                                        //                           width * 0.05,
+                                        //                     ),
+                                        //                   ),
+                                        //                   SizedBox(
+                                        //                     width:
+                                        //                         width * 0.042,
+                                        //                   ),
+                                        //                 ],
+                                        //               ),
+                                        //               Padding(
+                                        //                 padding: EdgeInsets.all(
+                                        //                     width * 0.042),
+                                        //                 child: Column(
+                                        //                   children: [
+                                        //                     Row(
+                                        //                       children: [
+                                        //                         Text(
+                                        //                           AED[index][
+                                        //                               "Text10"],
+                                        //                           style: TextStyle(
+                                        //                               fontWeight:
+                                        //                                   FontWeight
+                                        //                                       .w900,
+                                        //                               fontSize:
+                                        //                                   width *
+                                        //                                       0.07),
+                                        //                         ),
+                                        //                       ],
+                                        //                     ),
+                                        //                     SizedBox(
+                                        //                       height:
+                                        //                           width * 0.03,
+                                        //                     ),
+                                        //                     Text(
+                                        //                       AED[index]
+                                        //                           ["Text11"],
+                                        //                       style: TextStyle(
+                                        //                           fontSize:
+                                        //                               width *
+                                        //                                   0.045,
+                                        //                           color: Colors
+                                        //                               .grey),
+                                        //                     ),
+                                        //                     SizedBox(
+                                        //                         height: width *
+                                        //                             0.03),
+                                        //                     Row(
+                                        //                       children: [
+                                        //                         Icon(
+                                        //                           Icons
+                                        //                               .calendar_month_outlined,
+                                        //                           weight:
+                                        //                               width *
+                                        //                                   0.03,
+                                        //                         ),
+                                        //                         SizedBox(
+                                        //                           width: width *
+                                        //                               0.025,
+                                        //                         ),
+                                        //                         Text(
+                                        //                             AED[index][
+                                        //                                 "Text12"],
+                                        //                             style: TextStyle(
+                                        //                                 fontSize:
+                                        //                                     width *
+                                        //                                         0.045,
+                                        //                                 color: Colors
+                                        //                                     .grey))
+                                        //                       ],
+                                        //                     )
+                                        //                   ],
+                                        //                 ),
+                                        //               ),
+                                        //               SizedBox(
+                                        //                 height: width * 0.06,
+                                        //               ),
+                                        //               InkWell(
+                                        //                 onTap: () {
+                                        //                   Navigator.push(
+                                        //                       context,
+                                        //                       CupertinoPageRoute(
+                                        //                         builder:
+                                        //                             (context) =>
+                                        //                                 reacharge(
+                                        //                           number: widget
+                                        //                               .number,
+                                        //                                   name:widget.name,
+                                        //                           text: AED[
+                                        //                                   index]
+                                        //                               ["Text1"],
+                                        //                           amount: AED[
+                                        //                                   index]
+                                        //                               ["Text2"],
+                                        //                         ),
+                                        //                       ));
+                                        //                 },
+                                        //                 child: Container(
+                                        //                   height: width * 0.1,
+                                        //                   width: width * 0.68,
+                                        //                   decoration: BoxDecoration(
+                                        //                       color:
+                                        //                           Colors.indigo,
+                                        //                       borderRadius:
+                                        //                           BorderRadius
+                                        //                               .circular(
+                                        //                                   width *
+                                        //                                       0.05)),
+                                        //                   child: Center(
+                                        //                     child: Text(
+                                        //                       "Recharge",
+                                        //                       style: TextStyle(
+                                        //                           color: Colors
+                                        //                               .white,
+                                        //                           fontWeight:
+                                        //                               FontWeight
+                                        //                                   .w800,
+                                        //                           fontSize:
+                                        //                               width *
+                                        //                                   0.06),
+                                        //                     ),
+                                        //                   ),
+                                        //                 ),
+                                        //               )
+                                        //             ],
+                                        //           ),
+                                        //         );
+                                        //       },
+                                        //     );
+                                        //   },
+                                        //   child: Container(
+                                        //     height: width * 0.052,
+                                        //     width: width * 0.2,
+                                        //     child: Row(
+                                        //       mainAxisAlignment:
+                                        //           MainAxisAlignment.end,
+                                        //       children: [
+                                        //         Text(
+                                        //           AED[index]["Text3"],
+                                        //           style: TextStyle(
+                                        //               fontWeight:
+                                        //                   FontWeight.w600,
+                                        //               color: Colors.indigo),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // )
                                       ],
                                     ),
                                     Divider(
@@ -561,7 +564,7 @@ class _popularState extends State<popular> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(AED[index]["Text7"],
+                                        Text(widget.plan[index]["Expiry_Date"],
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: width * 0.048)),
