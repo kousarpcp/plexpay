@@ -97,7 +97,7 @@ class _home_pageState extends State<home_page> {
                 image: AssetImage(ImageConst.plexpay),
                 width: width * 0.23,
               ),
-              Text(
+              LocaleText(
                 "WALLET : 400 AED",
                 style: TextStyle(fontSize: width * 0.029, color: Colors.black),
               ),

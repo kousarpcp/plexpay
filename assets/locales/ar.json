@@ -12,7 +12,7 @@
   "electricity": "كهرباء",
   "gift_card": "بطاقة هدايا",
   "dth": "دث",
-  "Home": "وطن",
+  "home": "وطن",
   "local": "محلي",
   "international": "دولي",
   "aed_54.56": "درهم 54.56",
@@ -25,8 +25,6 @@
   "credit_cards": "بطاقات الإئتمان",
   "plexpe": "بلكس بي",
   "wallet": "محفظة",
-  "plexpe": "بلكس بي",
-  "gift_card": "بطاقة هدايا",
   "upi_lite": "يو بي آي لايت",
   "account_summary": "ملخص الحساب",
   "funds": "اموال",
@@ -35,5 +33,9 @@
   "due_summary": "الملخص الواجب",
   "profit_summary": "ملخص الأرباح",
   "refund_history": "تاريخ الاسترداد",
-  "logout": "الخروج"
+  "logout": "الخروج",
+  "wallet_:_400_aed": "المحفظة: 400 درهم",
+  "history": "تاريخ",
+  "reports": "التقارير"
+
 }

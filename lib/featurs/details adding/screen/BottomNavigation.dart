@@ -2,6 +2,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/imageConst.dart';
 // import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
@@ -57,9 +58,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
           //   setState(() {});
           // },
           items: [
-            CurvedNavigationBarItem( label: 'Home', child:  Icon(Icons.home)),
+            CurvedNavigationBarItem( label:Locales.string(context, 'Home') , child:  Icon(Icons.home)),
             CurvedNavigationBarItem(
-                child:  Icon(CupertinoIcons.chart_pie), label: 'Collections'),
+                child:  Icon(CupertinoIcons.chart_pie), label:Locales.string(context, 'Collections')),
             CurvedNavigationBarItem(
                 child: Container(
                   height: width*0.08,
@@ -73,10 +74,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
             CurvedNavigationBarItem(
               child: Icon(Icons.history),
-              label: 'History',
+              label: Locales.string(context, 'History'),
             ),
             CurvedNavigationBarItem(
-                child: Icon(Icons.ios_share), label: 'Reports'),
+                child: Icon(Icons.ios_share), label:Locales.string(context, 'Reports')),
           ],
           onTap: (index) {
             setState(() {

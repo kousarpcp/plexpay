@@ -43,6 +43,25 @@ class _profileState extends State<profile> {
   int currentIndex = 0;
 
   bool selectedLocale = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadSavedLocale();
+  }
+
+  _loadSavedLocale() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      currentIndex = prefs.getInt('selectedLanguageIndex') ?? 0; // Default to first language if not set
+    });
+  }
+  _saveLocale(int index) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('selectedLanguageIndex', index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -592,6 +611,7 @@ class _profileState extends State<profile> {
                                      setState(() {
                                         currentIndex = index ;
                                      });
+                                     _saveLocale(index);
                                      Locales.change(context, localeCodes[currentIndex]);
                                    },
                                    leading:Icon(selectedLocale?Icons.check : Icons.language,),
