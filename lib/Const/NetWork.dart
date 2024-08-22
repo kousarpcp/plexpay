@@ -100,9 +100,6 @@ final walletUrl = 'api/wallet';
 ///needed apis
 
 
-
-
-
 final serviceUrl = 'api/get_our_services_list';
 final loginOutUrl = 'auth/logout';
 final catUrl = 'api/category';

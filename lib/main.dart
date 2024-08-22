@@ -10,6 +10,7 @@ import 'featurs/details adding/screen/BottomNavigation.dart';
 
 import 'featurs/details adding/screen/Reacharge.dart';
 import 'featurs/details adding/screen/Recharge bill genarate.dart';
+import 'featurs/details adding/screen/plexBill.dart';
 import 'featurs/xpay/screen/xpay_page.dart';
 import 'featurs/details adding/screen/collections.dart';
 import 'featurs/details adding/screen/collectionsReciept.dart';
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
                 supportedLocales: Locales.supportedLocales,
                 locale: locale,
                 debugShowCheckedModeBanner: false,
-                home: Splashscreen()),
+                home: Plexbill()),
           ),
     );
   }

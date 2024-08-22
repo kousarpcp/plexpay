@@ -202,10 +202,20 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          LocaleText("AED 54.56",
-                              style: TextStyle(
-                                  fontSize: width * 0.06,
-                                  fontWeight: FontWeight.w800)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LocaleText("AED",
+                                  style: TextStyle(
+                                      fontSize: width * 0.06,
+                                      fontWeight: FontWeight.w800)),
+                              SizedBox(width: width*0.02,),
+                              LocaleText("54.56",
+                                  style: TextStyle(
+                                      fontSize: width * 0.06,
+                                      fontWeight: FontWeight.w800)),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -246,10 +256,20 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          LocaleText("AED 1000.00",
-                              style: TextStyle(
-                                  fontSize: width * 0.06,
-                                  fontWeight: FontWeight.w800)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LocaleText("AED",
+                                  style: TextStyle(
+                                      fontSize: width * 0.06,
+                                      fontWeight: FontWeight.w800)),
+                              SizedBox(width: width*0.02,),
+                              LocaleText("1000.00",
+                                  style: TextStyle(
+                                      fontSize: width * 0.06,
+                                      fontWeight: FontWeight.w800)),
+                            ],
+                          ),
                         ],
                       ),
                     ),
