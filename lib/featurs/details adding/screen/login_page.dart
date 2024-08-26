@@ -104,6 +104,7 @@ class _LoginState extends State<Login> {
                           controller: userController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
+
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           autocorrect: true,
                           cursorColor: colorConst.blue,
@@ -314,7 +315,6 @@ class _LoginState extends State<Login> {
                     ),)),
                   ),
                 ),
-
 
                 // TextFormField(
                 //   controller: userController,

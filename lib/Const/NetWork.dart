@@ -3,6 +3,7 @@ final baseUrl2 = 'https://billing.netplexsolution.com/plexpay_beta/';
 final baseUrl0 = 'https://billing.plexbill.com/';
 //final baseUrl = 'https://asset.plexbill.com/';
 final baseUrl = 'https://plexpay.netplexsolution.com/';
+final baseUrl3 = 'http://127.0.0.1:8000/';
 //final baseUrl = 'https://billing.netplexsolution.com/';
 // final  baseUrl= 'https://netplexsolution.com/dotcom/';
 
@@ -66,6 +67,7 @@ final fundingUrl = 'api/fundings';
 final getVouchersUrl = 'api/getVouchers';
 final getName = 'api/getName';
 final loginUrl = 'auth/login_action';
+final userloginUrl = 'api/userlogin';
 final planInfoUrl = 'api/planInfo';
 final typeAndPlanByNumberUrl = 'api/typeAndPlanByNumber';
 final plansByProviderUrl = 'api/plansBy_Provider';

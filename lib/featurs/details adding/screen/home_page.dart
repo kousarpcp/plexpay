@@ -310,7 +310,6 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   height: width * 0.03,
                 ),
-
                 SizedBox(
                   height: height*0.9,
                   child: TabBarView(children: [
@@ -320,7 +319,6 @@ class _home_pageState extends State<home_page> {
                     international(),
                   ],
                     physics: BouncingScrollPhysics(),
-
                   ),
                 ),
               ],

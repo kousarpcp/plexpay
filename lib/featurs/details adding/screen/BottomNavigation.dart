@@ -9,6 +9,7 @@ import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/History_Bottom.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Share.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexBill_login.dart';
 
 
 import '../../../Const/colorConst.dart';
@@ -32,7 +33,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     Collections(),
     XpayPage(),
     HistoryBottom3(),
-    share(),
+    plexbill_login(),
   ];
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
@@ -77,7 +78,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               label: Locales.string(context, 'History'),
             ),
             CurvedNavigationBarItem(
-                child: Icon(Icons.ios_share), label:Locales.string(context, 'Reports')),
+                child: Icon(Icons.sticky_note_2_outlined), label:Locales.string(context, 'PlexBill')),
           ],
           onTap: (index) {
             setState(() {
