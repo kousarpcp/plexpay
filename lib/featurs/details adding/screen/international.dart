@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +12,15 @@ import '../../../main.dart';
 import '../../../Const/imageConst.dart';
 
 class international extends StatefulWidget {
-  const international({super.key});
+  final data;
+  const international({super.key, required this.data});
 
   @override
   State<international> createState() => _internationalState();
 }
 
 class _internationalState extends State<international> {
+  var data;
   List Country = [
     {
       "image1": ImageConst.india1, "text": "India",
@@ -122,6 +125,13 @@ class _internationalState extends State<international> {
   ];
 
   @override
+  void initState() {
+    data =widget.data;
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -133,13 +143,17 @@ class _internationalState extends State<international> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => countryField(
-                        initialCountryCode: "", name: '', image: '', code: '',
-                      ),
-                    ));
+                // final item =  data!= null ? data[index] : null;
+                // Navigator.push(
+                //     context,
+                //     CupertinoPageRoute(
+                //       builder: (context) => countryField(
+                //           dash: item["topC"],
+                //           name: item["CountryName"],
+                //           image: item["Cflag"],
+                //           code: item["CountryIso"]
+                //       ),
+                //     ));
               },
               child: Container(
                   height: height * 0.055,
@@ -169,7 +183,7 @@ class _internationalState extends State<international> {
             Container(
               height: width*1.3,
               child: GridView.builder(
-                itemCount: Country.length,
+                itemCount: data != null ? data.length : 0,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(
                     decelerationRate: ScrollDecelerationRate.fast),
@@ -180,6 +194,7 @@ class _internationalState extends State<international> {
                     mainAxisSpacing: width*0.01,
                     crossAxisCount: 4),
                 itemBuilder: (context, index) {
+                  final item =  data!= null ? data[index] : null;
                   return Column(
                     children: [
                       InkWell(
@@ -188,10 +203,10 @@ class _internationalState extends State<international> {
                               context,
                               CupertinoPageRoute(
                                 builder: (context) => countryField(
-                                  initialCountryCode: Country[index]["code"]!,
-                                  name: Country[index]["text"],
-                                  image: Country[index]["image1"],
-                                  code: Country[index]["country code"]
+                                  dash: item["topC"],
+                                  name: item["CountryName"],
+                                  image: item["Cflag"],
+                                  code: item["CountryIso"]
                                 ),
                               ));
                         },
@@ -203,7 +218,8 @@ class _internationalState extends State<international> {
                               borderRadius: BorderRadius.circular(width * 0.04),
                               border: Border.all(width: width * 0.0001),
                               image: DecorationImage(
-                                  image: AssetImage(Country[index]["image1"]!))),
+                                  image: CachedNetworkImageProvider(item['Cflag']),fit:BoxFit.cover)
+                          ),
                           // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
                         ),
                       ),
@@ -211,7 +227,7 @@ class _internationalState extends State<international> {
                         height: width * 0.01,
                       ),
                       Text(
-                        Country[index]["text"],
+                        item["CountryName"],
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: width * 0.03),
                       )

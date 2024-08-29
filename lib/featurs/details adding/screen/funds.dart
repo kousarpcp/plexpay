@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/widgets.dart';
 
+import '../../../api/funds_API.dart';
 import '../../../main.dart';
 import '../../../Const/colorConst.dart';
 import '../../../Const/imageConst.dart';
@@ -14,6 +15,9 @@ class Funds extends StatefulWidget {
 }
 
 class _FundsState extends State<Funds> {
+
+  bool isLoading=false;
+  var fundsLIst = [];
 
   List F=[
     {
@@ -77,6 +81,43 @@ class _FundsState extends State<Funds> {
       "Text18":"AED 670",
     },
   ];
+  Future<String> getFund() async {
+
+    setState(() {
+      isLoading = true;
+    });
+    print("xoxoxo");
+
+    var rsp = await fundsApi(start,end);
+    print(rsp);
+
+
+    // arrProdList = data;
+    //
+    if(rsp['status']==true && rsp['result']!="Empty"){
+
+
+
+      setState(() {
+
+        fundsLIst = rsp['result']['all_data'];
+
+        // totalSale = rsp['total_card_sale'].toString();
+        // totalProfit = "₹"+rsp['total_profit'].toString();
+
+      });
+      print("arrProdList");
+      print(fundsLIst);
+    }
+
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return "";
+  }
+
 
   var start = DateTime.now().year.toString() +
       "-" +
@@ -123,6 +164,7 @@ class _FundsState extends State<Funds> {
             pickedRange.end.day.toString();
       });
     }
+    getFund();
   }
   @override
   Widget build(BuildContext context) {
@@ -152,101 +194,104 @@ class _FundsState extends State<Funds> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Container(
-              height: width * 0.125,
-              width: width * 0.86,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                  border:
-                  Border.all(width: width * 0.001, color: colorConst.grey),
-                  borderRadius: BorderRadius.circular(width * 0.03)),
-              child: Padding(
-                padding: EdgeInsets.all(width * 0.03),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.date_range_outlined,
-                      color: Colors.lightBlueAccent,
-                      size: width * 0.053,
-                    ),
-                    SizedBox(
-                      width: width * 0.03,
-                    ),
-                    Expanded(
-                      child: Text(
-                        start + "  to  " + end,
-                        maxLines: 2,
-                        style: TextStyle(fontSize: width * 0.043),
-                        // style: Theme.of(context).textTheme.subtitle2,
+      body: isLoading==true?Container(
+          child: Center(child: CircularProgressIndicator())):SingleChildScrollView(
+            child: Column(
+                    children: [
+            Center(
+              child: Container(
+                height: width * 0.125,
+                width: width * 0.86,
+                decoration: BoxDecoration(
+                  // color: Colors.red,
+                    border:
+                    Border.all(width: width * 0.001, color: colorConst.grey),
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+                child: Padding(
+                  padding: EdgeInsets.all(width * 0.03),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.date_range_outlined,
+                        color: Colors.lightBlueAccent,
+                        size: width * 0.053,
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        selectDateRange(context);
-                      },
-                      child: Container(
-                        height: width * 0.077,
-                        width: width * 0.23,
-                        decoration: BoxDecoration(
-                            color: colorConst.blue,
-                            borderRadius: BorderRadius.circular(width * 0.35)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                                child: Text(
-                                  "FILTER",
-                                  style: TextStyle(
-                                      fontSize: width * 0.044,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
-                                )),
-                            SizedBox(
-                              width: width * 0.012,
-                            ),
-                            Icon(
-                              Icons.filter_alt,
-                              color: Colors.white,
-                              size: width * 0.038,
-                            ),
-                          ],
+                      SizedBox(
+                        width: width * 0.03,
+                      ),
+                      Expanded(
+                        child: Text(
+                          start + "  to  " + end,
+                          maxLines: 2,
+                          style: TextStyle(fontSize: width * 0.043),
+                          // style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
-                    )
-                  ],
+                      InkWell(
+                        onTap: () {
+                          selectDateRange(context);
+                        },
+                        child: Container(
+                          height: width * 0.077,
+                          width: width * 0.23,
+                          decoration: BoxDecoration(
+                              color: colorConst.blue,
+                              borderRadius: BorderRadius.circular(width * 0.35)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                  child: Text(
+                                    "FILTER",
+                                    style: TextStyle(
+                                        fontSize: width * 0.044,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
+                                  )),
+                              SizedBox(
+                                width: width * 0.012,
+                              ),
+                              Icon(
+                                Icons.filter_alt,
+                                color: Colors.white,
+                                size: width * 0.038,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
+            ListView.separated(
+              shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                final item=fundsLIst != null ? fundsLIst[index] : null;
+                  return FundList(item:item, index: index,
+                  );
+
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+                itemCount: fundsLIst != null ? fundsLIst.length: 0,
+            )
+                    ],
+                  ),
           ),
-          ListView.separated(
-            shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return FundList(F: F, index: index,
-
-                );
-
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox();
-              },
-              itemCount: F.length
-          )
-        ],
-      ),
     );
   }
 }
 class FundList extends StatefulWidget {
-  final List F;
+  final Map item;
   final int  index;
   const FundList({super.key,
-    required this.F,
+    required this.item,
     required this.index
   });
 
@@ -289,23 +334,23 @@ class _FundListState extends State<FundList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(widget.F[widget.index]["Text1"],style: TextStyle(fontSize: width*0.035),),
-                          Text(widget.F[widget.index]["Text2"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text3"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text4"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text5"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text6"],style: TextStyle(fontSize: width*0.035)),
+                          Text("ENTRY DATE",style: TextStyle(fontSize: width*0.035),),
+                          Text("PREV BALANCE",style: TextStyle(fontSize: width*0.035)),
+                          Text("PREV DUE",style: TextStyle(fontSize: width*0.035)),
+                          Text("FUND",style: TextStyle(fontSize: width*0.035)),
+                          Text("TOTAL WALLET",style: TextStyle(fontSize: width*0.035)),
+                          Text("TOTAL DUE",style: TextStyle(fontSize: width*0.035)),
                         ],
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(widget.F[widget.index]["Text7"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text8"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text9"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text10"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text11"],style: TextStyle(fontSize: width*0.035)),
-                          Text(widget.F[widget.index]["Text12"],style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
+                          Text(":",style: TextStyle(fontSize: width*0.035)),
                         ],
                       ),
                     ],
@@ -318,12 +363,12 @@ class _FundListState extends State<FundList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(widget.F[widget.index]["Text13"],style: TextStyle(fontSize: width*0.035),),
-                      Text(widget.F[widget.index]["Text14"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.F[widget.index]["Text15"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.F[widget.index]["Text16"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.F[widget.index]["Text17"],style: TextStyle(fontSize: width*0.035)),
-                      Text(widget.F[widget.index]["Text18"],style: TextStyle(fontSize: width*0.035)),
+                      Text(widget.item["entry_date"],style: TextStyle(fontSize: width*0.035),),
+                      Text(widget.item["prev_balance"],style: TextStyle(fontSize: width*0.035)),
+                      Text(widget.item["prev_due"],style: TextStyle(fontSize: width*0.035)),
+                      Text(widget.item["fund"],style: TextStyle(fontSize: width*0.035)),
+                      Text(widget.item["total_wallet"],style: TextStyle(fontSize: width*0.035)),
+                      Text(widget.item["total_due"],style: TextStyle(fontSize: width*0.035)),
                     ],
                   ),
                 )

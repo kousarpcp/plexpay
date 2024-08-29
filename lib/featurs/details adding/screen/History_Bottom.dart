@@ -8,6 +8,8 @@ import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genara
 import 'package:screenshot/screenshot.dart';
 // import 'package:plexpay/Api/transactionSaleApi.dart';
 // import 'package:plexpay/Api/transactionSearchApi.dart';
+import '../../../api/historysearch_API.dart';
+import '../../../api/salehistoryAPI.dart';
 import '../../../main.dart';
 import '../../../Const/colorConst.dart';
 import 'Constants.dart';
@@ -20,6 +22,8 @@ class HistoryBottom3 extends StatefulWidget {
 
 class _HistoryBottom3State extends State<HistoryBottom3> {
   var purchaseDate = "0";
+  var historyList=[];
+  var isLoading = false;
 
   var start = DateTime.now().year.toString() +
       "-" +
@@ -86,12 +90,70 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
       "recieved":40.00,
     },
   ];
+  Future<String> getHistory() async {
+    setState(() {
+      isLoading = true;
+    });
+    print("xoxoxo");
+
+    var rsp = await transactionSaleApi(start, end);
+
+    // arrProdList = data;
+    //
+    if (rsp['status'] == true) {
+      setState(() {
+        historyList = rsp['transactions'];
+
+        // totalSale = rsp['total_card_sale'].toString();
+        // totalProfit = "₹"+rsp['total_profit'].toString();
+      });
+      print("arrProdList");
+      print(historyList);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+
+
+    return "";
+  }
+  Future<String> getSearch(key) async {
+    print("xoxoxo");
+    setState(() {
+      isLoading = true;
+    });
+    var rsp = await transactionSearchApi(key);
+
+    // arrProdList = data;
+    //
+    if (rsp['status'] ==  "success") {
+      setState(() {
+        historyList.clear();
+        historyList = rsp['Info'];
+
+        // totalSale = rsp['total_card_sale'].toString();
+        // totalProfit = "₹"+rsp['total_profit'].toString();
+      });
+      print("historyList");
+      print(historyList);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return "";
+  }
 
   @override
   void dispose() {
     numFocus.unfocus();
     super.dispose();
   }
+  
+  
   Future selectDateRange(BuildContext context) async {
     DateTimeRange? pickedRange = (await showDateRangePicker(
       context: context,
@@ -125,13 +187,14 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
             "-" +
             pickedRange.end.day.toString();
       });
-
-
+      
+      getHistory();
       print(pickedRange.start.day);
       print(pickedRange.start.month);
       print(pickedRange.start.year);
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +231,9 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
               onChanged: (key) async {
               },
               onSubmitted: (key) async {
-
+                print("keey");
+                var rsp = await getSearch(key);
+                print(rsp);
               },
               decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search, color: Colors.black),
@@ -182,6 +247,9 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                       setState(() {
                         numFocus.unfocus();
                         searchController.clear();
+                        historyList.clear();
+                        isLoading = false;
+
                       });
                     },
                   ),
@@ -192,89 +260,91 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
           ),
         ),
       ),
-      body:
-          Column(
-            children: [
-              Center(
-                child: Container(
-                  height: width * 0.125,
-                  width: width * 0.86,
-                  margin: EdgeInsets.all(width*0.03),
-                  decoration: BoxDecoration(
-                    // color: Colors.red,
-                      border:
-                      Border.all(width: width * 0.001, color: colorConst.grey),
-                      borderRadius: BorderRadius.circular(width * 0.03)),
-                  child: Padding(
-                    padding:  EdgeInsets.all(width*0.03),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.date_range_outlined,
-                          color: Colors.lightBlueAccent,
-                          size: width*0.053,
-                        ),
-                        SizedBox(
-                          width: width*0.03,
-                        ),
-                        Expanded(
-                          child: Text(
-                            start + "  to  " + end,
-                            maxLines: 2,
-                            style: TextStyle(
-                                fontSize: width*0.043
-                            ),
-                            // style: Theme.of(context).textTheme.subtitle2,
+      body:isLoading == true
+          ? Container(child: Center(child: CircularProgressIndicator()))
+          : SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                  child: Container(
+                    height: width * 0.125,
+                    width: width * 0.86,
+                    margin: EdgeInsets.all(width*0.03),
+                    decoration: BoxDecoration(
+                      // color: Colors.red,
+                        border:
+                        Border.all(width: width * 0.001, color: colorConst.grey),
+                        borderRadius: BorderRadius.circular(width * 0.03)),
+                    child: Padding(
+                      padding:  EdgeInsets.all(width*0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.date_range_outlined,
+                            color: Colors.lightBlueAccent,
+                            size: width*0.053,
                           ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            selectDateRange(context);
-                          },
-                          child: Container(
-                            height: width * 0.075,
-                            width: width * 0.23,
-                            decoration: BoxDecoration(
-                                color: colorConst.blue,
-                                borderRadius: BorderRadius.circular(width * 0.35)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Center(
-                                    child: Text(
-                                      "FILTER",
-                                      style: TextStyle(
-                                          fontSize: width * 0.046,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                    )),
-                                SizedBox(width: width*0.012,),
-                                Icon(Icons.filter_alt,color: Colors.white,size:width*0.042 ,),
-                              ],
+                          SizedBox(
+                            width: width*0.03,
+                          ),
+                          Expanded(
+                            child: Text(
+                              start + "  to  " + end,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: width*0.043
+                              ),
+                              // style: Theme.of(context).textTheme.subtitle2,
                             ),
                           ),
-                        )
-                      ],
+                          InkWell(
+                            onTap: () {
+                              selectDateRange(context);
+                            },
+                            child: Container(
+                              height: width * 0.075,
+                              width: width * 0.23,
+                              decoration: BoxDecoration(
+                                  color: colorConst.blue,
+                                  borderRadius: BorderRadius.circular(width * 0.35)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                      child: Text(
+                                        "FILTER",
+                                        style: TextStyle(
+                                            fontSize: width * 0.046,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white),
+                                      )),
+                                  SizedBox(width: width*0.012,),
+                                  Icon(Icons.filter_alt,color: Colors.white,size:width*0.042 ,),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ListView.separated(
+                ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: BouncingScrollPhysics(),
-                  itemCount: history.length,
+                  itemCount: historyList != null ? historyList.length : 0,
                   itemBuilder: (context, index) {
-                    return HistoryData(history: history, index: index);
+                    final item=historyList != null ? historyList[index] : null;
+                    return HistoryData(item: item, index: index);
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox();
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
     );
   }
@@ -285,8 +355,8 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
 }
 
 class HistoryData extends StatefulWidget {
-  const HistoryData({super.key,required this.history, required this.index,});
-  final List history;
+  const HistoryData({super.key,required this.item, required this.index,});
+  final Map item;
   final int index;
   @override
   State<HistoryData> createState() => _HistoryDataState();
@@ -341,15 +411,12 @@ class _HistoryDataState extends State<HistoryData> {
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(width*0.9),
-                            image: DecorationImage(image: AssetImage(widget.history[widget.index]["service"]))
                         ),
+                        child: Text(widget.item["provider_name"],style: TextStyle(
+                          color: colorConst.blue,
+                          fontWeight: FontWeight.bold
+                        ),),
                       ),
-                      Text(
-                        widget.history[widget.index]["text"],
-                        style: TextStyle(
-                          fontSize: width*0.025
-                        ),
-                      )
                     ],
                   ),
                   Column(
@@ -357,14 +424,14 @@ class _HistoryDataState extends State<HistoryData> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                          widget.history[widget.index]["transaction id"],
+                          widget.item["TransactionID"].toString(),
                         style: TextStyle(
                           fontSize: width*0.04,
                           fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
-                        widget.history[widget.index]["date"],
+                        widget.item["RechargedTime"].toString(),
                         style: TextStyle(
                           fontSize: width*0.025,
                           color: colorConst.grey,
@@ -376,13 +443,13 @@ class _HistoryDataState extends State<HistoryData> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        widget.history[widget.index]["cash"].toString(),
+                        widget.item["recharge_amount"].toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        widget.history[widget.index]["recieved"].toString(),
+                        widget.item["recharge_amount"].toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.green

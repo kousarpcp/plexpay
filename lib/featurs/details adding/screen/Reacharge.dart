@@ -85,12 +85,13 @@ class _reachargeState extends State<reacharge> {
     return " ";
   }
 
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
+    print(widget.dash);
+    print("ooooooooo");
     // widget.AED;
     // a=widget.AED;
   }
@@ -255,7 +256,7 @@ class _reachargeState extends State<reacharge> {
                                           isTap = true;
                                         });
                                         var rsp;
-                                        // rsp = await RechargeApi(SkuCode,ProviderCode,widget.number.toString(),SendValue,ReceiveValue,Our_SendValue,Country_Iso,CoupenTitle,widget.dash);
+                                        rsp = await RechargeApi(SkuCode,ProviderCode,widget.number.toString(),SendValue,ReceiveValue,Our_SendValue,Country_Iso,CoupenTitle,widget.dash);
 
                                         if(rsp != 0 && rsp['status'] == true){
                                           showDialog(
@@ -297,6 +298,7 @@ class _reachargeState extends State<reacharge> {
                                           },);
                                         }else{
                                           showToast("Recharge failed!!");
+                                          Navigator.pop(context);
                                         }
 
                                       },

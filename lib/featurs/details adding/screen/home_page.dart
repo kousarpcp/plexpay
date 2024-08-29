@@ -13,7 +13,12 @@ import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/international.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profile.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../Const/Snackbar_toast_helper.dart';
+import '../../../Const/shared_preference.dart';
+import '../../../api/fetchcountryhome_api.dart';
+import '../../../api/wallet_amount_API.dart';
 import '../../../main.dart';
 int _selectedIndex = 0;
 
@@ -37,6 +42,11 @@ class _home_pageState extends State<home_page> {
   var DTH  ;
   var GamingCard  ;
   var isCatLoading = true;
+  var wallet_amount;
+  var due_amount;
+
+
+  var interlist;
 
 
   List a = [
@@ -72,10 +82,66 @@ class _home_pageState extends State<home_page> {
     print("uuuuuuuuuuuuuuuuuuu");
     return "";
   }
+  Future<String> getWallet() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    var wallet = await walletAmnt();
+
+
+    if (wallet['status'] == true) {
+      setState(() {
+        wallet_amount = wallet['wallet_amount'].toString();
+        due_amount = wallet['due_amount'].toString();
+      });
+    } else {
+      var token = await sharedPrefrence("token", null);
+
+      var name = await sharedPrefrence("name", null);
+      print("logout");
+      showToast("Session timeout !");
+    }
+    setState(() {
+      isLoading = false;
+    });
+    print(data);
+    print("uuuuuuuuuuuuuuuuuuu");
+    return "";
+  }
+  Future<String> changeDash() async {
+    setState(() {
+      isLoading = false;
+    });
+
+    //var rsp = await dashFlipApi();
+    var rsp = await fetchCountryHomeApi();
+
+    //   voucherList = rsp['mobile_countries'];
+    print("international");
+    print(rsp);
+    if (rsp != 0) {
+      setState(() {
+        interlist = rsp['country'];
+
+
+      });
+    }
+
+    print("voucherrr");
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return " ";
+  }
   @override
   void initState() {
     // TODO: implement initState
     getHome();
+    changeDash();
+    getWallet();
     super.initState();
   }
 
@@ -91,15 +157,27 @@ class _home_pageState extends State<home_page> {
           scrolledUnderElevation: 0,
           backgroundColor: Colors.white,
           title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage(ImageConst.plexpay),
                 width: width * 0.23,
               ),
-              LocaleText(
-                "WALLET : 400 AED",
-                style: TextStyle(fontSize: width * 0.029, color: Colors.black),
+              Row(
+                children: [
+                  LocaleText(
+                    "WALLET :",
+                    style: TextStyle(fontSize: width * 0.029, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: width*0.01,
+                  ),
+                  Text(
+                    wallet_amount != null ? wallet_amount.toString() : "",
+                    style: TextStyle(fontSize: width * 0.029, color: Colors.black),
+                  )
+                ],
               ),
             ],
           ),
@@ -136,7 +214,10 @@ class _home_pageState extends State<home_page> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => profile(),
+                          builder: (context) => profile(
+                            wallet_amount:wallet_amount,
+                              due_amount:due_amount
+                          ),
                         ));
                   },
                   child: CircleAvatar(
@@ -157,9 +238,164 @@ class _home_pageState extends State<home_page> {
           ],
         ),
         body:isCatLoading?Container(
-          child: Center(child: CircularProgressIndicator(
-            color: colorConst.blue,
-          )),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  gap,
+                  Center(
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey.shade100,
+                      highlightColor: Colors.white,
+                      direction: ShimmerDirection.btt,
+                      enabled: true,
+                      child: Container(
+                        height: width * 0.26,
+                        width: width * 0.93,
+                        decoration: BoxDecoration(
+                            color: colorConst.lightgrey1,
+                            borderRadius: BorderRadius.circular(width * 0.03))
+                      ),
+                    ),
+                  ),
+                  gap,
+                  SizedBox(
+                    height: width*0.02,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // SizedBox(width: width*0.06,),
+                      Container(
+                        height: width * 0.18,
+                        width: width * 0.82,
+                        child: ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                  children: [
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey.shade100,
+                                      highlightColor: Colors.white,
+                                      direction: ShimmerDirection.btt,
+                                      enabled: true,
+                                      child: Container(
+                                          height: width*0.14,
+                                          width: width*0.14,
+                                          decoration: BoxDecoration(
+                                            color: CupertinoColors.systemGrey4,
+                                            borderRadius: BorderRadius.circular(width*0.03),
+                                          ),
+                                      ),
+                                    ),
+                                  ]
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: width * 0.03,
+                              );
+                            },
+                            itemCount: 5),
+                      )
+                    ],
+                  ),
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: width * 0.125,
+                      width: width * 0.56,
+                      decoration: BoxDecoration(
+                          color: CupertinoColors.systemGrey4,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: width * 0.03,
+                  ),
+                  Container(
+                    height: width*0.15,
+                    width: width*1,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey.shade100,
+                                highlightColor: Colors.white,
+                                direction: ShimmerDirection.btt,
+                                enabled: true,
+                                child: Container(
+                                  height: width*0.088,
+                                  width: width*0.25,
+                                  margin: EdgeInsets.only(left: width*0.035),
+                                  decoration: BoxDecoration(
+                                      color:  Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(width*0.03)
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                              width:width*0.01
+                          );
+                        },
+                        itemCount: 4
+                    ),
+                  ),
+                  Container(
+                    height: width*1.3,
+                    child: GridView.builder(
+                      itemCount: 12,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 0.9,
+                          crossAxisSpacing: width*0.01,
+                          mainAxisSpacing: width*0.01,
+                          crossAxisCount: 4),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Shimmer.fromColors(
+                              baseColor: Colors.grey.shade100,
+                              highlightColor: Colors.white,
+                              direction: ShimmerDirection.btt,
+                              enabled: true,
+                              child: Container(
+                                height: width*0.17,
+                                width: width*0.17,
+                                decoration: BoxDecoration(
+                                  // color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(width * 0.03),
+                                  color: Colors.grey.shade100,
+                                    ),
+                                // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  )
+              
+                ],
+              ),
+            ),
+          ),
         ):
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -291,6 +527,9 @@ class _home_pageState extends State<home_page> {
                           fontSize: width*0.03,
                           fontWeight: FontWeight.w400
                       ),
+                      onTap: (value) {
+
+                      },
                       tabs: [
                         Tab(
                           child: Center(
@@ -316,7 +555,9 @@ class _home_pageState extends State<home_page> {
                     local(
                       data:data
                     ),
-                    international(),
+                    international(
+                      data:interlist
+                    ),
                   ],
                     physics: BouncingScrollPhysics(),
                   ),

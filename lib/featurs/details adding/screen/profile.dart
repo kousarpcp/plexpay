@@ -21,14 +21,16 @@ import 'funds.dart';
 import '../../../Const/imageConst.dart';
 
 class profile extends StatefulWidget {
-  const profile({super.key});
+  final String due_amount;
+  final String wallet_amount;
+  const profile({super.key, required this.due_amount, required this.wallet_amount});
 
   @override
   State<profile> createState() => _profileState();
 }
 
 class _profileState extends State<profile> {
-
+  var name;
   List locales=[
     "English",
     "हिंदी",
@@ -40,12 +42,14 @@ class _profileState extends State<profile> {
     "er"
   ];
 
+
   int currentIndex = 0;
 
   bool selectedLocale = false;
 
   @override
   void initState() {
+
     // TODO: implement initState
     super.initState();
     _loadSavedLocale();
@@ -53,6 +57,7 @@ class _profileState extends State<profile> {
 
   _loadSavedLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = await getSharedPrefrence('name');
     setState(() {
       currentIndex = prefs.getInt('selectedLanguageIndex') ?? 0; // Default to first language if not set
     });
@@ -136,8 +141,8 @@ class _profileState extends State<profile> {
                             SizedBox(
                               width: width * 0.02,
                             ),
-                            LocaleText(
-                              "TEST4",
+                            Text(
+                              name.toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontSize: width * 0.057),
@@ -202,20 +207,10 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LocaleText("AED",
-                                  style: TextStyle(
-                                      fontSize: width * 0.06,
-                                      fontWeight: FontWeight.w800)),
-                              SizedBox(width: width*0.02,),
-                              LocaleText("54.56",
-                                  style: TextStyle(
-                                      fontSize: width * 0.06,
-                                      fontWeight: FontWeight.w800)),
-                            ],
-                          ),
+                          Text(widget.wallet_amount.toString(),
+                              style: TextStyle(
+                                  fontSize: width * 0.06,
+                                  fontWeight: FontWeight.w800)),
                         ],
                       ),
                     ),
@@ -256,20 +251,10 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LocaleText("AED",
-                                  style: TextStyle(
-                                      fontSize: width * 0.06,
-                                      fontWeight: FontWeight.w800)),
-                              SizedBox(width: width*0.02,),
-                              LocaleText("1000.00",
-                                  style: TextStyle(
-                                      fontSize: width * 0.06,
-                                      fontWeight: FontWeight.w800)),
-                            ],
-                          ),
+                          Text(widget.due_amount.toString(),
+                              style: TextStyle(
+                                  fontSize: width * 0.06,
+                                  fontWeight: FontWeight.w800)),
                         ],
                       ),
                     ),

@@ -133,19 +133,14 @@ class _profitSummaryState extends State<profitSummary> {
             pickedRange.end.day.toString();
       });
     }
+    getProfit();
   }
 
-  var arrProdList = [];
-  var  isLoading = true;
+  var profitList = [];
+  var  isLoading = false;
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    this.getHome();
 
-    setState(() {});
-  }
-  Future<String> getHome() async {
+  Future<String> getProfit() async {
 
     setState(() {
       isLoading = true;
@@ -158,11 +153,11 @@ class _profitSummaryState extends State<profitSummary> {
     if(rsp['status']==true && rsp['result']!="Empty"){
 
       setState(() {
-        arrProdList = rsp['result'];
+        profitList = rsp['result'];
 
       });
       print("arrProdList");
-      print(arrProdList);
+      print(profitList);
     }
 
     setState(() {
@@ -199,7 +194,8 @@ class _profitSummaryState extends State<profitSummary> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body: SingleChildScrollView(
+      body: isLoading==true?Container(
+          child: Center(child: CircularProgressIndicator())):SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -274,12 +270,12 @@ class _profitSummaryState extends State<profitSummary> {
             ),
 
             ListView.separated(
-              itemCount: arrProdList != null ? arrProdList.length: 0,
+              itemCount: profitList != null ? profitList.length: 0,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  final item = arrProdList != null ? arrProdList[index] : null;
+                  final item = profitList!= null ? profitList[index] : null;
                   return Column(
                     children: [
                       gap,

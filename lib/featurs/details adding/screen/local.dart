@@ -343,7 +343,7 @@ class _localState extends State<local> {
                         height: width*0.35,
                         width: width*0.37,
                         decoration: BoxDecoration(
-                            color: colorConst.grey,
+                            color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(prepaidCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(width*0.03)
                         ),
@@ -394,7 +394,7 @@ class _localState extends State<local> {
                         height: width*0.35,
                         width: width*0.37,
                         decoration: BoxDecoration(
-                            color: colorConst.lightgrey1,
+                            color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(voucherCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
                             borderRadius: BorderRadius.circular(width*0.03)
                         ),
@@ -443,7 +443,7 @@ class _localState extends State<local> {
                       height: width*0.35,
                       width: width*0.37,
                       decoration: BoxDecoration(
-                          color: Colors.transparent,
+                          color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(gamingCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(width*0.03)
                       ),
@@ -491,7 +491,7 @@ class _localState extends State<local> {
                       height: width*0.35,
                       width: width*0.37,
                       decoration: BoxDecoration(
-                          color: Colors.transparent,
+                          color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(electricityCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(width*0.03)
                       ),
@@ -539,7 +539,7 @@ class _localState extends State<local> {
                       height: width*0.35,
                       width: width*0.37,
                       decoration: BoxDecoration(
-                          color: Colors.transparent,
+                          color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(giftCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(width*0.03)
                       ),
@@ -584,7 +584,7 @@ class _localState extends State<local> {
                       height: width*0.35,
                       width: width*0.37,
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(dthCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(width*0.03)
                       ),

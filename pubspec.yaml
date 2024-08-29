@@ -60,6 +60,10 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   pinput: ^3.0.1
   flutter_locales: ^3.0.2
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+
+
 
 
 #  flutter_launcher_icons: ^0.13.1

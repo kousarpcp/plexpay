@@ -6,6 +6,7 @@ import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 import 'package:plexpay/featurs/details%20adding/screen/collectionsReciept.dart';
 
+import '../../../api/collectionAPI.dart';
 import '../../../main.dart';
 import '../../../Const/widgets.dart';
 import '../../../Const/imageConst.dart';
@@ -18,6 +19,37 @@ class Collections extends StatefulWidget {
 }
 
 class _CollectionsState extends State<Collections> {
+
+  var collectionList = [];
+  var isLoading = false;
+
+  Future<String> getHome() async {
+    setState(() {
+      isLoading = true;
+    });
+    print("xoxoxo");
+
+    var rsp = await collectionListApi(start, end);
+
+    // arrProdList = data;
+    //
+    if (rsp['status'] == true&&rsp['result'].toString()!="Empty") {
+      setState(() {
+        collectionList = rsp['result'];
+
+        // totalSale = rsp['total_card_sale'].toString();
+        // totalProfit = "₹"+rsp['total_profit'].toString();
+      });
+      print("collectionList");
+      print(collectionList);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return "";
+  }
 
   List c=[
     {
@@ -47,6 +79,7 @@ class _CollectionsState extends State<Collections> {
       DateTime.now().month.toString() +
       "-" +
       DateTime.now().day.toString();
+
 
   Future selectDateRange(BuildContext context) async {
     DateTimeRange? pickedRange = (await showDateRangePicker(
@@ -80,7 +113,22 @@ class _CollectionsState extends State<Collections> {
             "-" +
             pickedRange.end.day.toString();
       });
+
+      getHome();
+      setState(() {
+
+      });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    setState(() {
+
+    });
+    super.initState();
   }
 
   @override
@@ -96,7 +144,9 @@ class _CollectionsState extends State<Collections> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body: SingleChildScrollView(
+      body: isLoading == true
+          ? Container(child: Center(child: CircularProgressIndicator()))
+          :SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: AnimationLimiter(
           child: Column(
@@ -182,12 +232,14 @@ class _CollectionsState extends State<Collections> {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return CollectionList(c: c, index:index ,);
+                    final item =
+                    collectionList != null ? collectionList[index] : null;
+                    return CollectionList(item: item,);
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox();
                   },
-                  itemCount: c.length)
+                  itemCount: collectionList != null ? collectionList.length : 0,)
             ],
           ),
           )
@@ -198,11 +250,11 @@ class _CollectionsState extends State<Collections> {
 }
 
 class CollectionList extends StatefulWidget {
-  final List c;
-  final int index;
+  final Map item;
+
   const CollectionList({super.key,
-    required this.c,
-    required this.index});
+    required this.item,
+    });
 
   @override
   State<CollectionList> createState() => _CollectionListState();
@@ -240,13 +292,13 @@ class _CollectionListState extends State<CollectionList> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(widget.c[widget.index]["Text1"],
+                      Text("Transaction ID",
                         style: TextStyle(
                           fontSize: width*0.03
                         ),
                       ),
                       Text(
-                        widget.c[widget.index]["Text2"],
+                        widget.item["trans_id"].toString(),
                         style: TextStyle(
                             fontSize: width * 0.05, fontWeight: FontWeight.w700),
                       ),
@@ -260,7 +312,7 @@ class _CollectionListState extends State<CollectionList> {
                         borderRadius: BorderRadius.circular(width * 0.015)),
                     child: Center(
                         child: Text(
-                          widget.c[widget.index]["Text3"],
+                          widget.item["collected"],
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontSize: width * 0.045),
                     )),

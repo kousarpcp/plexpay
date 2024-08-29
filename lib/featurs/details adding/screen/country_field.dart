@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -6,6 +7,9 @@ import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/popularPlans.dart';
 import 'package:plexpay/featurs/details%20adding/screen/topUp.dart';
 
+import '../../../Const/Snackbar_toast_helper.dart';
+import '../../../api/country_code_API.dart';
+import '../../../api/planby_number_API.dart';
 import '../../../main.dart';
 import 'dataPacks.dart';
 
@@ -13,13 +17,15 @@ class countryField extends StatefulWidget {
   final String name;
   final String image;
   final String code;
+  final String dash;
 
-  final String initialCountryCode;
+
   const countryField({
-    required this.initialCountryCode,
+
     required this.name,
     required this.image,
     required this.code,
+    required this.dash,
   });
 
   @override
@@ -27,8 +33,16 @@ class countryField extends StatefulWidget {
 }
 
 class _countryFieldState extends State<countryField> {
+  var isLoading = false;
   bool showTabs = false;
+  var planLIst = [];
+  var ProviderLogo;
+  var ProviderName;
+  var providerinfo;
+  var selectedCountry ="91";
+
   TextEditingController numberController = TextEditingController();
+
   final phoneValidation = RegExp(r"[0-9]{10}$");
   final formKey = GlobalKey<FormState>();
 
@@ -39,13 +53,62 @@ class _countryFieldState extends State<countryField> {
     if (numberController.text.isNotEmpty) {
       setState(() {
         showTabs = !showTabs;
+        getHome(selectedCountry+numberController.text.toString(), selectedCountry.toString()=="971"?"0":"1");
       });
     }
+  }
+
+  Future<String> getHome(num, type) async {
+
+
+
+    setState(() {
+      isLoading = true;
+    });
+
+    var rsp = await plansByNumberApi(num.toString(), widget.dash);
+
+    print("responsee");
+    print(rsp);
+    if ( rsp['status'] == true) {
+      setState(() {
+        planLIst = rsp['plans'];
+        // showCustom = rsp['plans'][0]['range'];
+        providerinfo=rsp["provider_info"];
+        ProviderLogo = rsp['provider_info']['ProviderLogo'].toString();
+        ProviderName = rsp['provider_info']['ProviderName'].toString();
+      });
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    return " ";
+  }
+  Future<String> getCountryCode() async {
+    var rsp = await fetchCountryCodeApi(widget.code);
+    print("countryyy");
+    print(rsp['country']);
+    setState(() {
+      selectedCountry=rsp['country'].toString();
+
+    });
+    return "";
+
   }
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    if(widget.code!=null){
+      setState(() {
+        selectedCountry="";
+      });
+      this.getCountryCode();
+    }
+    setState(() {});
+
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         setState(() {
@@ -93,7 +156,7 @@ class _countryFieldState extends State<countryField> {
           actions: [
             CircleAvatar(
               radius: width*0.045,
-              backgroundImage:AssetImage(widget.image,),
+              backgroundImage:NetworkImage(widget.image,),
               backgroundColor: Colors.white,
             ),
             SizedBox(width: width*0.05,)],
@@ -109,13 +172,12 @@ class _countryFieldState extends State<countryField> {
                   height: width * 0.21,
                   width: width * 0.85,
                   child: IntlPhoneField(
-                    initialCountryCode: widget.initialCountryCode,
+                    initialCountryCode: widget.code,
                     controller: numberController,
                     // showDropdownIcon: false,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     autovalidateMode: AutovalidateMode.disabled,
-
                     style: TextStyle(
                         fontSize: width * 0.05, fontWeight: FontWeight.w600),
                     decoration: InputDecoration(
@@ -132,7 +194,24 @@ class _countryFieldState extends State<countryField> {
                       ),
                       suffixIcon: IconButton(
                         onPressed: () {
-                          toggleTabs();
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          // alertShow();
+                          if (numberController.text.isEmpty) {
+                            showToast("Number Empty");
+                            Navigator.pop(context);
+                            return;
+                          }else{
+                            toggleTabs();
+                          }
+
+                          // var type = numController.text.toString()[0] +numController.text.toString()[1]+numController.text.toString()[2];
+                          // print("type");
+                          // print(type);
+                          setState(() {
+                            FocusManager.instance.primaryFocus?.unfocus();
+
+                          });
+
                         },
                         icon: Icon(
                             Icons.search,
@@ -160,7 +239,12 @@ class _countryFieldState extends State<countryField> {
                 height: width * 0.03,
               ),
               if (showTabs)
-                Column(
+                planLIst.isEmpty&&isLoading==false?Container(child: Text("No result found!"),):
+                isLoading==true ?Container(
+                  child: Center(child: CircularProgressIndicator(
+                    color: colorConst.blue,
+                  )),
+                ):Column(
                   children: [
                     Container(
                       height: width * 0.11,
@@ -215,7 +299,7 @@ class _countryFieldState extends State<countryField> {
                         children: [
                           popular(
                             number:numberController.text,
-                            name:widget.name, dash: '',
+                            name:widget.name, dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
 
                           ),
                           dataPacks(

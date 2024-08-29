@@ -13,6 +13,7 @@ import '../../../Const/Snackbar_toast_helper.dart';
 import '../../../Const/shared_preference.dart';
 import '../../../main.dart';
 
+var username;
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -263,7 +264,7 @@ class _LoginState extends State<Login> {
                         await sharedPrefrence("token", rsp['access_token']);
 
                         var name = await sharedPrefrence(shopname, rsp['name']);
-
+                        username=name;
                         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
                         showToast("Login Success!");
                         print("wrking");
