@@ -16,13 +16,14 @@ import '../../../Const/imageConst.dart';
 
 class OfferDetails extends StatefulWidget {
   const OfferDetails({
-    super.key, required this.name, required this.image, required this.code, required this.dash, required this.iso,
+    super.key,  this.name,  this.image,  this.code,  this.dash,  this.iso, this.voucher,
   });
-  final String name;
-  final String image;
-  final String code;
-  final String iso;
-  final String dash;
+  final  name;
+  final  image;
+  final  code;
+  final  iso;
+  final  dash;
+  final voucher;
 
   @override
   State<OfferDetails> createState() => _OfferDetailsState();
@@ -119,11 +120,15 @@ class _OfferDetailsState extends State<OfferDetails> {
                   image:widget.image,
                   code:widget.code,
                   dash:widget.dash,
-                  iso:widget.iso
+                  iso:widget.iso,
+                  voucher:widget.voucher
 
                 ),
                 custom(
                   name:widget.name,
+                  code:widget.code,
+                  dash:widget.dash,
+                  voucher:widget.name=="DTH"?"1":widget.voucher,
                 ),
               ]),
             ),

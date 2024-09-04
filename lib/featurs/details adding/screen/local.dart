@@ -8,6 +8,7 @@ import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 
 import '../../../main.dart';
+import 'electricity_bill_payment/electricity_homepage.dart';
 import 'offer_details.dart';
 import '../../../Const/imageConst.dart';
 
@@ -29,23 +30,9 @@ class _localState extends State<local> {
   List<Map<String, dynamic>> electricityCategory = [];
   List<Map<String, dynamic>> giftCategory = [];
   List<Map<String, dynamic>> dthCategory = [];
+  List<Map<String, dynamic>> items = [];
+  List<Map<String, dynamic>> products = [];
 
-
-  List images = [
-    {"image1": ImageConst.etisalat, "text": "Etisalat UAE"},
-    {"image1": ImageConst.du, "text": "DU UAE"},
-    {"image1": ImageConst.lebanese, "text": "Lebanese"},
-    {"image1": ImageConst.adnoc, "text": "Adnoc"},
-    {"image1": ImageConst.kuwaitfinance, "text": " Finance"},
-    {"image1": ImageConst.knpc, "text": "KNPC"},
-    {"image1": ImageConst.mosaik, "text": "Mosaik"},
-    {"image1": ImageConst.netflix, "text": "Netflix"},
-    {"image1": ImageConst.ejari, "text": "Ejari"},
-    {"image1": ImageConst.kseb, "text": "KSEB"},
-    {"image1": ImageConst.jio, "text": "Jio"},
-    {"image1": ImageConst.amazone, "text": "Amazon"},
-
-  ];
 
    List All = [
      {
@@ -77,62 +64,7 @@ class _localState extends State<local> {
       "text":"DTH",
     },
   ];
-   List prepaid=[
-     {
-       'image':ImageConst.etisalat,
-       "text":"Etisalat"
-     },
-     {
-       'image':ImageConst.du,
-       "text":"DU"
-     },
-   ];
-   List voucher=[
-     {
-       'image':ImageConst.lebanese,
-       "text":"Lebanese"
-     },
-     {
-       'image':ImageConst.knpc,
-       "text":"KNPC"
-     },
-   ];
-   List gaming=[
-     {
-       'image':ImageConst.PUBG,
-       "text":"PUBG"
-     },
-     {
-       'image':ImageConst.fifa,
-       "text":"FIFA"
-     },
-   ];
-   List electricity=[
-     {
-       'image':ImageConst.kseb,
-       "text":"KSEB"
-     },
-   ];
-   List gift=[
-     {
-       'image':ImageConst.amazone,
-       "text":"Amazone"
-     },
-     {
-       'image':ImageConst.mosaik,
-       "text":"Mosaik"
-     },
-   ];
-   List dth=[
-     {
-       'image':ImageConst.airteltv,
-       "text":"Airtel"
-     },
-     {
-       'image':ImageConst.dishtv,
-       "text":"Dish TV"
-     },
-   ];
+
   int _selectedIndex = 0;
   bool tap=false;
   @override
@@ -140,6 +72,59 @@ class _localState extends State<local> {
     getData();
     // TODO: implement initState
     super.initState();
+  }
+
+  selectItem(index){
+    if(items[index]["Categoryname"]=="Prepaid"){
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+          name: items[index]["subcategory"],
+          image: items[index]["sub_cat_logo"],
+          code:items[index]["ProviderCode"],
+          dash:items[index]["dash"],
+          iso:items[index]["CountryIso"]
+      ),));
+    }
+    if(items[index]["Categoryname"]=="Vouchers"){
+
+    }
+    if(items[index]["Categoryname"]=="Gaming Card"){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+          name: items[index]["subcategory"],
+          image: items[index]["sub_cat_logo"],
+          code:items[index]["ProviderCode"],
+          voucher:"1",
+          dash: items[index]["dash"],
+          iso:items[index]["CountryIso"]
+      ),));
+    }
+    if(items[index]["Categoryname"]=="Electricity"){
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
+        iso:items[index]["CountryIso"],
+        code:items[index]["ProviderCode"]!=null?electricityCategory[index]["ProviderCode"]:"",
+        dash:items[index]["dash"],
+        image: items[index]["sub_cat_logo"],
+        name: items[index]["subcategory"],
+      ),));
+    }
+    if(items[index]["Categoryname"]=="DTH"){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+        code: items[index]['ProviderCode'].toString(),
+        name: items[index]['subcategory'].toString(),
+        iso: items[index]['CountryIso'].toString(),
+        dash: items[index]['dash'].toString(),
+        image: items[index]['sub_cat_logo'].toString(),
+      ),));
+    }
+    if(items[index]["Categoryname"]=="Gift Card"){
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+          name: items[index]["subcategory"],
+          image: items[index]["sub_cat_logo"],
+          code:items[index]["ProviderCode"],
+          voucher:"1",
+          dash: items[index]["dash"],
+          iso:items[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+      )));
+    }
   }
   Future<String> getData()async{
     setState(() {
@@ -149,10 +134,21 @@ class _localState extends State<local> {
       dataList = widget.data;
     }
 
-
+    // for(var all in dataList){
+    //   if(all is List){
+    //     for(var product in all){
+    //       if(product["type"] =="DTH"){
+    //         products.add(product);
+    //       }
+    //     }
+    //   }
+    // }
     for (var category in dataList) {
       if (category is List) {
         for (var item in category) {
+          if(item!=""){
+            items.add(item);
+          }
           if (item['Categoryname'] == 'Prepaid') {
             prepaidCategory.add(item);
           }
@@ -171,8 +167,6 @@ class _localState extends State<local> {
           if (item['Categoryname'] == 'DTH') {
             dthCategory.add(item);
           }
-
-
         }
       }
     }
@@ -223,6 +217,7 @@ class _localState extends State<local> {
                       child: Center(
                         child: LocaleText(
                           All[index]["text"],
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
                         ),
                       ),
@@ -245,56 +240,56 @@ class _localState extends State<local> {
           _selectedIndex==3? Gaming():SizedBox(),
           _selectedIndex==2? Voucher():SizedBox(),
           _selectedIndex==1? Prepaid():SizedBox(),
-          _selectedIndex==0? Container(
-            height: width*1.3,
-            child: GridView.builder(
-              itemCount: images.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.9,
-                  crossAxisSpacing: width*0.01,
-                  mainAxisSpacing: width*0.01,
-                  crossAxisCount: 4),
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     CupertinoPageRoute(
-                        //       builder: (context) => OfferDetails(
-                        //         name:images[index]["text"],
-                        //         image:images[index]["image1"]
-                        //       ),
-                        //     ));
-                      },
-                      child: Container(
-                        height: width*0.17,
-                        width: width*0.17,
-                        decoration: BoxDecoration(
-                            // color: Colors.blue,
-                            borderRadius: BorderRadius.circular(width * 0.03),
-                            border: Border.all(width: width * 0.0001),
-                            image: DecorationImage(
-                                image: AssetImage(images[index]["image1"]))),
-                        // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
-                      ),
-                    ),
-                    SizedBox(
-                      height: width * 0.01,
-                    ),
-                    Text(
-                      images[index]["text"],
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: width * 0.03),
-                    )
-                  ],
-                );
-              },
-            ),
+          _selectedIndex==0? Column(
+            children: [
+              Container(
+                height: width*3.2,
+                child: GridView.builder(
+                  itemCount: items.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.9,
+                      crossAxisSpacing: width*0.01,
+                      mainAxisSpacing: width*0.01,
+                      crossAxisCount: 4),
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+
+                           selectItem(index);
+
+                          },
+                          child: Container(
+                            height: width*0.17,
+                            width: width*0.17,
+                            decoration: BoxDecoration(
+                                // color: Colors.blue,
+                                borderRadius: BorderRadius.circular(width * 0.03),
+                                border: Border.all(width: width * 0.0001),
+                                image: DecorationImage(
+                                    image: NetworkImage(items[index]["sub_cat_logo"]),fit: BoxFit.cover)),
+                            // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                          ),
+                        ),
+                        SizedBox(
+                          height: width * 0.01,
+                        ),
+                        Text(
+                          items[index]["subcategory"],
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: width * 0.03),
+                        )
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           ):SizedBox()
         ],
       ),
@@ -307,7 +302,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("Prepaid",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("Prepaid",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         SizedBox(height: width*0.02,),
@@ -366,7 +361,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("Voucher",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("Voucher",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         SizedBox(
@@ -417,7 +412,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("Gaming Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("Gaming Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         SizedBox(
@@ -439,13 +434,25 @@ class _localState extends State<local> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: width*0.35,
-                      width: width*0.37,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          image: DecorationImage(image: NetworkImage(gamingCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(width*0.03)
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                            name: gamingCategory[index]["subcategory"],
+                            image: gamingCategory[index]["sub_cat_logo"],
+                            code:gamingCategory[index]["ProviderCode"],
+                            voucher:"1",
+                            dash: gamingCategory[index]["dash"],
+                            iso:gamingCategory[index]["CountryIso"]
+                        ),));
+                      },
+                      child: Container(
+                        height: width*0.35,
+                        width: width*0.37,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(gamingCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(width*0.03)
+                        ),
                       ),
                     ),
                   ],
@@ -465,7 +472,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("Electricity",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("Electricity",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         SizedBox(
@@ -487,13 +494,24 @@ class _localState extends State<local> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: width*0.35,
-                      width: width*0.37,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          image: DecorationImage(image: NetworkImage(electricityCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
-                          borderRadius: BorderRadius.circular(width*0.03)
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
+                            iso:electricityCategory[index]["CountryIso"],
+                          code:electricityCategory[index]["ProviderCode"]!=null?electricityCategory[index]["ProviderCode"]:"",
+                          dash:electricityCategory[index]["dash"],
+                          image: electricityCategory[index]["sub_cat_logo"],
+                          name: electricityCategory[index]["subcategory"],
+                        ),));
+                      },
+                      child: Container(
+                        height: width*0.35,
+                        width: width*0.37,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(electricityCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(width*0.03)
+                        ),
                       ),
                     ),
                   ],
@@ -513,7 +531,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("Gift Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("Gift Card",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         SizedBox(
@@ -535,13 +553,25 @@ class _localState extends State<local> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: width*0.35,
-                      width: width*0.37,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          image: DecorationImage(image: NetworkImage(giftCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
-                          borderRadius: BorderRadius.circular(width*0.03)
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+                            name: giftCategory[index]["subcategory"],
+                            image: giftCategory[index]["sub_cat_logo"],
+                            code:giftCategory[index]["ProviderCode"],
+                            voucher:"1",
+                            dash: giftCategory[index]["dash"],
+                            iso:giftCategory[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+                        )));
+                      },
+                      child: Container(
+                        height: width*0.35,
+                        width: width*0.37,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(giftCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(width*0.03)
+                        ),
                       ),
                     ),
                   ],
@@ -561,7 +591,7 @@ class _localState extends State<local> {
         Row(
           children: [
             SizedBox(width: width*0.05,),
-            Text("DTH",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            LocaleText("DTH",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
         GridView.builder(
@@ -580,13 +610,24 @@ class _localState extends State<local> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: width*0.35,
-                      width: width*0.37,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          image: DecorationImage(image: NetworkImage(dthCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(width*0.03)
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                          code: dthCategory[index]['ProviderCode'].toString(),
+                          name: dthCategory[index]['subcategory'].toString(),
+                          iso: dthCategory[index]['CountryIso'].toString(),
+                          dash: dthCategory[index]['dash'].toString(),
+                          image: dthCategory[index]['sub_cat_logo'].toString(),
+                        ),));
+                      },
+                      child: Container(
+                        height: width*0.35,
+                        width: width*0.37,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(dthCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(width*0.03)
+                        ),
                       ),
                     ),
                   ],

@@ -207,7 +207,15 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   width: width * 0.01,
                 ),
-                InkWell(
+                isLoading==true?CircleAvatar(
+                  radius: width*0.05,
+                  backgroundColor: Colors.transparent,
+                  child: Icon(
+                    CupertinoIcons.person_circle_fill,
+                    color: colorConst.grey,
+                    size: width*0.065,
+                  ),
+                ):InkWell(
                     borderRadius: BorderRadius.circular(width*0.06),
                     splashColor: colorConst.blue,
                     onTap: () {
@@ -248,7 +256,8 @@ class _home_pageState extends State<home_page> {
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey.shade100,
                       highlightColor: Colors.white,
-                      direction: ShimmerDirection.btt,
+                      direction: ShimmerDirection.ltr,
+                      period: Duration(seconds: 1),
                       enabled: true,
                       child: Container(
                         height: width * 0.26,
@@ -391,7 +400,7 @@ class _home_pageState extends State<home_page> {
                       },
                     ),
                   )
-              
+
                 ],
               ),
             ),
@@ -550,7 +559,8 @@ class _home_pageState extends State<home_page> {
                   height: width * 0.03,
                 ),
                 SizedBox(
-                  height: height*0.9,
+                  height: height*1.8,
+
                   child: TabBarView(children: [
                     local(
                       data:data

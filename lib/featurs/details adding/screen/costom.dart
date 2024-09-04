@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Reacharge.dart';
+import 'package:plexpay/featurs/details%20adding/screen/confirm_custom_reacharge.dart';
 import 'package:plexpay/main.dart';
 
 import '../../../Const/colorConst.dart';
 
 class custom extends StatefulWidget {
-  const custom({super.key, required this.name});
-  final String name;
+  const custom({super.key, this.name, this.code, this.voucher, this.dash});
+  final  name;
+  final  code;
+  final  voucher;
+  final  dash;
 
   @override
   State<custom> createState() => _customState();
@@ -16,7 +20,7 @@ class custom extends StatefulWidget {
 
 class _customState extends State<custom> {
   TextEditingController numController = TextEditingController();
-  TextEditingController numController1 = TextEditingController();
+  TextEditingController amountController = TextEditingController();
 
 
   @override
@@ -24,7 +28,10 @@ class _customState extends State<custom> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: widget.voucher =="1"
+            ?Center(
+          child: Text("Custom recharge not available on voucher"),
+        ):Column(
           children: [
             SizedBox(
               height: width * 0.12,
@@ -97,7 +104,7 @@ class _customState extends State<custom> {
                 height: width * 0.12,
                 width: width * 0.6,
                 child: TextFormField(
-                    controller: numController1,
+                    controller: amountController,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     textAlign: TextAlign.justify,
@@ -127,7 +134,11 @@ class _customState extends State<custom> {
 
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(context, CupertinoPageRoute(builder: (context) => reacharge(number: '', dash: '', code: '',
+                            Navigator.push(context, CupertinoPageRoute(builder: (context) => ConfirmRechargeCustom(
+                              code: widget.code,
+                              amount: amountController.text.toString(),
+                              number: numController.text.toString(),
+                              dash:widget.dash,
                                 ),));
                           },
                           icon: Icon(CupertinoIcons.right_chevron,color: Colors.white,),

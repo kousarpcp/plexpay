@@ -260,8 +260,7 @@ class _LoginState extends State<Login> {
                       print(rsp);
                       if (rsp['success'] == true) {
                         var id = await sharedPrefrence("userId", rsp['user_id']);
-                        var token =
-                        await sharedPrefrence("token", rsp['access_token']);
+                        var token = await sharedPrefrence("token", rsp['access_token']);
 
                         var name = await sharedPrefrence(shopname, rsp['name']);
                         username=name;

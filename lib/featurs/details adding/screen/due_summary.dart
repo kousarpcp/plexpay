@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../api/dueAPI.dart';
 import '../../../main.dart';
@@ -170,8 +171,51 @@ class _dueSummaryState extends State<dueSummary> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body:isLoading==true?Container(
-          child: Center(child: CircularProgressIndicator())): SingleChildScrollView(
+      body:isLoading == true
+          ? SingleChildScrollView(
+        child: Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade100,
+              highlightColor: Colors.white,
+              direction: ShimmerDirection.btt,
+              enabled: true,
+              child: Container(
+                height: width * 0.125,
+                width: width * 0.86,
+                decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    // color: Colors.red,
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+              ),
+            ),
+            gap,
+            ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: width * 0.3,
+                      margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+                itemCount: 8)
+          ],
+        ),
+      ):SingleChildScrollView(
         child: Column(
           children: [
             Center(

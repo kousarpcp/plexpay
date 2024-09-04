@@ -6,6 +6,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:shimmer/shimmer.dart';
 // import 'package:plexpay/Api/transactionSaleApi.dart';
 // import 'package:plexpay/Api/transactionSearchApi.dart';
 import '../../../api/historysearch_API.dart';
@@ -261,7 +262,49 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
         ),
       ),
       body:isLoading == true
-          ? Container(child: Center(child: CircularProgressIndicator()))
+          ? SingleChildScrollView(
+        child: Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade100,
+              highlightColor: Colors.white,
+              direction: ShimmerDirection.btt,
+              enabled: true,
+              child: Container(
+                height: width*0.2,
+                margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.03),
+                decoration: BoxDecoration(
+                  color: colorConst.lightgrey1,
+                  borderRadius: BorderRadius.circular(width*0.03),
+                ),)
+            ),
+            gap,
+            ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: width * 0.18,
+                      margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+                itemCount: 8)
+          ],
+        ),
+      )
           : SingleChildScrollView(
             child: Column(
               children: [
@@ -300,14 +343,16 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                           ),
                           InkWell(
                             onTap: () {
-                              selectDateRange(context);
+                              setState(() {
+                                selectDateRange(context);
+                              });
                             },
                             child: Container(
-                              height: width * 0.075,
+                              height: width * 0.08,
                               width: width * 0.23,
                               decoration: BoxDecoration(
                                   color: colorConst.blue,
-                                  borderRadius: BorderRadius.circular(width * 0.35)),
+                                  borderRadius: BorderRadius.circular(width * 0.03)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -315,7 +360,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                                       child: Text(
                                         "FILTER",
                                         style: TextStyle(
-                                            fontSize: width * 0.046,
+                                            fontSize: width * 0.04,
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white),
                                       )),
@@ -379,7 +424,9 @@ class _HistoryDataState extends State<HistoryData> {
         children: [
           InkWell(
             onTap: () {
-              Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(
+                id: widget.item['TransactionID'].toString(),
+              ),));
             },
             child: Container(
               height: width*0.2,

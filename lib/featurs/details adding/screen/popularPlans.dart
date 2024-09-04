@@ -26,6 +26,7 @@ class _popularState extends State<popular> {
     // TODO: implement initState
     print("ccccccccc");
     print(widget.dash);
+    print(widget.number);
     dash=widget.dash;
     super.initState(); 
   }

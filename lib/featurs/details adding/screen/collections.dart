@@ -4,7 +4,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
-import 'package:plexpay/featurs/details%20adding/screen/collectionsReciept.dart';
+import 'package:plexpay/featurs/details%20adding/screen/collection_bill_generate.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../api/collectionAPI.dart';
 import '../../../main.dart';
@@ -145,7 +146,50 @@ class _CollectionsState extends State<Collections> {
         ),
       ),
       body: isLoading == true
-          ? Container(child: Center(child: CircularProgressIndicator()))
+          ? SingleChildScrollView(
+            child: Column(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade100,
+                  highlightColor: Colors.white,
+                  direction: ShimmerDirection.btt,
+                  enabled: true,
+                  child: Container(
+                          height: width * 0.125,
+                          width: width * 0.86,
+                          decoration: BoxDecoration(
+                            color: colorConst.lightgrey1,
+                  // color: Colors.red,
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+                        ),
+                ),
+                gap,
+                ListView.separated(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade100,
+                      highlightColor: Colors.white,
+                      direction: ShimmerDirection.btt,
+                      enabled: true,
+                      child: Container(
+                        height: width * 0.18,
+                        margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                        decoration: BoxDecoration(
+                            color: colorConst.lightgrey1,
+                            borderRadius: BorderRadius.circular(width * 0.03)),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox();
+                  },
+                  itemCount: 8)
+              ],
+            ),
+          )
           :SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: AnimationLimiter(
@@ -191,14 +235,16 @@ class _CollectionsState extends State<Collections> {
                         ),
                         InkWell(
                           onTap: () {
-                            selectDateRange(context);
+                            setState(() {
+                              selectDateRange(context);
+                            });
                           },
                           child: Container(
-                            height: width * 0.077,
+                            height: width * 0.08,
                             width: width * 0.23,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
-                                borderRadius: BorderRadius.circular(width * 0.35)),
+                                borderRadius: BorderRadius.circular(width * 0.03)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -206,7 +252,7 @@ class _CollectionsState extends State<Collections> {
                                     child: Text(
                                   "FILTER",
                                   style: TextStyle(
-                                      fontSize: width * 0.044,
+                                      fontSize: width * 0.04,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white),
                                 )),
@@ -268,7 +314,7 @@ class _CollectionListState extends State<CollectionList> {
         gap,
         InkWell(
           onTap: () {
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => bill(),));
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => CollectionBill(id: widget.item["due_id"]),));
           },
           child: Container(
             height: width * 0.18,

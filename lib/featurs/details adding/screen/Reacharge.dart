@@ -13,8 +13,10 @@ import 'package:plexpay/featurs/details%20adding/screen/offer.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
+import '../../../Const/widgets.dart';
 import '../../../api/planinfoAPI.dart';
 import '../../../api/rechargeAPI.dart';
+import '../../../api/voucher_int_recharge_API.dart';
 import '../../../main.dart';
 
 import '../../../Const/Snackbar_toast_helper.dart';
@@ -23,10 +25,11 @@ import '../../../Const/imageConst.dart';
 
 class reacharge extends StatefulWidget {
 
-  const reacharge({super.key,  required this.number, required this.dash, required this.code, });
-  final String number;
-  final String dash;
-  final String code;
+  const reacharge({super.key,   this.number,  this.dash,  this.code,  this.voucher, });
+  final  number;
+  final voucher;
+  final  dash;
+  final  code;
 
   @override
   State<reacharge> createState() => _reachargeState();
@@ -91,7 +94,8 @@ class _reachargeState extends State<reacharge> {
     super.initState();
     getData();
     print(widget.dash);
-    print("ooooooooo");
+    print(widget.number);
+    print("........");
     // widget.AED;
     // a=widget.AED;
   }
@@ -143,12 +147,7 @@ class _reachargeState extends State<reacharge> {
               borderRadius: BorderRadius.circular(width * 0.03),
             ),
           ),
-          ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Column(
+           Column(
                   children: [
                     Container(
                       height: width * 0.742,
@@ -161,6 +160,9 @@ class _reachargeState extends State<reacharge> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          SizedBox(
+                            height: width*0.06,
+                          ),
                           Text(
                             "Confirm your Recharge?",
                             style: TextStyle(
@@ -168,61 +170,47 @@ class _reachargeState extends State<reacharge> {
                                 fontWeight: FontWeight.w900,
                                 color: colorConst.blue),
                           ),
-                          SizedBox(
-                            height: width * 0.03,
-                          ),
+                          widget.dash=="1"?Text(
+                            SendCurrencyIso +" "+Our_SendValue ,
+                            style: TextStyle(
+                                fontSize:height * 0.028,
+                                color: colorConst.blue,
+                                fontWeight: FontWeight.bold),
+                          ):Container(),
+                          Text(
+                            CoupenTitle!=null?CoupenTitle:"" ,
+                            style: TextStyle(
+                                fontSize: height * 0.02,
 
-                          SizedBox(
-                            height: width * 0.03,
+                                fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            "Please Confirm your recharge of",
-                            style: TextStyle(
-                                fontSize: width * 0.042,
-                                color: colorConst.grey,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("number",
-                                  style: TextStyle(
-                                      fontSize: width * 0.042,
-                                      color: colorConst.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(" ${widget.number}",
-                                  style: TextStyle(
-                                      fontSize: width * 0.042,
-                                      color: colorConst.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(" of",
-                                  style: TextStyle(
-                                      fontSize: width * 0.042,
-                                      color: colorConst.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(CoupenTitle,
-                                  style: TextStyle(
-                                      fontSize: width * 0.042,
-                                      color: colorConst.grey,
-                                      fontWeight: FontWeight.w500)),
-                              Text(
-                                " by",
+                          gap,
+                          Expanded(
+                            child: widget.number!=null?Container(
+                              width: width*0.8,
+                              child: Text(
+                                widget.dash=="0"?"Please confirm your recharge of "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge of number "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: width * 0.042,
-                                    color: colorConst.grey,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          Text(
-                            ProviderName,
-                            style: TextStyle(
-                                fontSize: width * 0.042,
-                                color: colorConst.grey,
-                                fontWeight: FontWeight.w500),
+                                    fontSize:height * 0.023,
+                                    color: colorConst.blue,
+                                    fontWeight: FontWeight.bold,),
+                              ),
+                            ):Container(
+                              width: width*0.8,
+                              child: Text(
+                                widget.dash=="0"?"Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:height * 0.023,
+                                    color: colorConst.blue,
+                                    fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
                           ),
                           SizedBox(
-                            height: width * 0.08,
+                            height: width * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -256,7 +244,14 @@ class _reachargeState extends State<reacharge> {
                                           isTap = true;
                                         });
                                         var rsp;
-                                        rsp = await RechargeApi(SkuCode,ProviderCode,widget.number.toString(),SendValue,ReceiveValue,Our_SendValue,Country_Iso,CoupenTitle,widget.dash);
+
+                                        if(widget.voucher=="1"){
+                                          print("itssss int vouchwer");
+                                          rsp = await  voucherIntRecharge(SkuCode,ProviderCode,SendValue,Our_SendValue,ReceiveValue,widget.dash);
+
+                                        }else{
+                                          rsp = await RechargeApi(SkuCode,ProviderCode,widget.number.toString(),SendValue,ReceiveValue,Our_SendValue,Country_Iso,CoupenTitle,widget.dash);
+                                        }
 
                                         if(rsp != 0 && rsp['status'] == true){
                                           showDialog(
@@ -293,9 +288,11 @@ class _reachargeState extends State<reacharge> {
                                           Future.delayed(
                                               const Duration(seconds: 1), () {
                                           }).then((value) {
-                                            Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => bill(
-                                            ),));
+                                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => bill(
+                                              id: rsp['transaction_id'].toString(),type: "HOME",
+                                            ),),ModalRoute.withName("/"));
                                           },);
+
                                         }else{
                                           showToast("Recharge failed!!");
                                           Navigator.pop(context);
@@ -323,20 +320,13 @@ class _reachargeState extends State<reacharge> {
                             ],
                           ),
                           SizedBox(
-                            height: width * 0.07,
+                            height: width * 0.12,
                           ),
                         ],
                       ),
                     )
                   ],
-                );
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  width: width * 0.01,
-                );
-              },
-              itemCount: 1)
+                )
         ],
       ),
     );

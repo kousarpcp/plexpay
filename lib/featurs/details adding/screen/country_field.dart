@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/popularPlans.dart';
@@ -241,9 +242,13 @@ class _countryFieldState extends State<countryField> {
               if (showTabs)
                 planLIst.isEmpty&&isLoading==false?Container(child: Text("No result found!"),):
                 isLoading==true ?Container(
-                  child: Center(child: CircularProgressIndicator(
-                    color: colorConst.blue,
-                  )),
+                  margin: EdgeInsets.only(
+                      bottom: width*0.05,
+                      left: width*0.05,
+                      right: width*0.05
+                  ),
+                  child: Center(child: Lottie.asset(ImageConst.loading1))
+                  ,
                 ):Column(
                   children: [
                     Container(
@@ -298,7 +303,7 @@ class _countryFieldState extends State<countryField> {
                       child: TabBarView(
                         children: [
                           popular(
-                            number:numberController.text,
+                            number:selectedCountry+numberController.text.toString(),
                             name:widget.name, dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
 
                           ),

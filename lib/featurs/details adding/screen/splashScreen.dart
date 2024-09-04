@@ -24,6 +24,7 @@ class _SplashscreenState extends State<Splashscreen> {
     var token = await getSharedPrefrence('token');
     var name = await sharedPrefrence("dash", "0");
     print(prefs);
+    print("nnnnnnnnnnn");
     Future.delayed(Duration(
         seconds: 1
     )).then((value) => Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => prefs==null?Login():BottomNavigation(),)));

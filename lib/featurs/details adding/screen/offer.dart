@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/popularPlans.dart';
 import 'package:plexpay/featurs/details%20adding/screen/topUp.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../api/country_code_API.dart';
 import '../../../api/plans_by_prov_API.dart';
+import 'Reacharge.dart';
 import 'dataPacks.dart';
 
 class offer extends StatefulWidget {
 
-  final String name;
-  final String image;
-  final String code;
-  final String iso;
-  final String dash;
-  const offer({super.key, required this.name, required this.image, required this.code, required this.dash, required this.iso});
+  final  name;
+  final  image;
+  final  code;
+  final  iso;
+  final  dash;
+  final voucher;
+  const offer({super.key,  this.name,  this.image,  this.code,  this.dash,  this.iso, this.voucher,});
 
   @override
   State<offer> createState() => _offerState();
@@ -25,8 +29,10 @@ class _offerState extends State<offer> {
   bool showTabs = false;
   var isCountry = false;
   var isLoading = false;
+  var message;
   var planLIst=[];
   var provinfo;
+  var rsp;
 
   TextEditingController numController = TextEditingController();
 
@@ -65,7 +71,7 @@ class _offerState extends State<offer> {
       isLoading = true;
     });
 
-    var rsp = await plansByProviderApi(widget.code.toString(),widget.dash);
+    rsp = await plansByProviderApi(widget.code.toString(),widget.dash);
     print("providersssss");
     print(rsp);
     if (rsp['status'] != false) {
@@ -87,6 +93,10 @@ class _offerState extends State<offer> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    if(widget.iso!=null){
+      numController.clear();
+      getCountryCode();
+    }
     getCountryCode();
     getHome();
     _focusNode.addListener(() {
@@ -115,7 +125,246 @@ class _offerState extends State<offer> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
-            child: Column(children: [
+            child:widget.voucher.toString()=="1"?isLoading?Column(
+              children: [
+                gap,
+                Container(
+                   child:  ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey.shade100,
+                                highlightColor: Colors.white,
+                                direction: ShimmerDirection.btt,
+                                enabled: true,
+                                child: Container(
+                                  height: width * 0.4,
+                                  width: width * 0.84,
+                                  decoration: BoxDecoration(
+                                      color: colorConst.lightgrey,
+                                      borderRadius:
+                                      BorderRadius.circular(width * 0.06)),
+                                ),
+                              ),
+                              SizedBox(
+                                height: width * 0.04,
+                              ),
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                            width: width * 0.02,
+                          );
+                        },
+                        itemCount: 4)
+                ),
+              ],
+            ):rsp["message"]=="Empty"?Container(
+              margin: EdgeInsets.all(width*0.1),
+              child: Center(child: Text("No Vouchers Found!")),
+            ):Column(
+              children: [
+                widget.dash=="1"?Row(
+                  children: [
+                    SizedBox(
+                      width: width*0.05,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(width*0.03),
+                      width: width*0.3,
+                      height: width*0.3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(width*0.03),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: width * 0.007,)
+                        ],
+                      ),
+                      child: Container(
+                        width: width*0.2,
+                        height: width*0.25,
+                        margin: EdgeInsets.all(width*0.03),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: NetworkImage(provinfo["ProviderLogo"])),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(provinfo["ProviderName"],style: TextStyle(
+                          fontSize: width*0.05,
+                          fontWeight: FontWeight.bold,
+                          color: colorConst.blue
+                      ),),
+                    )
+                  ],
+                ):SizedBox(
+                  height: width * 0.04,
+                ),
+                ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => reacharge(
+                                        code:planLIst[index]["SkuCode"],
+                                        dash:widget.dash,
+                                      voucher:widget.voucher
+                                    ),
+                                  ));
+                            },
+                            child: Center(
+                              child: Container(
+                                height: width * 0.4,
+                                width: width * 0.84,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: width * 0.007,)
+                                    ],
+                                    borderRadius:
+                                    BorderRadius.circular(width * 0.06)),
+                                child: Padding(
+                                  padding: EdgeInsets.all(width * 0.03),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: width * 0.01,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(planLIst[index]["ReceiveCurrencyIso"],
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.w900,
+                                                              fontSize: width * 0.055)),
+                                                      SizedBox(
+                                                        width: width * 0.02,
+                                                      ),
+                                                      Text(
+                                                        planLIst[index]["ReceiveValue"].toString(),
+                                                        style: TextStyle(
+                                                            fontWeight: FontWeight.w900,
+                                                            fontSize: width * 0.055),
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                ],
+                                              )
+
+
+                                            ],
+                                          ),
+                                          widget.dash=="1"?Row(
+                                            children: [
+                                              Text(planLIst[index]["SendCurrencyIso"],
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w900,
+                                                      fontSize: width * 0.05)),
+                                              SizedBox(
+                                                width: width * 0.02,
+                                              ),
+                                              Text(
+                                                planLIst[index]["Our_SendValue"].toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: width * 0.05),
+                                              ),
+                                            ],
+                                          ):SizedBox()
+                                        ],
+                                      ),
+                                      Divider(
+                                        thickness: width * 0.002,
+                                        // indent: width * 0.035,
+                                        // endIndent: width * 0.035,
+                                      ),
+                                      SizedBox(
+                                        height: width * 0.016,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Validity",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey)),
+                                          Text("Local Data",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey)),
+                                          Text("Roaming Data",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey)),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: width * 0.01,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(planLIst[index]["Expiry_Date"],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: width * 0.048)),
+                                          Text("N.A",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: width * 0.048)),
+                                          Text("N.A",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: width * 0.048)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: width * 0.04,
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        width: width * 0.02,
+                      );
+                    },
+                    itemCount: planLIst.length)
+              ],
+            ):
+            Column(children: [
               SizedBox(
                 height: width * 0.04,
               ),
