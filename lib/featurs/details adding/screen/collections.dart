@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -139,7 +140,7 @@ class _CollectionsState extends State<Collections> {
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         elevation: 0,
-        title: Text(
+        title: LocaleText(
           "Collections",
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
@@ -203,7 +204,7 @@ class _CollectionsState extends State<Collections> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Center(
-                                    child: Text(
+                                    child: LocaleText(
                                   "FILTER",
                                   style: TextStyle(
                                       fontSize: width * 0.044,

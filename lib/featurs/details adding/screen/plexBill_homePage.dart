@@ -5,6 +5,7 @@ import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexBill.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexBill_New.dart';
 
 import '../../../Const/imageConst.dart';
 import '../../../main.dart';
@@ -41,7 +42,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
               ),
             ),
           ),
-          title: Text(
+          title: LocaleText(
             "PlexBill",
             style:
                 TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
@@ -63,7 +64,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     SizedBox(
                       width: width*0.09,
                     ),
-                    Text("Dash Board",style: TextStyle(fontSize: 27,fontWeight: FontWeight.w700,color: Colors.white),),
+                    LocaleText("Dash Board",style: TextStyle(fontSize: 27,fontWeight: FontWeight.w700,color: Colors.white),),
                   ],
                 ),
                 Center(
@@ -91,7 +92,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbill(),));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(fruits: [], vegitalbles: [],),));
                                   },
                                   child: Center(
                                     child: Container(
@@ -119,7 +120,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                           SizedBox(
                                             height: width * 0.02,
                                           ),
-                                          Text(
+                                          LocaleText(
                                             "Billing",
                                             style: TextStyle(
                                                 fontSize: width * 0.052,
@@ -156,7 +157,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                         SizedBox(
                                           height: width * 0.02,
                                         ),
-                                        Text(
+                                        LocaleText(
                                           "Purchase",
                                           style: TextStyle(
                                               fontSize: width * 0.052,
@@ -200,7 +201,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                         SizedBox(
                                           height: width * 0.02,
                                         ),
-                                        Text(
+                                        LocaleText(
                                           "Sale Return",
                                           style: TextStyle(
                                               fontSize: width * 0.052,
@@ -235,7 +236,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                       SizedBox(
                                         height: width * 0.016,
                                       ),
-                                      Text(
+                                      LocaleText(
                                         "Purchase Return",
                                         style: TextStyle(
                                             fontSize: width * 0.052,
@@ -268,7 +269,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("TODAY'S SALE :",style: TextStyle(fontSize:14,color: Colors.black)),
+                      LocaleText("TODAY'S SALE :",style: TextStyle(fontSize:14,color: Colors.black)),
                       Text(" 0.000 INR",style: TextStyle(fontSize: 19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
@@ -286,7 +287,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("TODAY'S PURCHASE :",style: TextStyle(fontSize: 14,color: Colors.black)),
+                      LocaleText("TODAY'S PURCHASE :",style: TextStyle(fontSize: 14,color: Colors.black)),
                       Text(" 0.000 INR",style: TextStyle(fontSize: 19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
@@ -304,7 +305,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("TODAY'S RECEIPT :",style: TextStyle(fontSize: 14,color: Colors.black)),
+                      LocaleText("TODAY'S RECEIPT :",style: TextStyle(fontSize: 14,color: Colors.black)),
                       Text(" 0.000 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
@@ -322,7 +323,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("TODAY'S PAYMENTS :",style: TextStyle(fontSize: 14,color: Colors.black)),
+                      LocaleText("TODAY'S PAYMENTS :",style: TextStyle(fontSize: 14,color: Colors.black)),
                       Text(" 200.000 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),

@@ -1,57 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/screen/bill_items.dart';
 
 import '../../../Const/imageConst.dart';
 import '../../../main.dart';
 
 class cart extends StatefulWidget {
-  final List product;
-  const cart({super.key, required this.product});
+  final  category;
+  const cart({super.key, this.category});
 
   @override
   State<cart> createState() => _cartState();
 }
+
 int total = 0;
+int vat = 0;
+
 class _cartState extends State<cart> {
+
+
+
   dynamic added;
-  List a=[];
-  totalprice(){
-    for(int i=0;i<widget.product.length;i++){
-      if(widget.product[i]["quantity"]>0){
-        added=widget.product[i];
+  List a = [];
+  List b = [];
+  totalprice() {
+    for (int i = 0; i < b.length; i++) {
+      if (b[i]["quantity"] > 0) {
+        added = b[i];
         a.add(added);
       }
       // print(a);
       // print("oooooooooooooooooooooooooooooooo");
-
     }
 
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   tascprice() {
     total = 0;
     for (int i = 0; i < a.length; i++) {
-      total = a[i]["quantity"] *
-          a[i]["Price"] +
-          total;
+      total = a[i]["quantity"] * a[i]["Price"] + total;
     }
   }
+  vatAdd() {
+    vat = 0;
+    for (int i = 0; i < a.length; i++) {
+      vat = a[i]["quantity"] * a[i]["tax"] + vat;
+    }
+  }
+
   void initState() {
+    print(items);
+    b = items;
     totalprice();
     tascprice();
+    vatAdd();
     // TODO: implement initState
     super.initState();
+
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
-        height: width * 0.13,
-        width: width * 0.999,
-        color: Colors.white24,
+        height: width * 0.48,
+        width: width * 0.91,
+        color: Colors.white,
         child: Column(
           children: [
             Divider(
@@ -61,14 +77,87 @@ class _cartState extends State<cart> {
               indent: width * 0.01,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Total Price:$total",
+                  "Subtotal ",
                   style: TextStyle(
-                      fontWeight: FontWeight.w700, fontSize: width * 0.07),
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
+                ),
+                Text(
+                  "$total",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Vat",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
+                ),
+                Text(
+                  "$vat",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
                 )
               ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
+                ),
+                Text(
+                  "${total+vat}".toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: width * 0.06,
+                      color: Colors.black),
+                )
+              ],
+            ),
+            SizedBox(
+              height: width*0.03,
+            ),
+            Divider(
+              thickness: width * 0.005,
+              color: Colors.black,
+              endIndent: width * 0.2,
+              indent: width * 0.2,
+            ),
+            SizedBox(
+              height: width*0.018,
+            ),
+            Container(
+              height: width*0.1,
+              width: width*0.23,
+              decoration: BoxDecoration(
+                  color: colorConst.blue,
+                borderRadius: BorderRadius.circular(width*0.03)
+              ),
+              child: Center(
+                child: Text("Print",style: TextStyle(
+                  fontWeight: FontWeight.w700,fontSize: width*0.06,
+                  color: Colors.white
+                ),),
+              ),
             )
           ],
         ),
@@ -95,161 +184,181 @@ class _cartState extends State<cart> {
         ),
         title: Text(
           "Cart",
-          style:
-          TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          a.isEmpty
+              ? Center(child: Text("Empty",style: TextStyle(fontSize: width*0.07,color: Colors.white),))
+              : Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(width * 0.02),
+                    child: ListView.separated(
 
-          a.isEmpty?Center(child: Text("Empty")):Expanded(
-            child: Container(
-              margin: EdgeInsets.all(width*0.02),
-              child: ListView.separated(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                physics: BouncingScrollPhysics(),
-                itemCount: a.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      // Text("category:",style: TextStyle(fontWeight: FontWeight.w800,fontSize: width*0.05),),
-                      SizedBox(
-                        height: width * 0.22,
-                        width: width * 0.95,
-                        child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                height: width * 0.5,
-                                width: width * 0.55,
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                        height: width * 0.22,
-                                        width: width * 0.22,
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  a[index]["image1"]),
-                                              fit: BoxFit.fill),
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              width * 0.04),
-                                        )),
-                                    Column(
+                      scrollDirection: Axis.vertical,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: a.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            // Text("category:",style: TextStyle(fontWeight: FontWeight.w800,fontSize: width*0.05),),
+                            Center(
+                              child: Container(
+                                height: width * 0.24,
+                                width: width * 0.89,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurStyle: BlurStyle.normal,
+                                          color:
+                                          Colors.black.withOpacity(0.09),
+                                          offset: Offset(0, 2),
+                                          spreadRadius: 1,
+                                          blurRadius: 9)
+                                    ],
+                                    borderRadius:
+                                    BorderRadius.circular(width * 0.03)),
+                                child: Padding(
+                                  padding:  EdgeInsets.all(width*0.03),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
-                                          height: width * 0.052,
+                                          height: width * 0.5,
+                                          width: width * 0.47,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                  height: width * 0.18,
+                                                  width: width * 0.18,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            a[index]["image1"]),
+                                                        fit: BoxFit.fill),
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        width * 0.04),
+                                                  )),
+                                              Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: width * 0.02,
+                                                  ),
+                                                  Text(
+                                                    a[index]['text'],
+                                                    style: TextStyle(
+                                                        fontSize: width * 0.052),
+                                                  ),
+
+                                                  Text(
+                                                    a[index]["Price"]
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: width * 0.06),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        Text(
-                                          a[index]['text'],
-                                          style: TextStyle(
-                                              fontSize: width * 0.052),
-                                        ),
-                                        SizedBox(
-                                          height: width * 0.02,
-                                        ),
-                                        Text(
-                                          a[index]["Price"]
-                                              .toString(),
-                                          style: TextStyle(
-                                              fontSize: width * 0.06),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        a[index]["quantity"] != 0
+                                            ? Container(
+                                          height: width * 0.095,
+                                          width: width * 0.22,
+                                          decoration: BoxDecoration(
+                                              color:colorConst.blue,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  width * 0.03)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+                                              InkWell(
+                                                  onTap: () {
+                                                    a[index]
+                                                    ["quantity"] --;
+                                                    tascprice();
+                                                    vatAdd();
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.remove,
+                                                    color: Colors.white,
+                                                  )),
+                                              Text(
+                                                a[index]["quantity"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              InkWell(
+                                                  onTap: () {
+                                                    a[index]
+                                                    ["quantity"] ++;
+                                                    tascprice();
+                                                    vatAdd();
+                                                    setState(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    color: Colors.white,
+                                                  )),
+                                            ],
+                                          ),
+                                        )
+                                            : InkWell(
+                                          onTap: () {
+                                            a[index]["quantity"] ++;
+                                            tascprice();
+                                            vatAdd();
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                            height: width * 0.095,
+                                            width: width * 0.22,
+                                            decoration: BoxDecoration(
+                                              color: colorConst.blue,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  width * 0.03),
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                                  "Add item",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          ),
+                                        )
+                                      ]),
                                 ),
                               ),
-                              a[index]["quantity"] != 0
-                                  ? Container(
-                                height: width * 0.095,
-                                width: width * 0.22,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        width * 0.03)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .spaceBetween,
-                                  children: [
-                                    InkWell(
-                                        onTap: () {
-                                          a[index]
-                                          ["quantity"] --;
-                                          tascprice();
-                                          setState(() {});
-                                        },
-                                        child: const Icon(
-                                          Icons.remove,
-                                          color: Colors.white,
-                                        )),
-                                    Text(
-                                      a[index]["quantity"]
-                                          .toString(),
-                                      style: TextStyle(
-                                          color: Colors.white),
-                                    ),
-                                    InkWell(
-                                        onTap: () {
-                                          a[index]
-                                          ["quantity"] ++;
-                                          tascprice();
-                                          setState(() {});
-                                        },
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                        )),
-                                  ],
-                                ),
-                              )
-                                  : InkWell(
-                                onTap: () {
-                                  a[index]["quantity"] ++;
-                                  tascprice();
-                                  setState(() {});
-                                },
-                                child: Container(
-                                  height: width * 0.095,
-                                  width: width * 0.22,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        width * 0.03),
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                        "Add item",
-                                        style: TextStyle(
-                                            color: Colors.white),
-                                      )),
-                                ),
-                              )
-                            ]),
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    height: width * 0.04,
-                  );
-                },
-              ),
-            ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          height: width * 0.025,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+          SizedBox(
+              height: width*0.46,
           )
-
-
         ],
-
       ),
     );
   }

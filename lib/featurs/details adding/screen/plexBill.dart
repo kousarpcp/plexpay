@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexbill_cart.dart';
@@ -17,12 +18,29 @@ class _plexbillState extends State<plexbill> {
 
   String? dropdownValue;
 
+  dynamic added;
+  List a = [];
+  total(index) {
+    for (int i = 0; i < product.length; i++) {
+      if (product[i]["quantity"] > 0) {
+        added = product[i];
+        a.add(added);
+      }
+      // print(a);
+      // print("oooooooooooooooooooooooooooooooo");
+    }
+
+    setState(() {});
+  }
   List product = [
-    {"image1": ImageConst.etisalat, "text": "Etisalat UAE","quantity":0,"Price":50},
-    {"image1": ImageConst.du, "text": "DU UAE","quantity":0,"Price":100},
-    {"image1": ImageConst.lebanese, "text": "Lebanese","quantity":0,"Price":20},
-    {"image1": ImageConst.adnoc, "text": "Adnoc","quantity":0,"Price":30},
-    {"image1": ImageConst.kuwaitfinance, "text": " Finance","quantity":0,"Price":50},
+    {"image1": ImageConst.etisalat, "text": "Etisalat UAE","quantity":0,"Price":50,"tax":5},
+    {"image1": ImageConst.du, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
+    {"image1": ImageConst.lebanese, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
+    {"image1": ImageConst.adnoc, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
+    {"image1": ImageConst.kuwaitfinance, "text": " Finance","quantity":0,"Price":50,"tax":5},
+    {"image1": ImageConst.du, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
+    {"image1": ImageConst.lebanese, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
+    {"image1": ImageConst.adnoc, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
 
   ];
 
@@ -31,6 +49,13 @@ class _plexbillState extends State<plexbill> {
     "customer2",
     "customer3",
   ];
+
+  @override
+  void initState() {
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   TextEditingController customerController=TextEditingController();
   TextEditingController trnController=TextEditingController();
@@ -58,9 +83,9 @@ class _plexbillState extends State<plexbill> {
                   onTap: () {
                     Navigator.push(
                         context, MaterialPageRoute(
-                      builder: (context) => cart(product: product,),));
+                      builder: (context) => cart( category: [], ),));
                   },
-                  child: Text(
+                  child: LocaleText(
                     "Next",
                     style: TextStyle(
                         fontWeight: FontWeight.w500, fontSize: width * 0.07,color: Colors.white),
@@ -94,7 +119,7 @@ class _plexbillState extends State<plexbill> {
             ),
           ),
         ),
-        title: Text(
+        title: LocaleText(
           "PlexBill",
           style:
           TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
@@ -104,9 +129,22 @@ class _plexbillState extends State<plexbill> {
               onTap: () {
                 Navigator.push(
                     context, MaterialPageRoute(
-                  builder: (context) => cart(product: product,),));
+                  builder: (context) => cart( category: [],),));
               },
-              child: Icon(Icons.shopping_cart_outlined,size: width*0.063,)),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding:  EdgeInsets.only(left: width*0.042,),
+                    child: CircleAvatar(
+                      radius: width*0.026,
+                      backgroundColor: Colors.red,
+                      child: Center(child: Text(a.length.toString())),
+                    ),
+                  ),
+                Icon(Icons.shopping_cart_outlined,size: width*0.063,),
+                ],
+              )
+          ),
           SizedBox(
             width: width*0.03,
           )
@@ -351,7 +389,7 @@ class _plexbillState extends State<plexbill> {
                                 product[index]["quantity"]
                                     .toString(),
                                 style: TextStyle(
-                                    color: Colors.black),
+                                    color: Colors.black,fontSize: 18),
                               ),
                               InkWell(
                                   onTap: () {
@@ -371,6 +409,7 @@ class _plexbillState extends State<plexbill> {
                             : InkWell(
                           onTap: () {
                             product[index]["quantity"] ++;
+                            total(index);
                             // totalprice();
                             setState(() {});
                           },

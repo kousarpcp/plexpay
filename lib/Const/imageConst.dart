@@ -79,6 +79,25 @@
    static const fifa = "assets/images/fifa.jpg";
    static const airteltv = "assets/images/airtel tv.webp";
    static const dishtv = "assets/images/dishtv.jpg";
+   static const mixFruit = "assets/images/mix-fruits.jpg";
+   static const vegitables = "assets/images/vegitables.jpeg";
+   static const eggsall = "assets/images/eggs.jpg";
+   static const riceall = "assets/images/rice.png";
+   static const apple = "assets/images/apple.jpeg";
+   static const cucumber = "assets/images/cucumber.jpeg";
+   static const dragon = "assets/images/dragon fruit.jpeg";
+   static const egg = "assets/images/egg.jpg";
+   static const mango = "assets/images/Mangoes.jpg";
+   static const onion = "assets/images/onion.jpg";
+   static const rice = "assets/images/rice.jpeg";
+   static const strawberry = "assets/images/strawberry.jpeg";
+   static const tomato = "assets/images/tomatoes-.jpg";
+   static const potato = "assets/images/potato.jpeg";
+
+
+
+
+
 
 
 
