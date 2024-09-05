@@ -11,6 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 
 
+
 Future collectionInfoApi(transaction_id) async {
 
   bool result = await InternetConnectionChecker().hasConnection;
