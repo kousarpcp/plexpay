@@ -1,12 +1,22 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
+import 'package:plexpay/api/plexbillLogin_postApi.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexBill_homePage.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Const/Snackbar_toast_helper.dart';
 import '../../../Const/colorConst.dart';
 import '../../../Const/imageConst.dart';
+import '../../../Const/shared_preference.dart';
 import '../../../Const/widgets.dart';
+import '../../../api/plexbillLogin_getApi.dart';
 import '../../../main.dart';
-
+import 'login_page.dart';
 class plexbill_login extends StatefulWidget {
   const plexbill_login({super.key});
   @override
@@ -14,11 +24,53 @@ class plexbill_login extends StatefulWidget {
 }
 class _plexbill_loginState extends State<plexbill_login> {
   bool tap=true;
+  bool tick=false;
   final formKey =GlobalKey<FormState>();
   TextEditingController userController =TextEditingController();
   TextEditingController passwordController =TextEditingController();
   var isCheck = false;
+  // var token;
   @override
+  void initState() {
+    // getToken();
+
+    // TODO: implement initState
+  }
+  // Future<String?> getToken() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   token= prefs.getString('token');
+  // }
+   getHome() async {
+     // var rs = await plexbillLoginPostApi(userController.text.toString(), passwordController.text.toString(),token.toString() );
+    var rsps = await plexbillLoginGetApi();
+    print(globaltoken);
+    print("mmmmmmm");
+    print("dsssssssssss");
+    print(rsps);
+    var ck = await getSharedPrefrence(chek);
+    print("checkkkkkk");
+    print(ck);
+    if(ck=="true"){
+
+      var us = await getSharedPrefrence(currentusername);
+      var pws =await getSharedPrefrence(currentpassword);
+
+
+      setState(() {
+        userController.text=us;
+        passwordController.text=pws;
+        isCheck=true;
+        rsps;
+      });
+
+    }
+  }
+  @override
+  // void dispose() {
+  //   userController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -40,7 +92,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Welcome To!",style: TextStyle(
+                        LocaleText("Welcome To!",style: TextStyle(
                             fontSize: width*0.07,
                             fontWeight: FontWeight.w900
                         ),),
@@ -59,7 +111,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Username"),
+                        LocaleText("Username"),
                         Container(
                           width: width*1,
                           // height: height*0.07,
@@ -78,7 +130,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                                   maxWidth: width*1,
                                   minWidth: width*1
                               ),
-                              hintText: "Enter your Username",
+                              hintText: Locales.string(context, 'Enter your Username'),
                               hintStyle: TextStyle(
                                 fontSize: width*0.04,
                               ),
@@ -114,7 +166,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Password"),
+                        LocaleText("Password"),
                         Container(
                           width: width*1,
                           height: height*0.07,
@@ -130,7 +182,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                               contentPadding: EdgeInsets.only(
                                   top: width*0.005
                               ),
-                              hintText: "Enter your Password",
+                              hintText:Locales.string(context, 'Enter your Password') ,
                               hintStyle: TextStyle(
                                 fontSize: width*0.04,
                               ),
@@ -138,7 +190,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                                 onTap: () {
                                   tap=!tap;
                                   setState(() {
-        
+
                                   });
                                 },
                                 child: tap?Icon(
@@ -186,10 +238,20 @@ class _plexbill_loginState extends State<plexbill_login> {
                                   setState(() {
                                     isCheck=v!;
                                   });
+                                  if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
+                                    var un = await sharedPrefrence(currentusername, userController.text.toString() );
+                                    var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
+                                    var ck = await sharedPrefrence(chek, "true");
+                                  }else{
+                                    var un = await sharedPrefrence(userController, null );
+                                    var pass = await sharedPrefrence(passwordController, null);
+                                    var ck = await sharedPrefrence(chek, null);
+
+                                  }
                                 }),
                           )),
                       SizedBox(width: 10.0),
-                      Text("Remember Me",
+                      LocaleText("Remember Me",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 12,
@@ -198,8 +260,71 @@ class _plexbill_loginState extends State<plexbill_login> {
                   ),
                   gap,
                   InkWell(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);
+                    onTap: () async {
+                      if(userController.text.isNotEmpty&&
+                          passwordController.text.isNotEmpty)
+                        {
+                          getHome();
+                          print(globaltoken);
+                          print(userController.text);
+                          print(passwordController.text);
+                          print(globaltoken);
+                          print("eeeeeeeeeeeeeee");
+                          var rsp=await plexbillLoginPostApi(userController.text,passwordController.text);
+                          print(globaltoken);
+                          print("jjjjjjjjjjjjjjjjjjj");
+                          print("rspppp");
+                          print(rsp);
+                          if ( rsp['success'] == true) {
+                            var id = await sharedPrefrence(
+                                "userId", rsp['id']);
+                            id=id;
+                            var token =
+                                await sharedPrefrence(
+                                "token", rsp['token']);
+                            token=globaltoken;
+
+                            var name = await sharedPrefrence(
+                                shopname, rsp['username']);
+                            username = username;
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);
+                           // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Plexbill_home() ,));
+                            showToast("Login Success!");
+                            print("wrking");
+                            print(rsp['user_id']);
+                            print(rsp['token']);
+                          }
+
+                          else {
+                            showToast("Invalid Credentials!");
+                            setState(() {
+                            });
+                          }
+
+                        }else{
+                        if(userController.text ==""){
+                          QuickAlert.show(
+                            barrierDismissible: false,
+                            confirmBtnColor: Colors.red.shade600,
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Oops...',
+                            text: 'Sorry, please Enter your Username',
+                          );
+                          return;
+                        }
+                        if(passwordController.text ==""){
+                          QuickAlert.show(
+                            barrierDismissible: false,
+                            confirmBtnColor: Colors.red.shade600,
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Oops...',
+                            text: 'Sorry, please Enter your password',
+                          );
+                          return;
+                        }
+                      }
                     },
                     child: Container(
                       width: width*0.8,
@@ -208,12 +333,12 @@ class _plexbill_loginState extends State<plexbill_login> {
                           borderRadius:  BorderRadius.circular(width*0.1),
                           color: colorConst.blue
                       ),
-                      child: Center(child: Text("Sign in",style: TextStyle(
+                      child: Center(child: LocaleText("Sign in",style: TextStyle(
                           color: Colors.white
                       ),)),
                     ),
                   ),
-        
+
                   // TextFormField(
                   //   controller: userController,
                   //   textInputAction: TextInputAction.next,
@@ -223,7 +348,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                 ],
               ),
             )
-        
+
           ],
         ),
       ),

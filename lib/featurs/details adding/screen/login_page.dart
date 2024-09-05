@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/Const/widgets.dart';
@@ -76,7 +77,7 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Welcome To!",style: TextStyle(
+                      LocaleText("Welcome To!",style: TextStyle(
                           fontSize: width*0.07,
                           fontWeight: FontWeight.w900
                       ),),
@@ -96,7 +97,7 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Username"),
+                      LocaleText("Username"),
                       Container(
                         width: width*1,
                         // height: height*0.07,
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
                                 maxWidth: width*1,
                                 minWidth: width*1
                             ),
-                            hintText: "Enter your Username",
+                            hintText: Locales.string(context, 'Enter your Username'),
                             hintStyle: TextStyle(
                               fontSize: width*0.04,
                             ),
@@ -152,7 +153,7 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Password"),
+                      LocaleText("Password"),
                       Container(
                         width: width*1,
                         height: height*0.07,
@@ -168,7 +169,7 @@ class _LoginState extends State<Login> {
                             contentPadding: EdgeInsets.only(
                                 top: width*0.005
                             ),
-                            hintText: "Enter your Password",
+                            hintText: Locales.string(context, 'Enter your Password'),
                             hintStyle: TextStyle(
                               fontSize: width*0.04,
                             ),
@@ -240,7 +241,7 @@ class _LoginState extends State<Login> {
                               }),
                         )),
                     SizedBox(width: 10.0),
-                    Text("Remember Me",
+                    LocaleText("Remember Me",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -310,7 +311,7 @@ class _LoginState extends State<Login> {
                       borderRadius:  BorderRadius.circular(width*0.1),
                       color: colorConst.blue
                     ),
-                    child: Center(child: Text("Sign in",style: TextStyle(
+                    child: Center(child: LocaleText("Sign in",style: TextStyle(
                         color: Colors.white
                     ),)),
                   ),

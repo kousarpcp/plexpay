@@ -38,6 +38,25 @@
   "wallet_:": "المحفظة:",
   "history": "تاريخ",
   "reports": "التقارير",
-  "plexbill": "بلكس بيل"
-
+  "plexbill": "بلكس بيل",
+  "welcome_to!": "مرحبا بكم في!",
+  "username": "اسم المستخدم",
+  "enter_your_username": "أدخل اسم المستخدم الخاص بك",
+  "password": "كلمة المرور",
+  "enter_your_password": "أدخل كلمة المرور الخاصة بك",
+  "remember_me": "تذكرني",
+  "sign_in": "تسجيل الدخول",
+  "dash_board": "لوحة داش",
+  "billing": "الفواتير",
+  "purchase": "ابتاع",
+  "sale_return": "عودة البيع",
+  "purchase_return": "إرجاع المشتريات",
+  "today's_sale_:": "تخفيضات اليوم :",
+  "today's_purchase_:": "شراء اليوم :",
+  "today's_receipt_:": "استلام اليوم :",
+  "today's_payments_:": "مدفوعات اليوم :",
+  "next": "مقبل",
+  "customer_iD": "الرقم التعريفي للعميل",
+  "filter": "راووق",
+  "transaction_id_:": "معرف المعاملة :"
 }

@@ -141,7 +141,7 @@ class _profileState extends State<profile> {
                             SizedBox(
                               width: width * 0.02,
                             ),
-                            Text(
+                            LocaleText(
                               name.toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,

@@ -4,6 +4,7 @@ final baseUrl0 = 'https://billing.plexbill.com/';
 //final baseUrl = 'https://asset.plexbill.com/';
 final baseUrl = 'https://plexpay.netplexsolution.com/';
 final baseUrl3 = 'http://127.0.0.1:8000/';
+final baseUrl5 = 'http://www.plexbill.com/';
 //final baseUrl = 'https://billing.netplexsolution.com/';
 // final  baseUrl= 'https://netplexsolution.com/dotcom/';
 
@@ -118,6 +119,8 @@ final dialInfoUrl = 'api/dialInfo';
 final provCtyUrl = 'api/plansBy_Provider';
 final ksebBillUrl = 'api/KsebBill';
 final  ksebRechargeUrl= 'api/rechargeNow_Two';
+final  loginpost= 'loginsubmit';
+final  loginget= 'userlogin';
 
 final plansByNumberUrl = 'api/plansBy_Number';
 

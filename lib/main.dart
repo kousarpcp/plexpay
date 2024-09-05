@@ -11,6 +11,7 @@ import 'featurs/details adding/screen/BottomNavigation.dart';
 import 'featurs/details adding/screen/Reacharge.dart';
 import 'featurs/details adding/screen/Recharge bill genarate.dart';
 import 'featurs/details adding/screen/plexBill.dart';
+import 'featurs/details adding/screen/plexBill_New.dart';
 import 'featurs/details adding/screen/plexBill_homePage.dart';
 import 'featurs/details adding/screen/plexBill_login.dart';
 import 'featurs/xpay/screen/xpay_page.dart';

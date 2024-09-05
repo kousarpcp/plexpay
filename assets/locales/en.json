@@ -38,5 +38,26 @@
   "wallet_:": "WALLET :",
   "history": "History",
   "reports": "Reports",
-  "plexbill": "PlexBill"
+  "plexbill": "PlexBill",
+  "welcome_to!": "Welcome To!",
+  "username": "Username",
+  "enter_your_username": "Enter your Username",
+  "password": "Password",
+  "enter_your_password": "Enter your Password",
+  "remember_me": "Remember Me",
+  "sign_in": "Sign in",
+  "dash_board": "Dash Board",
+  "billing": "Billing",
+  "purchase": "Purchase",
+  "sale_return": "Sale Return",
+  "purchase_return": "Purchase Return",
+  "today's_sale_:": "TODAY'S SALE :",
+  "today's_purchase_:": "TODAY'S PURCHASE :",
+  "today's_receipt_:": "TODAY'S RECEIPT :",
+  "today's_payments_:": "TODAY'S PAYMENTS :",
+  "next": "Next",
+  "customer_iD": "Customer ID",
+  "filter": "FILTER",
+  "transaction_id_:": "Transaction ID :"
+
 }
