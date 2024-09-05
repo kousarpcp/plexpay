@@ -1,4 +1,4 @@
-import 'dart:convert'; // Import this for JSON conversion
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -6,7 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Const/NetWork.dart';
 import '../Const/Snackbar_toast_helper.dart';
 import '../featurs/details adding/screen/plexBill_login.dart';
-String?globaltoken;
+
+String? globaltoken;
+
 Future<Map<String, dynamic>?> plexbillLoginGetApi() async {
   // Check for an internet connection
   bool hasConnection = await InternetConnectionChecker().hasConnection;
@@ -22,20 +24,27 @@ Future<Map<String, dynamic>?> plexbillLoginGetApi() async {
   if (response.statusCode == 200) {
     // Check if the response is HTML
     if (response.body.startsWith('<html>')) {
-      // Handle HTML response
+      // Parse the HTML document
       var document = parse(response.body);
+
+      // Find the form tag and get the HTML starting from there
+      var formElement = document.querySelector('form');
+      String? formHtml = formElement?.outerHtml;
 
       // Extract token from the HTML if needed
       var tokenElement = document.querySelector('input[name="_token"]');
-      String?token = tokenElement?.attributes['value'];
-      globaltoken=token;
-      print(globaltoken);
-      print("hhhhhhhhhh");
+      String? token = tokenElement?.attributes['value'];
+      globaltoken = token;
 
+      print(globaltoken);
+      print("Token extracted from HTML.");
 
       if (token != null) {
-
-        return {'token': token,};
+        // Return the token along with the HTML starting from the <form> tag
+        return {
+          'token': token,
+          'response': formHtml, // Include the HTML starting from the form
+        };
       } else {
         showToast("Token not found in the HTML response.");
         return null;
@@ -45,6 +54,8 @@ Future<Map<String, dynamic>?> plexbillLoginGetApi() async {
       try {
         var jsonData = json.decode(response.body);
         print("Parsed JSON data: $jsonData");
+
+        // Return the full JSON response
         return jsonData;
       } catch (e) {
         showToast("Error parsing JSON: $e");
@@ -54,6 +65,9 @@ Future<Map<String, dynamic>?> plexbillLoginGetApi() async {
   } else {
     // Handle non-200 responses
     showToast("Request failed with status: ${response.statusCode}");
-    return null;
+    return {
+      'status': response.statusCode,
+      'response': response.body, // Include the response body for debugging
+    };
   }
 }

@@ -32,7 +32,6 @@ class _plexbill_loginState extends State<plexbill_login> {
   // var token;
   @override
   void initState() {
-    getHome();
     // getToken();
 
     // TODO: implement initState
@@ -67,11 +66,11 @@ class _plexbill_loginState extends State<plexbill_login> {
     }
   }
   @override
-  void dispose() {
-    userController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   userController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -265,12 +264,13 @@ class _plexbill_loginState extends State<plexbill_login> {
                       if(userController.text.isNotEmpty&&
                           passwordController.text.isNotEmpty)
                         {
+                          getHome();
                           print(globaltoken);
                           print(userController.text);
                           print(passwordController.text);
                           print(globaltoken);
                           print("eeeeeeeeeeeeeee");
-                          var rsp=await plexbillLoginPostApi(userController.text,passwordController.text,globaltoken);
+                          var rsp=await plexbillLoginPostApi(userController.text,passwordController.text);
                           print(globaltoken);
                           print("jjjjjjjjjjjjjjjjjjj");
                           print("rspppp");
@@ -325,7 +325,6 @@ class _plexbill_loginState extends State<plexbill_login> {
                           return;
                         }
                       }
-
                     },
                     child: Container(
                       width: width*0.8,
