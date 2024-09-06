@@ -244,7 +244,7 @@ class _billState extends State<bill> {
         .capture(delay: Duration(milliseconds: 10)).then(
             (Uint8List? image) async {
           if (image != null) {
-            await Share.file('Plus Pay Recharge', 'card.jpg', image, 'image/jpg');
+            await Share.file('Plex Pay Recharge', 'card.jpg', image, 'image/jpg');
             setState(() {
               _imageFile = image;
             });

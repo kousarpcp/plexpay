@@ -28,6 +28,7 @@
   "wallet": "Wallet",
   "upi_lite": "UPI lite",
   "account_summary": "Account Summary",
+  "report":"Report",
   "funds": "Funds",
   "transactions": "Transactions",
   "collections": "Collections",
@@ -59,5 +60,4 @@
   "customer_iD": "Customer ID",
   "filter": "FILTER",
   "transaction_id_:": "Transaction ID :"
-
 }

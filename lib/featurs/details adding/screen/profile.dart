@@ -11,6 +11,7 @@ import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
+import 'package:plexpay/featurs/details%20adding/screen/report.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Const/shared_preference.dart';
@@ -57,7 +58,7 @@ class _profileState extends State<profile> {
 
   _loadSavedLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = await getSharedPrefrence('name');
+    name = await getSharedPrefrence(shopname);
     setState(() {
       currentIndex = prefs.getInt('selectedLanguageIndex') ?? 0; // Default to first language if not set
     });
@@ -141,7 +142,7 @@ class _profileState extends State<profile> {
                             SizedBox(
                               width: width * 0.02,
                             ),
-                            LocaleText(
+                            Text(
                               name.toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
@@ -399,7 +400,7 @@ class _profileState extends State<profile> {
                 height: width * 0.032,
               ),
               Container(
-                height: width * 1.1,
+                height: width * 1.27,
                 width: width * 0.88,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -432,6 +433,23 @@ class _profileState extends State<profile> {
                     ),
                     SizedBox(
                       height: width * 0.03,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReportsTab(),));
+                      },
+                      child: ListTile(
+                        leading: Image.asset(
+                          ImageConst.report,
+                          width: width * 0.09,
+                        ),
+                        title: LocaleText(
+                          "Report",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: width * 0.055),
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -668,7 +686,6 @@ class _profileState extends State<profile> {
                             InkWell(onTap: () async {
                               var id = await removesharedPrefrence("userId", null);
                               var token = await removesharedPrefrence("token", null);
-
                               var name = await removesharedPrefrence("name", null);
                               Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
                             },

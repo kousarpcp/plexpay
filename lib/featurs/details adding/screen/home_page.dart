@@ -234,7 +234,7 @@ class _home_pageState extends State<home_page> {
                     child: Icon(
                       CupertinoIcons.person_circle_fill,
                       color: colorConst.blue,
-                      size: width*0.065,
+                      size: width*0.08,
                     ),
                   )
                 ),
@@ -558,7 +558,7 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   height: width * 0.03,
                 ),
-                SizedBox(
+                Container(
                   height: height*1.8,
 
                   child: TabBarView(children: [

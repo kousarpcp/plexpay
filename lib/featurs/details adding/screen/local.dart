@@ -5,6 +5,7 @@ import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/NetWork.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/widgets.dart';
+
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 
 import '../../../main.dart';
@@ -100,7 +101,7 @@ class _localState extends State<local> {
     if(items[index]["Categoryname"]=="Electricity"){
       Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
         iso:items[index]["CountryIso"],
-        code:items[index]["ProviderCode"]!=null?electricityCategory[index]["ProviderCode"]:"",
+        code:items[index]["ProviderCode"]!=null?items[index]["ProviderCode"]:"",
         dash:items[index]["dash"],
         image: items[index]["sub_cat_logo"],
         name: items[index]["subcategory"],
@@ -122,7 +123,7 @@ class _localState extends State<local> {
           code:items[index]["ProviderCode"],
           voucher:"1",
           dash: items[index]["dash"],
-          iso:items[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+          iso:items[index]["CountryIso"]!=null?items[index]["CountryIso"]:""
       )));
     }
   }
@@ -170,7 +171,7 @@ class _localState extends State<local> {
         }
       }
     }
-    
+
 
     // print(dataList);
     print(prepaidCategory);

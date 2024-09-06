@@ -93,6 +93,7 @@
    static const strawberry = "assets/images/strawberry.jpeg";
    static const tomato = "assets/images/tomatoes-.jpg";
    static const potato = "assets/images/potato.jpeg";
+   static const report = "assets/images/report.png";
 
 
 
