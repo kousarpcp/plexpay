@@ -76,7 +76,7 @@ class _localState extends State<local> {
   }
 
   selectItem(index){
-    if(items[index]["Categoryname"]=="Prepaid"){
+    if(items[index]["type"]=="Prepaid"){
       Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           name: items[index]["subcategory"],
           image: items[index]["sub_cat_logo"],
@@ -85,10 +85,10 @@ class _localState extends State<local> {
           iso:items[index]["CountryIso"]
       ),));
     }
-    if(items[index]["Categoryname"]=="Vouchers"){
+    if(items[index]["type"]=="Vouchers"){
 
     }
-    if(items[index]["Categoryname"]=="Gaming Card"){
+    if(items[index]["type"]=="Gaming Card"){
       Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
           name: items[index]["subcategory"],
           image: items[index]["sub_cat_logo"],
@@ -98,7 +98,7 @@ class _localState extends State<local> {
           iso:items[index]["CountryIso"]
       ),));
     }
-    if(items[index]["Categoryname"]=="Electricity"){
+    if(items[index]["type"]=="Electricity"){
       Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
         iso:items[index]["CountryIso"],
         code:items[index]["ProviderCode"]!=null?items[index]["ProviderCode"]:"",
@@ -107,7 +107,7 @@ class _localState extends State<local> {
         name: items[index]["subcategory"],
       ),));
     }
-    if(items[index]["Categoryname"]=="DTH"){
+    if(items[index]["type"]=="DTH"){
       Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
         code: items[index]['ProviderCode'].toString(),
         name: items[index]['subcategory'].toString(),
@@ -116,7 +116,7 @@ class _localState extends State<local> {
         image: items[index]['sub_cat_logo'].toString(),
       ),));
     }
-    if(items[index]["Categoryname"]=="Gift Card"){
+    if(items[index]["type"]=="Gift Card"){
       Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           name: items[index]["subcategory"],
           image: items[index]["sub_cat_logo"],
@@ -270,7 +270,6 @@ class _localState extends State<local> {
                             decoration: BoxDecoration(
                                 // color: Colors.blue,
                                 borderRadius: BorderRadius.circular(width * 0.03),
-                                border: Border.all(width: width * 0.0001),
                                 image: DecorationImage(
                                     image: NetworkImage(items[index]["sub_cat_logo"]),fit: BoxFit.cover)),
                             // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
