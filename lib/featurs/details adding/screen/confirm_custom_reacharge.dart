@@ -7,7 +7,9 @@ import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/snackbar_toast_helper.dart';
 import 'package:plexpay/api/recharge_local_API.dart';
 
+import '../../../Const/imageConst.dart';
 import '../../../api/amount_convertion_API.dart';
+import '../../../main.dart';
 import 'Recharge bill genarate.dart';
 
 class ConfirmRechargeCustom extends StatefulWidget {
@@ -70,11 +72,15 @@ class _ConfirmRechargeState extends State<ConfirmRechargeCustom> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body:isLoading == true
-          ? Container(
-        child: Center(child: CircularProgressIndicator()),
-      )
-          :  Container(
+      body:isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): Container(
         child: Column(
           children: [
             Container(

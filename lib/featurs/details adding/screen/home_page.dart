@@ -207,15 +207,7 @@ class _home_pageState extends State<home_page> {
                 SizedBox(
                   width: width * 0.01,
                 ),
-                isLoading==true?CircleAvatar(
-                  radius: width*0.05,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    CupertinoIcons.person_circle_fill,
-                    color: colorConst.grey,
-                    size: width*0.065,
-                  ),
-                ):InkWell(
+                InkWell(
                     borderRadius: BorderRadius.circular(width*0.06),
                     splashColor: colorConst.blue,
                     onTap: () {
@@ -223,8 +215,6 @@ class _home_pageState extends State<home_page> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => profile(
-                            wallet_amount:wallet_amount,
-                              due_amount:due_amount
                           ),
                         ));
                   },

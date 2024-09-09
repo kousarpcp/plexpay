@@ -19,44 +19,6 @@ class _dueSummaryState extends State<dueSummary> {
 
   var dueList = [];
   var  isLoading = false;
-  List D=[
-    {
-      "Text1":"OPEN BALANCE",
-      "Text2":"ENTRY",
-      "Text3":"COLLECTED",
-      "Text4":"CLOSED BALANCE",
-      "Text5":"FULL NAME",
-      "Text6":":",
-      "Text7":":",
-      "Text8":":",
-      "Text9":":",
-      "Text10":":",
-      "Text11":"100.00",
-      "Text12":"2023-03-23 12:02:12",
-      "Text13":"10.00",
-      "Text14":"90.00",
-      "Text15":"TEST",
-
-    },
-    {
-      "Text1":"OPEN BALANCE",
-      "Text2":"ENTRY",
-      "Text3":"COLLECTED",
-      "Text4":"CLOSED BALANCE",
-      "Text5":"FULL NAME",
-      "Text6":":",
-      "Text7":":",
-      "Text8":":",
-      "Text9":":",
-      "Text10":":",
-      "Text11":"100.00",
-      "Text12":"2023-03-23 12:02:12",
-      "Text13":"10.00",
-      "Text14":"90.00",
-      "Text15":"TEST",
-
-    },
-  ];
 
   Future<String> getdue() async {
 

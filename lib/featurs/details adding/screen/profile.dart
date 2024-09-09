@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/collections.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -13,8 +14,11 @@ import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
 import 'package:plexpay/featurs/details%20adding/screen/report.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../Const/Snackbar_toast_helper.dart';
 import '../../../Const/shared_preference.dart';
+import '../../../api/wallet_amount_API.dart';
 import '../../../main.dart';
 import 'History_Bottom.dart';
 import 'debit&credit.dart';
@@ -22,9 +26,8 @@ import 'funds.dart';
 import '../../../Const/imageConst.dart';
 
 class profile extends StatefulWidget {
-  final String due_amount;
-  final String wallet_amount;
-  const profile({super.key, required this.due_amount, required this.wallet_amount});
+
+  const profile({super.key});
 
   @override
   State<profile> createState() => _profileState();
@@ -42,17 +45,47 @@ class _profileState extends State<profile> {
     "hi",
     "er"
   ];
-
+  var isLoading = false;
+  var wallet_amount;
+  var due_amount;
 
   int currentIndex = 0;
 
   bool selectedLocale = false;
+  Future<String> getWallet() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    var wallet = await walletAmnt();
+
+
+    if (wallet['status'] == true) {
+      setState(() {
+        wallet_amount = wallet['wallet_amount'].toString();
+        due_amount = wallet['due_amount'].toString();
+      });
+    } else {
+      var token = await sharedPrefrence("token", null);
+
+      var name = await sharedPrefrence("name", null);
+      print("logout");
+      showToast("Session timeout !");
+    }
+    setState(() {
+      isLoading = false;
+    });
+    print("uuuuuuuuuuuuuuuuuuu");
+    return "";
+  }
+
 
   @override
   void initState() {
 
     // TODO: implement initState
     super.initState();
+    getWallet();
     _loadSavedLocale();
   }
 
@@ -96,7 +129,15 @@ class _profileState extends State<profile> {
           style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
-      body: SingleChildScrollView(
+      body:isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: AnimationLimiter(
           child: Column(
@@ -208,7 +249,7 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          Text(widget.wallet_amount.toString(),
+                          Text(wallet_amount.toString(),
                               style: TextStyle(
                                   fontSize: width * 0.06,
                                   fontWeight: FontWeight.w800)),
@@ -252,7 +293,8 @@ class _profileState extends State<profile> {
                               ),
                             ],
                           ),
-                          Text(widget.due_amount.toString(),
+
+                          Text(due_amount.toString(),
                               style: TextStyle(
                                   fontSize: width * 0.06,
                                   fontWeight: FontWeight.w800)),

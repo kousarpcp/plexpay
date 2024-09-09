@@ -137,7 +137,14 @@ class _ElcPaynowState extends State<ElcPaynow> {
         ),
       ),
       body:isLoading==true?Container(
-          child: Center(child: CircularProgressIndicator())):  Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): Container(
         alignment: Alignment.center,
         child: Column(
           children: [

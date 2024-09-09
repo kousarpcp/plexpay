@@ -380,7 +380,7 @@ class _ReportsTabState extends State<ReportsTab> {
                 Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    height: height*0.7+ (arrProdList.length * 0.05 * height),
+                    height: height*0.7+ (arrProdList.length * 0.07 * height),
                     width: width*0.9,
                     margin: EdgeInsets.only(top: width*0.03),
                     decoration: BoxDecoration(
