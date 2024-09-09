@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/voucher/operaterSelect.dart';
 
+import '../../../../Const/imageConst.dart';
 import '../../../../api/country_by_service_API.dart';
 import '../../../../main.dart';
 
@@ -58,11 +60,15 @@ class _VoucherCountryState extends State<VoucherCountry> {
           fontWeight: FontWeight.bold
         ),),
       ),
-      body: isLoading == true
-          ? Container(
-        child: Center(child: CircularProgressIndicator()),
-      )
-          : Container(
+      body:isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): Container(
         margin: EdgeInsets.all(10),
         child: Scrollbar(
           child: ListView.separated(

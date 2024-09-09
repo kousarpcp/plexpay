@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
 
 import '../../../../Const/colorConst.dart';
+import '../../../../Const/imageConst.dart';
 import '../../../../api/provider_by_countryAPI.dart';
 import '../../../../main.dart';
 
@@ -66,11 +68,15 @@ class _OperaterSelectState extends State<OperaterSelect> {
             fontWeight: FontWeight.bold
         ),),
       ),
-      body: isLoading == true
-          ? Container(
-        child: Center(child: CircularProgressIndicator()),
-      )
-          : arrList == null
+      body: isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): arrList == null
           ? Center(
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),

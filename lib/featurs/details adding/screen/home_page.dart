@@ -511,7 +511,7 @@ class _home_pageState extends State<home_page> {
                   ],
                 ),
                 Container(
-                  height: width * 0.125,
+                  height: width * 0.1,
                   width: width * 0.56,
                   decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.15),
@@ -556,7 +556,7 @@ class _home_pageState extends State<home_page> {
                       ]),
                 ),
                 SizedBox(
-                  height: width * 0.03,
+                  height: width * 0.07,
                 ),
                 Container(
                   height: height*1.8,

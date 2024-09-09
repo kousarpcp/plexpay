@@ -207,6 +207,12 @@ class _offerState extends State<offer> {
                 ):SizedBox(
                   height: width * 0.04,
                 ),
+                Text("Available Plans",style: TextStyle(
+                  color: colorConst.blue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: width*0.055
+                ),),
+                gap,
                 ListView.separated(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -228,7 +234,7 @@ class _offerState extends State<offer> {
                             },
                             child: Center(
                               child: Container(
-                                height: width * 0.4,
+                                height: width * 0.27,
                                 width: width * 0.84,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
@@ -242,10 +248,10 @@ class _offerState extends State<offer> {
                                 child: Padding(
                                   padding: EdgeInsets.all(width * 0.03),
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        height: width * 0.01,
-                                      ),
+
                                       Row(
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -253,6 +259,7 @@ class _offerState extends State<offer> {
                                           Row(
                                             children: [
                                               Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
                                                     children: [
@@ -272,78 +279,56 @@ class _offerState extends State<offer> {
                                                     ],
                                                   ),
 
+                                                  Text(planLIst[index]["CoupenTitle"],style: TextStyle(
+                                                    color: colorConst.blue,
+
+                                                  ),)
                                                 ],
                                               )
 
 
                                             ],
                                           ),
-                                          widget.dash=="1"?Row(
-                                            children: [
-                                              Text(planLIst[index]["SendCurrencyIso"],
+
+                                          widget.dash=="1"?Container(
+                                            width: width*0.15,
+                                            height: width*0.16,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(width*0.04),
+                                              color: colorConst.blue,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.blueGrey,
+                                                  offset: Offset(1,1),
+                                                  blurRadius:1
+                                                )
+                                              ]
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(planLIst[index]["SendCurrencyIso"],
+                                                    style: TextStyle(
+                                                        fontWeight: FontWeight.w900,
+                                                        color: Colors.white,
+                                                        fontSize: width * 0.04)),
+                                                SizedBox(
+                                                  width: width * 0.02,
+                                                ),
+                                                Text(
+                                                  planLIst[index]["Our_SendValue"].toString(),
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w900,
-                                                      fontSize: width * 0.05)),
-                                              SizedBox(
-                                                width: width * 0.02,
-                                              ),
-                                              Text(
-                                                planLIst[index]["Our_SendValue"].toString(),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: width * 0.05),
-                                              ),
-                                            ],
-                                          ):SizedBox()
+                                                      color: Colors.white,
+                                                      fontSize: width * 0.04),
+                                                ),
+                                              ],
+                                            ),
+                                          ):SizedBox(),
+
                                         ],
                                       ),
-                                      Divider(
-                                        thickness: width * 0.002,
-                                        // indent: width * 0.035,
-                                        // endIndent: width * 0.035,
-                                      ),
-                                      SizedBox(
-                                        height: width * 0.016,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Validity",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey)),
-                                          Text("Local Data",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey)),
-                                          Text("Roaming Data",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey)),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: width * 0.01,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(planLIst[index]["Expiry_Date"],
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: width * 0.048)),
-                                          Text("N.A",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: width * 0.048)),
-                                          Text("N.A",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: width * 0.048)),
-                                        ],
-                                      ),
+
                                     ],
                                   ),
                                 ),
