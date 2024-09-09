@@ -33,14 +33,14 @@ class _plexbillState extends State<plexbill> {
     setState(() {});
   }
   List product = [
-    {"image1": ImageConst.etisalat, "text": "Etisalat UAE","quantity":0,"Price":50,"tax":5},
-    {"image1": ImageConst.du, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
-    {"image1": ImageConst.lebanese, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
-    {"image1": ImageConst.adnoc, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
-    {"image1": ImageConst.kuwaitfinance, "text": " Finance","quantity":0,"Price":50,"tax":5},
-    {"image1": ImageConst.du, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
-    {"image1": ImageConst.lebanese, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
-    {"image1": ImageConst.adnoc, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
+    {"image1": ImageConst.cart1, "text": "Etisalat UAE","quantity":0,"Price":50,"tax":5},
+    {"image1": ImageConst.cart1, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
+    {"image1": ImageConst.cart5, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
+    {"image1": ImageConst.cart3, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
+    {"image1": ImageConst.cart3, "text": " Finance","quantity":0,"Price":50,"tax":5},
+    {"image1": ImageConst.cart3, "text": "DU UAE","quantity":0,"Price":100,"tax":15},
+    {"image1": ImageConst.cart3, "text": "Lebanese","quantity":0,"Price":20,"tax":2},
+    {"image1": ImageConst.cart3, "text": "Adnoc","quantity":0,"Price":30,"tax":3},
 
   ];
 

@@ -40,57 +40,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
 
   TextEditingController searchController = new TextEditingController();
   FocusNode numFocus = FocusNode();
-  List<dynamic> history = [
-    {
-      "service":ImageConst.etisalat, "text": "Etisalat UAE",
-      "transaction id":"PLXPESY393334513",
-      "date":"2024-01-23 07:42:07",
-      "cash":10.00,
-      "recieved":10.00,
-    },
-    {
-      "service":ImageConst.du, "text": "DU UAE",
-      "transaction id":"PLXPESY393081643",
-      "date":"2024-01-25 07:42:07",
-      "cash":50.00,
-      "recieved":50.00,
-    },
-    {
-      "service":ImageConst.lebanese, "text": "Lebanese",
-      "transaction id":"PLXPESY393027353",
-      "date":"2024-04-25 02:42:84",
-      "cash":25.00,
-      "recieved":25.00,
-    },
-    {
-      "service":ImageConst.adnoc, "text": "Adnoc",
-      "transaction id":"PLXPESY743827353",
-      "date":"2024-04-25 02:42:84",
-      "cash":35.00,
-      "recieved":35.00,
-    },
-    {
-      "service":ImageConst.kuwaitfinance, "text": " Finance",
-      "transaction id":"PLXPESY743827353",
-      "date":"2024-04-25 02:42:84",
-      "cash":40.00,
-      "recieved":40.00,
-    },
-    {
-      "service":ImageConst.knpc, "text": "KNPC",
-      "transaction id":"PLXPESY743827353",
-      "date":"2024-04-25 02:42:84",
-      "cash":40.00,
-      "recieved":40.00,
-    },
-    {
-      "service":ImageConst.mosaik, "text": "Mosaik",
-      "transaction id":"PLXPESY743827353",
-      "date":"2024-04-25 02:42:84",
-      "cash":40.00,
-      "recieved":40.00,
-    },
-  ];
+
   Future<String> getHistory() async {
     setState(() {
       isLoading = true;

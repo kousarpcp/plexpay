@@ -14,7 +14,6 @@ import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
 import 'package:plexpay/featurs/details%20adding/screen/report.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../Const/Snackbar_toast_helper.dart';
 import '../../../Const/shared_preference.dart';
@@ -176,10 +175,7 @@ class _profileState extends State<profile> {
                       children: [
                         Row(
                           children: [
-                            Image.asset(
-                              ImageConst.contact,
-                              width: width * 0.12,
-                            ),
+                            Icon(CupertinoIcons.person_circle_fill,size: width * 0.12,color: colorConst.blue,),
                             SizedBox(
                               width: width * 0.02,
                             ),
@@ -192,10 +188,7 @@ class _profileState extends State<profile> {
                             SizedBox(
                               width: width * 0.02,
                             ),
-                            Image.asset(
-                              ImageConst.verified,
-                              width: width * 0.05,
-                            ),
+                            Icon(Icons.verified,color: Colors.blue,)
                           ],
                         ),
                         LocaleText(

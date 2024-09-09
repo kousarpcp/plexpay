@@ -8,7 +8,6 @@ import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/History_Bottom.dart';
-import 'package:plexpay/featurs/details%20adding/screen/Share.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexBill_login.dart';
 
 
