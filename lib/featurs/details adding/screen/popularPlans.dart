@@ -121,7 +121,7 @@ class _popularState extends State<popular> {
                           },
                           child: Center(
                             child: Container(
-                              height: width * 0.4,
+                              height: width * 0.42,
                               width: width * 0.84,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -146,6 +146,7 @@ class _popularState extends State<popular> {
                                         Row(
                                           children: [
                                             Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -164,7 +165,9 @@ class _popularState extends State<popular> {
                                                     ),
                                                   ],
                                                 ),
-
+                                                Text(
+                                                  widget.plan[index]["CoupenTitle"]
+                                                )
                                               ],
                                             )
 
