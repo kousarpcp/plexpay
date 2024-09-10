@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/popularPlans.dart';
@@ -164,10 +166,12 @@ class _offerState extends State<offer> {
                         itemCount: 4)
                 ),
               ],
-            ):rsp["message"]=="Empty"?Container(
+            ):rsp["message"]=="Empty"?
+            Container(
               margin: EdgeInsets.all(width*0.1),
               child: Center(child: Text("No Vouchers Found!")),
-            ):Column(
+            ):
+            Column(
               children: [
                 widget.dash=="1"?Row(
                   children: [

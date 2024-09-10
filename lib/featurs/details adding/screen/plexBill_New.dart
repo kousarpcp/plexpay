@@ -233,6 +233,9 @@ class _plexbillNewState extends State<plexbillNew> {
                 ),
                 if(_selectedIndex==1&&category=="")
                   Container(),
+                // if(_selectedIndex==2&&category=="")
+                //   Container(),
+                // if(_selectedIndex==1)
                 if(_selectedIndex==0)
                 GridView.builder(
                   itemCount: product.length,

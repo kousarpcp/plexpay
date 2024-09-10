@@ -42,6 +42,7 @@
    static const strawberry = "assets/images/strawberry.jpeg";
    static const tomato = "assets/images/tomatoes-.jpg";
    static const potato = "assets/images/potato.jpeg";
+   static const empty = "assets/images/Animation - 1725518525663.json";
    static const report = "assets/images/report.png";
 
 

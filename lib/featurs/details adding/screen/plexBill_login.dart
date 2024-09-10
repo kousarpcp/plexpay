@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
-import 'package:plexpay/api/plexbillLogin_postApi.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexBill_homePage.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -13,8 +12,9 @@ import '../../../Const/Snackbar_toast_helper.dart';
 import '../../../Const/colorConst.dart';
 import '../../../Const/imageConst.dart';
 import '../../../Const/shared_preference.dart';
+import '../../../Const/shared_preference1.dart';
 import '../../../Const/widgets.dart';
-import '../../../api/plexbillLogin_getApi.dart';
+import '../../../api/plexbillLogin_postApi.dart';
 import '../../../main.dart';
 import 'login_page.dart';
 class plexbill_login extends StatefulWidget {
@@ -29,10 +29,10 @@ class _plexbill_loginState extends State<plexbill_login> {
   TextEditingController userController =TextEditingController();
   TextEditingController passwordController =TextEditingController();
   var isCheck = false;
-  // var token;
+  var token;
   @override
   void initState() {
-    // getToken();
+
 
     // TODO: implement initState
   }
@@ -40,31 +40,7 @@ class _plexbill_loginState extends State<plexbill_login> {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
   //   token= prefs.getString('token');
   // }
-   getHome() async {
-     // var rs = await plexbillLoginPostApi(userController.text.toString(), passwordController.text.toString(),token.toString() );
-    var rsps = await plexbillLoginGetApi();
-    print(globaltoken);
-    print("mmmmmmm");
-    print("dsssssssssss");
-    print(rsps);
-    var ck = await getSharedPrefrence(chek);
-    print("checkkkkkk");
-    print(ck);
-    if(ck=="true"){
 
-      var us = await getSharedPrefrence(currentusername);
-      var pws =await getSharedPrefrence(currentpassword);
-
-
-      setState(() {
-        userController.text=us;
-        passwordController.text=pws;
-        isCheck=true;
-        rsps;
-      });
-
-    }
-  }
   @override
   // void dispose() {
   //   userController.dispose();
@@ -239,13 +215,13 @@ class _plexbill_loginState extends State<plexbill_login> {
                                     isCheck=v!;
                                   });
                                   if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
-                                    var un = await sharedPrefrence(currentusername, userController.text.toString() );
-                                    var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
-                                    var ck = await sharedPrefrence(chek, "true");
+                                    var un = await sharedPrefrence1(currentusername1, userController.text.toString() );
+                                    var pass = await sharedPrefrence1(currentpassword1, passwordController.text.toString());
+                                    var ck = await sharedPrefrence1(chek1, "true");
                                   }else{
-                                    var un = await sharedPrefrence(userController, null );
-                                    var pass = await sharedPrefrence(passwordController, null);
-                                    var ck = await sharedPrefrence(chek, null);
+                                    var un = await sharedPrefrence1(userController, null );
+                                    var pass = await sharedPrefrence1(passwordController, null);
+                                    var ck = await sharedPrefrence1(chek1, null);
 
                                   }
                                 }),
@@ -264,44 +240,34 @@ class _plexbill_loginState extends State<plexbill_login> {
                       if(userController.text.isNotEmpty&&
                           passwordController.text.isNotEmpty)
                         {
-                          getHome();
-                          print(globaltoken);
-                          print(userController.text);
-                          print(passwordController.text);
-                          print(globaltoken);
+                          print("Username: ${userController.text}");
+                          print("Password: ${passwordController.text}");
                           print("eeeeeeeeeeeeeee");
-                          var rsp=await plexbillLoginPostApi(userController.text,passwordController.text);
-                          print(globaltoken);
+                          var rsp=await plexbillLoginApi(userController.text,passwordController.text,);
+                          print(token);
                           print("jjjjjjjjjjjjjjjjjjj");
                           print("rspppp");
                           print(rsp);
-                          if ( rsp['success'] == true) {
-                            var id = await sharedPrefrence(
-                                "userId", rsp['id']);
-                            id=id;
-                            var token =
-                                await sharedPrefrence(
-                                "token", rsp['token']);
-                            token=globaltoken;
-
-                            var name = await sharedPrefrence(
-                                shopname, rsp['username']);
+                          if ( rsp['userdatas']!=null) {
+                            print("Login success");
                             username = username;
                             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);
                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Plexbill_home() ,));
                             showToast("Login Success!");
                             print("wrking");
-                            print(rsp['user_id']);
-                            print(rsp['token']);
+                            print(rsp?['id']);
+                            print(rsp?['token']);
                           }
 
                           else {
+                            // print("Login failed. Response: $rsp");
                             showToast("Invalid Credentials!");
-                            setState(() {
-                            });
+
                           }
 
-                        }else{
+                        }
+
+                      else{
                         if(userController.text ==""){
                           QuickAlert.show(
                             barrierDismissible: false,

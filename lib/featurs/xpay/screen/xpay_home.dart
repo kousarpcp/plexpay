@@ -105,6 +105,7 @@ class _XpayHomeState extends State<XpayHome> {
                       color: colorConst.blue
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.add_circle,color: Colors.white,),
                         SizedBox(
