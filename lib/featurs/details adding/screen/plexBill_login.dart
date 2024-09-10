@@ -249,6 +249,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                           print("rspppp");
                           print(rsp);
                           if ( rsp['userdatas']!=null) {
+                            var id = await sharedPrefrence1("userId", rsp['userdatas']);
                             print("Login success");
                             username = username;
                             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);

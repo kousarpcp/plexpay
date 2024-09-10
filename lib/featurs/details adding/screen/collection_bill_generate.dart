@@ -135,7 +135,7 @@ class _CollectionBillState extends State<CollectionBill> {
       if( collected_amount.toString()!="null"){
         MaxxSunmiPrinter.printText(
           "COLLECTION AMOUNT: "+collected_amount.toString()+" AED",
-          styles: SunmiStyles(alignment: SunmiAlign.left,size: SunmiSize.customSize(22),font: SunmiFont.khmerOs),
+          styles: SunmiStyles(alignment: SunmiAlign.left,size: SunmiSize.customSize(22),font: SunmiFont.khmerOs,isBold: true),
         );
       }
 

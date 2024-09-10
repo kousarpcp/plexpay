@@ -8,23 +8,23 @@ final chek1= "checkbox";
 
 Future sharedPrefrence1(key,data) async {
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString(key, data);
+  SharedPreferences prefs1 = await SharedPreferences.getInstance();
+  prefs1.setString(key, data);
 
 }
 
-Future removesharedPrefrence(key,data) async {
+Future removesharedPrefrence1(key,data) async {
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.remove(key);
+  SharedPreferences prefs1 = await SharedPreferences.getInstance();
+  prefs1.remove(key);
 
 }
 
 
-Future getSharedPrefrence(key) async {
+Future getSharedPrefrence1(key) async {
 
-  var prefs = await SharedPreferences.getInstance();
-  var value = prefs.getString(key);
+  var prefs1 = await SharedPreferences.getInstance();
+  var value = prefs1.getString(key);
 
   return value;
 

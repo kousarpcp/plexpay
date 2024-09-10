@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,18 +16,18 @@ import '../../../main.dart';
 import 'dataPacks.dart';
 
 class countryField extends StatefulWidget {
-  final String name;
-  final String image;
-  final String code;
-  final String dash;
+  final  name;
+  final  image;
+  final  code;
+  final  dash;
 
 
   const countryField({
 
-    required this.name,
-    required this.image,
-    required this.code,
-    required this.dash,
+     this.name,
+     this.image,
+     this.code,
+     this.dash,
   });
 
   @override
@@ -88,7 +89,7 @@ class _countryFieldState extends State<countryField> {
     return " ";
   }
   Future<String> getCountryCode() async {
-    var rsp = await fetchCountryCodeApi(widget.code);
+    var rsp = await fetchCountryCodeApi(widget.code!=null?widget.code:selectedCountry);
     print("countryyy");
     print(rsp['country']);
     setState(() {
@@ -106,7 +107,7 @@ class _countryFieldState extends State<countryField> {
       setState(() {
         selectedCountry="";
       });
-      this.getCountryCode();
+      if(widget.code!=null){this.getCountryCode();}
     }
     setState(() {});
 
@@ -149,17 +150,17 @@ class _countryFieldState extends State<countryField> {
               ),
             ),
           ),
-          title: Text(
+          title: widget.name!=null?Text(
             widget.name,
             style:
             TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
-          ),
+          ):SizedBox(),
           actions: [
-            CircleAvatar(
+            widget.image!=null?CircleAvatar(
               radius: width*0.045,
               backgroundImage:NetworkImage(widget.image,),
               backgroundColor: Colors.white,
-            ),
+            ):SizedBox(),
             SizedBox(width: width*0.05,)],
         ),
         body: SingleChildScrollView(
@@ -169,13 +170,14 @@ class _countryFieldState extends State<countryField> {
                 height: width * 0.03,
               ),
               Center(
-                child: Container(
+                child: widget.code!=null?Container(
                   height: width * 0.21,
                   width: width * 0.85,
                   child: IntlPhoneField(
                     initialCountryCode: widget.code,
                     controller: numberController,
-                    // showDropdownIcon: false,
+                    showDropdownIcon: false,
+                    flagsButtonMargin: EdgeInsets.only(left: width*0.03),
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     autovalidateMode: AutovalidateMode.disabled,
@@ -202,6 +204,7 @@ class _countryFieldState extends State<countryField> {
                             Navigator.pop(context);
                             return;
                           }else{
+
                             toggleTabs();
                           }
 
@@ -217,6 +220,94 @@ class _countryFieldState extends State<countryField> {
                         icon: Icon(
                             Icons.search,
                             color: colorConst.blue,
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: colorConst.blue,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.03),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: colorConst.blue,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.03),
+                      ),
+                    ),
+                    focusNode: _focusNode,
+                  ),
+                ):Container(
+                  height: width * 0.18,
+                  width: width * 0.85,
+                  child: TextFormField(
+                    controller: numberController,
+                    // showDropdownIcon: false,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    maxLength: 10,
+                    style: TextStyle(
+                        fontSize: width * 0.05, fontWeight: FontWeight.w600),
+                    decoration: InputDecoration(
+                      // labelText: "Number",
+                      // label: Text(""),
+                      labelStyle: TextStyle(
+                          fontSize: width * 0.045,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black),
+                      hintText: "Please Enter Your Number",
+                      hintStyle: TextStyle(
+                        fontSize: width * 0.04,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      prefix: InkWell(
+                        onTap: () {
+                          showCountryPicker(
+                            context: context,
+                            showPhoneCode: true, // optional. Shows phone code before the country name.
+                            onSelect: (Country country) {
+                              setState(() {
+
+                                selectedCountry =country.phoneCode.toString();
+
+                              });
+                              print('Select country: ${country.flagEmoji}');
+                            },
+                          );
+                        },
+                        child: Container(
+
+                          width: width*0.1,
+                          child: Center(child: Text("+"+selectedCountry,style: TextStyle(fontSize: 18,color: colorConst.blue),)),
+
+                        ),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          // alertShow();
+                          if (numberController.text.isEmpty) {
+                            showToast("Number Empty");
+                            Navigator.pop(context);
+                            return;
+                          }else{
+
+                            toggleTabs();
+                          }
+
+                          // var type = numController.text.toString()[0] +numController.text.toString()[1]+numController.text.toString()[2];
+                          // print("type");
+                          // print(type);
+                          setState(() {
+                            FocusManager.instance.primaryFocus?.unfocus();
+
+                          });
+
+                        },
+                        icon: Icon(
+                          Icons.search,
+                          color: colorConst.blue,
                         ),
                       ),
                       border: OutlineInputBorder(
@@ -304,18 +395,18 @@ class _countryFieldState extends State<countryField> {
                         children: [
                           popular(
                             number:selectedCountry+numberController.text.toString(),
-                            name:widget.name, dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
+                            name:providerinfo["ProviderName"], dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
 
                           ),
                           dataPacks(
                             number:numberController.text,
-                            name:widget.name,
+                            name:providerinfo["ProviderName"],
 
 
                           ),
                           topUp(
                             number:numberController.text,
-                            name:widget.name,
+                            name:providerinfo["ProviderName"],
 
 
                           ),

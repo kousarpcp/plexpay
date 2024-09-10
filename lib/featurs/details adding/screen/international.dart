@@ -41,17 +41,13 @@ class _internationalState extends State<international> {
           ),
           InkWell(
             onTap: () {
-              // final item =  data!= null ? data[index] : null;
-              // Navigator.push(
-              //     context,
-              //     CupertinoPageRoute(
-              //       builder: (context) => countryField(
-              //           dash: item["topC"],
-              //           name: item["CountryName"],
-              //           image: item["Cflag"],
-              //           code: item["CountryIso"]
-              //       ),
-              //     ));
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => countryField(
+                      dash: "1",
+                    ),
+                  ));
             },
             child: Container(
                 height: height * 0.055,
