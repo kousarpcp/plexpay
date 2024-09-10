@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexBill_homePage.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_homePage.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,13 +16,14 @@ import '../../../Const/shared_preference1.dart';
 import '../../../Const/widgets.dart';
 import '../../../api/plexbillLogin_postApi.dart';
 import '../../../main.dart';
-import 'login_page.dart';
+
 class plexbill_login extends StatefulWidget {
   const plexbill_login({super.key});
   @override
   State<plexbill_login> createState() => _plexbill_loginState();
 }
 class _plexbill_loginState extends State<plexbill_login> {
+
   bool tap=true;
   bool tick=false;
   final formKey =GlobalKey<FormState>();
@@ -251,7 +252,6 @@ class _plexbill_loginState extends State<plexbill_login> {
                           if ( rsp['userdatas']!=null) {
                             var id = await sharedPrefrence1("userId", rsp['userdatas']);
                             print("Login success");
-                            username = username;
                             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);
                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Plexbill_home() ,));
                             showToast("Login Success!");

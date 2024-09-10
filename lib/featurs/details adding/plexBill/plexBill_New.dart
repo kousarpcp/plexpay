@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexbill_cart.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/plexbill_cart.dart';
 
 import '../../../Const/imageConst.dart';
 import '../../../main.dart';

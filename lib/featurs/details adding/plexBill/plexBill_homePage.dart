@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_New.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexBill.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexBill_New.dart';
+
 
 import '../../../Const/imageConst.dart';
+import '../../../api/plexbillLogin_postApi.dart';
 import '../../../main.dart';
 
 class Plexbill_home extends StatefulWidget {
@@ -18,6 +19,18 @@ class Plexbill_home extends StatefulWidget {
 }
 
 class _Plexbill_homeState extends State<Plexbill_home> {
+
+  var isCatLoading = true;
+  var data ;
+  var todays_sale;
+  var todays_purchase;
+  var todays_receipt;
+  var todays_payments;
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -324,7 +337,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("TODAY'S PAYMENTS :",style: TextStyle(fontSize: 14,color: Colors.black)),
-                      Text(" 200.000 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
+                      Text("0.200 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),

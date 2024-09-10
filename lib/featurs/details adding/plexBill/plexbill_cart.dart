@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/bill_items.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/bill_items.dart';
 
 import '../../../Const/imageConst.dart';
 import '../../../main.dart';

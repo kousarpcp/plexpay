@@ -9,14 +9,14 @@ import 'package:plexpay/Const/shared_preference.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
 import 'package:plexpay/featurs/details%20adding/screen/History_Bottom.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexBill_homePage.dart';
-import 'package:plexpay/featurs/details%20adding/screen/plexBill_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../../Const/colorConst.dart';
 import '../../../main.dart';
 import '../../xpay/screen/xpay_page.dart';
+import '../plexBill/plexBill_homePage.dart';
+import '../plexBill/plexBill_login.dart';
 import 'collections.dart';
 
 class BottomNavigation extends StatefulWidget {
