@@ -9,7 +9,7 @@ import 'package:plexpay/featurs/details%20adding/screen/collections.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/due_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
-import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/login_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
 import 'package:plexpay/featurs/details%20adding/screen/report.dart';

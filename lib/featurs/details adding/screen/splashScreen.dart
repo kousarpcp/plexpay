@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
-import 'package:plexpay/featurs/details%20adding/screen/login_page.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Const/shared_preference.dart';

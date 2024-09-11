@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/Const/shared_preference.dart';
+import 'package:plexpay/Const/shared_preference1.dart';
 // import 'package:plexpay/featurs/details%20adding/screen/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/page1.dart';
@@ -29,15 +30,19 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int select = 0;
   int selectedIndex = 0;
-  var prefs1 = getSharedPrefrence("userId");
-  final List<Widget> Ann = [
+  var prefs1;
+  getLogin() async {
+    prefs1 = await getSharedPrefrence1("username");
+  }
+
+   List<Widget> Ann = [
     home_page(),
     Collections(),
     XpayPage(),
     HistoryBottom3(),
     plexbill_login(),
   ];
-  final List<Widget> Ann1 = [
+  List<Widget> Ann1 = [
     home_page(),
     Collections(),
     XpayPage(),
@@ -45,13 +50,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
     Plexbill_home(),
   ];
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-
+  @override
+  void initState() {
+    getLogin();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: prefs1==null?Ann[selectedIndex]:Ann1[selectedIndex],
+            
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor:  colorConst.blue,
           key: _bottomNavigationKey,

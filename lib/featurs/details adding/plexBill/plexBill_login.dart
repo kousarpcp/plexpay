@@ -216,8 +216,8 @@ class _plexbill_loginState extends State<plexbill_login> {
                                     isCheck=v!;
                                   });
                                   if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
-                                    var un = await sharedPrefrence1(currentusername1, userController.text.toString() );
-                                    var pass = await sharedPrefrence1(currentpassword1, passwordController.text.toString());
+                                    var un = await sharedPrefrence1("username", userController.text.toString() );
+                                    var pass = await sharedPrefrence1("password", passwordController.text.toString());
                                     var ck = await sharedPrefrence1(chek1, "true");
                                   }else{
                                     var un = await sharedPrefrence1(userController, null );
@@ -249,15 +249,20 @@ class _plexbill_loginState extends State<plexbill_login> {
                           print("jjjjjjjjjjjjjjjjjjj");
                           print("rspppp");
                           print(rsp);
-                          if ( rsp['userdatas']!=null) {
-                            var id = await sharedPrefrence1("userId", rsp['userdatas']);
+                          if ( rsp['users']!=null) {
+                            print("jjjjjjjjjjjjjjjjjjj");
+                            print(rsp);
+                            var id = await sharedPrefrence1("userId1", rsp['userdatas'][0]["username"]);
+                            var username= await sharedPrefrence1("username",rsp["userdatas"][0]["username"] );
+                            var password= await sharedPrefrence1("password",passwordController.text );
+
+                            print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
                             print("Login success");
                             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => Plexbill_home(),), (route) => false);
                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Plexbill_home() ,));
                             showToast("Login Success!");
                             print("wrking");
-                            print(rsp?['id']);
-                            print(rsp?['token']);
+
                           }
 
                           else {

@@ -4,6 +4,7 @@ import 'package:flutter_locales/flutter_locales.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/number_submit_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +18,7 @@ import 'featurs/details adding/screen/collectionsReciept.dart';
 import 'featurs/details adding/screen/country_field.dart';
 import 'featurs/details adding/screen/dataPacks.dart';
 import 'featurs/details adding/screen/debit&credit.dart';
-import 'featurs/details adding/screen/login_page.dart';
+import 'featurs/details adding/screen/plexpay authentication/login_page.dart';
 import 'featurs/details adding/screen/offer_details.dart';
 import 'featurs/details adding/screen/costom.dart';
 import 'featurs/details adding/screen/offer.dart';
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
                 supportedLocales: Locales.supportedLocales,
                 locale: locale,
                 debugShowCheckedModeBanner: false,
-                home: Splashscreen()),
+                home: NumberSubmitPage()),
           ),
     );
   }

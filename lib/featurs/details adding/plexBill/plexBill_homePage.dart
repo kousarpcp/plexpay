@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/shared_preference1.dart';
 import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_New.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_login.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 
@@ -26,7 +30,42 @@ class _Plexbill_homeState extends State<Plexbill_home> {
   var todays_purchase;
   var todays_receipt;
   var todays_payments;
+  var currency;
+  var isLoading=false;
 
+
+  getData() async {
+    setState(() {
+      isLoading=true;
+    });
+    var username= await getSharedPrefrence1("username");
+    var password= await getSharedPrefrence1("password");
+    print(password);
+    print(username);
+    print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    var rsp=await plexbillLoginApi(username.toString(),password.toString());
+    if ( rsp['userdatas']!=null) {
+      todays_sale= rsp["todaysale"];
+      todays_purchase= rsp["todayreturn"];
+      todays_receipt= rsp["todayreceipt"];
+      todays_payments= rsp["todaypayment"];
+      currency=rsp["currency"];
+      print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+      print("Login success");
+      print("wrking");
+      print(rsp?['id']);
+      print(rsp?['token']);
+    }
+    setState(() {
+      isLoading=false;
+    });
+  }
+  @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
 
 
 
@@ -60,8 +99,84 @@ class _Plexbill_homeState extends State<Plexbill_home> {
             style:
                 TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
           ),
+          actions: [
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  anchorPoint: Offset(2, 5),
+
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width*0.05)
+                  ),
+                  builder: (context) {
+                    return Container(
+                      height: width*0.6,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(width*0.05),topRight: Radius.circular(width*0.05)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Text("Are you sure you want to log out?",style: TextStyle(
+                                fontSize: 20,fontWeight: FontWeight.w600)),
+                          ),
+                          SizedBox(height: width*0.05,),
+                          InkWell(onTap: () async {
+                            var id= await removesharedPrefrence1("userId1", null);
+                            var user= await removesharedPrefrence1("username", null);
+                            var pass= await removesharedPrefrence1("password", null);
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => BottomNavigation(),), (route) => false);
+                          },
+                            child: Container(
+                              height: width*0.1,
+                              width:width*0.8,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(width*0.03),
+                                  color: colorConst.blue
+                              ),
+                              child: Center(child: Text("YES",style: TextStyle(
+                                  fontWeight: FontWeight.w600,color: Colors.white),)),
+                            ),
+                          ),
+                          SizedBox(height: width*0.05,),
+                          InkWell(onTap: () {
+                            Navigator.pop(context);
+                          },
+                            child: Container(
+                              height: width*0.1,
+                              width:width*0.8,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(width*0.03),
+                                  color: colorConst.blue
+                              ),
+                              child: Center(child: Text("NO",style: TextStyle(
+                                  fontWeight: FontWeight.w600,color: Colors.white),)),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    );
+                  },
+                );
+              },
+                child: Container(child: Icon(Icons.logout,color: colorConst.blue,))),
+            SizedBox(width: width*0.04,)
+          ],
         ),
-        body: SingleChildScrollView(
+        body: isLoading==true?Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1))
+          ,
+        ):SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
               children: [
@@ -283,7 +398,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("TODAY'S SALE :",style: TextStyle(fontSize:14,color: Colors.black)),
-                      Text(" 0.000 INR",style: TextStyle(fontSize: 19,color: Colors.black,fontWeight: FontWeight.w600),),
+                      Text(" ${todays_sale} ${currency}",style: TextStyle(fontSize: 19,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),
@@ -301,7 +416,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("TODAY'S PURCHASE :",style: TextStyle(fontSize: 14,color: Colors.black)),
-                      Text(" 0.000 INR",style: TextStyle(fontSize: 19,color: Colors.black,fontWeight: FontWeight.w600),),
+                      Text(" ${todays_purchase} ${currency}",style: TextStyle(fontSize: 17,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),
@@ -319,7 +434,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("TODAY'S RECEIPT :",style: TextStyle(fontSize: 14,color: Colors.black)),
-                      Text(" 0.000 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
+                      Text(" ${todays_receipt} ${currency}",style: TextStyle(fontSize:16,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),
@@ -337,7 +452,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("TODAY'S PAYMENTS :",style: TextStyle(fontSize: 14,color: Colors.black)),
-                      Text("0.200 INR",style: TextStyle(fontSize:19,color: Colors.black,fontWeight: FontWeight.w600),),
+                      Text(" ${todays_payments} ${currency}",style: TextStyle(fontSize:17,color: Colors.black,fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),

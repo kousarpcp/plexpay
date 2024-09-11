@@ -2,8 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-final currentusername1= "username";
-final currentpassword1= "pass";
+final currentusername1= "";
+final currentpassword1= "";
 final chek1= "checkbox";
 
 Future sharedPrefrence1(key,data) async {
