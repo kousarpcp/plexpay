@@ -4,6 +4,7 @@ import 'package:flutter_locales/flutter_locales.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
 import 'package:plexpay/featurs/details%20adding/screen/local.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/new_login_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/number_submit_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -73,12 +74,12 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 textTheme: GoogleFonts.muktaVaaniTextTheme()
               ),
-                title: 'Flutter Locales',
+                title: 'Plexpay',
                 localizationsDelegates: Locales.delegates,
                 supportedLocales: Locales.supportedLocales,
                 locale: locale,
                 debugShowCheckedModeBanner: false,
-                home: NumberSubmitPage()),
+                home: Splashscreen()),
           ),
     );
   }

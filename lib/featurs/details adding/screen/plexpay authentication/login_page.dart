@@ -6,6 +6,7 @@ import 'package:plexpay/Const/imageConst.dart';
 import 'package:plexpay/Const/widgets.dart';
 import 'package:plexpay/api/login_api.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/number_submit_page.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,15 +57,11 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
-        body: Container(
-          padding: EdgeInsets.all(width*0.03),
-          decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(ImageConst.login),fit: BoxFit.cover,opacity: width*0.005)
-          ),
-          child: Form(
-            key: formKey,
+        body: Form(
+          key: formKey,
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
@@ -311,7 +308,32 @@ class _LoginState extends State<Login> {
                       borderRadius:  BorderRadius.circular(width*0.1),
                       color: colorConst.blue
                     ),
-                    child: Center(child: LocaleText("Sign in",style: TextStyle(
+                    child: Center(child: Text("Login",style: TextStyle(
+                        color: Colors.white
+                    ),)),
+                  ),
+                ),
+                SizedBox(
+                  height: width*0.06,
+                ),
+                Text("Don't have an account?",style: TextStyle(
+                  fontSize: width*0.035
+                ),),
+                SizedBox(
+                  height: width*0.01,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
+                  },
+                  child: Container(
+                    width: width*0.8,
+                    height: height*0.065,
+                    decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.circular(width*0.1),
+                        color: colorConst.blue
+                    ),
+                    child: Center(child: Text("Sign up",style: TextStyle(
                         color: Colors.white
                     ),)),
                   ),

@@ -44,6 +44,9 @@
    static const potato = "assets/images/potato.jpeg";
    static const empty = "assets/images/Animation - 1725518525663.json";
    static const report = "assets/images/report.png";
+   static const numberpagepng = "assets/images/numberpage.png";
+   static const userregistration = "assets/images/user.png";
+   static const newlogin = "assets/images/user_registration.png";
 
 
 
