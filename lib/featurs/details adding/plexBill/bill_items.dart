@@ -57,7 +57,7 @@ class _billItemsState extends State<billItems> {
           GridView.builder(
             itemCount: vegitalbles.length,
             gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.62,
+                childAspectRatio: 0.6,
                 crossAxisSpacing: width*0.01,
                 mainAxisSpacing: width*0.01,
                 crossAxisCount: 4),
@@ -68,7 +68,7 @@ class _billItemsState extends State<billItems> {
               return Column(
                 children: [
                   Container(
-                    height: width*0.35,
+                    height: width*0.37,
                     width: width*0.26,
                     decoration: BoxDecoration(
                         color: colorConst.blue,

@@ -68,8 +68,6 @@ class _Plexbill_homeState extends State<Plexbill_home> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,7 +218,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(fruits: [], vegitalbles: [],),));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(),));
                                   },
                                   child: Center(
                                     child: Container(

@@ -1,23 +1,41 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/plexBill/plexbill_cart.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/print.dart';
 
 import '../../../Const/imageConst.dart';
 import '../../../main.dart';
 import 'bill_items.dart';
 
 class plexbillNew extends StatefulWidget {
-  final List fruits;
-  final List vegitalbles;
-  const plexbillNew({super.key, required this.fruits, required this.vegitalbles});
+
+  const plexbillNew({super.key,});
 
   @override
   State<plexbillNew> createState() => _plexbillNewState();
 }
-
+int total = 0;
+int vat = 0;
 class _plexbillNewState extends State<plexbillNew> {
+  List fruits=[
+
+    {"image1": ImageConst.apple, "text": " Apple","quantity":0,"Price":100,"tax":5},
+    {"image1": ImageConst.strawberry, "text": "Strawberry ","quantity":0,"Price":200,"tax":15},
+    {"image1": ImageConst.mango, "text": "Mango ","quantity":0,"Price":70,"tax":15},
+    {"image1": ImageConst.dragon, "text": "Dragon Fruit ","quantity":0,"Price":250,"tax":15},
+  ];
+  List vegitalbles=[
+
+    {"image1": ImageConst.cucumber, "text": "Cucumber","quantity":0,"Price":30,"tax":5},
+    {"image1": ImageConst.onion, "text": "Onion","quantity":0,"Price":45,"tax":15},
+    {"image1": ImageConst.tomato, "text": "Tomato","quantity":0,"Price":20,"tax":2},
+    {"image1": ImageConst.potato, "text": "Potato","quantity":0,"Price":35,"tax":3},
+
+  ];
 
   List product = [
     {"image1": ImageConst.vegitables, "text": "Vegitables","quantity":0,},
@@ -48,16 +66,168 @@ class _plexbillNewState extends State<plexbillNew> {
   ];
   int _selectedIndex = 0;
   var category ="";
-  var items;
   late int catindex;
   TextEditingController nameController=TextEditingController();
+
+  dynamic added;
+  List a = [];
+  List b = [];
+  List items= [];
+
+  // Method to calculate and update items in the cart
+  totalprice() {
+    a.clear();  // Clear list to prevent duplicates
+    for (int i = 0; i < b.length; i++) {
+      if (b[i]["quantity"] > 0) {
+        // Check if the item is already in the list before adding
+        if (!a.any((element) => element['text'] == b[i]['text'])) {
+          added = b[i];
+          a.add(added);
+        }
+      }
+    }
+    setState(() {});
+  }
+
+  // Calculate total price of items in the cart
+  tascprice() {
+    total = 0;
+    for (int i = 0; i < a.length; i++) {
+      total = a[i]["quantity"] * a[i]["Price"] + total;
+    }
+  }
+
+  // Calculate VAT for items in the cart
+  vatAdd() {
+    vat = 0;
+    for (int i = 0; i < a.length; i++) {
+      vat = a[i]["quantity"] * a[i]["tax"] + vat;
+    }
+  }
+
+  @override
+  void initState() {
+    print(items);
+    print("qqqqqqqqqqqqqqq");
+
+    totalprice();
+    tascprice();
+    vatAdd();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: _selectedIndex==2?Container(
+        height: width * 0.48,
+        width: width * 0.91,
+        color: Colors.white,
+        child: Column(
+          children: [
+            Divider(
+              thickness: width * 0.005,
+              color: Colors.black,
+              endIndent: width * 0.01,
+              indent: width * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Subtotal",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                ),
+                Text(
+                  "$total",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Vat",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                ),
+                Text(
+                  "$vat",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                ),
+                Text(
+                  "${total + vat}".toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: width * 0.05,
+                      color: Colors.black),
+                )
+              ],
+            ),
+            SizedBox(
+              height: width * 0.03,
+            ),
+            Divider(
+              thickness: width * 0.005,
+              color: Colors.black,
+              endIndent: width * 0.2,
+              indent: width * 0.2,
+            ),
+            SizedBox(
+              height: width * 0.018,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => printout(),));
+              },
+              child: Container(
+                height: width * 0.1,
+                width: width * 0.23,
+                decoration: BoxDecoration(
+                    color: colorConst.blue,
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+                child: Center(
+                  child: Text(
+                    "Print",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: width * 0.06,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ):SizedBox(),
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // scrolledUnderElevation: 0,
-        // elevation: 0,
+        scrolledUnderElevation: 0,
+        elevation: 0,
         backgroundColor: Colors.white,
         leading: InkWell(
           onTap: () {
@@ -98,219 +268,712 @@ class _plexbillNewState extends State<plexbillNew> {
           )
         ],
       ),
-      body: Padding(
-        padding:  EdgeInsets.all(width*0.03),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Customer ID :",style: TextStyle(fontSize: 16),),
-                        Text(" 6",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text("TRN Number :"),
-                        Text(" 6456",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(height: width*0.03,),
-                TextFormField(
-                  controller:nameController ,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(
-                    fontSize: 20,fontWeight: FontWeight.w500
-                  ),
-                  decoration: InputDecoration(
-                    suffixIcon:  Padding(
-                      padding:  EdgeInsets.all(width*0.002),
-                      child: Container(
-                        height: width*0.03,
-                        width: width*0.3,
-                        decoration: BoxDecoration(
-                            // color: colorConst.lightgrey1,
-                          borderRadius: BorderRadius.only(bottomRight:Radius.circular(width*0.02),topRight:Radius.circular(width*0.02))
-                        ),
-                        child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            isExpanded: true,
-                            // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
-            
-                            icon:Center(child: Padding(
-                              padding:  EdgeInsets.only(right: width*0.07),
-                              child: Icon(Icons.keyboard_arrow_down_outlined,),
-                            )) ,
-                            underline: SizedBox(),
-                            value: dropdownValue,
-                            items: customer.map<DropdownMenuItem<String>>((String? value) {
-                              return DropdownMenuItem(
-                                child: Center(child: Text(value!,style: TextStyle(fontSize: width*0.05,fontWeight: FontWeight.w600,),)),
-                                value: value,);
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue;
-                                nameController.text = newValue ?? '';
-                              });
-                            }
-                        ),
-                      ),
-                    ),
-                      hintText: "Customer Name",
-                      contentPadding: EdgeInsets.all(width*0.03),
-                      hintStyle: TextStyle(
-                          fontSize: width * 0.052,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(width*0.02)
-                      )
-                  ),
-                ),
-                SizedBox(
-                  height: width*0.03,
-                ),
-                Container(
-                  height: width*0.14,
-                  width: width*1,
-                  child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      // physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _selectedIndex = index;
-                                });
-                              },
-                              child: Container(
-                                height: width*0.095,
-                                width: width*0.299,
-                                // margin: EdgeInsets.only(left: width*0.035),
-                                decoration: BoxDecoration(
-                                    color:  _selectedIndex==index ? colorConst.blue : Colors.white,
-                                    borderRadius: BorderRadius.circular(width*0.02),
-                                  border: Border.all(width: width*0.002)
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      All[index]["text"],
-                                      style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
-                                    ),
-                                    SizedBox(width: width*0.02,),
-                                    Icon(All[index]["icon"],size: width*0.05,color:_selectedIndex==index ? Colors.white: Colors.black ,),
-                                  ],
-                                ),
-                                
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                            width:width*0.02
-                        );
-                      },
-                      itemCount: All.length
-                  ),
-                ),
-                if(_selectedIndex==1&&category=="")
-                  Container(),
-                // if(_selectedIndex==2&&category=="")
-                //   Container(),
-                // if(_selectedIndex==1)
-                if(_selectedIndex==0)
-                GridView.builder(
-                  itemCount: product.length,
-                    gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 0.62,
-                        crossAxisSpacing: width*0.01,
-                        mainAxisSpacing: width*0.01,
-                        crossAxisCount: 3),
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, catindex) {
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            _selectedIndex=1;
-                            category=product[catindex]["text"];
-                            setState(() {
+      body:SingleChildScrollView(
+        child: Container(
+          child: Wrap(
+            runSpacing: 20,
+            children: [
+              plexbill(),
+              _selectedIndex==0?itemstab():SizedBox(),
+              _selectedIndex==1?BillItems():SizedBox(),
+        
+              _selectedIndex==2?Cart():SizedBox()
+            ],
+          ),
+        ),
+      )
 
-                            });
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => cart(fruits: frui, vegitalbles: [],),));
-                          },
+    );
+  }
+  Widget plexbill(){
+    return Column(
+      children: [
+        Padding(
+          padding:  EdgeInsets.all(width*0.03),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text("Customer ID :",style: TextStyle(fontSize: 16),),
+                          Text(" 6",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("TRN Number :"),
+                          Text(" 6456",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: width*0.03,),
+                  TextFormField(
+                    controller:nameController ,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(
+                        fontSize: 20,fontWeight: FontWeight.w500
+                    ),
+                    decoration: InputDecoration(
+                        suffixIcon:  Padding(
+                          padding:  EdgeInsets.all(width*0.002),
                           child: Container(
-                            height: width*0.35,
-                            width: width*0.26,
+                            height: width*0.03,
+                            width: width*0.287,
                             decoration: BoxDecoration(
-                                color: colorConst.blue,
-                                borderRadius: BorderRadius.circular(width*0.02)
+                              // color: colorConst.lightgrey1,
+                                borderRadius: BorderRadius.only(bottomRight:Radius.circular(width*0.02),topRight:Radius.circular(width*0.02))
                             ),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: width*0.02,
-                                ),
-                                Container(
-                                  height: width*0.15,
-                                  width: width*0.22,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    image: DecorationImage(image: AssetImage(product[catindex]["image1"]),fit: BoxFit.cover,),
-                                    borderRadius: BorderRadius.circular(width*0.012)
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: width*0.01,
-                                ),
-                                Text(product[catindex]["text"],style: TextStyle(fontSize: 20,color: Colors.white),),
-                                SizedBox(
-                                  height: width*0.01,
-                                ),
-                                Container(
-                                  height: width*0.06,
-                                  width: width*0.15,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    borderRadius: BorderRadius.circular(width*0.01)
-                                  ),
-                                  child: Center(child: Text("Select",style: TextStyle(fontWeight: FontWeight.w600),)),
-                                )
-                                                ],
-                            )
-                                              ),
+                            child: DropdownButton(
+                                dropdownColor: Colors.white,
+                                isExpanded: true,
+                                // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
+
+                                icon:Row(
+                                  children: [
+                                    Center(child: Padding(
+                                      padding:  EdgeInsets.only(right: width*0.07),
+                                      child: Icon(Icons.keyboard_arrow_down_outlined,),
+                                    )),
+                                    InkWell(
+                                      onTap: () {
+                                        if (nameController.text.isNotEmpty) {
+                                          // Check if the name already exists in the list
+                                          if (!customer.contains(nameController.text)) {
+                                            setState(() {
+                                              // Add the typed name to the customer list
+                                              customer.add(nameController.text);
+                                              // Update the dropdown value with the newly added customer
+                                              dropdownValue = nameController.text;
+                                              // Clear the text field after adding
+                                              nameController.clear();
+                                            });
+                                          } else {
+                                            // Optional: You can show a message or handle it gracefully if the name is already added
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                              content: Text("Name already exists!"),
+                                            ));
+                                          }
+                                        }
+                                      },
+                                      child: Container(
+                                        height: width*0.06,
+                                        width: width*0.12,
+                                        decoration: BoxDecoration(
+                                            color: colorConst.blue,
+                                            borderRadius: BorderRadius.circular(width*0.01)
+                                        ),
+                                        child: Center(child: Text("Add",style: TextStyle(color: Colors.white),)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: width*0.03,
+                                    )
+                                  ],
+                                ) ,
+                                underline: SizedBox(),
+                                value: dropdownValue,
+                                items: customer.map<DropdownMenuItem<String>>((String? value) {
+                                  return DropdownMenuItem(
+                                    child: Center(child: Text(value!,style: TextStyle(fontSize: width*0.05,fontWeight: FontWeight.w600,),)),
+                                    value: value,);
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValue;
+                                    nameController.text = newValue ?? '';
+                                  });
+                                }
+                            ),
+                          ),
+                        ),
+                        hintText: "Customer Name",
+                        contentPadding: EdgeInsets.all(width*0.03),
+                        hintStyle: TextStyle(
+                            fontSize: width * 0.052,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(width*0.02)
                         )
-                    ]
-                    );
-                  },
-                ),
-                if(_selectedIndex==1)
-                    billItems(category:category),
-              ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: width*0.03,
+                  ),
+                  Container(
+                    height: width*0.10,
+                    width: width*1,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        // physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                    if(_selectedIndex==2){
+                                      b=items;
+                                      totalprice();
+                                      tascprice();
+                                      vatAdd();
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  height: width*0.095,
+                                  width: width*0.299,
+                                  // margin: EdgeInsets.only(left: width*0.035),
+                                  decoration: BoxDecoration(
+                                      color:  _selectedIndex==index ? colorConst.blue : Colors.white,
+                                      borderRadius: BorderRadius.circular(width*0.02),
+                                      border: Border.all(width: width*0.002)
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        All[index]["text"],
+                                        style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
+                                      ),
+                                      SizedBox(width: width*0.02,),
+                                      Icon(All[index]["icon"],size: width*0.05,color:_selectedIndex==index ? Colors.white: Colors.black ,),
+                                    ],
+                                  ),
+
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                              width:width*0.02
+                          );
+                        },
+                        itemCount: All.length
+                    ),
+                  ),
+                  // if(_selectedIndex==2&&category=="")
+                  //   Container(),
+                  // if(_selectedIndex==1)
+                  // -_selectedIndex==2?Cart():SizedBox(),
+
+                  // _selectedIndex==1?billItems(category:category):SizedBox(),
+
+                  // _selectedIndex==2? cart(category:category):SizedBox()
+
+                ],
+              ),
             ),
           ),
         ),
-      ),
+      ],
+    );
+  }
+  Widget itemstab(){
+    return GridView.builder(
+      itemCount: product.length,
+      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 0.62,
+          crossAxisSpacing: width*0.01,
+          mainAxisSpacing: width*0.01,
+          crossAxisCount: 3),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, catindex) {
+        return Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  _selectedIndex=1;
+                  category=product[catindex]["text"];
+                  setState(() {
+
+                  });
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => cart(fruits: frui, vegitalbles: [],),));
+                },
+                child: Container(
+                    height: width*0.35,
+                    width: width*0.26,
+                    decoration: BoxDecoration(
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width*0.02)
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: width*0.02,
+                        ),
+                        Container(
+                          height: width*0.15,
+                          width: width*0.22,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              image: DecorationImage(image: AssetImage(product[catindex]["image1"]),fit: BoxFit.cover,),
+                              borderRadius: BorderRadius.circular(width*0.012)
+                          ),
+                        ),
+                        SizedBox(
+                          height: width*0.01,
+                        ),
+                        Text(product[catindex]["text"],style: TextStyle(fontSize: 20,color: Colors.white),),
+                        SizedBox(
+                          height: width*0.01,
+                        ),
+                        Container(
+                          height: width*0.06,
+                          width: width*0.15,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(width*0.01)
+                          ),
+                          child: Center(child: Text("Select",style: TextStyle(fontWeight: FontWeight.w600),)),
+                        )
+                      ],
+                    )
+                ),
+              )
+            ]
+        );
+      },
+    );
+  }
+  Widget BillItems(){
+    return Column(
+      children: [
+        if(category=="Vegitables")
+          GridView.builder(
+            itemCount: vegitalbles.length,
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.6,
+                crossAxisSpacing: width*0.01,
+                mainAxisSpacing: width*0.01,
+                crossAxisCount: 4),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Container(
+                    height: width*0.37,
+                    width: width*0.26,
+                    decoration: BoxDecoration(
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width*0.02)
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: width*0.02,
+                        ),
+                        Container(
+                          height: width*0.12,
+                          width: width*0.18,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              image: DecorationImage(image: AssetImage(vegitalbles[index]["image1"]),fit: BoxFit.cover,),
+                              borderRadius: BorderRadius.circular(width*0.012)
+                          ),
+                        ),
+                        Text(vegitalbles[index]["text"],style: TextStyle(fontSize: 15,color: Colors.white),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("AED",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white),),
+                            SizedBox(
+                              width: width*0.01,
+                            ),
+                            Text(vegitalbles[index]["Price"].toString(),style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,color: Colors.white)),
+                          ],
+                        ),
+
+                        vegitalbles[index]["quantity"] != 0
+                            ? Container(
+                          height: width * 0.08,
+                          width: width * 0.182,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(width * 0.012),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    vegitalbles[index]["quantity"]--;
+                                  });
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  color: Colors.black,
+                                  size: 20,
+                                ),
+                              ),
+                              Text(
+                                vegitalbles[index]["quantity"].toString(),
+                                style: TextStyle(color: Colors.black, fontSize: 18),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    vegitalbles[index]["quantity"]++;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: width * 0.05,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                            : InkWell(
+                          onTap: () {
+                            setState(() {
+                              vegitalbles[index]["quantity"]++;
+                              items.add(vegitalbles[index]);
+                            });
+                          },
+                          child: Container(
+                            height: width * 0.08,
+                            width: width * 0.182,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(width * 0.012),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Add item",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        if(category=="Fruits")
+          GridView.builder(
+            itemCount: fruits.length,
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.62,
+                crossAxisSpacing: width*0.01,
+                mainAxisSpacing: width*0.01,
+                crossAxisCount: 4),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Container(
+                    height: width*0.35,
+                    width: width*0.26,
+                    decoration: BoxDecoration(
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width*0.02)
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: width*0.02,
+                        ),
+                        Container(
+                          height: width*0.12,
+                          width: width*0.18,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              image: DecorationImage(image: AssetImage(fruits[index]["image1"]),fit: BoxFit.cover,),
+                              borderRadius: BorderRadius.circular(width*0.012)
+                          ),
+                        ),
+                        Text(fruits[index]["text"],style: TextStyle(fontSize: 15,color: Colors.white),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("AED",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white),),
+                            SizedBox(
+                              width: width*0.01,
+                            ),
+                            Text(fruits[index]["Price"].toString(),style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,color: Colors.white)),
+                          ],
+                        ),
+                        fruits[index]["quantity"] != 0
+                            ? Container(
+                          height: width * 0.08,
+                          width: width * 0.182,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(width * 0.012),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    fruits[index]["quantity"]--;
+                                  });
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  color: Colors.black,
+                                  size: 20,
+                                ),
+                              ),
+                              Text(
+                                fruits[index]["quantity"].toString(),
+                                style: TextStyle(color: Colors.black, fontSize: 18),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    fruits[index]["quantity"]++;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: width * 0.05,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                            : InkWell(
+                          onTap: () {
+                            setState(() {
+                              fruits[index]["quantity"]++;
+                              items.add(fruits[index]);
+                            });
+                          },
+                          child: Container(
+                            height: width * 0.08,
+                            width: width * 0.182,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(width * 0.012),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Add item",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        )
+
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+      ],
+    );
+  }
+  Widget Cart(){
+    return Column(
+      children: [
+        a.isEmpty
+            ? Center(
+          child: Text(
+            "Empty",
+            style: TextStyle(
+                fontSize: width * 0.07, color: Colors.white),
+          ),
+        )
+            : Column(
+              children: [
+                ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: a.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Center(
+                          child: Container(
+                            height: width * 0.25,
+                            width: width * 0.89,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurStyle: BlurStyle.normal,
+                                      color: Colors.black.withOpacity(0.09),
+                                      offset: Offset(0, 2),
+                                      spreadRadius: 1,
+                                      blurRadius: 9)
+                                ],
+                                borderRadius:
+                                BorderRadius.circular(width * 0.03)),
+                            child: Padding(
+                              padding: EdgeInsets.all(width * 0.03),
+                              child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: width * 0.5,
+                                      width: width * 0.47,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          Container(
+                                              height: width * 0.18,
+                                              width: width * 0.18,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        a[index]["image1"]),
+                                                    fit: BoxFit.fill),
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    width * 0.04),
+                                              )),
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                height: width * 0.02,
+                                              ),
+                                              Text(
+                                                a[index]['text'],
+                                                style: TextStyle(
+                                                    fontSize:
+                                                    width * 0.052),
+                                              ),
+                                              Text(
+                                                a[index]["Price"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize:
+                                                    width * 0.06),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    a[index]["quantity"] != 0
+                                        ? Container(
+                                      height: width * 0.095,
+                                      width: width * 0.22,
+                                      decoration: BoxDecoration(
+                                          color: colorConst.blue,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              width * 0.03)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              a[index]["quantity"]--;
+                                              if (a[index]
+                                              ["quantity"] ==
+                                                  0) {
+                                                // Remove the item if quantity becomes zero
+                                                a.removeAt(index);
+                                              }
+                                              tascprice();
+                                              vatAdd();
+                                              setState(() {});
+                                            },
+                                            child: const Icon(
+                                              Icons.remove,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            a[index]["quantity"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              a[index]["quantity"]++;
+                                              tascprice();
+                                              vatAdd();
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                        : InkWell(
+                                      onTap: () {
+                                        a[index]["quantity"]++;
+                                        tascprice();
+                                        vatAdd();
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        height: width * 0.095,
+                                        width: width * 0.22,
+                                        decoration: BoxDecoration(
+                                          color: colorConst.blue,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              width * 0.03),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                              "Add item",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                    )
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      height: width * 0.025,
+                    );
+                  },
+                ),
+                SizedBox(height: width*0.53,)
+              ],
+            ),
+      ],
     );
   }
 }

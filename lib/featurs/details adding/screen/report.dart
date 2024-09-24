@@ -335,7 +335,10 @@ class _ReportsTabState extends State<ReportsTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
         elevation: 0,
         title: Text("Report", style: TextStyle(
             fontSize: width * 0.06, fontWeight: FontWeight.w700),),
@@ -528,9 +531,9 @@ class _ReportsTabState extends State<ReportsTab> {
                                   ),
                                   MySeparator(),
 
-                                  _total("total amount", "AED " + total_amount.toString()),
+                                  _total("total amount",   total_amount.toString()),
                                   _total(
-                                      "total commission", "AED " + total_commission.toString()),
+                                      "total commission",  total_commission.toString()),
 
                                 ],
                               )),

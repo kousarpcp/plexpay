@@ -9,6 +9,8 @@ import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication
 import 'package:plexpay/featurs/details%20adding/screen/splashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'featurs/details adding/plexBill/plexbill_print.dart';
+import 'featurs/details adding/plexBill/print.dart';
 import 'featurs/details adding/screen/BottomNavigation.dart';
 
 import 'featurs/details adding/screen/Reacharge.dart';
