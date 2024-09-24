@@ -32,7 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex = 0;
   var prefs1;
   getLogin() async {
-    prefs1 = await getSharedPrefrence1("username");
+    prefs1 = await getSharedPrefrence1("username")!=""?getSharedPrefrence1("username"):null;
   }
 
    List<Widget> Ann = [

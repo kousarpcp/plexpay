@@ -37,31 +37,31 @@ class _localState extends State<local> {
 
    List All = [
      {
-       "Size":50.0,
+       "Size":width*0.15,
        "text":"All",
      },
     {
-      "Size":80.0,
+      "Size":width*0.25,
       "text":"Prepaid",
     },
     {
-      "Size":80.0,
+      "Size":width*0.3,
       "text":"Voucher",
     },
     {
-      "Size":110.0,
+      "Size":width*0.3,
       "text":"Gaming Card",
     },
     {
-      "Size":93.0,
+      "Size":width*0.34,
       "text":"Electricity",
     },
     {
-      "Size":80.0,
+      "Size":width*0.32,
       "text":"Gift Card",
     },
     {
-      "Size":50.0,
+      "Size":width*0.2,
       "text":"DTH",
     },
   ];

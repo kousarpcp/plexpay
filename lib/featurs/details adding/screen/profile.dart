@@ -9,6 +9,7 @@ import 'package:plexpay/featurs/details%20adding/screen/collections.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/due_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
+import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/change_password.dart';
 import 'package:plexpay/featurs/details%20adding/screen/plexpay%20authentication/login_page.dart';
 import 'package:plexpay/featurs/details%20adding/screen/profit_summary.dart';
 import 'package:plexpay/featurs/details%20adding/screen/refund_history.dart';
@@ -605,6 +606,31 @@ class _profileState extends State<profile> {
                         ),
                         title: LocaleText(
                           "Refund History",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: width * 0.055),
+                        ),
+                        trailing: Icon(Icons.navigate_next),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangePIN(),
+                            ));
+                      },
+                      child: ListTile(
+                        leading: Padding(
+                          padding:  EdgeInsets.only(left: width*0.02),
+                          child: Icon(
+                            Icons.edit_outlined,
+                            size: width*0.07,
+                            color: colorConst.blue,
+                          ),
+                        ),
+                        title: Text(
+                          "Change Password",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: width * 0.055),
                         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Notification.dart';
@@ -39,8 +40,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Locales.init(['en','ar', 'hi']);
 
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
 // class MyApp extends StatelessWidget {
