@@ -189,112 +189,123 @@ class _localState extends State<local> {
         child: Center(child: CircularProgressIndicator(
           color: colorConst.blue,
         )),
-      ):Column(
-        children: [
-          Container(
-            height: width*0.15,
-            width: width*1,
-            child: ListView.separated(
-              shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                      child: Container(
-                        height: width*0.088,
-                      width: All[index]["Size"],
-                      margin: EdgeInsets.only(left: width*0.035),
-                      decoration: BoxDecoration(
-                        color:  _selectedIndex==index ? colorConst.blue : colorConst.lightgrey1,
-                        borderRadius: BorderRadius.circular(width*0.03)
-                      ),
-                      child: Center(
-                        child: LocaleText(
-                          All[index]["text"],
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
-                        ),
-                      ),
-                      ),
-                    )
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    width:width*0.01
-                  );
-                },
-                itemCount: All.length
-            ),
-          ),
-          _selectedIndex==6? DTH():SizedBox(),
-          _selectedIndex==5? Gift():SizedBox(),
-          _selectedIndex==4? Electricity():SizedBox(),
-          _selectedIndex==3? Gaming():SizedBox(),
-          _selectedIndex==2? Voucher():SizedBox(),
-          _selectedIndex==1? Prepaid():SizedBox(),
-          _selectedIndex==0? Column(
+      ):SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Wrap(
+            runSpacing: height*0.02,
             children: [
-              Container(
-                height: width*3.2,
-                child: GridView.builder(
-                  itemCount: items.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.9,
-                      crossAxisSpacing: width*0.01,
-                      mainAxisSpacing: width*0.01,
-                      crossAxisCount: 4),
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-
-                           selectItem(index);
-
-                          },
-                          child: Container(
-                            height: width*0.17,
-                            width: width*0.17,
-                            decoration: BoxDecoration(
-                                // color: Colors.blue,
-                                borderRadius: BorderRadius.circular(width * 0.03),
-                                image: DecorationImage(
-                                    image: NetworkImage(items[index]["sub_cat_logo"]),fit: BoxFit.cover)),
-                            // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
-                          ),
-                        ),
-                        SizedBox(
-                          height: width * 0.01,
-                        ),
-                        Text(
-                          items[index]["subcategory"],
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.03),
-                        )
-                      ],
-                    );
-                  },
-                ),
-              ),
+              tab(),
+              _selectedIndex==6? DTH():SizedBox(),
+              _selectedIndex==5? Gift():SizedBox(),
+              _selectedIndex==4? Electricity():SizedBox(),
+              _selectedIndex==3? Gaming():SizedBox(),
+              _selectedIndex==2? Voucher():SizedBox(),
+              _selectedIndex==1? Prepaid():SizedBox(),
+              _selectedIndex==0? AllProviders():SizedBox()
             ],
-          ):SizedBox()
-        ],
+          ),
+        ),
       ),
     );
 
+  }
+  Widget tab(){
+    return Container(
+      height: height*0.05,
+      width: width*2,
+      child: ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  child: Container(
+                    height: width*0.088,
+                    width: All[index]["Size"],
+                    margin: EdgeInsets.only(left: width*0.035),
+                    decoration: BoxDecoration(
+                        color:  _selectedIndex==index ? colorConst.blue : colorConst.lightgrey1,
+                        borderRadius: BorderRadius.circular(width*0.03)
+                    ),
+                    child: Center(
+                      child: LocaleText(
+                        All[index]["text"],
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(
+                width:width*0.01
+            );
+          },
+          itemCount: All.length
+      ),
+    );
+  }
+  Widget AllProviders(){
+    return Column(
+      children: [
+        Container(
+          child: GridView.builder(
+            itemCount: items.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.9,
+                crossAxisSpacing: width*0.01,
+                mainAxisSpacing: width*0.01,
+                crossAxisCount: 4),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+
+                      selectItem(index);
+
+                    },
+                    child: Container(
+                      height: width*0.17,
+                      width: width*0.17,
+                      decoration: BoxDecoration(
+                        // color: Colors.blue,
+                          borderRadius: BorderRadius.circular(width * 0.03),
+                          image: DecorationImage(
+                              image: NetworkImage(items[index]["sub_cat_logo"]),fit: BoxFit.cover)),
+                      // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                    ),
+                  ),
+                  SizedBox(
+                    height: width * 0.01,
+                  ),
+                  Text(
+                    items[index]["subcategory"],
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: width * 0.03),
+                  )
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
   Widget Prepaid (){
     return Column(

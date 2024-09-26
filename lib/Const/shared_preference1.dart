@@ -6,14 +6,14 @@ final currentusername1= "";
 final currentpassword1= "";
 final chek1= "checkbox";
 
-Future sharedPrefrence1(key,data) async {
+Future plexbilllogin(key,data) async {
 
   SharedPreferences prefs1 = await SharedPreferences.getInstance();
   prefs1.setString(key, data);
 
 }
 
-Future removesharedPrefrence1(key,data) async {
+Future removeplexbilllogin(key,data) async {
 
   SharedPreferences prefs1 = await SharedPreferences.getInstance();
   prefs1.remove(key);
@@ -21,7 +21,7 @@ Future removesharedPrefrence1(key,data) async {
 }
 
 
-Future getSharedPrefrence1(key) async {
+Future getplexbilllogin(key) async {
 
   var prefs1 = await SharedPreferences.getInstance();
   var value = prefs1.getString(key);

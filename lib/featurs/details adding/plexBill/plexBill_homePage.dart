@@ -38,8 +38,8 @@ class _Plexbill_homeState extends State<Plexbill_home> {
     setState(() {
       isLoading=true;
     });
-    var username= await getSharedPrefrence1("username");
-    var password= await getSharedPrefrence1("password");
+    var username= await getplexbilllogin("username");
+    var password= await getplexbilllogin("password");
     print(password);
     print(username);
     print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
@@ -124,9 +124,9 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                           ),
                           SizedBox(height: width*0.05,),
                           InkWell(onTap: () async {
-                            var id= await removesharedPrefrence1("userId1", null);
-                            var user= await removesharedPrefrence1("username", null);
-                            var pass= await removesharedPrefrence1("password", null);
+                            var id= await removeplexbilllogin("userId1", null);
+                            var user= await removeplexbilllogin("username", null);
+                            var pass= await removeplexbilllogin("password", null);
                             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => BottomNavigation(),), (route) => false);
                           },
                             child: Container(

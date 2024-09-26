@@ -216,13 +216,13 @@ class _plexbill_loginState extends State<plexbill_login> {
                                     isCheck=v!;
                                   });
                                   if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
-                                    var un = await sharedPrefrence1("username", userController.text.toString() );
-                                    var pass = await sharedPrefrence1("password", passwordController.text.toString());
-                                    var ck = await sharedPrefrence1(chek1, "true");
+                                    var un = await plexbilllogin("username", userController.text.toString() );
+                                    var pass = await plexbilllogin("password", passwordController.text.toString());
+                                    var ck = await plexbilllogin(chek1, "true");
                                   }else{
-                                    var un = await sharedPrefrence1(userController, null );
-                                    var pass = await sharedPrefrence1(passwordController, null);
-                                    var ck = await sharedPrefrence1(chek1, null);
+                                    var un = await plexbilllogin(userController, null );
+                                    var pass = await plexbilllogin(passwordController, null);
+                                    var ck = await plexbilllogin(chek1, null);
 
                                   }
                                 }),
@@ -252,9 +252,9 @@ class _plexbill_loginState extends State<plexbill_login> {
                           if ( rsp['users']!=null) {
                             print("jjjjjjjjjjjjjjjjjjj");
                             print(rsp);
-                            var id = await sharedPrefrence1("userId1", rsp['userdatas'][0]["username"]);
-                            var username= await sharedPrefrence1("username",rsp["userdatas"][0]["username"] );
-                            var password= await sharedPrefrence1("password",passwordController.text );
+                            var id = await plexbilllogin("userId1", rsp['userdatas'][0]["username"]);
+                            var username= await plexbilllogin("username",rsp["userdatas"][0]["username"] );
+                            var password= await plexbilllogin("password",passwordController.text );
 
                             print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
                             print("Login success");

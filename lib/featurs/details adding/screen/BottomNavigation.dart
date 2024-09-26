@@ -32,7 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex = 0;
   var prefs1;
   getLogin() async {
-    prefs1 = await getSharedPrefrence1("username");
+    prefs1 = await getplexbilllogin("userId1");
   }
 
    List<Widget> Ann = [
@@ -52,6 +52,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
   void initState() {
+    print(prefs1);
+    print("ggggggggggggggggggggggg");
     getLogin();
     // TODO: implement initState
     super.initState();
