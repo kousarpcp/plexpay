@@ -237,7 +237,7 @@ class _home_pageState extends State<home_page> {
         ),
         body:isCatLoading?Container(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(width*0.03),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -250,7 +250,7 @@ class _home_pageState extends State<home_page> {
                       period: Duration(seconds: 1),
                       enabled: true,
                       child: Container(
-                        height: width * 0.26,
+                        height: height * 0.13,
                         width: width * 0.93,
                         decoration: BoxDecoration(
                             color: colorConst.lightgrey1,
@@ -399,13 +399,13 @@ class _home_pageState extends State<home_page> {
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(width*0.02),
             child: Column(
               children: [
                 gap,
                 Center(
                   child: Container(
-                    height: width * 0.26,
+                    height: height * 0.13,
                     width: width * 0.93,
                     decoration: BoxDecoration(
                         color: colorConst.blue,
@@ -459,14 +459,14 @@ class _home_pageState extends State<home_page> {
                 ),
                 gap,
                 SizedBox(
-                  height: width*0.02,
+                  height: height*0.01,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // SizedBox(width: width*0.06,),
                     Container(
-                      height: width * 0.18,
+                      height: height * 0.09,
                       width: width * 0.82,
                       child: ListView.separated(
                           shrinkWrap: true,
@@ -476,7 +476,7 @@ class _home_pageState extends State<home_page> {
                             return Column(
                               children: [
                               Container(
-                              height: width*0.14,
+                              height: height*0.07,
                               width: width*0.14,
                               decoration: BoxDecoration(
                                   color: Colors.indigo.withOpacity(0.05),
@@ -501,7 +501,7 @@ class _home_pageState extends State<home_page> {
                   ],
                 ),
                 Container(
-                  height: width * 0.1,
+                  height: height * 0.052,
                   width: width * 0.56,
                   decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.15),
@@ -546,7 +546,7 @@ class _home_pageState extends State<home_page> {
                       ]),
                 ),
                 SizedBox(
-                  height: width * 0.07,
+                  height: height * 0.035,
                 ),
                 Container(
                   height: height*1.8,

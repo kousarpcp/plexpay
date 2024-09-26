@@ -300,7 +300,7 @@ class _plexbillNewState extends State<plexbillNew> {
                     children: [
                       Row(
                         children: [
-                          Text("Customer ID :",style: TextStyle(fontSize: 16),),
+                          LocaleText("Customer ID :",style: TextStyle(fontSize: 16),),
                           Text(" 6",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                         ],
                       ),

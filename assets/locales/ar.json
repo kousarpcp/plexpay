@@ -57,7 +57,7 @@
   "today's_receipt_:": "استلام اليوم :",
   "today's_payments_:": "مدفوعات اليوم :",
   "next": "مقبل",
-  "customer_iD": "الرقم التعريفي للعميل",
+  "customer_id_:": "الرقم التعريفي للعميل",
   "filter": "راووق",
   "transaction_id_:": "معرف المعاملة :"
 }

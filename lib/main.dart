@@ -43,9 +43,9 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]);
 }
 
 // class MyApp extends StatelessWidget {
