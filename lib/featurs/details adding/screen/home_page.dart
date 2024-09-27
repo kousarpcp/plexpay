@@ -147,7 +147,429 @@ class _home_pageState extends State<home_page> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return MediaQuery.of(context).size.width > 650?
+      DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          scrolledUnderElevation: 0,
+          toolbarHeight: height*0.1,
+          backgroundColor: Colors.white,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage(ImageConst.plexpay),
+                width: width * 0.09,
+              ),
+              Row(
+                children: [
+                  LocaleText(
+                    "WALLET :",
+                    style: TextStyle(fontSize: width * 0.015, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: width*0.01,
+                  ),
+                  Text(
+                    wallet_amount != null ? wallet_amount.toString() : "",
+                    style: TextStyle(fontSize: width * 0.015, color: Colors.black),
+                  )
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            Row(
+              children: [
+                InkWell(
+                  borderRadius: BorderRadius.circular(width*0.06),
+                  splashColor: colorConst.blue,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Notifications(),
+                        ));
+                  },
+                  child: CircleAvatar(
+                    radius: width*0.025,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(
+                      Icons.notifications_rounded,
+                      color: colorConst.blue,
+                      size: width*0.035,
+                    ),
+                  )
+                ),
+
+                InkWell(
+                    borderRadius: BorderRadius.circular(width*0.06),
+                    splashColor: colorConst.blue,
+                    onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => profile(
+                          ),
+                        ));
+                  },
+                  child: CircleAvatar(
+                    radius: width*0.025,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(
+                      CupertinoIcons.person_circle_fill,
+                      color: colorConst.blue,
+                      size: width*0.035,
+                    ),
+                  )
+                ),
+              ],
+            ),
+            SizedBox(
+              width: width * 0.02,
+            )
+          ],
+        ),
+        body:isCatLoading?Container(
+          child: Padding(
+            padding:  EdgeInsets.all(width*0.03),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  gap,
+                  Center(
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey.shade100,
+                      highlightColor: Colors.white,
+                      direction: ShimmerDirection.ltr,
+                      period: Duration(seconds: 1),
+                      enabled: true,
+                      child: Container(
+                        height: height * 0.13,
+                        width: width * 0.93,
+                        decoration: BoxDecoration(
+                            color: colorConst.lightgrey1,
+                            borderRadius: BorderRadius.circular(width * 0.03))
+                      ),
+                    ),
+                  ),
+                  gap,
+                  SizedBox(
+                    height: width*0.02,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // SizedBox(width: width*0.06,),
+                      Container(
+                        height: width * 0.18,
+                        width: width * 0.82,
+                        child: ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                  children: [
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey.shade100,
+                                      highlightColor: Colors.white,
+                                      direction: ShimmerDirection.btt,
+                                      enabled: true,
+                                      child: Container(
+                                          height: width*0.14,
+                                          width: width*0.14,
+                                          decoration: BoxDecoration(
+                                            color: CupertinoColors.systemGrey4,
+                                            borderRadius: BorderRadius.circular(width*0.03),
+                                          ),
+                                      ),
+                                    ),
+                                  ]
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: width * 0.03,
+                              );
+                            },
+                            itemCount: 5),
+                      )
+                    ],
+                  ),
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: width * 0.125,
+                      width: width * 0.56,
+                      decoration: BoxDecoration(
+                          color: CupertinoColors.systemGrey4,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: width * 0.03,
+                  ),
+                  Container(
+                    height: width*0.15,
+                    width: width*1,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey.shade100,
+                                highlightColor: Colors.white,
+                                direction: ShimmerDirection.btt,
+                                enabled: true,
+                                child: Container(
+                                  height: width*0.088,
+                                  width: width*0.25,
+                                  margin: EdgeInsets.only(left: width*0.035),
+                                  decoration: BoxDecoration(
+                                      color:  Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(width*0.03)
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                              width:width*0.01
+                          );
+                        },
+                        itemCount: 4
+                    ),
+                  ),
+                  Container(
+                    height: width*1.3,
+                    child: GridView.builder(
+                      itemCount: 12,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 0.9,
+                          crossAxisSpacing: width*0.01,
+                          mainAxisSpacing: width*0.01,
+                          crossAxisCount: 4),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Shimmer.fromColors(
+                              baseColor: Colors.grey.shade100,
+                              highlightColor: Colors.white,
+                              direction: ShimmerDirection.btt,
+                              enabled: true,
+                              child: Container(
+                                height: width*0.17,
+                                width: width*0.17,
+                                decoration: BoxDecoration(
+                                  // color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(width * 0.03),
+                                  color: Colors.grey.shade100,
+                                    ),
+                                // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          ),
+        ):
+        Padding(
+          padding:  EdgeInsets.all(width*0.01),
+          child: Column(
+            children: [
+              SizedBox(
+                height: height*0.02,
+              ),
+              Center(
+                child: Container(
+                  height: height * 0.14,
+                  width: width * 0.93,
+                  decoration: BoxDecoration(
+                      color: colorConst.blue,
+                      borderRadius: BorderRadius.circular(width * 0.03)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          LocaleText(
+                            "Free Vouchers",
+                            style: TextStyle(
+                                // softWrap: true, // Allows text to wrap to the next line
+                                // maxLines: null, // Allows unlimited lines
+                                overflow: TextOverflow.visible,
+                                fontSize: width*0.023, color: Colors.white),
+                          ),
+                          LocaleText(
+                            "Tap here to claim your free discount vouchers",
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                                fontSize: width * 0.01, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: width*0.15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "0",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: width*0.045,
+                            )
+                          ),
+                          Text(
+                            "%",
+                            style: GoogleFonts.poppins(
+                                fontSize: width * 0.045,
+                                color: Colors.lightBlue.shade200),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                height: height*0.03,
+              ),
+              Container(
+                height: height * 0.11,
+                // width: width * 0.46,
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                        Container(
+                        height: height*0.09,
+                        width: width*0.06,
+                        decoration: BoxDecoration(
+                            color: Colors.indigo.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(width*0.03),
+                        ),
+                            child: Padding(
+                              padding:  EdgeInsets.all(width*0.01),
+                              child: Image(image: AssetImage(a[index]["image1"],),
+                              ),
+                            )
+                      ),
+                        ]
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        width: width * 0.03,
+                      );
+                    },
+                    itemCount: a.length),
+              ),
+              SizedBox(
+                height: height*0.02,
+              ),
+              Container(
+                height: height * 0.07,
+                width: width * 0.26,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+                child: TabBar(
+                  splashBorderRadius:BorderRadius.circular(width*0.03),
+                    indicatorColor: Colors.transparent,
+                    labelColor: CupertinoColors.white,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicator: BoxDecoration(
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width*0.03)
+                    ),
+                    dividerColor: Colors.transparent,
+                    labelStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: width*0.015,
+                        fontWeight: FontWeight.w500
+                    ),
+                    unselectedLabelStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: width*0.015,
+                        fontWeight: FontWeight.w400
+                    ),
+                    onTap: (value) {
+
+                    },
+                    tabs: [
+                      Tab(
+                        child: Center(
+                            child: LocaleText(
+                          "Local",
+
+                        )),
+                      ),
+                      Tab(
+                        child: Center(
+                            child: LocaleText("International",
+                                // style: TextStyle(fontSize: width * 0.033)
+                            )),
+                      ),
+                    ]),
+              ),
+              SizedBox(
+                height: height * 0.035,
+              ),
+              Flexible(
+                child: Container(
+                  child: TabBarView(
+                    children: [
+                    Container(
+                      child: local(
+                        data:data
+                      ),
+                    ),
+                    Container(
+                      child: international(
+                        data:interlist
+                      ),
+                    ),
+                  ],
+                    physics: BouncingScrollPhysics(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+        :DefaultTabController(
       length: 2,
       child: Scaffold(
         resizeToAvoidBottomInset: false,

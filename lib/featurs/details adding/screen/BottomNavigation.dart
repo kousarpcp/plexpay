@@ -64,8 +64,56 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return SafeArea(
       child: Scaffold(
         body: prefs1==null?Ann[selectedIndex]:Ann1[selectedIndex],
-            
-        bottomNavigationBar: CurvedNavigationBar(
+
+
+        bottomNavigationBar:  MediaQuery.of(context).size.width > 650?
+        CurvedNavigationBar(
+          height: height*0.118,
+          backgroundColor:  Colors.white,
+
+          key: _bottomNavigationKey,
+          items: [
+            CurvedNavigationBarItem(label:Locales.string(context, 'Home'),labelStyle: TextStyle(
+              fontSize: width*0.015
+            ) , child:  Icon(Icons.home,size: width*0.03)),
+            CurvedNavigationBarItem(
+                child:  Icon(CupertinoIcons.chart_pie,size: width*0.03),
+                label:Locales.string(context, 'Collections'),
+                labelStyle: TextStyle(
+                fontSize: width*0.015
+            )),
+            CurvedNavigationBarItem(
+                child: Container(
+                  height: width*0.06,
+                  width: width*0.12,
+                  child: Image(image:AssetImage(ImageConst.xpay), fit: BoxFit.cover,),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                label: "",
+
+            ),
+            CurvedNavigationBarItem(
+              child: Icon(Icons.history,size: width*0.03),
+              label: Locales.string(context, 'History'),labelStyle: TextStyle(
+                fontSize: width*0.015
+            )
+            ),
+            CurvedNavigationBarItem(
+                child: Icon(Icons.sticky_note_2_outlined,size: width*0.03,),
+                label:Locales.string(context, 'PlexBill'),labelStyle: TextStyle(
+                fontSize: width*0.015
+            )
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          letIndexChange: (index) => true,
+        )
+            :CurvedNavigationBar(
           backgroundColor:  colorConst.blue,
           key: _bottomNavigationKey,
           // elevation: 0,
@@ -85,15 +133,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
             CurvedNavigationBarItem(
                 child:  Icon(CupertinoIcons.chart_pie), label:Locales.string(context, 'Collections')),
             CurvedNavigationBarItem(
-                child: Container(
-                  height: width*0.08,
-                  width: width*0.2,
-                  child: Image(image:AssetImage(ImageConst.xpay), fit: BoxFit.cover,),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                label: "",
-                
+              child: Container(
+                height: width*0.08,
+                width: width*0.2,
+                child: Image(image:AssetImage(ImageConst.xpay), fit: BoxFit.cover,),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              label: "",
+
             ),
             CurvedNavigationBarItem(
               child: Icon(Icons.history),
@@ -108,7 +156,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             });
           },
           letIndexChange: (index) => true,
-        ),
+        )
       ),
     );
   }
