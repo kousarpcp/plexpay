@@ -522,8 +522,6 @@ class _localState extends State<local> {
                           code:prepaidCategory[index]["ProviderCode"],
                           dash:prepaidCategory[index]["dash"],
                           iso:prepaidCategory[index]["CountryIso"]
-
-
                         ),));
                       },
                       child: Container(
