@@ -65,6 +65,36 @@ class _localState extends State<local> {
       "text":"DTH",
     },
   ];
+  List All2 = [
+    {
+      "Size":width*0.07,
+      "text":"All",
+    },
+    {
+      "Size":width*0.11,
+      "text":"Prepaid",
+    },
+    {
+      "Size":width*0.11,
+      "text":"Voucher",
+    },
+    {
+      "Size":width*0.14,
+      "text":"Gaming Card",
+    },
+    {
+      "Size":width*0.15,
+      "text":"Electricity",
+    },
+    {
+      "Size":width*0.13,
+      "text":"Gift Card",
+    },
+    {
+      "Size":width*0.07,
+      "text":"DTH",
+    },
+  ];
 
   int _selectedIndex = 0;
   bool tap=false;
@@ -211,7 +241,50 @@ class _localState extends State<local> {
 
   }
   Widget tab(){
-    return Container(
+    return MediaQuery.of(context).size.width > 650? Container(
+      height: height*0.06,
+      width: width*2,
+      child: ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  child: Container(
+                    height: height*0.06,
+                    width: All2[index]["Size"],
+                    margin: EdgeInsets.only(left: width*0.015),
+                    decoration: BoxDecoration(
+                        color:  _selectedIndex==index ? colorConst.blue : colorConst.lightgrey1,
+                        borderRadius: BorderRadius.circular(width*0.01)
+                    ),
+                    child: Center(
+                      child: LocaleText(
+                        All2[index]["text"],
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: width*0.015),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(
+                width:width*0.005
+            );
+          },
+          itemCount: All2.length
+      ),
+    ):Container(
       height: height*0.05,
       width: width*2,
       child: ListView.separated(
@@ -257,7 +330,57 @@ class _localState extends State<local> {
     );
   }
   Widget AllProviders(){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?
+    Column(
+      children: [
+        Container(
+          child: GridView.builder(
+            itemCount: items.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.9,
+                crossAxisSpacing: width*0.01,
+                mainAxisSpacing: width*0.01,
+                crossAxisCount: 8),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+
+                      selectItem(index);
+
+                    },
+                    child: Container(
+                      height: width*0.07,
+                      width: width*0.07,
+                      decoration: BoxDecoration(
+                        // color: Colors.blue,
+                          borderRadius: BorderRadius.circular(width * 0.01),
+                          image: DecorationImage(
+                              image: NetworkImage(items[index]["sub_cat_logo"]),fit: BoxFit.cover)),
+                      // child: Image.asset(images[index]["image1"],fit: BoxFit.fill,),
+                    ),
+                  ),
+                  SizedBox(
+                    height: width * 0.01,
+                  ),
+                  Text(
+                    items[index]["subcategory"],
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: width * 0.015),
+                  )
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    ):
+    Column(
       children: [
         Container(
           child: GridView.builder(
@@ -308,7 +431,67 @@ class _localState extends State<local> {
     );
   }
   Widget Prepaid (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?
+    Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.03),
+            LocaleText("Prepaid",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(height: height*0.01,),
+        Center(
+          child: GridView.builder(
+            itemCount: prepaidCategory.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.07,
+                crossAxisSpacing: width*0.01,
+                mainAxisSpacing: width*0.01,
+                crossAxisCount: 4),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+                              name: prepaidCategory[index]["subcategory"],
+                              image: prepaidCategory[index]["sub_cat_logo"],
+                            code:prepaidCategory[index]["ProviderCode"],
+                            dash:prepaidCategory[index]["dash"],
+                            iso:prepaidCategory[index]["CountryIso"]
+
+
+                          ),));
+                        },
+                        child: Container(
+                          height: height*0.3,
+                          width: width*0.18,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(prepaidCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(width*0.01)
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: width*0.01,),
+                  Text(prepaidCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),)
+                ],
+              );
+            },
+          ),
+        )
+      ],
+    ):
+    Column(
       children: [
         Row(
           children: [
@@ -316,7 +499,7 @@ class _localState extends State<local> {
             LocaleText("Prepaid",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
           ],
         ),
-        SizedBox(height: width*0.02,),
+        SizedBox(height: height*0.01,),
         GridView.builder(
           itemCount: prepaidCategory.length,
           shrinkWrap: true,
@@ -346,7 +529,7 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: width*0.35,
+                        height: height*0.3,
                         width: width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
@@ -357,7 +540,7 @@ class _localState extends State<local> {
                     ),
                   ],
                 ),
-                SizedBox(height: width*0.01,),
+                SizedBox(height: height*0.01,),
                 Text(prepaidCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.04),)
               ],
             );
@@ -367,7 +550,54 @@ class _localState extends State<local> {
     );
   }
   Widget Voucher (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?
+      Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.03,),
+            LocaleText("Voucher",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: height*0.01,
+        ),
+        GridView.builder(
+          itemCount: voucherCategory.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 4),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: height*0.3,
+                      width: width*0.18,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          image: DecorationImage(image: NetworkImage(voucherCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                          borderRadius: BorderRadius.circular(width*0.01)
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: height*0.01,),
+                Text(voucherCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),overflow: TextOverflow.ellipsis,)
+              ],
+            );
+          },
+        )
+      ],
+    ):
+      Column(
       children: [
         Row(
           children: [
@@ -418,7 +648,67 @@ class _localState extends State<local> {
     );
   }
   Widget Gaming  (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?
+    Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.03,),
+            LocaleText("Gaming Card",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: height*0.01,
+        ),
+        GridView.builder(
+          itemCount: gamingCategory.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 4),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                            name: gamingCategory[index]["subcategory"],
+                            image: gamingCategory[index]["sub_cat_logo"],
+                            code:gamingCategory[index]["ProviderCode"],
+                            voucher:"1",
+                            dash: gamingCategory[index]["dash"],
+                            iso:gamingCategory[index]["CountryIso"]
+                        ),));
+                      },
+                      child: Container(
+                        height: height*0.3,
+
+                        width: width*0.18,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(gamingCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(width*0.01)
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: height*0.01,),
+                Expanded(child: Text(gamingCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),textAlign: TextAlign.center,))
+              ],
+            );
+          },
+        )
+      ],
+    ):
+    Column(
       children: [
         Row(
           children: [
@@ -478,7 +768,64 @@ class _localState extends State<local> {
     );
   }
   Widget Electricity (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?
+    Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.03,),
+            LocaleText("Electricity",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: height*0.01,
+        ),
+        GridView.builder(
+          itemCount: electricityCategory.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 4),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
+                            iso:electricityCategory[index]["CountryIso"],
+                          code:electricityCategory[index]["ProviderCode"]!=null?electricityCategory[index]["ProviderCode"]:"",
+                          dash:electricityCategory[index]["dash"],
+                          image: electricityCategory[index]["sub_cat_logo"],
+                          name: electricityCategory[index]["subcategory"],
+                        ),));
+                      },
+                      child: Container(
+                        height: height*0.3,
+                        width: width*0.18,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(electricityCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(width*0.01)
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: height*0.01,),
+                Text(electricityCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.002),)
+              ],
+            );
+          },
+        )
+      ],
+    ):Column(
       children: [
         Row(
           children: [
@@ -508,7 +855,7 @@ class _localState extends State<local> {
                     InkWell(
                       onTap: () {
                         Navigator.push(context, CupertinoPageRoute(builder: (context) => ElcHome(
-                            iso:electricityCategory[index]["CountryIso"],
+                          iso:electricityCategory[index]["CountryIso"],
                           code:electricityCategory[index]["ProviderCode"]!=null?electricityCategory[index]["ProviderCode"]:"",
                           dash:electricityCategory[index]["dash"],
                           image: electricityCategory[index]["sub_cat_logo"],
@@ -537,7 +884,64 @@ class _localState extends State<local> {
     );
   }
   Widget Gift (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650? Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.03,),
+            LocaleText("Gift Card",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: height*0.01,
+        ),
+        GridView.builder(
+          itemCount: giftCategory.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: 4),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+                            name: giftCategory[index]["subcategory"],
+                            image: giftCategory[index]["sub_cat_logo"],
+                            code:giftCategory[index]["ProviderCode"],
+                            voucher:"1",
+                            dash: giftCategory[index]["dash"],
+                            iso:giftCategory[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+                        )));
+                      },
+                      child: Container(
+                        height: height*0.3,
+                        width: width*0.18,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(giftCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(width*0.01)
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: height*0.01,),
+                Text(giftCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),)
+              ],
+            );
+          },
+        )
+      ],
+    ):Column(
       children: [
         Row(
           children: [
@@ -601,8 +1005,8 @@ class _localState extends State<local> {
       children: [
         Row(
           children: [
-            SizedBox(width: width*0.05,),
-            LocaleText("DTH",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+            SizedBox(width: width*0.03,),
+            LocaleText("DTH",style: TextStyle(fontSize:width*0.025,fontWeight: FontWeight.w700),),
           ],
         ),
         GridView.builder(
@@ -614,7 +1018,7 @@ class _localState extends State<local> {
               childAspectRatio: 1.07,
               crossAxisSpacing: width*0.01,
               mainAxisSpacing: width*0.01,
-              crossAxisCount: 2),
+              crossAxisCount: 4),
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -632,19 +1036,19 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: width*0.35,
-                        width: width*0.37,
+                        height: height*0.3,
+                        width: width*0.18,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(dthCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(width*0.03)
+                            borderRadius: BorderRadius.circular(width*0.01)
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: width*0.01,),
-                Text(dthCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.037),)
+                SizedBox(height: height*0.01,),
+                Text(dthCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),)
               ],
             );
           },

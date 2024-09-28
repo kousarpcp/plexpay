@@ -406,10 +406,10 @@ class _home_pageState extends State<home_page> {
               Center(
                 child: Container(
                   height: height * 0.14,
-                  width: width * 0.93,
+                  width: width * 0.6,
                   decoration: BoxDecoration(
                       color: colorConst.blue,
-                      borderRadius: BorderRadius.circular(width * 0.03)),
+                      borderRadius: BorderRadius.circular(width * 0.02)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -476,7 +476,7 @@ class _home_pageState extends State<home_page> {
                         width: width*0.06,
                         decoration: BoxDecoration(
                             color: Colors.indigo.withOpacity(0.05),
-                            borderRadius: BorderRadius.circular(width*0.03),
+                            borderRadius: BorderRadius.circular(width*0.02),
                         ),
                             child: Padding(
                               padding:  EdgeInsets.all(width*0.01),
@@ -502,15 +502,15 @@ class _home_pageState extends State<home_page> {
                 width: width * 0.26,
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(width * 0.03)),
+                    borderRadius: BorderRadius.circular(width * 0.02)),
                 child: TabBar(
-                  splashBorderRadius:BorderRadius.circular(width*0.03),
+                  splashBorderRadius:BorderRadius.circular(width*0.02),
                     indicatorColor: Colors.transparent,
                     labelColor: CupertinoColors.white,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicator: BoxDecoration(
                         color: colorConst.blue,
-                        borderRadius: BorderRadius.circular(width*0.03)
+                        borderRadius: BorderRadius.circular(width*0.02)
                     ),
                     dividerColor: Colors.transparent,
                     labelStyle: TextStyle(
