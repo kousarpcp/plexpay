@@ -195,7 +195,7 @@ class _dataPacksState extends State<dataPacks> {
               Column(
                 children: [
                   SizedBox(
-                    height: width * 0.04,
+                    height: height * 0.02,
                   ),
                   Row(
                     children: [
@@ -214,7 +214,7 @@ class _dataPacksState extends State<dataPacks> {
                 ],
               ),
               SizedBox(
-                height: width * 0.05,
+                height: height * 0.02,
               ),
               ListView.separated(
                   scrollDirection: Axis.vertical,
@@ -235,7 +235,7 @@ class _dataPacksState extends State<dataPacks> {
                         children: [
                           Center(
                             child: Container(
-                              height: width * 0.362,
+                              height: height * 0.2,
                               width: width * 0.84,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -250,6 +250,7 @@ class _dataPacksState extends State<dataPacks> {
                               child: Padding(
                                 padding: EdgeInsets.all(width * 0.03),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     // Row(
                                     //   children: [
@@ -267,7 +268,7 @@ class _dataPacksState extends State<dataPacks> {
                                     //   ],
                                     // ),
                                     SizedBox(
-                                      height: width * 0.02,
+                                      height: height * 0.01,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -299,12 +300,12 @@ class _dataPacksState extends State<dataPacks> {
                                       ],
                                     ),
                                     Divider(
-                                      thickness: width * 0.002,
+                                      thickness: height * 0.001,
                                       // indent: width * 0.035,
                                       // endIndent: width * 0.035,
                                     ),
                                     SizedBox(
-                                      height: width * 0.01,
+                                      height: height * 0.005,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -325,7 +326,7 @@ class _dataPacksState extends State<dataPacks> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: width * 0.01,
+                                      height: height * 0.006,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -367,7 +368,7 @@ class _dataPacksState extends State<dataPacks> {
                             ),
                           ),
                           SizedBox(
-                            height: width * 0.04,
+                            height: height * 0.02,
                           ),
                         ],
                       ),

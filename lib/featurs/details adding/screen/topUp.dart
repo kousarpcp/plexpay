@@ -239,7 +239,7 @@ class _topUpState extends State<topUp> {
               Column(
                 children: [
                   SizedBox(
-                    height: width * 0.04,
+                    height: height * 0.02,
                   ),
                   Row(
                     children: [
@@ -258,7 +258,7 @@ class _topUpState extends State<topUp> {
                 ],
               ),
               SizedBox(
-                height: width * 0.05,
+                height: height * 0.02,
               ),
               ListView.separated(
                   scrollDirection: Axis.vertical,
@@ -279,7 +279,7 @@ class _topUpState extends State<topUp> {
                           },
                           child: Center(
                             child: Container(
-                              height: width * 0.366,
+                              height: height * 0.2,
                               width: width * 0.84,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -310,7 +310,7 @@ class _topUpState extends State<topUp> {
                                     //   ],
                                     // ),
                                     SizedBox(
-                                      height: width * 0.01,
+                                      height: height * 0.005,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -335,172 +335,172 @@ class _topUpState extends State<topUp> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      width * 0.07)),
-                                              builder: (context) {
-                                                return Container(
-                                                  height: width * 0.7,
-                                                  width: width * 1,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                      BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(
-                                                          width * 0.07,
-                                                        ),
-                                                        topRight:
-                                                        Radius.circular(
-                                                          width * 0.07,
-                                                        ),
-                                                      )),
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: width * 0.033,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .end,
-                                                        children: [
-                                                          InkWell(
-                                                            onTap: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Image.asset(
-                                                              ImageConst.remove,
-                                                              width:
-                                                              width * 0.05,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width:
-                                                            width * 0.042,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(
-                                                            width * 0.042),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  AED[index][
-                                                                  "Text10"],
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .w900,
-                                                                      fontSize:
-                                                                      width *
-                                                                          0.07),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height:
-                                                              width * 0.03,
-                                                            ),
-                                                            Text(
-                                                              AED[index]
-                                                              ["Text11"],
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                  width *
-                                                                      0.045,
-                                                                  color: Colors
-                                                                      .grey),
-                                                            ),
-                                                            SizedBox(
-                                                                height: width *
-                                                                    0.03),
-                                                            Row(
-                                                              children: [
-                                                                Icon(
-                                                                  Icons
-                                                                      .calendar_month_outlined,
-                                                                  weight:
-                                                                  width *
-                                                                      0.03,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: width *
-                                                                      0.025,
-                                                                ),
-                                                                Text(
-                                                                    AED[index][
-                                                                    "Text12"],
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                        width *
-                                                                            0.045,
-                                                                        color: Colors
-                                                                            .grey))
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: width * 0.06,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              CupertinoPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                    reacharge(
-                                                                      number: widget
-                                                                          .number, dash: '', code: '',
-                                                                    ),
-                                                              ));
-                                                        },
-                                                        child: Container(
-                                                          height: width * 0.1,
-                                                          width: width * 0.68,
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                              Colors.indigo,
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  width *
-                                                                      0.05)),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Recharge",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                                  fontSize:
-                                                                  width *
-                                                                      0.06),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            );
+                                            // showModalBottomSheet(
+                                            //   context: context,
+                                            //   isScrollControlled: true,
+                                            //   shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //       BorderRadius.circular(
+                                            //           width * 0.07)),
+                                            //   builder: (context) {
+                                            //     return Container(
+                                            //       height: width * 0.7,
+                                            //       width: width * 1,
+                                            //       decoration: BoxDecoration(
+                                            //           color: Colors.white,
+                                            //           borderRadius:
+                                            //           BorderRadius.only(
+                                            //             topLeft:
+                                            //             Radius.circular(
+                                            //               width * 0.07,
+                                            //             ),
+                                            //             topRight:
+                                            //             Radius.circular(
+                                            //               width * 0.07,
+                                            //             ),
+                                            //           )),
+                                            //       child: Column(
+                                            //         children: [
+                                            //           SizedBox(
+                                            //             height: width * 0.033,
+                                            //           ),
+                                            //           Row(
+                                            //             mainAxisAlignment:
+                                            //             MainAxisAlignment
+                                            //                 .end,
+                                            //             children: [
+                                            //               InkWell(
+                                            //                 onTap: () {
+                                            //                   Navigator.pop(
+                                            //                       context);
+                                            //                 },
+                                            //                 child: Image.asset(
+                                            //                   ImageConst.remove,
+                                            //                   width:
+                                            //                   width * 0.05,
+                                            //                 ),
+                                            //               ),
+                                            //               SizedBox(
+                                            //                 width:
+                                            //                 width * 0.042,
+                                            //               ),
+                                            //             ],
+                                            //           ),
+                                            //           Padding(
+                                            //             padding: EdgeInsets.all(
+                                            //                 width * 0.042),
+                                            //             child: Column(
+                                            //               children: [
+                                            //                 Row(
+                                            //                   children: [
+                                            //                     Text(
+                                            //                       AED[index][
+                                            //                       "Text10"],
+                                            //                       style: TextStyle(
+                                            //                           fontWeight:
+                                            //                           FontWeight
+                                            //                               .w900,
+                                            //                           fontSize:
+                                            //                           width *
+                                            //                               0.07),
+                                            //                     ),
+                                            //                   ],
+                                            //                 ),
+                                            //                 SizedBox(
+                                            //                   height:
+                                            //                   width * 0.03,
+                                            //                 ),
+                                            //                 Text(
+                                            //                   AED[index]
+                                            //                   ["Text11"],
+                                            //                   style: TextStyle(
+                                            //                       fontSize:
+                                            //                       width *
+                                            //                           0.045,
+                                            //                       color: Colors
+                                            //                           .grey),
+                                            //                 ),
+                                            //                 SizedBox(
+                                            //                     height: width *
+                                            //                         0.03),
+                                            //                 Row(
+                                            //                   children: [
+                                            //                     Icon(
+                                            //                       Icons
+                                            //                           .calendar_month_outlined,
+                                            //                       weight:
+                                            //                       width *
+                                            //                           0.03,
+                                            //                     ),
+                                            //                     SizedBox(
+                                            //                       width: width *
+                                            //                           0.025,
+                                            //                     ),
+                                            //                     Text(
+                                            //                         AED[index][
+                                            //                         "Text12"],
+                                            //                         style: TextStyle(
+                                            //                             fontSize:
+                                            //                             width *
+                                            //                                 0.045,
+                                            //                             color: Colors
+                                            //                                 .grey))
+                                            //                   ],
+                                            //                 )
+                                            //               ],
+                                            //             ),
+                                            //           ),
+                                            //           SizedBox(
+                                            //             height: width * 0.06,
+                                            //           ),
+                                            //           InkWell(
+                                            //             onTap: () {
+                                            //               Navigator.push(
+                                            //                   context,
+                                            //                   CupertinoPageRoute(
+                                            //                     builder:
+                                            //                         (context) =>
+                                            //                         reacharge(
+                                            //                           number: widget
+                                            //                               .number, dash: '', code: '',
+                                            //                         ),
+                                            //                   ));
+                                            //             },
+                                            //             child: Container(
+                                            //               height: width * 0.1,
+                                            //               width: width * 0.68,
+                                            //               decoration: BoxDecoration(
+                                            //                   color:
+                                            //                   Colors.indigo,
+                                            //                   borderRadius:
+                                            //                   BorderRadius
+                                            //                       .circular(
+                                            //                       width *
+                                            //                           0.05)),
+                                            //               child: Center(
+                                            //                 child: Text(
+                                            //                   "Recharge",
+                                            //                   style: TextStyle(
+                                            //                       color: Colors
+                                            //                           .white,
+                                            //                       fontWeight:
+                                            //                       FontWeight
+                                            //                           .w800,
+                                            //                       fontSize:
+                                            //                       width *
+                                            //                           0.06),
+                                            //                 ),
+                                            //               ),
+                                            //             ),
+                                            //           )
+                                            //         ],
+                                            //       ),
+                                            //     );
+                                            //   },
+                                            // );
                                           },
                                           child: Container(
-                                            height: width * 0.052,
+                                            height: height * 0.042,
                                             width: width * 0.2,
                                             child: Row(
                                               mainAxisAlignment:
@@ -520,12 +520,12 @@ class _topUpState extends State<topUp> {
                                       ],
                                     ),
                                     Divider(
-                                      thickness: width * 0.002,
+                                      thickness: height * 0.001,
                                       // indent: width * 0.035,
                                       // endIndent: width * 0.035,
                                     ),
                                     SizedBox(
-                                      height: width * 0.016,
+                                      height: height * 0.01,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -546,7 +546,7 @@ class _topUpState extends State<topUp> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: width * 0.01,
+                                      height: height * 0.005,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -573,7 +573,7 @@ class _topUpState extends State<topUp> {
                           ),
                         ),
                         SizedBox(
-                          height: width * 0.04,
+                          height: height * 0.02,
                         ),
                       ],
                     );

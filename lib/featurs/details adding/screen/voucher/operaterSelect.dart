@@ -57,7 +57,68 @@ class _OperaterSelectState extends State<OperaterSelect> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650?
+    Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text("Select Provider",style: TextStyle(
+            color: colorConst.blue,
+            fontSize: width*0.03,
+            fontWeight: FontWeight.bold
+        ),),
+      ),
+      body: isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): arrList == null
+          ? Center(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/no.png",
+                width: MediaQuery.of(context).size.width * 0.6,
+              ),
+              Text(
+                "No Data",
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * 0.02,
+                    fontWeight: FontWeight.w600),
+              )
+            ],
+          ),
+        ),
+      )
+          : Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Scrollbar(
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            physics: BouncingScrollPhysics(),
+            separatorBuilder: (context, index) => SizedBox(
+              height: height*0.01,
+            ),
+            shrinkWrap: true,
+            itemCount: arrList != null ? arrList.length : 0,
+            itemBuilder: (context, index) {
+              final item = arrList != null ? arrList[index] : null;
+              return Countries(item, index);
+            },
+          ),
+        ),
+      ),
+
+    ):
+    Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -119,9 +180,54 @@ class _OperaterSelectState extends State<OperaterSelect> {
     );
   }
   Countries(var item, int index) {
-    final ss = MediaQuery.of(context).size;
 
-    return GestureDetector(
+
+    return MediaQuery.of(context).size.width > 650?
+    InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+          code: item['ProviderCode'].toString(),
+          voucher: widget.voucher.toString(),
+          image: item["logo"].toString(),
+          name: item["provider_name"].toString(),
+          dash: widget.dash,
+        ),));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric( vertical: height*0.015),
+        child: Row(
+          children: [
+            SizedBox(
+              width: width * 0.03,
+            ),
+            Container(
+              height: height * 0.08,
+              width: width * 0.12,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12, width: 1),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: NetworkImage(
+                      item['logo'].toString(),
+                    ),
+                    fit: BoxFit.cover),
+              ),
+            ),
+
+            Expanded(
+              child: Text(
+                item['provider_name'].toString(),
+                style: TextStyle(
+                    color: colorConst.blue,
+                    fontSize: width * 0.02,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ):GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
           code: item['ProviderCode'].toString(),
@@ -136,11 +242,11 @@ class _OperaterSelectState extends State<OperaterSelect> {
         child: Row(
           children: [
             SizedBox(
-              width: ss.width * 0.03,
+              width: width * 0.03,
             ),
             Container(
-              height: ss.height * 0.08,
-              width: ss.width * 0.12,
+              height: height * 0.08,
+              width: width * 0.12,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black12, width: 1),
@@ -153,14 +259,14 @@ class _OperaterSelectState extends State<OperaterSelect> {
               ),
             ),
             SizedBox(
-              width: ss.width * 0.03,
+              width: width * 0.03,
             ),
             Expanded(
               child: Text(
                 item['provider_name'].toString(),
                 style: TextStyle(
                     color: colorConst.blue,
-                    fontSize: ss.height * 0.025,
+                    fontSize: height * 0.025,
                     fontWeight: FontWeight.w600),
               ),
             ),

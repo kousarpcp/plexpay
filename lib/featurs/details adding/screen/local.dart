@@ -525,7 +525,7 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: height*0.3,
+                        height: height*0.17,
                         width: width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,

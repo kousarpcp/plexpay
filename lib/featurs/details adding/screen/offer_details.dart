@@ -33,7 +33,97 @@ class _OfferDetailsState extends State<OfferDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return MediaQuery.of(context).size.width > 650?
+    DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Text(
+            widget.name,
+            style:
+                TextStyle(fontSize: width * 0.03, fontWeight: FontWeight.w700),
+          ),
+          actions: [
+            CircleAvatar(
+              radius: width*0.021,
+                backgroundImage:NetworkImage(widget.image,),
+              backgroundColor: Colors.white,
+                ),
+            SizedBox(width: width*0.05,)],
+
+        ),
+        body: Column(
+          children: [
+            Center(
+              child: Container(
+                height: height * 0.1,
+                width: width * 0.4,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+                child: TabBar(
+                    splashBorderRadius:BorderRadius.circular(width*0.03),
+                  physics: BouncingScrollPhysics(),
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: width*0.023
+                    ),
+                    labelColor: Colors.white,
+                    unselectedLabelStyle: TextStyle(
+                      fontWeight: FontWeight.w400,
+                    ),
+                    unselectedLabelColor: Colors.black,
+                    indicatorColor: Colors.transparent,
+                    dividerColor: Colors.transparent,
+                    // indicatorPadding: EdgeInsets.symmetric(horizontal: 2,),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicator: BoxDecoration(
+                        color: colorConst.blue,
+                        borderRadius: BorderRadius.circular(width * 0.03)),
+                    tabs: [
+                      Tab(
+                        child: Center(
+                            child: Text(
+                              "Offer",
+                              style: TextStyle(fontSize: width * 0.023),
+                            )),
+                      ),
+                      Tab(
+                        child: Center(
+                            child: Text("Custom",
+                                style: TextStyle(fontSize: width * 0.023))),
+                      ),
+                    ]),
+              ),
+            ),
+            Expanded(
+              child: TabBarView(children: [
+                offer(
+                  name:widget.name,
+                  image:widget.image,
+                  code:widget.code,
+                  dash:widget.dash,
+                  iso:widget.iso,
+                  voucher:widget.voucher
+
+                ),
+                custom(
+                  name:widget.name,
+                  code:widget.code,
+                  dash:widget.dash,
+                  voucher:widget.name=="DTH"?"1":widget.voucher,
+                ),
+              ]),
+            ),
+          ],
+        ),
+      ),
+    ):
+    DefaultTabController(
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -59,14 +149,14 @@ class _OfferDetailsState extends State<OfferDetails> {
           title: Text(
             widget.name,
             style:
-                TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
+            TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
           ),
           actions: [
             CircleAvatar(
               radius: width*0.045,
-                backgroundImage:NetworkImage(widget.image,),
+              backgroundImage:NetworkImage(widget.image,),
               backgroundColor: Colors.white,
-                ),
+            ),
             SizedBox(width: width*0.05,)],
 
         ),
@@ -81,9 +171,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                     borderRadius: BorderRadius.circular(width * 0.03)),
                 child: TabBar(
                     splashBorderRadius:BorderRadius.circular(width*0.03),
-                  physics: BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold
                     ),
                     labelColor: Colors.white,
                     unselectedLabelStyle: TextStyle(
@@ -116,12 +206,12 @@ class _OfferDetailsState extends State<OfferDetails> {
             Expanded(
               child: TabBarView(children: [
                 offer(
-                  name:widget.name,
-                  image:widget.image,
-                  code:widget.code,
-                  dash:widget.dash,
-                  iso:widget.iso,
-                  voucher:widget.voucher
+                    name:widget.name,
+                    image:widget.image,
+                    code:widget.code,
+                    dash:widget.dash,
+                    iso:widget.iso,
+                    voucher:widget.voucher
 
                 ),
                 custom(
