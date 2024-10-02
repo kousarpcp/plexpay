@@ -307,7 +307,7 @@ class _profileState extends State<profile> {
               ),
               Center(
                 child: Container(
-                  height: height * 0.3,
+                  height: height * 0.35,
                   width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -345,13 +345,13 @@ class _profileState extends State<profile> {
                               Image.asset(
                                 ImageConst.account,
                                 color: Colors.indigo,
-                                width: width * 0.04,
+                                width: width * 0.045,
                               ),
                               SizedBox(
-                                height: height * 0.01,
+                                height: height * 0.017,
                               ),
-                              LocaleText("Bank"),
-                              LocaleText("Accounts"),
+                              Text("Bank\nAccounts",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015,)),
                             ],
                           ),
                           InkWell(
@@ -367,10 +367,10 @@ class _profileState extends State<profile> {
                                 Image.asset(
                                   ImageConst.debitcredit,
                                   color: Colors.indigo,
-                                  width: width * 0.053,
+                                  width: width * 0.055,
                                 ),
-                                LocaleText("Debit &"),
-                                LocaleText("Credit Cards"),
+                                Text("Debit &\nCredit Cards",textAlign: TextAlign.center,style: TextStyle(
+                                  fontSize: width*0.015)),
                               ],
                             ),
                           ),
@@ -379,13 +379,13 @@ class _profileState extends State<profile> {
                               Image.asset(
                                 ImageConst.plexpayWallet,
                                 color: Colors.indigo,
-                                width: width * 0.04,
+                                width: width * 0.045,
                               ),
                               SizedBox(
-                                height: height * 0.015,
+                                height: height * 0.017,
                               ),
-                              LocaleText("PlexPe"),
-                              LocaleText("Wallet"),
+                              Text("PlexPe\nWallet",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015),)
                             ],
                           ),
                           Column(
@@ -393,13 +393,15 @@ class _profileState extends State<profile> {
                               Image.asset(
                                 ImageConst.giftCard,
                                 // color: Colors.indigo,
-                                width: width * 0.05,
+                                width: width * 0.045,
                               ),
                               SizedBox(
                                 height: height * 0.01,
                               ),
-                              LocaleText("PlexPe"),
-                              LocaleText("Gift Card"),
+                              Text("PlexPe\nGift Card",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015,
+                              ),),
+                              // LocaleText(""),
                             ],
                           ),
                           Column(
@@ -418,9 +420,10 @@ class _profileState extends State<profile> {
                                     BorderRadius.circular(width * 0.01)),
                               ),
                               SizedBox(
-                                height: height * 0.022,
+                                height: height * 0.025,
                               ),
-                              LocaleText("UPI Lite")
+                              Text("UPI Lite",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015,))
                             ],
                           )
                         ],
@@ -433,7 +436,7 @@ class _profileState extends State<profile> {
                 height: height * 0.016,
               ),
               Container(
-                height: height * 0.93,
+                height: height * 1.4,
                 width: width * 0.932,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -640,7 +643,7 @@ class _profileState extends State<profile> {
               ),
               Center(
                 child: Container(
-                  height: height * 0.52,
+                  height: height * 0.68,
                   width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -673,20 +676,24 @@ class _profileState extends State<profile> {
                           ),
                         ],
                       ),
+                     SizedBox(
+                       height: height*0.025,
+                     ),
 
                      Column(
                        children: [
                          ListView.builder(
+                           physics: NeverScrollableScrollPhysics(),
                            shrinkWrap: true,
                              itemCount: locales.length,
                              itemBuilder: (context, index) {
                              selectedLocale = currentIndex == index;
                                return Container(
-                                 height: height*0.1,
-                                 margin: EdgeInsets.all(width*0.01),
+                                 height: height*0.15,
+                                 margin: EdgeInsets.only(bottom: height*0.025,left: width*0.025,right: width*0.025),
                                  decoration: BoxDecoration(
                                    color: colorConst.lightgrey1,
-                                   borderRadius: BorderRadius.circular(width*0.018)
+                                   borderRadius: BorderRadius.circular(width*0.03)
                                  ),
                                  child: ListTile(
                                    onTap: () {
@@ -696,11 +703,11 @@ class _profileState extends State<profile> {
                                      _saveLocale(index);
                                      Locales.change(context, localeCodes[currentIndex]);
                                    },
-                                   leading:Icon(selectedLocale?Icons.check : Icons.language,),
+                                   leading:Icon(selectedLocale?Icons.check : Icons.language,size: width*0.025,),
                                    title: Text(locales[index],style: TextStyle(
                                  fontWeight: FontWeight.w500, fontSize: width * 0.023),
                                      ),
-                                   trailing: Icon(Icons.navigate_next),
+                                   trailing: Icon(Icons.navigate_next,size: width*0.025,),
                                  ),
                                );
                              },
@@ -782,7 +789,7 @@ class _profileState extends State<profile> {
                   );
                 },
                 child: Container(
-                  height: height * 0.11,
+                  height: height * 0.16,
                   width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
