@@ -643,6 +643,7 @@ class _profileState extends State<profile> {
               ),
               Center(
                 child: Container(
+
                   height: MediaQuery.of(context).size.height > 520 ?height*0.5:height * 0.68,
                   width: width * 0.932,
                   decoration: BoxDecoration(
