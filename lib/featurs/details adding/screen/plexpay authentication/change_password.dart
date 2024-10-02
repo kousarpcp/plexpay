@@ -20,17 +20,18 @@ class _ChangePINState extends State<ChangePIN> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_outlined,
-              color: Colors.black,
-            )),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //     icon: Icon(
+        //       Icons.arrow_back_ios_outlined,
+        //       color: Colors.black,
+        //     )),
         title: Row(
           children: [
             Padding(
@@ -38,7 +39,7 @@ class _ChangePINState extends State<ChangePIN> {
                 child: Icon(
                   Icons.edit,
                   color: colorConst.blue,
-                  size: width*0.055,
+                  size: width*0.04,
                 )),
             SizedBox(
               width: 5,

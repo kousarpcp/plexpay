@@ -79,7 +79,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                     ),
                   ),
                   Container(
-                    height: height*0.15,
+                    height: MediaQuery.of(context).size.height>520?height*0.15:height*0.22,
                     width: width*1,
                     margin: EdgeInsets.only(
                       right: width*0.05,
@@ -137,7 +137,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                   ),
                   gap,
                   Container(
-                    height: height*0.15,
+                    height: MediaQuery.of(context).size.height>520?height*0.15:height*0.22,
                     width: width*1,
                     margin: EdgeInsets.only(
                       right: width*0.05,
@@ -316,7 +316,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                     },
                     child: Container(
                       width: width*0.3,
-                      height: height*0.07,
+                      height: MediaQuery.of(context).size.height>520?height*0.07:height*0.1,
                       decoration: BoxDecoration(
                           borderRadius:  BorderRadius.circular(width*0.01),
                           color: colorConst.blue
@@ -327,7 +327,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.02,
+                    height: height*0.06,
                   )
 
                   // TextFormField(

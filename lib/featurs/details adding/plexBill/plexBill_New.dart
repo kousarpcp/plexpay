@@ -651,7 +651,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: width * 0.03,
+                                            width: width * 0.02,
                                           )
                                         ],
                                       ),

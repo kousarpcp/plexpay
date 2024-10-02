@@ -245,7 +245,7 @@ class _CollectionBillState extends State<CollectionBill> {
                 child: Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    height: height*0.86,
+                    height: MediaQuery.of(context).size.height > 520 ?height*0.86:height*1.2,
                     width: width*0.45,
                     margin: EdgeInsets.only(top: width*0.03),
                     decoration: BoxDecoration(
@@ -408,7 +408,7 @@ class _CollectionBillState extends State<CollectionBill> {
                 child: Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    height: width*1.15,
+                    height: width*1.3,
                     width: width*0.75,
                     margin: EdgeInsets.only(top: width*0.03),
                     decoration: BoxDecoration(
@@ -580,7 +580,7 @@ class _CollectionBillState extends State<CollectionBill> {
             child: Text(
               label1.toUpperCase(),
               style: TextStyle(
-                  fontSize: width*0.04
+                  fontSize: width*0.033
               ),
             )),
         Text(":  "),
@@ -589,33 +589,56 @@ class _CollectionBillState extends State<CollectionBill> {
               label2.toUpperCase(),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: width*0.04
+                  fontSize: width*0.033
               ),
             ))
       ],
     );
   }
-  Widget DetailsB(String label1, String label2) {
-    return Row(
-      children: [
-        Expanded(
-            child: Text(
-              label1.toUpperCase(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-        Text(":  "),
-        Expanded(
-            child: Text(
-              label2.toUpperCase(),
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ))
-      ],
-    );
-  }
+  // Widget DetailsB(String label1, String label2) {
+  //   return Row(
+  //     children: [
+  //       Expanded(
+  //           child: Text(
+  //             label1.toUpperCase(),
+  //             style: TextStyle(fontWeight: FontWeight.bold),
+  //           )),
+  //       Text(":  "),
+  //       Expanded(
+  //           child: Text(
+  //             label2.toUpperCase(),
+  //             style: TextStyle(fontWeight: FontWeight.bold),
+  //           ))
+  //     ],
+  //   );
+  // }
 
 
   Widget Button1(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width > 650 ?GestureDetector(
+      onTap:isTap==true?null:(){
+        setState(() {
+          isTap=true;
+        });
+        printOut();
+      } ,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(width*0.03),
+            color: colorConst.blue
+        ),
+        margin: EdgeInsets.all(width*0.005),
+        alignment: Alignment.center,
+        height: height*0.12,
+        child: Text(
+          isTap==true?"Printing...":label,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Colors.white, fontSize: width*0.02, fontWeight: FontWeight.w600),
+        ),
+
+      ),
+    ):GestureDetector(
       onTap:isTap==true?null:(){
         setState(() {
           isTap=true;
@@ -641,7 +664,28 @@ class _CollectionBillState extends State<CollectionBill> {
     );
   }
   Widget Button2(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width > 650 ?
+    GestureDetector(
+      onTap:(){
+        capture();
+      } ,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width*0.06),
+          color: colorConst.blue,
+
+        ),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(width*0.005),
+        height: height*0.12,
+        child: Text(
+          label,
+          style: TextStyle(
+              color: Colors.white, fontSize:  width*0.02, fontWeight: FontWeight.w600),
+        ),
+      ),
+    ):
+    GestureDetector(
       onTap:(){
         capture();
       } ,

@@ -289,7 +289,7 @@ class _billState extends State<bill> {
               child: Screenshot(
                 controller: screenshotController,
                 child: Container(
-                  height: height*1,
+                  height: MediaQuery.of(context).size.height > 520 ?height*1:height*1.3,
                   width: width*0.45,
                   margin: EdgeInsets.only(top: width*0.03),
                   decoration: BoxDecoration(
@@ -443,7 +443,7 @@ class _billState extends State<bill> {
         //   ),
         // ),
         bottomNavigationBar:  isLoading==true?SizedBox():Container(
-          height: height*0.2,
+          height: height*0.12,
           child: Row(
             children: [
               Expanded(child: Button1("Print")),
@@ -699,7 +699,32 @@ class _billState extends State<bill> {
 
 
   Widget Button1(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width> 650?
+    GestureDetector(
+        onTap:isTap==true?null:(){
+          setState(() {
+            isTap=true;
+          });
+          printOut();
+        } ,
+        child:Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(width*0.06),
+              color:isTap==true?Colors.grey: colorConst.blue
+          ),
+          margin: EdgeInsets.all(width*0.005),
+          alignment: Alignment.center,
+          height: height*0.12,
+          child: Text(
+            label,
+            style: TextStyle(
+                color: Colors.white, fontSize: width*0.02, fontWeight: FontWeight.w600),
+          ),
+
+        )
+
+    )
+        :GestureDetector(
       onTap:isTap==true?null:(){
         setState(() {
           isTap=true;
@@ -725,7 +750,28 @@ class _billState extends State<bill> {
     );
   }
   Widget Button2(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width> 650?
+    GestureDetector(
+      onTap:(){
+        capture();
+      } ,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width*0.06),
+          color: colorConst.blue,
+
+        ),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(width*0.005),
+        height:height*0.12,
+        child: Text(
+          label,
+          style: TextStyle(
+              color: Colors.white, fontSize:  width*0.02, fontWeight: FontWeight.w600),
+        ),
+      ),
+    ):
+    GestureDetector(
       onTap:(){
         capture();
       } ,

@@ -384,7 +384,7 @@ class _ReportsTabState extends State<ReportsTab> {
                 Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    height: height*0.97 + (arrProdList.length * 0.07 * height),
+                    height: MediaQuery.of(context).size.height>520?height*0.97 + (arrProdList.length * 0.07 * height):height*1.3 + (arrProdList.length * 0.14 * height),
                     width: width*0.45,
                     margin: EdgeInsets.only(top: width*0.03),
                     decoration: BoxDecoration(
@@ -866,7 +866,7 @@ class _ReportsTabState extends State<ReportsTab> {
           child: Text(
             label,
             style: TextStyle(
-                color: Colors.white, fontSize: width*0.03, fontWeight: FontWeight.w600),
+                color: Colors.white, fontSize: width*0.02, fontWeight: FontWeight.w600),
           ),
 
         )
@@ -915,7 +915,7 @@ class _ReportsTabState extends State<ReportsTab> {
         child: Text(
           label,
           style: TextStyle(
-              color: Colors.white, fontSize:  width*0.03, fontWeight: FontWeight.w600),
+              color: Colors.white, fontSize:  width*0.02, fontWeight: FontWeight.w600),
         ),
       ),
     ):

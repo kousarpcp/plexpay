@@ -112,21 +112,21 @@ class _profileState extends State<profile> {
         scrolledUnderElevation: 0,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            height: height * 0.09,
-            width: width * 0.05,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.01),
-              child: SvgPicture.asset(
-                ImageConst.back,
-              ),
-            ),
-          ),
-        ),
+        // leading: InkWell(
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        //   child: Container(
+        //     height: height * 0.09,
+        //     width: width * 0.05,
+        //     child: Padding(
+        //       padding: EdgeInsets.all(width * 0.01),
+        //       child: SvgPicture.asset(
+        //         ImageConst.back,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         title: LocaleText(
           "Profile & Payments",
           style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
@@ -231,7 +231,7 @@ class _profileState extends State<profile> {
                             children: [
                               Image.asset(
                                 ImageConst.wallet,
-                                width: width * 0.04,
+                                width: width * 0.038,
                               ),
                               SizedBox(
                                 width: width * 0.02,
@@ -247,7 +247,7 @@ class _profileState extends State<profile> {
                               ),
                               Text(wallet_amount.toString(),
                                   style: TextStyle(
-                                      fontSize: width * 0.032,
+                                      fontSize: width * 0.026,
                                       fontWeight: FontWeight.w800)),
                             ],
                           ),
@@ -278,7 +278,7 @@ class _profileState extends State<profile> {
                             children: [
                               Image.asset(
                                 ImageConst.Duewallet,
-                                width: width * 0.042,
+                                width: width * 0.038,
                               ),
                               SizedBox(
                                 width: width * 0.02,
@@ -294,7 +294,7 @@ class _profileState extends State<profile> {
                               ),
                               Text(due_amount.toString(),
                                   style: TextStyle(
-                                      fontSize: width * 0.032,
+                                      fontSize: width * 0.026,
                                       fontWeight: FontWeight.w800)),
                             ],
                           ),

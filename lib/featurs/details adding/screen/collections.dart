@@ -478,7 +478,7 @@ class _CollectionListState extends State<CollectionList> {
             Navigator.push(context, CupertinoPageRoute(builder: (context) => CollectionBill(id: widget.item["due_id"]),));
           },
           child: Container(
-            height: height * 0.17,
+            height: MediaQuery.of(context).size.height > 520 ?height * 0.17:height*0.188,
             margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
             decoration: BoxDecoration(
                 color: Colors.white,

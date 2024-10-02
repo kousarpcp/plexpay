@@ -115,21 +115,21 @@ class _FundsState extends State<Funds> {
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            height: height * 0.09,
-            width: width * 0.05,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.01),
-              child: SvgPicture.asset(
-                ImageConst.back,
-              ),
-            ),
-          ),
-        ),
+        // leading: InkWell(
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        //   child: Container(
+        //     height: height * 0.09,
+        //     width: width * 0.05,
+        //     child: Padding(
+        //       padding: EdgeInsets.all(width * 0.01),
+        //       child: SvgPicture.asset(
+        //         ImageConst.back,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         title: Text(
           "Funds",
           style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
@@ -453,7 +453,7 @@ class _FundListState extends State<FundList> {
           height: height*0.013,
         ),
         Container(
-          height: height * 0.29,
+          height:MediaQuery.of(context).size.height>520? height * 0.29:height*0.35,
           margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
           decoration: BoxDecoration(
               color: Colors.white,

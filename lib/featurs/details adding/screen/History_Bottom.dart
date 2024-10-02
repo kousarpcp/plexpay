@@ -169,7 +169,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
         automaticallyImplyLeading: false,
         title: Container(
           width: double.infinity,
-          height: height*0.07,
+          height: MediaQuery.of(context).size.height > 520 ?height*0.07:height*0.1,
           decoration: BoxDecoration(
               color: Colors.grey[50], borderRadius: BorderRadius.circular(width*0.01)),
           child: Center(
@@ -205,7 +205,6 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                       });
                     },
                   ),
-                  contentPadding: EdgeInsets.only(top: width*0.003),
                   hintText: 'Search...',
                   border: InputBorder.none),
             ),
@@ -633,6 +632,9 @@ class _HistoryDataState extends State<HistoryData> {
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    width: width*0.3,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
