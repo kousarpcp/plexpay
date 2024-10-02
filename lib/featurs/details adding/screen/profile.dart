@@ -436,7 +436,7 @@ class _profileState extends State<profile> {
                 height: height * 0.016,
               ),
               Container(
-                height: 500,
+                height: MediaQuery.of(context).size.height > 520 ?height*1: height * 1.4,
                 width: width * 0.932,
                 decoration: BoxDecoration(
                     color: Colors.white,
