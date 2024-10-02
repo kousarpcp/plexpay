@@ -436,7 +436,7 @@ class _profileState extends State<profile> {
                 height: height * 0.016,
               ),
               Container(
-                height: height * 1.4,
+                height: 500,
                 width: width * 0.932,
                 decoration: BoxDecoration(
                     color: Colors.white,
