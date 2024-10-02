@@ -229,8 +229,375 @@ class _topUpState extends State<topUp> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MediaQuery.of(context).size.width > 650?SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: width * 0.05,
+                      ),
+                      Text(
+                          "TOP-UP",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: width * 0.03,
+                              color: colorConst.blue)
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => reacharge(
+                            //
+                            //         number: widget.number, dash: '', code: '',),
+                            //     ));
+                          },
+                          child: Center(
+                            child: Container(
+                              height: height * 0.25,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: width * 0.007,)
+                                  ],
+                                  borderRadius:
+                                  BorderRadius.circular(width * 0.02)),
+                              child: Padding(
+                                padding: EdgeInsets.all(width * 0.012),
+                                child: Column(
+                                  children: [
+                                    // Row(
+                                    //   children: [
+                                    //     // Container(
+                                    //     //   height: width*0.07,
+                                    //     //   width: width*0.22,
+                                    //     //   decoration: BoxDecoration(
+                                    //     //       color: Colors.red,
+                                    //     //       borderRadius: BorderRadius.circular(width*0.05)
+                                    //     //   ),
+                                    //     //   // child: Center(child: Text("Unlimited 5G",style: TextStyle(fontWeight: FontWeight.w900,color: Colors.white),)),
+                                    //     // ),
+                                    //     // SizedBox(width: width*0.032,),
+                                    //     // Text("Popular Plan",style: TextStyle(color:Colors.blue,fontWeight: FontWeight.w600),)
+                                    //   ],
+                                    // ),
+                                    SizedBox(
+                                      height: height * 0.003,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(AED[index]["Text1"],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: width * 0.022)),
+                                            SizedBox(
+                                              width: width * 0.02,
+                                            ),
+                                            Text(
+                                              AED[index]["Text2"],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: width * 0.022),
+                                            ),
+                                          ],
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            // showModalBottomSheet(
+                                            //   context: context,
+                                            //   isScrollControlled: true,
+                                            //   shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //       BorderRadius.circular(
+                                            //           width * 0.07)),
+                                            //   builder: (context) {
+                                            //     return Container(
+                                            //       height: width * 0.7,
+                                            //       width: width * 1,
+                                            //       decoration: BoxDecoration(
+                                            //           color: Colors.white,
+                                            //           borderRadius:
+                                            //           BorderRadius.only(
+                                            //             topLeft:
+                                            //             Radius.circular(
+                                            //               width * 0.07,
+                                            //             ),
+                                            //             topRight:
+                                            //             Radius.circular(
+                                            //               width * 0.07,
+                                            //             ),
+                                            //           )),
+                                            //       child: Column(
+                                            //         children: [
+                                            //           SizedBox(
+                                            //             height: width * 0.033,
+                                            //           ),
+                                            //           Row(
+                                            //             mainAxisAlignment:
+                                            //             MainAxisAlignment
+                                            //                 .end,
+                                            //             children: [
+                                            //               InkWell(
+                                            //                 onTap: () {
+                                            //                   Navigator.pop(
+                                            //                       context);
+                                            //                 },
+                                            //                 child: Image.asset(
+                                            //                   ImageConst.remove,
+                                            //                   width:
+                                            //                   width * 0.05,
+                                            //                 ),
+                                            //               ),
+                                            //               SizedBox(
+                                            //                 width:
+                                            //                 width * 0.042,
+                                            //               ),
+                                            //             ],
+                                            //           ),
+                                            //           Padding(
+                                            //             padding: EdgeInsets.all(
+                                            //                 width * 0.042),
+                                            //             child: Column(
+                                            //               children: [
+                                            //                 Row(
+                                            //                   children: [
+                                            //                     Text(
+                                            //                       AED[index][
+                                            //                       "Text10"],
+                                            //                       style: TextStyle(
+                                            //                           fontWeight:
+                                            //                           FontWeight
+                                            //                               .w900,
+                                            //                           fontSize:
+                                            //                           width *
+                                            //                               0.07),
+                                            //                     ),
+                                            //                   ],
+                                            //                 ),
+                                            //                 SizedBox(
+                                            //                   height:
+                                            //                   width * 0.03,
+                                            //                 ),
+                                            //                 Text(
+                                            //                   AED[index]
+                                            //                   ["Text11"],
+                                            //                   style: TextStyle(
+                                            //                       fontSize:
+                                            //                       width *
+                                            //                           0.045,
+                                            //                       color: Colors
+                                            //                           .grey),
+                                            //                 ),
+                                            //                 SizedBox(
+                                            //                     height: width *
+                                            //                         0.03),
+                                            //                 Row(
+                                            //                   children: [
+                                            //                     Icon(
+                                            //                       Icons
+                                            //                           .calendar_month_outlined,
+                                            //                       weight:
+                                            //                       width *
+                                            //                           0.03,
+                                            //                     ),
+                                            //                     SizedBox(
+                                            //                       width: width *
+                                            //                           0.025,
+                                            //                     ),
+                                            //                     Text(
+                                            //                         AED[index][
+                                            //                         "Text12"],
+                                            //                         style: TextStyle(
+                                            //                             fontSize:
+                                            //                             width *
+                                            //                                 0.045,
+                                            //                             color: Colors
+                                            //                                 .grey))
+                                            //                   ],
+                                            //                 )
+                                            //               ],
+                                            //             ),
+                                            //           ),
+                                            //           SizedBox(
+                                            //             height: width * 0.06,
+                                            //           ),
+                                            //           InkWell(
+                                            //             onTap: () {
+                                            //               Navigator.push(
+                                            //                   context,
+                                            //                   CupertinoPageRoute(
+                                            //                     builder:
+                                            //                         (context) =>
+                                            //                         reacharge(
+                                            //                           number: widget
+                                            //                               .number, dash: '', code: '',
+                                            //                         ),
+                                            //                   ));
+                                            //             },
+                                            //             child: Container(
+                                            //               height: width * 0.1,
+                                            //               width: width * 0.68,
+                                            //               decoration: BoxDecoration(
+                                            //                   color:
+                                            //                   Colors.indigo,
+                                            //                   borderRadius:
+                                            //                   BorderRadius
+                                            //                       .circular(
+                                            //                       width *
+                                            //                           0.05)),
+                                            //               child: Center(
+                                            //                 child: Text(
+                                            //                   "Recharge",
+                                            //                   style: TextStyle(
+                                            //                       color: Colors
+                                            //                           .white,
+                                            //                       fontWeight:
+                                            //                       FontWeight
+                                            //                           .w800,
+                                            //                       fontSize:
+                                            //                       width *
+                                            //                           0.06),
+                                            //                 ),
+                                            //               ),
+                                            //             ),
+                                            //           )
+                                            //         ],
+                                            //       ),
+                                            //     );
+                                            //   },
+                                            // );
+                                          },
+                                          child: Container(
+                                            height: height * 0.042,
+                                            width: width * 0.2,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  AED[index]["Text3"],
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.w600,
+                                                      color: Colors.indigo),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Divider(
+                                      thickness: height * 0.001,
+                                      // indent: width * 0.035,
+                                      // endIndent: width * 0.035,
+                                    ),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(AED[index]["Text4"],
+                                            style: TextStyle(
+                                              fontSize: width*0.015,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                        Text(AED[index]["Text5"],
+                                            style: TextStyle(
+                                                fontSize: width*0.015,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                        Text(AED[index]["Text6"],
+                                            style: TextStyle(
+                                                fontSize: width*0.015,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey)),
+                                      ],
+                                    ),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(AED[index]["Text7"],
+                                            style: TextStyle(
+                                                fontSize: width*0.015,
+                                                fontWeight: FontWeight.w700,
+                                            )),
+                                        Text(AED[index]["Text8"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                              fontSize: width*0.015,
+                                            )),
+                                        Text(AED[index]["Text9"],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                              fontSize: width*0.015,
+                                            )),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      width: width * 0.02,
+                    );
+                  },
+                  itemCount: AED.length),
+
+              SizedBox(height: height*0.3,)
+
+            ],
+          ),
+        ),
+      ),
+    ):
+    SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),

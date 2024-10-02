@@ -37,6 +37,7 @@ class _OfferDetailsState extends State<OfferDetails> {
     DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
           scrolledUnderElevation: 0,
@@ -126,6 +127,7 @@ class _OfferDetailsState extends State<OfferDetails> {
     DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
           scrolledUnderElevation: 0,
