@@ -644,7 +644,7 @@ class _profileState extends State<profile> {
               Center(
                 child: Container(
 
-                  height: MediaQuery.of(context).size.height > 520 ?height*0.5:height * 0.68,
+                  height: MediaQuery.of(context).size.height > 520 ?height*0.6:height * 0.68,
                   width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -690,11 +690,11 @@ class _profileState extends State<profile> {
                              itemBuilder: (context, index) {
                              selectedLocale = currentIndex == index;
                                return Container(
-                                 height: height*0.15,
+                                 height: MediaQuery.of(context).size.height > 520 ?height*0.11:height*0.15,
                                  margin: EdgeInsets.only(bottom: height*0.025,left: width*0.025,right: width*0.025),
                                  decoration: BoxDecoration(
                                    color: colorConst.lightgrey1,
-                                   borderRadius: BorderRadius.circular(width*0.03)
+                                   borderRadius: BorderRadius.circular(width*0.018)
                                  ),
                                  child: ListTile(
                                    onTap: () {
@@ -790,7 +790,7 @@ class _profileState extends State<profile> {
                   );
                 },
                 child: Container(
-                  height: height * 0.16,
+                  height: MediaQuery.of(context).size.height > 520 ?height*0.11:height * 0.16,
                   width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
