@@ -12,71 +12,118 @@ import '../../../main.dart';
 import 'bill_items.dart';
 
 class plexbillNew extends StatefulWidget {
-
-  const plexbillNew({super.key,});
+  const plexbillNew({
+    super.key,
+  });
 
   @override
   State<plexbillNew> createState() => _plexbillNewState();
 }
+
 int total = 0;
 int vat = 0;
+
 class _plexbillNewState extends State<plexbillNew> {
-  List fruits=[
-
-    {"image1": ImageConst.apple, "text": " Apple","quantity":0,"Price":100,"tax":5},
-    {"image1": ImageConst.strawberry, "text": "Strawberry ","quantity":0,"Price":200,"tax":15},
-    {"image1": ImageConst.mango, "text": "Mango ","quantity":0,"Price":70,"tax":15},
-    {"image1": ImageConst.dragon, "text": "Dragon Fruit ","quantity":0,"Price":250,"tax":15},
+  List fruits = [
+    {
+      "image1": ImageConst.apple,
+      "text": " Apple",
+      "quantity": 0,
+      "Price": 10,
+      "tax": 3
+    },
+    {
+      "image1": ImageConst.strawberry,
+      "text": "Strawberry ",
+      "quantity": 0,
+      "Price": 20,
+      "tax": 4
+    },
+    {
+      "image1": ImageConst.mango,
+      "text": "Mango ",
+      "quantity": 0,
+      "Price": 7,
+      "tax": 2
+    },
+    {
+      "image1": ImageConst.dragon,
+      "text": "Dragon Fruit ",
+      "quantity": 0,
+      "Price": 25,
+      "tax": 5
+    },
   ];
-  List vegitalbles=[
-
-    {"image1": ImageConst.cucumber, "text": "Cucumber","quantity":0,"Price":30,"tax":5},
-    {"image1": ImageConst.onion, "text": "Onion","quantity":0,"Price":45,"tax":15},
-    {"image1": ImageConst.tomato, "text": "Tomato","quantity":0,"Price":20,"tax":2},
-    {"image1": ImageConst.potato, "text": "Potato","quantity":0,"Price":35,"tax":3},
-
+  List vegitalbles = [
+    {
+      "image1": ImageConst.cucumber,
+      "text": "Cucumber",
+      "quantity": 0,
+      "Price": 3,
+      "tax": 1
+    },
+    {
+      "image1": ImageConst.onion,
+      "text": "Onion",
+      "quantity": 0,
+      "Price": 4,
+      "tax": 1
+    },
+    {
+      "image1": ImageConst.tomato,
+      "text": "Tomato",
+      "quantity": 0,
+      "Price": 2,
+      "tax": 1
+    },
+    {
+      "image1": ImageConst.potato,
+      "text": "Potato",
+      "quantity": 0,
+      "Price": 3,
+      "tax": 1
+    },
   ];
 
   List product = [
-    {"image1": ImageConst.vegitables, "text": "Vegitables","quantity":0,},
-    {"image1": ImageConst.mixFruit, "text": "Fruits","quantity":0,},
+    {
+      "image1": ImageConst.vegitables,
+      "text": "Vegitables",
+      "quantity": 0,
+    },
+    {
+      "image1": ImageConst.mixFruit,
+      "text": "Fruits",
+      "quantity": 0,
+    },
   ];
 
   String? dropdownValue;
   final _formKey = GlobalKey<FormState>();
-  var customer=[
+  var customer = [
     "customer1",
     "customer2",
     "customer3",
   ];
 
   List All = [
-    {
-      "text":"CATEGORY",
-      "icon":Icons.category_outlined
-    },
-    {
-      "text":"ITEMS",
-      "icon":Icons.card_travel_outlined
-    },
-    {
-      "text":"CART",
-      "icon":Icons.shopping_cart_outlined
-    },
+    {"text": "CATEGORY", "icon": Icons.category_outlined},
+    {"text": "ITEMS", "icon": Icons.card_travel_outlined},
+    {"text": "CART", "icon": Icons.shopping_cart_outlined},
   ];
   int _selectedIndex = 0;
-  var category ="";
+  var category = "";
   late int catindex;
-  TextEditingController nameController=TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   dynamic added;
   List a = [];
   List b = [];
-  List items= [];
+  List items = [];
 
   // Method to calculate and update items in the cart
   totalprice() {
-    a.clear();  // Clear list to prevent duplicates
+    a.clear(); // Clear list to prevent duplicates
     for (int i = 0; i < b.length; i++) {
       if (b[i]["quantity"] > 0) {
         // Check if the item is already in the list before adding
@@ -115,865 +162,2011 @@ class _plexbillNewState extends State<plexbillNew> {
     vatAdd();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _selectedIndex==2?Container(
-        height: width * 0.48,
-        width: width * 0.91,
-        color: Colors.white,
-        child: Column(
-          children: [
-            Divider(
-              thickness: width * 0.005,
-              color: Colors.black,
-              endIndent: width * 0.01,
-              indent: width * 0.01,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Subtotal",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                ),
-                Text(
-                  "$total",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Vat",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                ),
-                Text(
-                  "$vat",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                ),
-                Text(
-                  "${total + vat}".toString(),
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: width * 0.05,
-                      color: Colors.black),
-                )
-              ],
-            ),
-            SizedBox(
-              height: width * 0.03,
-            ),
-            Divider(
-              thickness: width * 0.005,
-              color: Colors.black,
-              endIndent: width * 0.2,
-              indent: width * 0.2,
-            ),
-            SizedBox(
-              height: width * 0.018,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => printout(),));
-              },
-              child: Container(
-                height: width * 0.1,
-                width: width * 0.23,
-                decoration: BoxDecoration(
-                    color: colorConst.blue,
-                    borderRadius: BorderRadius.circular(width * 0.03)),
-                child: Center(
-                  child: Text(
-                    "Print",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: width * 0.06,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ):SizedBox(),
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            height: width * 0.05,
-            width: width * 0.08,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.03),
-              child: SvgPicture.asset(
-                ImageConst.back,
-              ),
-            ),
-          ),
-        ),
-        title: LocaleText(
-          "PlexBill",
-          style:
-          TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
-        ),
-        actions: [
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => cart(category:items),));
-            },
-            child: Container(
-              height: width*0.06,
-                width: width*0.11,
-                decoration: BoxDecoration(
-                  color: colorConst.blue,
-                  borderRadius: BorderRadius.circular(width*0.01)
-                ),
-                child: Center(child: Text("Next",style: TextStyle(color: Colors.white),))),
-          ),
-          SizedBox(
-            width: width*0.05,
-          )
-        ],
-      ),
-      body:SingleChildScrollView(
-        child: Container(
-          child: Wrap(
-            runSpacing: 20,
-            children: [
-              plexbill(),
-              _selectedIndex==0?itemstab():SizedBox(),
-              _selectedIndex==1?BillItems():SizedBox(),
-        
-              _selectedIndex==2?Cart():SizedBox()
-            ],
-          ),
-        ),
-      )
-
-    );
-  }
-  Widget plexbill(){
-    return Column(
-      children: [
-        Padding(
-          padding:  EdgeInsets.all(width*0.03),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          LocaleText("Customer ID :",style: TextStyle(fontSize: 16),),
-                          Text(" 6",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text("TRN Number :"),
-                          Text(" 6456",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(height: width*0.03,),
-                  TextFormField(
-                    controller:nameController ,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                        fontSize: 20,fontWeight: FontWeight.w500
-                    ),
-                    decoration: InputDecoration(
-                        suffixIcon:  Padding(
-                          padding:  EdgeInsets.all(width*0.002),
-                          child: Container(
-                            height: width*0.03,
-                            width: width*0.287,
-                            decoration: BoxDecoration(
-                              // color: colorConst.lightgrey1,
-                                borderRadius: BorderRadius.only(bottomRight:Radius.circular(width*0.02),topRight:Radius.circular(width*0.02))
+    return MediaQuery.of(context).size.width > 650
+        ? Scaffold(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: _selectedIndex == 2
+                ? Container(
+                    height: height * 0.37,
+                    width: width * 0.91,
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Divider(
+                          thickness: width * 0.001,
+                          color: Colors.black,
+                          endIndent: width * 0.001,
+                          indent: width * 0.003,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Subtotal",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.02,
+                                  color: Colors.black),
                             ),
-                            child: DropdownButton(
-                                dropdownColor: Colors.white,
-                                isExpanded: true,
-                                // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
-
-                                icon:Row(
-                                  children: [
-                                    Center(child: Padding(
-                                      padding:  EdgeInsets.only(right: width*0.07),
-                                      child: Icon(Icons.keyboard_arrow_down_outlined,),
-                                    )),
-                                    InkWell(
-                                      onTap: () {
-                                        if (nameController.text.isNotEmpty) {
-                                          // Check if the name already exists in the list
-                                          if (!customer.contains(nameController.text)) {
-                                            setState(() {
-                                              // Add the typed name to the customer list
-                                              customer.add(nameController.text);
-                                              // Update the dropdown value with the newly added customer
-                                              dropdownValue = nameController.text;
-                                              // Clear the text field after adding
-                                              nameController.clear();
-                                            });
-                                          } else {
-                                            // Optional: You can show a message or handle it gracefully if the name is already added
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                              content: Text("Name already exists!"),
-                                            ));
-                                          }
-                                        }
-                                      },
-                                      child: Container(
-                                        height: width*0.06,
-                                        width: width*0.12,
-                                        decoration: BoxDecoration(
-                                            color: colorConst.blue,
-                                            borderRadius: BorderRadius.circular(width*0.01)
-                                        ),
-                                        child: Center(child: Text("Add",style: TextStyle(color: Colors.white),)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: width*0.03,
-                                    )
-                                  ],
-                                ) ,
-                                underline: SizedBox(),
-                                value: dropdownValue,
-                                items: customer.map<DropdownMenuItem<String>>((String? value) {
-                                  return DropdownMenuItem(
-                                    child: Center(child: Text(value!,style: TextStyle(fontSize: width*0.05,fontWeight: FontWeight.w600,),)),
-                                    value: value,);
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    dropdownValue;
-                                    nameController.text = newValue ?? '';
-                                  });
-                                }
+                            Text(
+                              "$total",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: width * 0.022,
+                                  color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Vat",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.02,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              "$vat",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: width * 0.022,
+                                  color: Colors.black),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.02,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              "${total + vat}".toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: width * 0.024,
+                                  color: Colors.black),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
+                        Divider(
+                          thickness: width * 0.001,
+                          color: Colors.black,
+                          endIndent: width * 0.2,
+                          indent: width * 0.2,
+                        ),
+                        SizedBox(
+                          height: height * 0.018,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => printout(),
+                                ));
+                          },
+                          child: Container(
+                            height: height * 0.08,
+                            width: width * 0.11,
+                            decoration: BoxDecoration(
+                                color: colorConst.blue,
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.016)),
+                            child: Center(
+                              child: Text(
+                                "Print",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: width * 0.026,
+                                    color: Colors.white),
+                              ),
                             ),
                           ),
-                        ),
-                        hintText: "Customer Name",
-                        contentPadding: EdgeInsets.all(width*0.03),
-                        hintStyle: TextStyle(
-                            fontSize: width * 0.052,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(width*0.02)
                         )
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    height: width*0.03,
-                  ),
-                  Container(
-                    height: width*0.10,
-                    width: width*1,
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        // physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _selectedIndex = index;
-                                    if(_selectedIndex==2){
-                                      b=items;
-                                      totalprice();
-                                      tascprice();
-                                      vatAdd();
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  height: width*0.095,
-                                  width: width*0.299,
-                                  // margin: EdgeInsets.only(left: width*0.035),
-                                  decoration: BoxDecoration(
-                                      color:  _selectedIndex==index ? colorConst.blue : Colors.white,
-                                      borderRadius: BorderRadius.circular(width*0.02),
-                                      border: Border.all(width: width*0.002)
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        All[index]["text"],
-                                        style: TextStyle(color:_selectedIndex==index ? Colors.white: Colors.black, fontSize: 17.0),
-                                      ),
-                                      SizedBox(width: width*0.02,),
-                                      Icon(All[index]["icon"],size: width*0.05,color:_selectedIndex==index ? Colors.white: Colors.black ,),
-                                    ],
-                                  ),
-
-                                ),
-                              )
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                              width:width*0.02
-                          );
-                        },
-                        itemCount: All.length
-                    ),
-                  ),
-                  // if(_selectedIndex==2&&category=="")
-                  //   Container(),
-                  // if(_selectedIndex==1)
-                  // -_selectedIndex==2?Cart():SizedBox(),
-
-                  // _selectedIndex==1?billItems(category:category):SizedBox(),
-
-                  // _selectedIndex==2? cart(category:category):SizedBox()
-
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-  Widget itemstab(){
-    return GridView.builder(
-      itemCount: product.length,
-      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.62,
-          crossAxisSpacing: width*0.01,
-          mainAxisSpacing: width*0.01,
-          crossAxisCount: 3),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, catindex) {
-        return Column(
-            children: [
-              InkWell(
+                  )
+                : SizedBox(),
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              elevation: 0,
+              backgroundColor: Colors.white,
+              leading: InkWell(
                 onTap: () {
-                  _selectedIndex=1;
-                  category=product[catindex]["text"];
-                  setState(() {
-
-                  });
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => cart(fruits: frui, vegitalbles: [],),));
+                  Navigator.pop(context);
                 },
                 child: Container(
-                    height: width*0.35,
-                    width: width*0.26,
-                    decoration: BoxDecoration(
-                        color: colorConst.blue,
-                        borderRadius: BorderRadius.circular(width*0.02)
+                  height: height * 0.09,
+                  width: width * 0.05,
+                  child: Padding(
+                    padding: EdgeInsets.all(width * 0.01),
+                    child: SvgPicture.asset(
+                      ImageConst.back,
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: width*0.02,
-                        ),
-                        Container(
-                          height: width*0.15,
-                          width: width*0.22,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(image: AssetImage(product[catindex]["image1"]),fit: BoxFit.cover,),
-                              borderRadius: BorderRadius.circular(width*0.012)
-                          ),
-                        ),
-                        SizedBox(
-                          height: width*0.01,
-                        ),
-                        Text(product[catindex]["text"],style: TextStyle(fontSize: 20,color: Colors.white),),
-                        SizedBox(
-                          height: width*0.01,
-                        ),
-                        Container(
-                          height: width*0.06,
-                          width: width*0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(width*0.01)
-                          ),
-                          child: Center(child: Text("Select",style: TextStyle(fontWeight: FontWeight.w600),)),
-                        )
-                      ],
-                    )
+                  ),
                 ),
-              )
-            ]
-        );
-      },
-    );
-  }
-  Widget BillItems(){
-    return Column(
-      children: [
-        if(category=="Vegitables")
-          GridView.builder(
-            itemCount: vegitalbles.length,
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.6,
-                crossAxisSpacing: width*0.01,
-                mainAxisSpacing: width*0.01,
-                crossAxisCount: 4),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Container(
-                    height: width*0.37,
-                    width: width*0.26,
-                    decoration: BoxDecoration(
-                        color: colorConst.blue,
-                        borderRadius: BorderRadius.circular(width*0.02)
-                    ),
+              ),
+              title: LocaleText(
+                "PlexBill",
+                style: TextStyle(
+                    fontSize: width * 0.025, fontWeight: FontWeight.w700),
+              ),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => cart(category: items),
+                        ));
+                  },
+                  child: Container(
+                      height: height * 0.05,
+                      width: width * 0.063,
+                      decoration: BoxDecoration(
+                          color: colorConst.blue,
+                          borderRadius: BorderRadius.circular(width * 0.01)),
+                      child: Center(
+                          child: Text(
+                        "Next",
+                        style: TextStyle(color: Colors.white),
+                      ))),
+                ),
+                SizedBox(
+                  width: width * 0.03,
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  runSpacing: 20,
+                  children: [
+                    plexbill(),
+                    _selectedIndex == 0 ? itemstab() : SizedBox(),
+                    _selectedIndex == 1 ? BillItems() : SizedBox(),
+                    _selectedIndex == 2 ? Cart() : SizedBox()
+                  ],
+                ),
+              ),
+            ))
+        : Scaffold(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: _selectedIndex == 2
+                ? Container(
+                    height: width * 0.48,
+                    width: width * 0.91,
+                    color: Colors.white,
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: width*0.02,
+                        Divider(
+                          thickness: width * 0.005,
+                          color: Colors.black,
+                          endIndent: width * 0.01,
+                          indent: width * 0.01,
                         ),
-                        Container(
-                          height: width*0.12,
-                          width: width*0.18,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(image: AssetImage(vegitalbles[index]["image1"]),fit: BoxFit.cover,),
-                              borderRadius: BorderRadius.circular(width*0.012)
-                          ),
-                        ),
-                        Text(vegitalbles[index]["text"],style: TextStyle(fontSize: 15,color: Colors.white),),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("AED",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white),),
-                            SizedBox(
-                              width: width*0.01,
+                            Text(
+                              "Subtotal",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
                             ),
-                            Text(vegitalbles[index]["Price"].toString(),style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,color: Colors.white)),
+                            Text(
+                              "$total",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
+                            ),
                           ],
                         ),
-
-                        vegitalbles[index]["quantity"] != 0
-                            ? Container(
-                          height: width * 0.08,
-                          width: width * 0.182,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(width * 0.012),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    vegitalbles[index]["quantity"]--;
-                                  });
-                                },
-                                child: const Icon(
-                                  Icons.remove,
-                                  color: Colors.black,
-                                  size: 20,
-                                ),
-                              ),
-                              Text(
-                                vegitalbles[index]["quantity"].toString(),
-                                style: TextStyle(color: Colors.black, fontSize: 18),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    vegitalbles[index]["quantity"]++;
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.black,
-                                  size: width * 0.05,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                            : InkWell(
-                          onTap: () {
-                            setState(() {
-                              vegitalbles[index]["quantity"]++;
-                              items.add(vegitalbles[index]);
-                            });
-                          },
-                          child: Container(
-                            height: width * 0.08,
-                            width: width * 0.182,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(width * 0.012),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Add item",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-        if(category=="Fruits")
-          GridView.builder(
-            itemCount: fruits.length,
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.62,
-                crossAxisSpacing: width*0.01,
-                mainAxisSpacing: width*0.01,
-                crossAxisCount: 4),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Container(
-                    height: width*0.35,
-                    width: width*0.26,
-                    decoration: BoxDecoration(
-                        color: colorConst.blue,
-                        borderRadius: BorderRadius.circular(width*0.02)
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: width*0.02,
-                        ),
-                        Container(
-                          height: width*0.12,
-                          width: width*0.18,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(image: AssetImage(fruits[index]["image1"]),fit: BoxFit.cover,),
-                              borderRadius: BorderRadius.circular(width*0.012)
-                          ),
-                        ),
-                        Text(fruits[index]["text"],style: TextStyle(fontSize: 15,color: Colors.white),),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("AED",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white),),
-                            SizedBox(
-                              width: width*0.01,
+                            Text(
+                              "Vat",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
                             ),
-                            Text(fruits[index]["Price"].toString(),style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18,color: Colors.white)),
+                            Text(
+                              "$vat",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
+                            )
                           ],
                         ),
-                        fruits[index]["quantity"] != 0
-                            ? Container(
-                          height: width * 0.08,
-                          width: width * 0.182,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(width * 0.012),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    fruits[index]["quantity"]--;
-                                  });
-                                },
-                                child: const Icon(
-                                  Icons.remove,
-                                  color: Colors.black,
-                                  size: 20,
-                                ),
-                              ),
-                              Text(
-                                fruits[index]["quantity"].toString(),
-                                style: TextStyle(color: Colors.black, fontSize: 18),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    fruits[index]["quantity"]++;
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.black,
-                                  size: width * 0.05,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                            : InkWell(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              "${total + vat}".toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: width * 0.05,
+                                  color: Colors.black),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: width * 0.03,
+                        ),
+                        Divider(
+                          thickness: width * 0.005,
+                          color: Colors.black,
+                          endIndent: width * 0.2,
+                          indent: width * 0.2,
+                        ),
+                        SizedBox(
+                          height: width * 0.018,
+                        ),
+                        InkWell(
                           onTap: () {
-                            setState(() {
-                              fruits[index]["quantity"]++;
-                              items.add(fruits[index]);
-                            });
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => printout(),
+                                ));
                           },
                           child: Container(
-                            height: width * 0.08,
-                            width: width * 0.182,
+                            height: width * 0.1,
+                            width: width * 0.23,
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(width * 0.012),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Add item",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ),
-                        )
-
-                      ],
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-      ],
-    );
-  }
-  Widget Cart(){
-    return Column(
-      children: [
-        a.isEmpty
-            ? Center(
-          child: Text(
-            "Empty",
-            style: TextStyle(
-                fontSize: width * 0.07, color: Colors.white),
-          ),
-        )
-            : Column(
-              children: [
-                ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: a.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Center(
-                          child: Container(
-                            height: width * 0.25,
-                            width: width * 0.89,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurStyle: BlurStyle.normal,
-                                      color: Colors.black.withOpacity(0.09),
-                                      offset: Offset(0, 2),
-                                      spreadRadius: 1,
-                                      blurRadius: 9)
-                                ],
+                                color: colorConst.blue,
                                 borderRadius:
-                                BorderRadius.circular(width * 0.03)),
-                            child: Padding(
-                              padding: EdgeInsets.all(width * 0.03),
-                              child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: width * 0.5,
-                                      width: width * 0.47,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
+                                    BorderRadius.circular(width * 0.03)),
+                            child: Center(
+                              child: Text(
+                                "Print",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: width * 0.06,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : SizedBox(),
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              elevation: 0,
+              backgroundColor: Colors.white,
+              leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: width * 0.05,
+                  width: width * 0.08,
+                  child: Padding(
+                    padding: EdgeInsets.all(width * 0.03),
+                    child: SvgPicture.asset(
+                      ImageConst.back,
+                    ),
+                  ),
+                ),
+              ),
+              title: LocaleText(
+                "PlexBill",
+                style: TextStyle(
+                    fontSize: width * 0.06, fontWeight: FontWeight.w700),
+              ),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => cart(category: items),
+                        ));
+                  },
+                  child: Container(
+                      height: width * 0.06,
+                      width: width * 0.11,
+                      decoration: BoxDecoration(
+                          color: colorConst.blue,
+                          borderRadius: BorderRadius.circular(width * 0.01)),
+                      child: Center(
+                          child: Text(
+                        "Next",
+                        style: TextStyle(color: Colors.white),
+                      ))),
+                ),
+                SizedBox(
+                  width: width * 0.05,
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  runSpacing: 20,
+                  children: [
+                    plexbill(),
+                    _selectedIndex == 0 ? itemstab() : SizedBox(),
+                    _selectedIndex == 1 ? BillItems() : SizedBox(),
+                    _selectedIndex == 2 ? Cart() : SizedBox()
+                  ],
+                ),
+              ),
+            ));
+  }
+
+  Widget plexbill() {
+    return MediaQuery.of(context).size.width > 650
+        ? Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: width * 0.03,right: width * 0.03),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                LocaleText(
+                                  "Customer ID :",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  " 6",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text("TRN Number :"),
+                                Text(
+                                  " 6456",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        TextFormField(
+                          controller: nameController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                          decoration: InputDecoration(
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.all(width * 0.002),
+                                child: Container(
+                                  height: height * 0.02,
+                                  width: width * 0.287,
+                                  decoration: BoxDecoration(
+                                      // color: colorConst.lightgrey1,
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight:
+                                              Radius.circular(width * 0.02),
+                                          topRight:
+                                              Radius.circular(width * 0.02))),
+                                  child: DropdownButton(
+                                      dropdownColor: Colors.white,
+                                      isExpanded: true,
+                                      // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
+
+                                      icon: Row(
                                         children: [
-                                          Container(
-                                              height: width * 0.18,
-                                              width: width * 0.18,
+                                          Center(
+                                              child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: width * 0.076,
+                                                left: width * 0.08),
+                                            child: Icon(
+                                              Icons
+                                                  .keyboard_arrow_down_outlined,
+                                            ),
+                                          )),
+                                          InkWell(
+                                            onTap: () {
+                                              if (nameController
+                                                  .text.isNotEmpty) {
+                                                // Check if the name already exists in the list
+                                                if (!customer.contains(
+                                                    nameController.text)) {
+                                                  setState(() {
+                                                    // Add the typed name to the customer list
+                                                    customer.add(
+                                                        nameController.text);
+                                                    // Update the dropdown value with the newly added customer
+                                                    dropdownValue =
+                                                        nameController.text;
+                                                    // Clear the text field after adding
+                                                    nameController.clear();
+                                                  });
+                                                } else {
+                                                  // Optional: You can show a message or handle it gracefully if the name is already added
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Name already exists!"),
+                                                  ));
+                                                }
+                                              }
+                                            },
+                                            child: Container(
+                                              height: width * 0.036,
+                                              width: width * 0.076,
                                               decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        a[index]["image1"]),
-                                                    fit: BoxFit.fill),
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    width * 0.04),
+                                                  color: colorConst.blue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          width * 0.01)),
+                                              child: Center(
+                                                  child: Text(
+                                                "Add",
+                                                style: TextStyle(
+                                                    color: Colors.white),
                                               )),
-                                          Column(
-                                            children: [
-                                              SizedBox(
-                                                height: width * 0.02,
-                                              ),
-                                              Text(
-                                                a[index]['text'],
-                                                style: TextStyle(
-                                                    fontSize:
-                                                    width * 0.052),
-                                              ),
-                                              Text(
-                                                a[index]["Price"]
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize:
-                                                    width * 0.06),
-                                              ),
-                                            ],
+                                            ),
                                           ),
+                                          SizedBox(
+                                            width: width * 0.03,
+                                          )
                                         ],
                                       ),
-                                    ),
-                                    a[index]["quantity"] != 0
-                                        ? Container(
-                                      height: width * 0.095,
-                                      width: width * 0.22,
-                                      decoration: BoxDecoration(
-                                          color: colorConst.blue,
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              width * 0.03)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              a[index]["quantity"]--;
-                                              if (a[index]
-                                              ["quantity"] ==
-                                                  0) {
-                                                // Remove the item if quantity becomes zero
-                                                a.removeAt(index);
-                                              }
-                                              tascprice();
-                                              vatAdd();
-                                              setState(() {});
-                                            },
-                                            child: const Icon(
-                                              Icons.remove,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            a[index]["quantity"]
-                                                .toString(),
+                                      underline: SizedBox(),
+                                      value: dropdownValue,
+                                      items: customer
+                                          .map<DropdownMenuItem<String>>(
+                                              (String? value) {
+                                        return DropdownMenuItem(
+                                          child: Center(
+                                              child: Text(
+                                            value!,
                                             style: TextStyle(
-                                                color: Colors.white),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              a[index]["quantity"]++;
-                                              tascprice();
-                                              vatAdd();
-                                              setState(() {});
-                                            },
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
+                                              fontSize: width * 0.02,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                          ),
-                                        ],
+                                          )),
+                                          value: value,
+                                        );
+                                      }).toList(),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownValue;
+                                          nameController.text = newValue ?? '';
+                                        });
+                                      }),
+                                ),
+                              ),
+                              hintText: "Customer Name",
+                              contentPadding: EdgeInsets.all(width * 0.018),
+                              hintStyle: TextStyle(
+                                  fontSize: width * 0.018,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.018))),
+                        ),
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
+                        Container(
+                          height: height * 0.095,
+                          width: width * 1,
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              // physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _selectedIndex = index;
+                                          if (_selectedIndex == 2) {
+                                            b = items;
+                                            totalprice();
+                                            tascprice();
+                                            vatAdd();
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        height: height * 0.095,
+                                        width: width * 0.299,
+                                        // margin: EdgeInsets.only(left: width*0.035),
+                                        decoration: BoxDecoration(
+                                            color: _selectedIndex == index
+                                                ? colorConst.blue
+                                                : Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.01),
+                                            border: Border.all(
+                                                width: width * 0.002)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              All[index]["text"],
+                                              style: TextStyle(
+                                                  color: _selectedIndex == index
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 15.0),
+                                            ),
+                                            SizedBox(
+                                              width: width * 0.02,
+                                            ),
+                                            Icon(
+                                              All[index]["icon"],
+                                              size: width * 0.03,
+                                              color: _selectedIndex == index
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     )
-                                        : InkWell(
+                                  ],
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(width: width * 0.02);
+                              },
+                              itemCount: All.length),
+                        ),
+                        // if(_selectedIndex==2&&category=="")
+                        //   Container(),
+                        // if(_selectedIndex==1)
+                        // -_selectedIndex==2?Cart():SizedBox(),
+
+                        // _selectedIndex==1?billItems(category:category):SizedBox(),
+
+                        // _selectedIndex==2? cart(category:category):SizedBox()
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(width * 0.03),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                LocaleText(
+                                  "Customer ID :",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  " 6",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text("TRN Number :"),
+                                Text(
+                                  " 6456",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: width * 0.03,
+                        ),
+                        TextFormField(
+                          controller: nameController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                          decoration: InputDecoration(
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.all(width * 0.002),
+                                child: Container(
+                                  height: width * 0.03,
+                                  width: width * 0.287,
+                                  decoration: BoxDecoration(
+                                      // color: colorConst.lightgrey1,
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight:
+                                              Radius.circular(width * 0.02),
+                                          topRight:
+                                              Radius.circular(width * 0.02))),
+                                  child: DropdownButton(
+                                      dropdownColor: Colors.white,
+                                      isExpanded: true,
+                                      // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
+
+                                      icon: Row(
+                                        children: [
+                                          Center(
+                                              child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: width * 0.07),
+                                            child: Icon(
+                                              Icons
+                                                  .keyboard_arrow_down_outlined,
+                                            ),
+                                          )),
+                                          InkWell(
+                                            onTap: () {
+                                              if (nameController
+                                                  .text.isNotEmpty) {
+                                                // Check if the name already exists in the list
+                                                if (!customer.contains(
+                                                    nameController.text)) {
+                                                  setState(() {
+                                                    // Add the typed name to the customer list
+                                                    customer.add(
+                                                        nameController.text);
+                                                    // Update the dropdown value with the newly added customer
+                                                    dropdownValue =
+                                                        nameController.text;
+                                                    // Clear the text field after adding
+                                                    nameController.clear();
+                                                  });
+                                                } else {
+                                                  // Optional: You can show a message or handle it gracefully if the name is already added
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Name already exists!"),
+                                                  ));
+                                                }
+                                              }
+                                            },
+                                            child: Container(
+                                              height: width * 0.06,
+                                              width: width * 0.12,
+                                              decoration: BoxDecoration(
+                                                  color: colorConst.blue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          width * 0.01)),
+                                              child: Center(
+                                                  child: Text(
+                                                "Add",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: width * 0.03,
+                                          )
+                                        ],
+                                      ),
+                                      underline: SizedBox(),
+                                      value: dropdownValue,
+                                      items: customer
+                                          .map<DropdownMenuItem<String>>(
+                                              (String? value) {
+                                        return DropdownMenuItem(
+                                          child: Center(
+                                              child: Text(
+                                            value!,
+                                            style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          )),
+                                          value: value,
+                                        );
+                                      }).toList(),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownValue;
+                                          nameController.text = newValue ?? '';
+                                        });
+                                      }),
+                                ),
+                              ),
+                              hintText: "Customer Name",
+                              contentPadding: EdgeInsets.all(width * 0.03),
+                              hintStyle: TextStyle(
+                                  fontSize: width * 0.052,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.02))),
+                        ),
+                        SizedBox(
+                          height: width * 0.03,
+                        ),
+                        Container(
+                          height: width * 0.10,
+                          width: width * 1,
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              // physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    GestureDetector(
                                       onTap: () {
-                                        a[index]["quantity"]++;
-                                        tascprice();
-                                        vatAdd();
-                                        setState(() {});
+                                        setState(() {
+                                          _selectedIndex = index;
+                                          if (_selectedIndex == 2) {
+                                            b = items;
+                                            totalprice();
+                                            tascprice();
+                                            vatAdd();
+                                          }
+                                        });
                                       },
                                       child: Container(
                                         height: width * 0.095,
-                                        width: width * 0.22,
+                                        width: width * 0.299,
+                                        // margin: EdgeInsets.only(left: width*0.035),
                                         decoration: BoxDecoration(
-                                          color: colorConst.blue,
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              width * 0.03),
+                                            color: _selectedIndex == index
+                                                ? colorConst.blue
+                                                : Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.02),
+                                            border: Border.all(
+                                                width: width * 0.002)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              All[index]["text"],
+                                              style: TextStyle(
+                                                  color: _selectedIndex == index
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 17.0),
+                                            ),
+                                            SizedBox(
+                                              width: width * 0.02,
+                                            ),
+                                            Icon(
+                                              All[index]["icon"],
+                                              size: width * 0.05,
+                                              color: _selectedIndex == index
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                            ),
+                                          ],
                                         ),
-                                        child: Center(
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(width: width * 0.02);
+                              },
+                              itemCount: All.length),
+                        ),
+                        // if(_selectedIndex==2&&category=="")
+                        //   Container(),
+                        // if(_selectedIndex==1)
+                        // -_selectedIndex==2?Cart():SizedBox(),
+
+                        // _selectedIndex==1?billItems(category:category):SizedBox(),
+
+                        // _selectedIndex==2? cart(category:category):SizedBox()
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+  }
+
+  Widget itemstab() {
+    return MediaQuery.of(context).size.width > 650
+        ? GridView.builder(
+            itemCount: product.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.62,
+                crossAxisSpacing: width * 0.01,
+                mainAxisSpacing: width * 0.01,
+                crossAxisCount: 6),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, catindex) {
+              return Column(children: [
+                InkWell(
+                  onTap: () {
+                    _selectedIndex = 1;
+                    category = product[catindex]["text"];
+                    setState(() {});
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => cart(fruits: frui, vegitalbles: [],),));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: width * 0.018),
+                    child: Container(
+                        height: height * 0.3,
+                        width: width * 0.12,
+                        decoration: BoxDecoration(
+                            color: colorConst.blue,
+                            borderRadius: BorderRadius.circular(width * 0.02)),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: height * 0.022,
+                            ),
+                            Container(
+                              height: height * 0.1,
+                              width: width * 0.09,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage(product[catindex]["image1"]),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.013)),
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            Text(
+                              product[catindex]["text"],
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            Container(
+                              height: height * 0.06,
+                              width: width * 0.1,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.01)),
+                              child: Center(
+                                  child: Text(
+                                "Select",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              )),
+                            )
+                          ],
+                        )),
+                  ),
+                )
+              ]);
+            },
+          )
+        : GridView.builder(
+            itemCount: product.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.62,
+                crossAxisSpacing: width * 0.01,
+                mainAxisSpacing: width * 0.01,
+                crossAxisCount: 3),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, catindex) {
+              return Column(children: [
+                InkWell(
+                  onTap: () {
+                    _selectedIndex = 1;
+                    category = product[catindex]["text"];
+                    setState(() {});
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => cart(fruits: frui, vegitalbles: [],),));
+                  },
+                  child: Container(
+                      height: width * 0.35,
+                      width: width * 0.26,
+                      decoration: BoxDecoration(
+                          color: colorConst.blue,
+                          borderRadius: BorderRadius.circular(width * 0.02)),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: width * 0.02,
+                          ),
+                          Container(
+                            height: width * 0.15,
+                            width: width * 0.22,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  image:
+                                      AssetImage(product[catindex]["image1"]),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.012)),
+                          ),
+                          SizedBox(
+                            height: width * 0.01,
+                          ),
+                          Text(
+                            product[catindex]["text"],
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: width * 0.01,
+                          ),
+                          Container(
+                            height: width * 0.06,
+                            width: width * 0.15,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.01)),
+                            child: Center(
+                                child: Text(
+                              "Select",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            )),
+                          )
+                        ],
+                      )),
+                )
+              ]);
+            },
+          );
+  }
+
+  Widget BillItems() {
+    return MediaQuery.of(context).size.width > 650
+        ? Column(
+            children: [
+              if (category == "Vegitables")
+                GridView.builder(
+                  itemCount: vegitalbles.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.6,
+                      crossAxisSpacing: width * 0.01,
+                      mainAxisSpacing: width * 0.01,
+                      crossAxisCount: 6),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: width * 0.02),
+                          child: Container(
+                            height: height * 0.3,
+                            width: width * 0.125,
+                            decoration: BoxDecoration(
+                                color: colorConst.blue,
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.02)),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: height * 0.03,
+                                ),
+                                Container(
+                                  height: height * 0.07,
+                                  width: width * 0.087,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            vegitalbles[index]["image1"]),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(width * 0.01)),
+                                ),
+                                Text(
+                                  vegitalbles[index]["text"],
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "AED",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          color: Colors.white),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.01,
+                                    ),
+                                    Text(vegitalbles[index]["Price"].toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18,
+                                            color: Colors.white)),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 0.02,
+                                ),
+                                vegitalbles[index]["quantity"] != 0
+                                    ? Container(
+                                        height: height * 0.057,
+                                        width: width * 0.077,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              width * 0.01),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  vegitalbles[index]
+                                                      ["quantity"]--;
+                                                });
+                                              },
+                                              child: Icon(
+                                                Icons.remove,
+                                                color: Colors.black,
+                                                size: width * 0.02,
+                                              ),
+                                            ),
+                                            Text(
+                                              vegitalbles[index]["quantity"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  vegitalbles[index]
+                                                      ["quantity"]++;
+                                                });
+                                              },
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.black,
+                                                size: width * 0.02,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            vegitalbles[index]["quantity"]++;
+                                            items.add(vegitalbles[index]);
+                                          });
+                                        },
+                                        child: Container(
+                                          height: height * 0.057,
+                                          width: width * 0.077,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.01),
+                                          ),
+                                          child: Center(
                                             child: Text(
                                               "Add item",
                                               style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                    )
-                                  ]),
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                              ],
                             ),
                           ),
-                        ),
+                        )
                       ],
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: width * 0.025,
+                ),
+              if (category == "Fruits")
+                GridView.builder(
+                  itemCount: fruits.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.62,
+                      crossAxisSpacing: width * 0.01,
+                      mainAxisSpacing: width * 0.01,
+                      crossAxisCount: 6),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: width * 0.02),
+                          child: Container(
+                            height: height * 0.3,
+                            width: width * 0.125,
+                            decoration: BoxDecoration(
+                                color: colorConst.blue,
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.02)),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: height * 0.03,
+                                ),
+                                Container(
+                                  height: height * 0.07,
+                                  width: width * 0.087,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                        image:
+                                            AssetImage(fruits[index]["image1"]),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(width * 0.012)),
+                                ),
+                                Text(
+                                  fruits[index]["text"],
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "AED",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          color: Colors.white),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.01,
+                                    ),
+                                    Text(fruits[index]["Price"].toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18,
+                                            color: Colors.white)),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 0.02,
+                                ),
+                                fruits[index]["quantity"] != 0
+                                    ? Container(
+                                        height: height * 0.057,
+                                        width: width * 0.077,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              width * 0.01),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  fruits[index]["quantity"]--;
+                                                });
+                                              },
+                                              child: Icon(
+                                                Icons.remove,
+                                                color: Colors.black,
+                                                size: width * 0.02,
+                                              ),
+                                            ),
+                                            Text(
+                                              fruits[index]["quantity"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  fruits[index]["quantity"]++;
+                                                });
+                                              },
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.black,
+                                                size: width * 0.02,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            fruits[index]["quantity"]++;
+                                            items.add(fruits[index]);
+                                          });
+                                        },
+                                        child: Container(
+                                          height: height * 0.057,
+                                          width: width * 0.077,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.01),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Add item",
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     );
                   },
                 ),
-                SizedBox(height: width*0.53,)
-              ],
-            ),
-      ],
-    );
+            ],
+          )
+        : Column(
+            children: [
+              if (category == "Vegitables")
+                GridView.builder(
+                  itemCount: vegitalbles.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.6,
+                      crossAxisSpacing: width * 0.01,
+                      mainAxisSpacing: width * 0.01,
+                      crossAxisCount: 4),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: width * 0.37,
+                          width: width * 0.26,
+                          decoration: BoxDecoration(
+                              color: colorConst.blue,
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.02)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: width * 0.02,
+                              ),
+                              Container(
+                                height: width * 0.12,
+                                width: width * 0.18,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          vegitalbles[index]["image1"]),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.012)),
+                              ),
+                              Text(
+                                vegitalbles[index]["text"],
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "AED",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
+                                        color: Colors.white),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.01,
+                                  ),
+                                  Text(vegitalbles[index]["Price"].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          color: Colors.white)),
+                                ],
+                              ),
+                              vegitalbles[index]["quantity"] != 0
+                                  ? Container(
+                                      height: width * 0.08,
+                                      width: width * 0.182,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(
+                                            width * 0.012),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                vegitalbles[index]
+                                                    ["quantity"]--;
+                                              });
+                                            },
+                                            child: const Icon(
+                                              Icons.remove,
+                                              color: Colors.black,
+                                              size: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            vegitalbles[index]["quantity"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                vegitalbles[index]
+                                                    ["quantity"]++;
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.black,
+                                              size: width * 0.05,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          vegitalbles[index]["quantity"]++;
+                                          items.add(vegitalbles[index]);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: width * 0.08,
+                                        width: width * 0.182,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              width * 0.012),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Add item",
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
+              if (category == "Fruits")
+                GridView.builder(
+                  itemCount: fruits.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.62,
+                      crossAxisSpacing: width * 0.01,
+                      mainAxisSpacing: width * 0.01,
+                      crossAxisCount: 4),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: width * 0.35,
+                          width: width * 0.26,
+                          decoration: BoxDecoration(
+                              color: colorConst.blue,
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.02)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: width * 0.02,
+                              ),
+                              Container(
+                                height: width * 0.12,
+                                width: width * 0.18,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage(fruits[index]["image1"]),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.012)),
+                              ),
+                              Text(
+                                fruits[index]["text"],
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "AED",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
+                                        color: Colors.white),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.01,
+                                  ),
+                                  Text(fruits[index]["Price"].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          color: Colors.white)),
+                                ],
+                              ),
+                              fruits[index]["quantity"] != 0
+                                  ? Container(
+                                      height: width * 0.08,
+                                      width: width * 0.182,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(
+                                            width * 0.012),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                fruits[index]["quantity"]--;
+                                              });
+                                            },
+                                            child: const Icon(
+                                              Icons.remove,
+                                              color: Colors.black,
+                                              size: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            fruits[index]["quantity"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                fruits[index]["quantity"]++;
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.black,
+                                              size: width * 0.05,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          fruits[index]["quantity"]++;
+                                          items.add(fruits[index]);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: width * 0.08,
+                                        width: width * 0.182,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              width * 0.012),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Add item",
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
+            ],
+          );
+  }
+
+  Widget Cart() {
+    return MediaQuery.of(context).size.width > 650
+        ? Column(
+            children: [
+              a.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Empty",
+                        style: TextStyle(
+                            fontSize: width * 0.07, color: Colors.white),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: a.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Center(
+                                  child: Container(
+                                    height: height * 0.14,
+                                    width: width * 0.89,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurStyle: BlurStyle.normal,
+                                              color: Colors.black
+                                                  .withOpacity(0.09),
+                                              offset: Offset(0, 2),
+                                              spreadRadius: 1,
+                                              blurRadius: 9)
+                                        ],
+                                        borderRadius: BorderRadius.circular(
+                                            width * 0.014)),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(width * 0.01),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              height: height * 0.5,
+                                              width: width * 0.47,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      height: height * 0.11,
+                                                      width: width * 0.1,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                a[index]
+                                                                    ["image1"]),
+                                                            fit: BoxFit.fill),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.013),
+                                                      )),
+                                                  Row(
+                                                    children: [
+
+                                                      Text(
+                                                        a[index]['text'],
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                width * 0.02),
+                                                      ),
+                                                      SizedBox(
+                                                        width: width * 0.025,
+                                                      ),
+                                                      Text(
+                                                        a[index]["Price"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                width * 0.02,
+                                                            fontWeight: FontWeight.w600
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            a[index]["quantity"] != 0
+                                                ? Container(
+                                              height: height * 0.06,
+                                              width: width * 0.1,
+                                                    decoration: BoxDecoration(
+                                                        color: colorConst.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.03)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                            a[index]
+                                                                ["quantity"]--;
+                                                            if (a[index][
+                                                                    "quantity"] ==
+                                                                0) {
+                                                              // Remove the item if quantity becomes zero
+                                                              a.removeAt(index);
+                                                            }
+                                                            tascprice();
+                                                            vatAdd();
+                                                            setState(() {});
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.remove,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          a[index]["quantity"]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            a[index]
+                                                                ["quantity"]++;
+                                                            tascprice();
+                                                            vatAdd();
+                                                            setState(() {});
+                                                          },
+                                                          child: Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : InkWell(
+                                                    onTap: () {
+                                                      a[index]["quantity"]++;
+                                                      tascprice();
+                                                      vatAdd();
+                                                      setState(() {});
+                                                    },
+                                                    child: Container(
+                                                      height: height * 0.06,
+                                                      width: width * 0.1,
+                                                      decoration: BoxDecoration(
+                                                        color: colorConst.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.03),
+                                                      ),
+                                                      child: Center(
+                                                          child: Text(
+                                                        "Add item",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      )),
+                                                    ),
+                                                  )
+                                          ]),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: height * 0.02,
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: height * 0.37,
+                        )
+                      ],
+                    ),
+            ],
+          )
+        : Column(
+            children: [
+              a.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Empty",
+                        style: TextStyle(
+                            fontSize: width * 0.07, color: Colors.white),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: a.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Center(
+                                  child: Container(
+                                    height: width * 0.25,
+                                    width: width * 0.89,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurStyle: BlurStyle.normal,
+                                              color: Colors.black
+                                                  .withOpacity(0.09),
+                                              offset: Offset(0, 2),
+                                              spreadRadius: 1,
+                                              blurRadius: 9)
+                                        ],
+                                        borderRadius: BorderRadius.circular(
+                                            width * 0.03)),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(width * 0.03),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              height: width * 0.5,
+                                              width: width * 0.47,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      height: width * 0.18,
+                                                      width: width * 0.18,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                a[index]
+                                                                    ["image1"]),
+                                                            fit: BoxFit.fill),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.04),
+                                                      )),
+                                                  Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: width * 0.02,
+                                                      ),
+                                                      Text(
+                                                        a[index]['text'],
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                width * 0.052),
+                                                      ),
+                                                      Text(
+                                                        a[index]["Price"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                width * 0.06),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            a[index]["quantity"] != 0
+                                                ? Container(
+                                                    height: width * 0.095,
+                                                    width: width * 0.22,
+                                                    decoration: BoxDecoration(
+                                                        color: colorConst.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.03)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                            a[index]
+                                                                ["quantity"]--;
+                                                            if (a[index][
+                                                                    "quantity"] ==
+                                                                0) {
+                                                              // Remove the item if quantity becomes zero
+                                                              a.removeAt(index);
+                                                            }
+                                                            tascprice();
+                                                            vatAdd();
+                                                            setState(() {});
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.remove,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          a[index]["quantity"]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            a[index]
+                                                                ["quantity"]++;
+                                                            tascprice();
+                                                            vatAdd();
+                                                            setState(() {});
+                                                          },
+                                                          child: Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : InkWell(
+                                                    onTap: () {
+                                                      a[index]["quantity"]++;
+                                                      tascprice();
+                                                      vatAdd();
+                                                      setState(() {});
+                                                    },
+                                                    child: Container(
+                                                      height: width * 0.095,
+                                                      width: width * 0.22,
+                                                      decoration: BoxDecoration(
+                                                        color: colorConst.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    width *
+                                                                        0.03),
+                                                      ),
+                                                      child: Center(
+                                                          child: Text(
+                                                        "Add item",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      )),
+                                                    ),
+                                                  )
+                                          ]),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: width * 0.025,
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: width * 0.53,
+                        )
+                      ],
+                    ),
+            ],
+          );
   }
 }

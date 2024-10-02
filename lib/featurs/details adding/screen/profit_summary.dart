@@ -169,7 +169,245 @@ class _profitSummaryState extends State<profitSummary> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650 ?
+      Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            height: height * 0.09,
+            width: width * 0.05,
+            child: Padding(
+              padding: EdgeInsets.all(width * 0.01),
+              child: SvgPicture.asset(
+                ImageConst.back,
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          "Profit Summary",
+          style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
+        ),
+      ),
+      body: isLoading == true
+          ? SingleChildScrollView(
+        child: Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade100,
+              highlightColor: Colors.white,
+              direction: ShimmerDirection.btt,
+              enabled: true,
+              child: Container(
+                height: height * 0.13,
+                width: width * 0.86,
+                decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    // color: Colors.red,
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+              ),
+            ),
+            SizedBox(height: width*0.02,),
+            ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: height * 0.27,
+                      margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+                itemCount: 8)
+          ],
+        ),
+      ):SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+
+            Center(
+              child: Container(
+                height: height * 0.13,
+                width: width * 0.86,
+                decoration: BoxDecoration(
+                  // color: Colors.red,
+                    border:
+                    Border.all(width: width * 0.001, color: colorConst.grey),
+                    borderRadius: BorderRadius.circular(width * 0.018)),
+                child: Padding(
+                  padding: EdgeInsets.all(width * 0.015),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.date_range_outlined,
+                        color: Colors.lightBlueAccent,
+                        size: width * 0.024,
+                      ),
+                      SizedBox(
+                        width: width * 0.03,
+                      ),
+                      Expanded(
+                        child: Text(
+                          start + "  to  " + end,
+                          maxLines: 2,
+                          style: TextStyle(fontSize: width * 0.021),
+                          // style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          selectDateRange(context);
+                        },
+                        child: Container(
+                          height: height * 0.064,
+                          width: width * 0.11,
+                          decoration: BoxDecoration(
+                              color: colorConst.blue,
+                              borderRadius: BorderRadius.circular(width * 0.03)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                  child: Text(
+                                    "FILTER",
+                                    style: TextStyle(
+                                        fontSize: width * 0.014,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
+                                  )),
+                              SizedBox(
+                                width: width * 0.012,
+                              ),
+                              Icon(
+                                Icons.filter_alt,
+                                color: Colors.white,
+                                size: width * 0.017,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            ListView.separated(
+              itemCount: profitList != null ? profitList.length: 0,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  final item = profitList!= null ? profitList[index] : null;
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Container(
+                        height: height * 0.27,
+                        margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  blurStyle: BlurStyle.normal,
+                                  color: Colors.black.withOpacity(0.09),
+                                  offset: Offset(0, 2),
+                                  spreadRadius: 1,
+                                  blurRadius: 9)
+                            ],
+                            borderRadius: BorderRadius.circular(width * 0.018)),
+                        child: Padding(
+                          padding:  EdgeInsets.all(width*0.023),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: height*0.28,
+                                width: width*0.48,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("NAME",style: TextStyle(fontSize: width*0.014),),
+                                        Text("RECHARGE TIME",style: TextStyle(fontSize: width*0.014)),
+                                        Text("BUYING COST",style: TextStyle(fontSize: width*0.014)),
+                                        Text(" MRP",style: TextStyle(fontSize: width*0.014)),
+                                        Text("PROFIT",style: TextStyle(fontSize: width*0.014)),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(":",style: TextStyle(fontSize: width*0.014)),
+                                        Text(":",style: TextStyle(fontSize: width*0.014)),
+                                        Text(":",style: TextStyle(fontSize: width*0.014)),
+                                        Text(":",style: TextStyle(fontSize: width*0.014)),
+                                        Text(":",style: TextStyle(fontSize: width*0.014)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: height*0.28,
+                                width: width*0.39,
+                                child:  Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(item['Name'],style: TextStyle(fontSize: width*0.014)),
+                                    Text(item['RechargedTime'],style: TextStyle(fontSize: width*0.014)),
+                                    Text(item['buyingCost'],style: TextStyle(fontSize: width*0.014)),
+                                    Text(item['MRP'],style: TextStyle(fontSize: width*0.014)),
+                                    Text(item['profit'],style: TextStyle(fontSize: width*0.014)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+
+            )
+          ],
+        ),
+      ),
+    ):
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -409,7 +647,7 @@ class _profitSummaryState extends State<profitSummary> {
 var purchaseDate;
 Widget totalSales(){
   return    Padding(
-    padding: const EdgeInsets.only(top:8.0),
+    padding:  EdgeInsets.only(top:width*0.03),
     child: Container(
       color: Colors.white,
       child: Padding(

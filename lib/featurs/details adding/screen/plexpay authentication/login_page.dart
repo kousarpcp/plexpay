@@ -69,22 +69,23 @@ class _LoginState extends State<Login> {
                   height: height*0.3,
                   width: width*1,
                   margin: EdgeInsets.only(
-                      top: width*0.15
+                      top: width*0.07
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LocaleText("Welcome To!",style: TextStyle(
-                          fontSize: width*0.07,
+                          fontSize: width*0.027,
                           fontWeight: FontWeight.w900
                       ),),
-                      Center(child: Image.asset(ImageConst.plexpay,width: width*0.5,)),
+                      Center(child: Image.asset(ImageConst.plexpay,width: width*0.23,)),
 
                     ],
                   ),
                 ),
                 Container(
+                  height: height*0.15,
                   // height: width*0.22,
                   width: width*1,
                   margin: EdgeInsets.only(
@@ -95,7 +96,10 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      LocaleText("Username"),
+                      Padding(
+                        padding:  EdgeInsets.only(left: width*0.005),
+                        child: LocaleText("Username"),
+                      ),
                       Container(
                         width: width*1,
                         // height: height*0.07,
@@ -117,11 +121,11 @@ class _LoginState extends State<Login> {
                             ),
                             hintText: Locales.string(context, 'Enter your Username'),
                             hintStyle: TextStyle(
-                              fontSize: width*0.04,
+                              fontSize: width*0.018,
                             ),
                             prefixIcon: Icon(
                               Icons.person,
-                              size: width*0.06,
+                              size: width*0.025,
                             ),
                             prefixIconColor: colorConst.blue,
                             filled: true,
@@ -131,7 +135,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.red,
                                   strokeAlign: width*0.01
                                 ),
-                                borderRadius: BorderRadius.circular(width*0.03)
+                                borderRadius: BorderRadius.circular(width*0.018)
                             ),
                           ),
                         ),
@@ -143,7 +147,7 @@ class _LoginState extends State<Login> {
                   height: height*0.03,
                 ),
                 Container(
-                  height: height*0.11,
+                  height: height*0.15,
                   width: width*1,
                   margin: EdgeInsets.only(
                     right: width*0.05,
@@ -153,10 +157,13 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      LocaleText("Password"),
+                      Padding(
+                        padding:  EdgeInsets.only(left: width*0.005),
+                        child: LocaleText("Password"),
+                      ),
                       Container(
                         width: width*1,
-                        height: height*0.075,
+                        // height: height*0.075,
                         // color: Colors.yellow,
                         child: TextFormField(
                           controller: passwordController,
@@ -166,12 +173,15 @@ class _LoginState extends State<Login> {
                           obscuringCharacter: "*",
                           cursorColor: colorConst.blue,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: width*0.005
+                            constraints: BoxConstraints(
+                              // maxHeight: height*0.07,
+                                minHeight: height*0.065,
+                                maxWidth: width*1,
+                                minWidth: width*1
                             ),
                             hintText: Locales.string(context, 'Enter your Password'),
                             hintStyle: TextStyle(
-                              fontSize: width*0.04,
+                              fontSize: width*0.018,
                             ),
                             suffixIcon: InkWell(
                               onTap: () {
@@ -182,24 +192,24 @@ class _LoginState extends State<Login> {
                               },
                               child: tap?Icon(
                                 Icons.visibility_off,
-                                size: width*0.06,
+                                size: width*0.025,
                               ):
                               Icon(
                                 Icons.visibility,
-                                size: width*0.06,
+                                size: width*0.025,
                               ),
                             ),
                             suffixIconColor: colorConst.blue,
                             prefixIcon: Icon(
                               CupertinoIcons.lock,
-                              size: width*0.06,
+                              size: width*0.025,
                             ),
                             prefixIconColor: colorConst.blue,
                             filled: true,
                             fillColor: Colors.blueGrey.shade50,
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.circular(width*0.03)
+                                borderRadius: BorderRadius.circular(width*0.018)
                             ),
                           ),
                         ),
@@ -208,45 +218,48 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 gap,
-                Container(
-                  padding:  EdgeInsets.symmetric(horizontal: width*0.09),
-                  child:   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    SizedBox(
-                        height: height*0.03,
-                        width: width*0.07,
-                        child: Theme(
-                          data: ThemeData(
-                              unselectedWidgetColor: colorConst.blue // Your color
-                          ),
-                          child: Checkbox(
-                              activeColor: colorConst.blue,
-                              value: isCheck,
-                              onChanged: (v)async{
-                                setState(() {
-                                  isCheck=v!;
+                Padding(
+                  padding:  EdgeInsets.only(left: width*0.035),
+                  child: Container(
+                    padding:  EdgeInsets.symmetric(horizontal: 30),
+                    child:   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      SizedBox(
+                          height: 24.0,
+                          width: 24.0,
+                          child: Theme(
+                            data: ThemeData(
+                                unselectedWidgetColor: colorConst.blue // Your color
+                            ),
+                            child: Checkbox(
+                                activeColor: colorConst.blue,
+                                value: isCheck,
+                                onChanged: (v)async{
+                                  setState(() {
+                                    isCheck=v!;
 
 
-                                });
+                                  });
 
-                                if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
-                                  var un = await sharedPrefrence(currentusername, userController.text.toString() );
-                                  var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
-                                  var ck = await sharedPrefrence(chek, "true");
-                                }else{
-                                  var un = await sharedPrefrence(userController, null );
-                                  var pass = await sharedPrefrence(passwordController, null);
-                                  var ck = await sharedPrefrence(chek, null);
+                                  if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
+                                    var un = await sharedPrefrence(currentusername, userController.text.toString() );
+                                    var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
+                                    var ck = await sharedPrefrence(chek, "true");
+                                  }else{
+                                    var un = await sharedPrefrence(userController, null );
+                                    var pass = await sharedPrefrence(passwordController, null);
+                                    var ck = await sharedPrefrence(chek, null);
 
-                                }
-                              }),
-                        )),
-                    SizedBox(width: width*0.03),
-                    LocaleText("Remember Me",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: width*0.035,
-                          fontWeight: FontWeight.bold,))
-                  ]),
+                                  }
+                                }),
+                          )),
+                      SizedBox(width: 10.0),
+                      LocaleText("Remember Me",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize:12,
+                            fontWeight: FontWeight.bold,))
+                    ]),
+                  ),
                 ),
                 gap,
                 InkWell(
@@ -305,22 +318,22 @@ class _LoginState extends State<Login> {
                     }
                   },
                   child: Container(
-                    width: width*0.8,
-                    height: height*0.065,
+                    width: width*0.3,
+                    height: height*0.07,
                     decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.circular(width*0.1),
+                      borderRadius:  BorderRadius.circular(width*0.01),
                       color: colorConst.blue
                     ),
                     child: Center(child: Text("Login",style: TextStyle(
-                        color: Colors.white
+                        color: Colors.white,fontSize: width*0.02
                     ),)),
                   ),
                 ),
                 SizedBox(
-                  height: height*0.032,
+                  height: height*0.02,
                 ),
                 Text("Don't have an account?",style: TextStyle(
-                  fontSize: width*0.035
+                  fontSize: width*0.013
                 ),),
                 SizedBox(
                   height: height*0.01,
@@ -330,17 +343,20 @@ class _LoginState extends State<Login> {
                     Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
                   },
                   child: Container(
-                    width: width*0.8,
-                    height: height*0.065,
+                    width: width*0.3,
+                    height: height*0.07,
                     decoration: BoxDecoration(
-                        borderRadius:  BorderRadius.circular(width*0.1),
+                        borderRadius:  BorderRadius.circular(width*0.01),
                         color: colorConst.blue
                     ),
                     child: Center(child: Text("Sign up",style: TextStyle(
-                        color: Colors.white
+                        color: Colors.white,fontSize: width*0.02
                     ),)),
                   ),
                 ),
+                SizedBox(
+                  height: height*0.02,
+                )
 
                 // TextFormField(
                 //   controller: userController,

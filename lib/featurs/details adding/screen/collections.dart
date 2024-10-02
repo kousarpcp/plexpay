@@ -135,7 +135,8 @@ class _CollectionsState extends State<Collections> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650 ?
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -143,7 +144,7 @@ class _CollectionsState extends State<Collections> {
         elevation: 0,
         title: LocaleText(
           "Collections",
-          style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
         ),
       ),
       body: isLoading == true
@@ -156,8 +157,8 @@ class _CollectionsState extends State<Collections> {
                   direction: ShimmerDirection.btt,
                   enabled: true,
                   child: Container(
-                          height: width * 0.125,
-                          width: width * 0.86,
+                    height: height * 0.13,
+                    width: width * 0.86,
                           decoration: BoxDecoration(
                             color: colorConst.lightgrey1,
                   // color: Colors.red,
@@ -176,7 +177,7 @@ class _CollectionsState extends State<Collections> {
                       direction: ShimmerDirection.btt,
                       enabled: true,
                       child: Container(
-                        height: width * 0.18,
+                        height: height * 0.17,
                         margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
                         decoration: BoxDecoration(
                             color: colorConst.lightgrey1,
@@ -196,7 +197,7 @@ class _CollectionsState extends State<Collections> {
         child: AnimationLimiter(
           child: Column(
     children:  AnimationConfiguration.toStaggeredList(
-    duration: const Duration(milliseconds: 300),
+    duration:  Duration(milliseconds: 300),
     childAnimationBuilder: (widget) => SlideAnimation(
     horizontalOffset: 30.0,
     child: FadeInAnimation(
@@ -206,22 +207,22 @@ class _CollectionsState extends State<Collections> {
             children: [
               Center(
                 child: Container(
-                  height: width * 0.125,
+                  height: height * 0.13,
                   width: width * 0.86,
                   decoration: BoxDecoration(
                       // color: Colors.red,
                       border:
                           Border.all(width: width * 0.001, color: colorConst.grey),
-                      borderRadius: BorderRadius.circular(width * 0.03)),
+                      borderRadius: BorderRadius.circular(width * 0.018)),
                   child: Padding(
-                    padding: EdgeInsets.all(width * 0.03),
+                    padding: EdgeInsets.all(width * 0.015),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(
                           Icons.date_range_outlined,
                           color: Colors.lightBlueAccent,
-                          size: width * 0.053,
+                          size: width * 0.024,
                         ),
                         SizedBox(
                           width: width * 0.03,
@@ -230,7 +231,7 @@ class _CollectionsState extends State<Collections> {
                           child: Text(
                             start + "  to  " + end,
                             maxLines: 2,
-                            style: TextStyle(fontSize: width * 0.043),
+                            style: TextStyle(fontSize: width * 0.021),
                             // style: Theme.of(context).textTheme.subtitle2,
                           ),
                         ),
@@ -241,8 +242,8 @@ class _CollectionsState extends State<Collections> {
                             });
                           },
                           child: Container(
-                            height: width * 0.08,
-                            width: width * 0.23,
+                            height: height * 0.064,
+                            width: width * 0.11,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
                                 borderRadius: BorderRadius.circular(width * 0.03)),
@@ -253,7 +254,7 @@ class _CollectionsState extends State<Collections> {
                                     child: LocaleText(
                                   "FILTER",
                                   style: TextStyle(
-                                      fontSize: width * 0.04,
+                                      fontSize: width * 0.014,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white),
                                 )),
@@ -263,7 +264,7 @@ class _CollectionsState extends State<Collections> {
                                 Icon(
                                   Icons.filter_alt,
                                   color: Colors.white,
-                                  size: width * 0.038,
+                                  size: width * 0.017,
                                 ),
                               ],
                             ),
@@ -292,6 +293,164 @@ class _CollectionsState extends State<Collections> {
           )
         ),
       ),
+    ):
+    Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: LocaleText(
+          "Collections",
+          style: TextStyle(fontSize: width * 0.06, fontWeight: FontWeight.w700),
+        ),
+      ),
+      body: isLoading == true
+          ? SingleChildScrollView(
+        child: Column(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey.shade100,
+              highlightColor: Colors.white,
+              direction: ShimmerDirection.btt,
+              enabled: true,
+              child: Container(
+                height: width * 0.125,
+                width: width * 0.86,
+                decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    // color: Colors.red,
+                    borderRadius: BorderRadius.circular(width * 0.03)),
+              ),
+            ),
+            gap,
+            ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey.shade100,
+                    highlightColor: Colors.white,
+                    direction: ShimmerDirection.btt,
+                    enabled: true,
+                    child: Container(
+                      height: width * 0.18,
+                      margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox();
+                },
+                itemCount: 8)
+          ],
+        ),
+      )
+          :SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: AnimationLimiter(
+            child: Column(
+              children:  AnimationConfiguration.toStaggeredList(
+                duration: const Duration(milliseconds: 300),
+                childAnimationBuilder: (widget) => SlideAnimation(
+                    horizontalOffset: 30.0,
+                    child: FadeInAnimation(
+                      child: widget,
+                    )
+                ),
+                children: [
+                  Center(
+                    child: Container(
+                      height: width * 0.125,
+                      width: width * 0.86,
+                      decoration: BoxDecoration(
+                        // color: Colors.red,
+                          border:
+                          Border.all(width: width * 0.001, color: colorConst.grey),
+                          borderRadius: BorderRadius.circular(width * 0.03)),
+                      child: Padding(
+                        padding: EdgeInsets.all(width * 0.03),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.date_range_outlined,
+                              color: Colors.lightBlueAccent,
+                              size: width * 0.053,
+                            ),
+                            SizedBox(
+                              width: width * 0.03,
+                            ),
+                            Expanded(
+                              child: Text(
+                                start + "  to  " + end,
+                                maxLines: 2,
+                                style: TextStyle(fontSize: width * 0.043),
+                                // style: Theme.of(context).textTheme.subtitle2,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectDateRange(context);
+                                });
+                              },
+                              child: Container(
+                                height: width * 0.08,
+                                width: width * 0.23,
+                                decoration: BoxDecoration(
+                                    color: colorConst.blue,
+                                    borderRadius: BorderRadius.circular(width * 0.03)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                        child: LocaleText(
+                                          "FILTER",
+                                          style: TextStyle(
+                                              fontSize: width * 0.04,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white),
+                                        )),
+                                    SizedBox(
+                                      width: width * 0.012,
+                                    ),
+                                    Icon(
+                                      Icons.filter_alt,
+                                      color: Colors.white,
+                                      size: width * 0.038,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final item =
+                      collectionList != null ? collectionList[index] : null;
+                      return CollectionList(item: item,);
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox();
+                    },
+                    itemCount: collectionList != null ? collectionList.length : 0,)
+                ],
+              ),
+            )
+        ),
+      ),
     );
   }
 }
@@ -310,7 +469,70 @@ class CollectionList extends StatefulWidget {
 class _CollectionListState extends State<CollectionList> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return MediaQuery.of(context).size.width > 650 ?
+      Column(
+      children: [
+        gap,
+        InkWell(
+          onTap: () {
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => CollectionBill(id: widget.item["due_id"]),));
+          },
+          child: Container(
+            height: height * 0.17,
+            margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      blurStyle: BlurStyle.normal,
+                      color: Colors.black.withOpacity(0.09),
+                      offset: Offset(0, 2),
+                      spreadRadius: 1,
+                      blurRadius: 9)
+                ],
+                borderRadius: BorderRadius.circular(width * 0.018)),
+            child: Padding(
+              padding:  EdgeInsets.all(width*0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Transaction ID",
+                        style: TextStyle(
+                          fontSize: width*0.014
+                        ),
+                      ),
+                      Text(
+                        widget.item["trans_id"].toString(),
+                        style: TextStyle(
+                            fontSize: width * 0.02, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: height * 0.067,
+                    width: width * 0.1,
+                    decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        borderRadius: BorderRadius.circular(width * 0.012)),
+                    child: Center(
+                        child: Text(
+                          widget.item["collected"],
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: width * 0.023),
+                    )),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+      ],
+    ):
+    Column(
       children: [
         gap,
         InkWell(
@@ -341,7 +563,7 @@ class _CollectionListState extends State<CollectionList> {
                     children: [
                       Text("Transaction ID",
                         style: TextStyle(
-                          fontSize: width*0.03
+                            fontSize: width*0.03
                         ),
                       ),
                       Text(
@@ -360,9 +582,9 @@ class _CollectionListState extends State<CollectionList> {
                     child: Center(
                         child: Text(
                           widget.item["collected"],
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: width * 0.045),
-                    )),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: width * 0.045),
+                        )),
                   ),
                 ],
               ),

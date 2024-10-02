@@ -104,7 +104,233 @@ class _reachargeState extends State<reacharge> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650?
+      Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: isTap == true
+            ? Container()
+            : InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: height * 0.09,
+                  width: width * 0.05,
+                  child: Padding(
+                    padding: EdgeInsets.all(width * 0.01),
+                    child: SvgPicture.asset(
+                      ImageConst.back,
+                    ),
+                  ),
+                ),
+              ),
+      ),
+      body: isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ):Column(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: height * 0.4,
+            child: Lottie.asset(
+              "assets/images/Animation - 1721449650090.json",
+            ),
+          ),
+           Column(
+                  children: [
+                    Container(
+                      height: height * 0.45,
+                      width: width * 1,
+                      decoration: BoxDecoration(
+                          color: colorConst.lightgrey1,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(width * 0.06),
+                              topLeft: Radius.circular(width * 0.06))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: height*0.02,
+                          ),
+                          Text(
+                            "Confirm your Recharge?",
+                            style: TextStyle(
+                                fontSize: width * 0.03,
+                                fontWeight: FontWeight.w900,
+                                color: colorConst.blue),
+                          ),
+                          widget.dash=="1"?Text(
+                            SendCurrencyIso +" "+Our_SendValue ,
+                            style: TextStyle(
+                                fontSize:height * 0.02,
+                                color: colorConst.blue,
+                                fontWeight: FontWeight.bold),
+                          ):Container(),
+                          Text(
+                            CoupenTitle!=null?CoupenTitle:"" ,
+                            style: TextStyle(
+                                fontSize: height * 0.0275,
+
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: height*0.02,
+                          ),
+                          Expanded(
+                            child: widget.number!=null?Container(
+                              width: width*0.8,
+                              child: Text(
+                                widget.dash=="0"?"Please confirm your recharge of "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge of number "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:height * 0.023,
+                                    color: colorConst.blue,
+                                    fontWeight: FontWeight.bold,),
+                              ),
+                            ):Container(
+                              width: width*0.8,
+                              child: Text(
+                                widget.dash=="0"?"Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:height * 0.023,
+                                    color: colorConst.blue,
+                                    fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        height: height * 0.12,
+                                        width: width * 0.22,
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.grey),
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.018)),
+                                        child: Center(
+                                            child: Text(
+                                          "Cancel",
+                                          style: TextStyle(
+                                              fontSize: width * 0.032,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w500),
+                                        )),
+                                      ),
+                                    ),
+                                  InkWell(
+                                      onTap: () async {
+                                        setState(() {
+                                          isTap = true;
+                                        });
+                                        var rsp;
+
+                                        if(widget.voucher=="1"){
+                                          print("itssss int vouchwer");
+                                          rsp = await  voucherIntRecharge(SkuCode,ProviderCode,SendValue,Our_SendValue,ReceiveValue,widget.dash);
+
+                                        }else{
+                                          rsp = await RechargeApi(SkuCode,ProviderCode,widget.number.toString(),SendValue,ReceiveValue,Our_SendValue,Country_Iso,CoupenTitle,widget.dash);
+                                        }
+
+                                        if(rsp != 0 && rsp['status'] == true){
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  backgroundColor: Colors.white,
+                                                  surfaceTintColor: Colors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(width * 0.05)),
+                                                  content: Container(
+                                                    height: height * 0.5,
+                                                    width: width * 1,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                        BorderRadius.circular(width * 0.03)),
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Lottie.asset(ImageConst.lottie1),
+                                                        Text(
+                                                          "Recharge Successfull!!",
+                                                          style:
+                                                          TextStyle(fontSize: width * 0.03),
+                                                        ),
+
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              });
+                                          Future.delayed(
+                                              const Duration(seconds: 1), () {
+                                          }).then((value) {
+                                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => bill(
+                                              id: rsp['transaction_id'].toString(),type: "HOME",
+                                            ),),ModalRoute.withName("/"));
+                                          },);
+
+                                        }else{
+                                          showToast("Recharge failed!!");
+                                          Navigator.pop(context);
+                                        }
+
+                                      },
+                                      child: isTap?CircularProgressIndicator():
+                                      Container(
+                                        height: height * 0.12,
+                                        width: width * 0.22,
+                                        decoration: BoxDecoration(
+                                            color: Colors.indigo,
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.018)),
+                                        child: Center(
+                                            child: Text(
+                                          "Confirm",
+                                          style: TextStyle(
+                                              fontSize: width * 0.032,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        )),
+                                      ),
+                                    ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: height * 0.02,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
+        ],
+      ),
+    ):
+      Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(

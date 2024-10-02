@@ -270,7 +270,8 @@ class _billState extends State<bill> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MediaQuery.of(context).size.width > 650?
+      SafeArea(
       child: Scaffold(
       body: isLoading==true?Container(
         margin: EdgeInsets.only(
@@ -288,7 +289,190 @@ class _billState extends State<bill> {
               child: Screenshot(
                 controller: screenshotController,
                 child: Container(
-                  height: width*2,
+                  height: height*1,
+                  width: width*0.45,
+                  margin: EdgeInsets.only(top: width*0.03),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          blurStyle: BlurStyle.normal,
+                          color: Colors.black.withOpacity(0.09),
+                          offset: Offset(0, 2),
+                          spreadRadius: 1,
+                          blurRadius: 9
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(width*0.02)
+                  ),
+                  child: Padding(
+                    padding:  EdgeInsets.all(width*0.02),
+                    child: Column(
+                      children: [
+                        gap,
+                        Image.asset(ImageConst.plexpay,width: width*0.17,),
+                        Text(
+                          "www.plexpay.ae",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: width*0.014,
+                              letterSpacing: 0.3),
+                        ),
+                        // SizedBox(
+                        //   height: width*0.01,
+                        // ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+
+                              children: [
+                                Text("${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",style: TextStyle(fontSize: width*0.014)),
+                                SizedBox(
+                                  width: width*0.02,
+                                ),
+                                Container(
+                                  height: height*0.035,
+                                  width: width*0.0012,color: Colors.black,
+                                ),
+                                SizedBox(
+                                  width: width*0.02,
+                                ),
+                                Text("${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}".toString(),style: TextStyle(fontSize: width*0.014),),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: height*0.04,
+                        ),
+                        Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 20,
+                            ),
+                            child: Wrap(
+                              runSpacing: width*0.01,
+                              children: [
+                                voucher_code.toString()!="null"?DetailsB("VOUCHER CARD", voucher_code.toUpperCase()):SizedBox(),
+                                shop_name.toString()!="null"? Details("SHOP NAME", shop_name.toUpperCase()):SizedBox(),
+                                TransactionID.toString()!="null"? Details("TRANSACTION ID", TransactionID.toUpperCase()):SizedBox(),
+                                RechargeID.toString()!="null"? Details("RECHARGE ID", RechargeID.toUpperCase()):SizedBox(),
+
+                                coupen_info.toString()!="null"?Details("RECEIVED VALUE", coupen_info.toUpperCase()):SizedBox(),
+                                recharge_info.toString()!="null"? Details("PIN SERIAL", recharge_info.toUpperCase()):SizedBox(),
+                                transactionCode.toString()!="null"? Details("transaction Code".toUpperCase(), transactionCode.toUpperCase()):SizedBox(),
+
+
+                                provider_name.toString()!="null"? Details("OPERATOR", provider_name.toUpperCase()):SizedBox(),
+                                location.toString()!="null"? Details("LOCATION", location.toUpperCase()):SizedBox(),
+                                AccountNumber.toString()!="null"? Details(( RechargeType=="KSEB BILL"?"CONSUMER NUMBER":"MOBILE NUMBER"), AccountNumber.toUpperCase()):SizedBox(),
+                                RechargeType.toString()!="null"? Details("TYPE", RechargeType.toUpperCase()):SizedBox(),
+                                recharge_amount.toString()!="null"?  Details("AMOUNT", recharge_amount.toUpperCase()+" AED"):SizedBox(),
+
+                                //  coupen_info.toString()!="null"? Details("OFFER INFO", coupen_info.toUpperCase()):SizedBox(),
+                                RechargedTime.toString()!="null"? Details("DATE & TIME", RechargedTime.toUpperCase()):SizedBox(),
+                                instruction.toString()!="null"? Details("INSTRUCTIONS", instruction.toUpperCase()):SizedBox(),
+                                mobile.toString()!="null"? Details("WHATSAPP SUPPORT", mobile.toUpperCase()):SizedBox(),
+                                Details("STATUS", "success".toUpperCase()),
+
+                              ],
+                            )),
+                        SizedBox(
+                          height: height*0.05,
+                        ),
+                        Text("Help & Support",style: TextStyle(fontSize: width*0.033,fontWeight: FontWeight.w800),),
+                        SizedBox(
+                          height: height*0.02,
+                        ),
+                        Expanded(child: Text("WHATSAPP SUPPORT: ${mobile}",style: TextStyle(fontSize: width*0.012),)),
+                        SizedBox(
+                          height: height*0.03,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: height*0.02,
+            )
+          ],
+        ),
+      ),
+        // bottomNavigationBar:
+        // InkWell(
+        //   onTap: () {
+        //     isTap==true?null:(){
+        //       setState(() {
+        //         isTap=true;
+        //       });
+        //       printOut();
+        //     };
+        //   },
+        //   child: Container(
+        //     // height: width*0.18,
+        //     child: Row(
+        //       children: [
+        //         Container(
+        //           height: width*0.12,
+        //           width: width*0.49,
+        //           color:isTap==true?Colors.grey: Colors.indigo,
+        //             child: Center(child: Text("Print",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.06),)),
+        //         ),
+        //         SizedBox(
+        //           width: width*0.02,
+        //         ),
+        //         InkWell(
+        //           onTap: () {
+        //
+        //           },
+        //           child: Container(
+        //             height: width*0.12,
+        //             width: width*0.49,
+        //               color: Colors.indigo,
+        //               child: Center(
+        //                 child: Text("Share",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.06)
+        //                                   ),
+        //               ),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        bottomNavigationBar:  isLoading==true?SizedBox():Container(
+          height: height*0.2,
+          child: Row(
+            children: [
+              Expanded(child: Button1("Print")),
+              Expanded(child: Button2("Share"))
+            ],
+          ),
+        ),
+
+      ),
+    ):
+      SafeArea(
+      child: Scaffold(
+      body: isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ):SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Screenshot(
+                controller: screenshotController,
+                child: Container(
+                  height: width*1.36,
                   width: width*0.75,
                   margin: EdgeInsets.only(top: width*0.03),
                   decoration: BoxDecoration(
@@ -453,7 +637,28 @@ class _billState extends State<bill> {
   }
 
   Widget Details(String label1, String label2) {
-    return Row(
+    return MediaQuery.of(context).size.width > 650?
+      Row(
+      children: [
+        Expanded(
+            child: Text(
+              label1.toUpperCase(),
+              style: TextStyle(
+                fontSize: width*0.015
+              ),
+            )),
+        Text(":  "),
+        Expanded(
+            child: Text(
+              label2.toUpperCase(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: width*0.015
+              ),
+            ))
+      ],
+    ):
+      Row(
       children: [
         Expanded(
             child: Text(
@@ -508,11 +713,11 @@ class _billState extends State<bill> {
         ),
         margin: EdgeInsets.all(width*0.03),
         alignment: Alignment.center,
-        height: width*0.14,
+        height: height*0.12,
         child: Text(
           label,
           style: TextStyle(
-              color: Colors.white, fontSize: width*0.052, fontWeight: FontWeight.w600),
+              color: Colors.white, fontSize: width*0.035, fontWeight: FontWeight.w600),
         ),
 
       )
@@ -532,11 +737,11 @@ class _billState extends State<bill> {
         ),
         alignment: Alignment.center,
         margin: EdgeInsets.all(width*0.03),
-        height: width*0.14,
+        height:height*0.12,
         child: Text(
           label,
           style: TextStyle(
-              color: Colors.white, fontSize:  width*0.052, fontWeight: FontWeight.w600),
+              color: Colors.white, fontSize:  width*0.035, fontWeight: FontWeight.w600),
         ),
       ),
     );

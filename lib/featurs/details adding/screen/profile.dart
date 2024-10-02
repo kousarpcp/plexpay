@@ -239,7 +239,7 @@ class _profileState extends State<profile> {
                               LocaleText(
                                 "Balance",
                                 style: TextStyle(
-                                    fontSize: width * 0.029,
+                                    fontSize: width * 0.027,
                                     fontWeight: FontWeight.w500),
                               ),
                               SizedBox(
@@ -247,7 +247,7 @@ class _profileState extends State<profile> {
                               ),
                               Text(wallet_amount.toString(),
                                   style: TextStyle(
-                                      fontSize: width * 0.034,
+                                      fontSize: width * 0.032,
                                       fontWeight: FontWeight.w800)),
                             ],
                           ),
@@ -286,7 +286,7 @@ class _profileState extends State<profile> {
                               LocaleText(
                                 "Due Balance",
                                 style: TextStyle(
-                                    fontSize: width * 0.029,
+                                    fontSize: width * 0.027,
                                     fontWeight: FontWeight.w500),
                               ),
                               SizedBox(
@@ -294,7 +294,7 @@ class _profileState extends State<profile> {
                               ),
                               Text(due_amount.toString(),
                                   style: TextStyle(
-                                      fontSize: width * 0.034,
+                                      fontSize: width * 0.032,
                                       fontWeight: FontWeight.w800)),
                             ],
                           ),
@@ -327,7 +327,7 @@ class _profileState extends State<profile> {
                       Row(
                         children: [
                           SizedBox(
-                            width: width * 0.04,
+                            width: width * 0.03,
                           ),
                           LocaleText(
                             "Payment Methods",
@@ -433,7 +433,7 @@ class _profileState extends State<profile> {
                 height: height * 0.016,
               ),
               Container(
-                height: height * 0.8,
+                height: height * 0.93,
                 width: width * 0.932,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -454,7 +454,7 @@ class _profileState extends State<profile> {
                     Row(
                       children: [
                         SizedBox(
-                          width: width * 0.04,
+                          width: width * 0.03,
                         ),
                         LocaleText(
                           "Account Summary",
@@ -479,7 +479,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Report",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -496,7 +496,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Funds",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -518,7 +518,7 @@ class _profileState extends State<profile> {
                           "Transactions",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: width * 0.027),
+                              fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -539,7 +539,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Collections",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -560,7 +560,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Due Summary",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -581,7 +581,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Profit Summary",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -602,7 +602,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Refund History",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -617,17 +617,17 @@ class _profileState extends State<profile> {
                       },
                       child: ListTile(
                         leading: Padding(
-                          padding:  EdgeInsets.only(left: width*0.02),
+                          padding:  EdgeInsets.only(left: width*0.01),
                           child: Icon(
                             Icons.edit_outlined,
-                            size: width*0.015,
+                            size: width*0.022,
                             color: colorConst.blue,
                           ),
                         ),
                         title: Text(
                           "Change Password",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: width * 0.027),
+                              fontWeight: FontWeight.w500, fontSize: width * 0.023),
                         ),
                         trailing: Icon(Icons.navigate_next),
                       ),
@@ -640,8 +640,8 @@ class _profileState extends State<profile> {
               ),
               Center(
                 child: Container(
-                  height: height * 0.32,
-                  width: width * 0.88,
+                  height: height * 0.52,
+                  width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -658,18 +658,18 @@ class _profileState extends State<profile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: height * 0.015,
+                        height: height * 0.025,
                       ),
                       Row(
                         children: [
                           SizedBox(
-                            width: width * 0.06,
+                            width: width * 0.03,
                           ),
                           Text(
                             "Languages",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: width * 0.053),
+                                fontSize: width * 0.028),
                           ),
                         ],
                       ),
@@ -682,10 +682,11 @@ class _profileState extends State<profile> {
                              itemBuilder: (context, index) {
                              selectedLocale = currentIndex == index;
                                return Container(
+                                 height: height*0.1,
                                  margin: EdgeInsets.all(width*0.01),
                                  decoration: BoxDecoration(
                                    color: colorConst.lightgrey1,
-                                   borderRadius: BorderRadius.circular(width*0.03)
+                                   borderRadius: BorderRadius.circular(width*0.018)
                                  ),
                                  child: ListTile(
                                    onTap: () {
@@ -697,7 +698,7 @@ class _profileState extends State<profile> {
                                    },
                                    leading:Icon(selectedLocale?Icons.check : Icons.language,),
                                    title: Text(locales[index],style: TextStyle(
-                                 fontWeight: FontWeight.w500, fontSize: width * 0.055),
+                                 fontWeight: FontWeight.w500, fontSize: width * 0.023),
                                      ),
                                    trailing: Icon(Icons.navigate_next),
                                  ),
@@ -714,7 +715,7 @@ class _profileState extends State<profile> {
                 ),
               ),
               SizedBox(
-                height: height * 0.016,
+                height: height * 0.025,
               ),
               GestureDetector(
                 onTap: () {
@@ -781,8 +782,8 @@ class _profileState extends State<profile> {
                   );
                 },
                 child: Container(
-                  height: height * 0.083,
-                  width: width * 0.88,
+                  height: height * 0.11,
+                  width: width * 0.932,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -793,7 +794,7 @@ class _profileState extends State<profile> {
                             spreadRadius: 1,
                             blurRadius: 9)
                       ],
-                      borderRadius: BorderRadius.circular(width * 0.03)),
+                      borderRadius: BorderRadius.circular(width * 0.018)),
                   child: Column(
                     children: [
                       ListTile(
@@ -804,7 +805,7 @@ class _profileState extends State<profile> {
                         title: LocaleText(
                           "Logout",
                           style:
-                              TextStyle(color: Colors.red, fontSize: width * 0.053),
+                              TextStyle(color: Colors.red, fontSize: width * 0.027),
                         ),
                       )
                     ],
@@ -812,7 +813,7 @@ class _profileState extends State<profile> {
                 ),
               ),
               SizedBox(
-                height: height * 0.01,
+                height: height * 0.025,
               ),
             ],
           ),

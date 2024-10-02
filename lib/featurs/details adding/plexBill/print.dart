@@ -134,7 +134,258 @@ class _printoutState extends State<printout> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650 ?
+      Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Screenshot(
+                controller: screenshotController,
+                child: Container(
+                  height: width*0.8,
+                  width: width*0.38,
+                  margin: EdgeInsets.only(top: width*0.03),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            blurStyle: BlurStyle.normal,
+                            color: Colors.black.withOpacity(0.09),
+                            offset: Offset(0, 2),
+                            spreadRadius: 1,
+                            blurRadius: 9
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(width*0.02)
+                  ),
+                  child: Padding(
+                    padding:  EdgeInsets.all(width*0.02),
+                    child: Column(
+                      children: [
+                        gap,
+                        Image.asset(ImageConst.plexpay,width: width*0.14,),
+                        Text(
+                          "www.plexpay.ae",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: width*0.012,
+                              letterSpacing: 0.3),
+                        ),
+                        SizedBox(
+                          height: height*0.02,
+                        ),
+                        Center(child: Text("Netplex IT Infrastructure LLC, Dubai,United\nArab Emirates", style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: width*0.016,))),
+                        SizedBox(
+                          height: height*0.03,
+                        ),
+                        Center(child: Text("PLEXBILL", style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: width*0.0287,))),
+                        SizedBox(
+                          height: height*0.03,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text("Customer ID :"),
+                                Text(" 6"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Invoice Date :"),
+                                Text(" ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("TRN Number :"),
+                                Text(" 6456"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Payment Type :",style: TextStyle(fontSize: width*0.020,fontWeight: FontWeight.w500),),
+                                Text(" CASH",style: TextStyle(fontSize: width*0.020,fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+        
+                          ],
+                        ),
+                        SizedBox(
+                          height: height*0.02,
+                        ),
+                        Divider(
+                          thickness: width*0.001,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("Product",style: TextStyle(fontWeight: FontWeight.w600,fontSize: width*0.025),),
+                            Text("Price",style: TextStyle(fontWeight: FontWeight.w600,fontSize: width*0.025)),
+                          ],
+                        ),
+                        Divider(
+                          thickness: width*0.001,
+                        ),
+                        Container(
+                          width: width*0.7,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Tomato"),
+                                      Text("1 x 1.42"),
+                                    ],
+                                  ),
+                                  Text("AED 1.42"),
+                                ],
+                              ),
+                              SizedBox(
+                                height: height*0.027,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Onion"),
+                                      Text("1 x 3.04"),
+                                    ],
+                                  ),
+                                  Text("AED 3.04"),
+                                ],
+                              ),
+                              SizedBox(
+                                height: height*0.027,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Dragon Fruit"),
+                                      Text("1 x 5.08"),
+                                    ],
+                                  ),
+                                  Text("AED 5.08"),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: height*0.03,
+                        ),
+                        Divider(
+                          thickness: width*0.001,
+                        ),
+                        Container(
+                          width: width*0.7,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Sub Total",style: TextStyle(fontSize: width*0.02,),),
+                                  Text("AED 9.54",style: TextStyle(fontSize: width*0.02,)),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Vat",style: TextStyle(fontSize: width*0.02),),
+                                  Text("AED 0.84",style: TextStyle(fontSize: width*0.02,)),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Amount",style: TextStyle(fontSize: width*0.02,fontWeight: FontWeight.w600),),
+                                  Text("AED 10.38",style: TextStyle(fontSize: width*0.02,fontWeight: FontWeight.w600)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: width*0.001,
+                        ),
+                        Text("We Love PlexPay!!",style: TextStyle(fontSize: width*0.025),),
+                        SizedBox(
+                          height: height*0.02,
+                        ),
+                        Text("${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year} | ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}")
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: height*0.02,
+            )
+          ],
+        ),
+      ),
+
+      bottomNavigationBar:
+      InkWell(
+        onTap: () {
+          printOut1();
+        //   isTap==true?null:(){
+        //     setState(() {
+        //       isTap=true;
+        //     });
+        //     printOut1();
+        //   };
+        },
+        child: Container(
+          height: height*0.1,
+          child: Row(
+            children: [
+              Container(
+                height: height*0.12,
+                width: width*0.49,
+                color:isTap==true?Colors.grey: Colors.indigo,
+                  child: Center(child: Text("Print",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.038),)),
+              ),
+              SizedBox(
+                width: width*0.02,
+              ),
+              InkWell(
+                onTap: () {
+                  capture();
+                },
+                child: Container(
+                  height: height*0.12,
+                  width: width*0.49,
+                    color: Colors.indigo,
+                    child: Center(
+                      child: Text("Share",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.038)
+                                        ),
+                    ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ):
+      Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -214,7 +465,7 @@ class _printoutState extends State<printout> {
                                 Text(" CASH",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w500)),
                               ],
                             ),
-        
+
                           ],
                         ),
                         SizedBox(

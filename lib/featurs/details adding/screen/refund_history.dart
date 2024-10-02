@@ -14,7 +14,35 @@ class refundHistory extends StatefulWidget {
 class _refundHistoryState extends State<refundHistory> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  MediaQuery.of(context).size.width > 650 ?
+      Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            height: height * 0.09,
+            width: width * 0.05,
+            child: Padding(
+              padding: EdgeInsets.all(width * 0.01),
+              child: SvgPicture.asset(
+                ImageConst.back,
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          "Refund History",
+          style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
+        ),
+      ),
+    ):
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,

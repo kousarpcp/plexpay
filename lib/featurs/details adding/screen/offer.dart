@@ -158,7 +158,7 @@ class _offerState extends State<offer> {
                                 ),
                               ),
                               SizedBox(
-                                height: width * 0.04,
+                                height: height * 0.04,
                               ),
                             ],
                           );

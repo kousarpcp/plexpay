@@ -334,7 +334,245 @@ class _ReportsTabState extends State<ReportsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650 ?
+      Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: Text("Report", style: TextStyle(
+            fontSize: width * 0.027, fontWeight: FontWeight.w700),),
+      ),
+      body: isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.05,
+            left: width*0.05,
+            right: width*0.05
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ):Padding(
+        padding:  EdgeInsets.all(width*0.03),
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+
+              children: [
+                InkWell(
+                  onTap: () {
+                    selectDateRange(context);
+                    setState(() {
+
+                    });
+                  },
+                  child: Container(
+                    height: height*0.1,
+                    decoration: BoxDecoration(
+                      color: colorConst.blue,
+                      borderRadius: BorderRadius.circular(width*0.016),
+                    ),
+                    child: Center(
+                      child: Text("Pick Date",style: TextStyle(
+                        fontSize: width*0.025,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),),
+                    ),
+                  ),
+                ),
+                Screenshot(
+                  controller: screenshotController,
+                  child: Container(
+                    height: height*0.97 + (arrProdList.length * 0.07 * height),
+                    width: width*0.45,
+                    margin: EdgeInsets.only(top: width*0.03),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              blurStyle: BlurStyle.normal,
+                              color: Colors.black.withOpacity(0.09),
+                              offset: Offset(0, 2),
+                              spreadRadius: 1,
+                              blurRadius: 9
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(width*0.02)
+                    ),
+                    child: Padding(
+                      padding:  EdgeInsets.all(width*0.02),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Image.asset(ImageConst.plexpay,width: width*0.17,),
+                          Text(
+                            "www.plexpay.ae",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: width*0.018,
+                                letterSpacing: 0.3),
+                          ),
+                          // SizedBox(
+                          //   height: width*0.01,
+                          // ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+
+                                children: [
+                                  Text("${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",style: TextStyle(fontSize: width*0.018)),
+                                  SizedBox(
+                                    width: width*0.02,
+                                  ),
+                                  Container(
+                                    height: height*0.029,
+                                    width: width*0.002 ,color: Colors.black,
+                                  ),
+                                  SizedBox(
+                                    width: width*0.02,
+                                  ),
+                                  Text("${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}".toString(),style: TextStyle(fontSize: width*0.018),),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: height*0.043,
+                          ),
+                          Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Wrap(
+                                runSpacing: width*0.01,
+                                children: [
+                                  _items("receipt no.", "#12346567890"),
+                                  _items("point name", name),
+                                  _items(
+                                      "duration", start.toString() + " to " + end.toString()),
+                                  _items("balance", wallet_amount.toString()),
+                                  SizedBox(
+                                    height: height*0.08,
+                                  ),
+                                  Divider(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "DATE",
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                                        ),
+                                        flex: 2,
+                                      ),
+                                      Expanded(
+                                        child: Text("SERVICES", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                                        flex: 2,
+                                      ),
+                                      Expanded(
+                                        child: Text("AMT", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                                        flex: 1,
+                                      ),
+                                      Expanded(
+                                        child: Text("COM%", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                                        flex: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  ListView.separated(
+                                    scrollDirection: Axis.vertical,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    separatorBuilder: (context, index) => SizedBox(
+                                      height: 10,
+                                    ),
+                                    shrinkWrap: true,
+                                    itemCount: arrProdList != null ? arrProdList.length : 0,
+                                    itemBuilder: (context, index) {
+                                      final item =
+                                      arrProdList != null ? arrProdList[index] : null;
+                                      return Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              item['Date'].toString(),
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                                            ),
+                                            flex: 2,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              item['Service'].toString(),
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                                            ),
+                                            flex: 2,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              item['Amount'].toString(),
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                                            ),
+                                            flex: 1,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              item['Commission'].toString(),
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                                            ),
+                                            flex: 1,
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  MySeparator(),
+
+                                  _total("total amount",   total_amount.toString()),
+                                  _total(
+                                      "total commission",  total_commission.toString()),
+
+                                ],
+                              )),
+                          SizedBox(
+                            height: height*0.047,
+                          ),
+                          Text("Help & Support",style: TextStyle(fontSize: width*0.028,fontWeight: FontWeight.w800),),
+                          SizedBox(
+                            height: height*0.03,
+                          ),
+                          Expanded(child: Text("WHATSAPP SUPPORT: +971589692115")),
+                          SizedBox(
+                            height: height*0.02,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: height*0.02,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar:  isLoading==true?SizedBox():Container(
+        height: height*0.1,
+        child: Row(
+          children: [
+            Expanded(child: Button1("Print")),
+            Expanded(child: Button2("Share"))
+          ],
+        ),
+      ),
+    ):
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -607,8 +845,34 @@ class _ReportsTabState extends State<ReportsTab> {
       ],
     );
   }
+
   Widget Button1(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width > 650 ?
+    GestureDetector(
+        onTap:isTap==true?null:(){
+          setState(() {
+            isTap=true;
+          });
+          printOut2();
+        } ,
+        child:Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(width*0.01),
+              color:isTap==true?Colors.grey: colorConst.blue
+          ),
+          margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+          alignment: Alignment.center,
+          height: height*0.14,
+          child: Text(
+            label,
+            style: TextStyle(
+                color: Colors.white, fontSize: width*0.03, fontWeight: FontWeight.w600),
+          ),
+
+        )
+
+    ):
+    GestureDetector(
         onTap:isTap==true?null:(){
           setState(() {
             isTap=true;
@@ -634,7 +898,28 @@ class _ReportsTabState extends State<ReportsTab> {
     );
   }
   Widget Button2(String label) {
-    return GestureDetector(
+    return MediaQuery.of(context).size.width > 650 ?
+      GestureDetector(
+      onTap:(){
+        capture();
+      } ,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(width*0.01),
+          color: colorConst.blue,
+
+        ),
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
+        // height: height*0.14,
+        child: Text(
+          label,
+          style: TextStyle(
+              color: Colors.white, fontSize:  width*0.03, fontWeight: FontWeight.w600),
+        ),
+      ),
+    ):
+      GestureDetector(
       onTap:(){
         capture();
       } ,

@@ -222,7 +222,172 @@ class _CollectionBillState extends State<CollectionBill> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MediaQuery.of(context).size.width > 650 ?
+      SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: isLoading==true?Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1))
+          ,
+        ):SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: height*0.1,
+              ),
+              Center(
+                child: Screenshot(
+                  controller: screenshotController,
+                  child: Container(
+                    height: height*0.86,
+                    width: width*0.45,
+                    margin: EdgeInsets.only(top: width*0.03),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              blurStyle: BlurStyle.normal,
+                              color: Colors.black.withOpacity(0.09),
+                              offset: Offset(0, 2),
+                              spreadRadius: 1,
+                              blurRadius: 9
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(width*0.02)
+                    ),
+                    child: Padding(
+                      padding:  EdgeInsets.all(width*0.02),
+                      child: Column(
+                        children: [
+                          gap,
+                          Image.asset(ImageConst.plexpay,width: width*0.20,),
+                          Text(
+                            "www.plexpay.ae",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: width*0.018,
+                                letterSpacing: 0.3),
+                          ),
+                          // SizedBox(
+                          //   height: width*0.01,
+                          // ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+
+                                children: [
+                                  Text("${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",style: TextStyle(fontSize: width*0.016)),
+                                  SizedBox(
+                                    width: width*0.02,
+                                  ),
+                                  Container(
+                                    height: height*0.035,
+                                    width: width*0.0012,color: Colors.black,
+                                  ),
+                                  SizedBox(
+                                    width: width*0.02,
+                                  ),
+                                  Text("${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}".toString(),style: TextStyle(fontSize: width*0.016),),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: height*0.04,
+                          ),
+                          Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Wrap(
+                                runSpacing: width*0.01,
+                                children: [
+                                  Details("transaction id", trans_id),
+                                  Details("point name", point_name),
+                                  Details("agent name",agent_name),
+                                  Details("due wallet", due_wallet+" AED"),
+                                  Details("collection amount", collected_amount+" AED"),
+                                  Details("mode of payment", mode_of_payment),
+                                  Details("due balance", due_balance+" AED"),
+                                  Details("date & time", entry_date),
+                                  Details("STATUS", "success".toUpperCase()),
+
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: height*0.02,
+              )
+            ],
+          ),
+        ),
+        // bottomNavigationBar:
+        // InkWell(
+        //   onTap: () {
+        //     isTap==true?null:(){
+        //       setState(() {
+        //         isTap=true;
+        //       });
+        //       printOut();
+        //     };
+        //   },
+        //   child: Container(
+        //     // height: width*0.18,
+        //     child: Row(
+        //       children: [
+        //         Container(
+        //           height: width*0.12,
+        //           width: width*0.49,
+        //           color:isTap==true?Colors.grey: Colors.indigo,
+        //             child: Center(child: Text("Print",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.06),)),
+        //         ),
+        //         SizedBox(
+        //           width: width*0.02,
+        //         ),
+        //         InkWell(
+        //           onTap: () {
+        //
+        //           },
+        //           child: Container(
+        //             height: width*0.12,
+        //             width: width*0.49,
+        //               color: Colors.indigo,
+        //               child: Center(
+        //                 child: Text("Share",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: width*0.06)
+        //                                   ),
+        //               ),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        bottomNavigationBar: isLoading==true?SizedBox():Container(
+          height: height*0.12,
+          child: Row(
+            children: [
+              Expanded(child: Button1("Print")),
+              Expanded(child: Button2("Share"))
+            ],
+          ),
+        ),
+
+      ),
+    ):
+      SafeArea(
       child: Scaffold(
         body: isLoading==true?Container(
           margin: EdgeInsets.only(
@@ -243,7 +408,7 @@ class _CollectionBillState extends State<CollectionBill> {
                 child: Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    height: width*1.3,
+                    height: width*1.15,
                     width: width*0.75,
                     margin: EdgeInsets.only(top: width*0.03),
                     decoration: BoxDecoration(
@@ -320,10 +485,7 @@ class _CollectionBillState extends State<CollectionBill> {
                                 ],
                               )),
                           SizedBox(
-                            height: width*0.05,
-                          ),
-                          SizedBox(
-                            height: width*0.06,
+                            height: height*0.02,
                           ),
                         ],
                       ),
@@ -391,7 +553,28 @@ class _CollectionBillState extends State<CollectionBill> {
   }
 
   Widget Details(String label1, String label2) {
-    return Row(
+    return MediaQuery.of(context).size.width > 650 ?
+      Row(
+      children: [
+        Expanded(
+            child: Text(
+              label1.toUpperCase(),
+              style: TextStyle(
+                  fontSize: width*0.015
+              ),
+            )),
+        Text(":  "),
+        Expanded(
+            child: Text(
+              label2.toUpperCase(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: width*0.015
+              ),
+            ))
+      ],
+    ):
+      Row(
       children: [
         Expanded(
             child: Text(
@@ -446,12 +629,12 @@ class _CollectionBillState extends State<CollectionBill> {
         ),
         margin: EdgeInsets.all(width*0.03),
         alignment: Alignment.center,
-        height: width*0.14,
+        height: height*0.12,
         child: Text(
           isTap==true?"Printing...":label,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Colors.white, fontSize: width*0.052, fontWeight: FontWeight.w600),
+              color: Colors.white, fontSize: width*0.035, fontWeight: FontWeight.w600),
         ),
 
       ),
@@ -470,11 +653,11 @@ class _CollectionBillState extends State<CollectionBill> {
         ),
         alignment: Alignment.center,
         margin: EdgeInsets.all(width*0.03),
-        height: width*0.14,
+        height: height*0.12,
         child: Text(
           label,
           style: TextStyle(
-              color: Colors.white, fontSize:  width*0.052, fontWeight: FontWeight.w600),
+              color: Colors.white, fontSize:  width*0.035, fontWeight: FontWeight.w600),
         ),
       ),
     );
