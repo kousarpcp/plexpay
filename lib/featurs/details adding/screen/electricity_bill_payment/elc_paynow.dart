@@ -125,7 +125,123 @@ class _ElcPaynowState extends State<ElcPaynow> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MediaQuery.of(context).size.width > 650?
+      Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: Text(
+          "Electricity Bill Payment",
+          style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
+        ),
+      ),
+      body:isLoading==true?Container(
+        margin: EdgeInsets.only(
+            bottom: width*0.03,
+            left: width*0.03,
+            right: width*0.03
+        ),
+        child: Center(child: Lottie.asset(ImageConst.loading1))
+        ,
+      ): Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Container(
+              // margin: EdgeInsets.all(width*0.1),
+              height: height*0.23,
+              width: width * 0.17,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(width*0.03),
+                  border: Border.all(color: Colors.black12),
+
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          image),fit: BoxFit.fill
+                  )),
+            ),
+            SizedBox(
+              height: height*0.032,
+            ),
+            Container(
+              height: height*0.13,
+              width: width*0.7,
+              child: Text(
+                customername,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: colorConst.blue,
+                    fontSize: width * 0.03, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Text(
+              "Bill Amount : "+BillAmount,
+              style: TextStyle(
+                  fontSize: width * 0.025, fontWeight: FontWeight.w600),
+            ),
+
+            Text(
+              "Due Date : "+dueDate,
+              style: TextStyle(
+                  fontSize: width * 0.025, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              "Consumer Number : "+widget.consumer,
+              style: TextStyle(
+                  fontSize: width * 0.025, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: height * 0.02,
+            ),
+
+            SendValue!=null?Text(
+              "Send amount : AED "+SendValue.toString(),
+              style: TextStyle(
+                  fontSize: width * 0.025,
+                  color: colorConst.blue,
+                  fontWeight: FontWeight.bold),
+            ):Container(),
+            SizedBox(
+              height: height * 0.02,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          ksebBill(widget.data);
+        },
+        child: isLoading==true?Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.03,
+              left: width*0.03,
+              right: width*0.03
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1))
+          ,
+        ):Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(
+              bottom: width*0.03,
+              left: width*0.03,
+              right: width*0.03
+          ),
+          height: height*0.1,
+          decoration: BoxDecoration(
+              color: colorConst.blue, borderRadius: BorderRadius.circular(width*0.018)),
+          child: Text(
+            "Pay",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    ):
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
