@@ -68,6 +68,7 @@ class _ElcHomeState extends State<ElcHome> {
   Widget build(BuildContext context) {
     return MediaQuery.of(context).size.width > 650?
       Scaffold(
+        resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,

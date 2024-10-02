@@ -171,113 +171,114 @@ class _plexbillNewState extends State<plexbillNew> {
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: _selectedIndex == 2
                 ? Container(
-                    height: height * 0.37,
-                    width: width * 0.91,
+              height: MediaQuery.of(context).size.height > 520?height * 0.37:height * 0.39,
+              width: width * 1,
                     color: Colors.white,
-                    child: Column(
-                      children: [
-                        Divider(
-                          thickness: width * 0.001,
-                          color: Colors.black,
-                          endIndent: width * 0.001,
-                          indent: width * 0.003,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Subtotal",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: width * 0.02,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              "$total",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: width * 0.022,
-                                  color: Colors.black),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Vat",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: width * 0.02,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              "$vat",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: width * 0.022,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Total",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: width * 0.02,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              "${total + vat}".toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: width * 0.024,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        Divider(
-                          thickness: width * 0.001,
-                          color: Colors.black,
-                          endIndent: width * 0.2,
-                          indent: width * 0.2,
-                        ),
-                        SizedBox(
-                          height: height * 0.018,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => printout(),
-                                ));
-                          },
-                          child: Container(
-                            height: height * 0.08,
-                            width: width * 0.11,
-                            decoration: BoxDecoration(
-                                color: colorConst.blue,
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.016)),
-                            child: Center(
-                              child: Text(
-                                "Print",
+                    child: Padding(
+                      padding:  EdgeInsets.only(right:width*0.03,left: width*0.03),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Divider(
+                            thickness: width * 0.001,
+                            color: Colors.black,
+                            endIndent: width * 0.001,
+                            indent: width * 0.003,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Subtotal",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: width * 0.026,
-                                    color: Colors.white),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: width * 0.018,
+                                    color: Colors.black),
+                              ),
+                              Text(
+                                "$total",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: width * 0.02,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Vat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: width * 0.018,
+                                    color: Colors.black),
+                              ),
+                              Text(
+                                "$vat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: width * 0.02,
+                                    color: Colors.black),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Total",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: width * 0.018,
+                                    color: Colors.black),
+                              ),
+                              Text(
+                                "${total + vat}".toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width * 0.021,
+                                    color: Colors.black),
+                              )
+                            ],
+                          ),
+                          Divider(
+                            thickness: width * 0.001,
+                            color: Colors.black,
+                            endIndent: width * 0.2,
+                            indent: width * 0.2,
+                          ),
+                          SizedBox(
+                            height: height * 0.01,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => printout(),
+                                  ));
+                            },
+                            child: Container(
+                              height: height * 0.08,
+                              width: width * 0.5,
+                              decoration: BoxDecoration(
+                                  color: colorConst.blue,
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.016)),
+                              child: Center(
+                                child: Text(
+                                  "Print",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: width * 0.023,
+                                      color: Colors.white),
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 : SizedBox(),
@@ -1049,7 +1050,7 @@ class _plexbillNewState extends State<plexbillNew> {
                   child: Padding(
                     padding: EdgeInsets.only(left: width * 0.018),
                     child: Container(
-                        height: height * 0.3,
+                        height: MediaQuery.of(context).size.height>520? height * 0.3:height*0.32,
                         width: width * 0.12,
                         decoration: BoxDecoration(
                             color: colorConst.blue,
@@ -1198,7 +1199,7 @@ class _plexbillNewState extends State<plexbillNew> {
                         Padding(
                           padding: EdgeInsets.only(left: width * 0.02),
                           child: Container(
-                            height: height * 0.3,
+                            height: MediaQuery.of(context).size.height > 520?height * 0.3:height * 0.36,
                             width: width * 0.125,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
@@ -1210,7 +1211,8 @@ class _plexbillNewState extends State<plexbillNew> {
                                   height: height * 0.03,
                                 ),
                                 Container(
-                                  height: height * 0.07,
+                                  height: MediaQuery.of(context).size.height > 520?height * 0.07:height * 0.1,
+
                                   width: width * 0.087,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -1248,7 +1250,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: height * 0.02,
+                                  height: height * 0.01,
                                 ),
                                 vegitalbles[index]["quantity"] != 0
                                     ? Container(
@@ -1308,7 +1310,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                         },
                                         child: Container(
                                           height: height * 0.057,
-                                          width: width * 0.077,
+                                          width: width * 0.079,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.circular(
@@ -1318,6 +1320,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                             child: Text(
                                               "Add item",
                                               style: TextStyle(
+                                                fontSize: width*0.015,
                                                   color: Colors.black),
                                             ),
                                           ),
@@ -1348,19 +1351,20 @@ class _plexbillNewState extends State<plexbillNew> {
                         Padding(
                           padding: EdgeInsets.only(left: width * 0.02),
                           child: Container(
-                            height: height * 0.3,
+                            height: MediaQuery.of(context).size.height > 520?height * 0.3:height * 0.36,
                             width: width * 0.125,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
                                 borderRadius:
                                     BorderRadius.circular(width * 0.02)),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  height: height * 0.03,
+                                  height: height * 0.01,
                                 ),
                                 Container(
-                                  height: height * 0.07,
+                                  height: MediaQuery.of(context).size.height > 520?height * 0.07:height * 0.1,
                                   width: width * 0.087,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -1398,7 +1402,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: height * 0.02,
+                                  height: height * 0.01,
                                 ),
                                 fruits[index]["quantity"] != 0
                                     ? Container(
@@ -1466,6 +1470,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                             child: Text(
                                               "Add item",
                                               style: TextStyle(
+                                                fontSize: width*0.015,
                                                   color: Colors.black),
                                             ),
                                           ),
@@ -1797,7 +1802,7 @@ class _plexbillNewState extends State<plexbillNew> {
                               children: [
                                 Center(
                                   child: Container(
-                                    height: height * 0.14,
+                                    height: MediaQuery.of(context).size.height > 520?height * 0.14:height * 0.17,
                                     width: width * 0.89,
                                     decoration: BoxDecoration(
                                         color: Colors.white,

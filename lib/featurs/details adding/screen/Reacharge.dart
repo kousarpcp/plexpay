@@ -112,23 +112,7 @@ class _reachargeState extends State<reacharge> {
         scrolledUnderElevation: 0,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: isTap == true
-            ? Container()
-            : InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: height * 0.09,
-                  width: width * 0.05,
-                  child: Padding(
-                    padding: EdgeInsets.all(width * 0.01),
-                    child: SvgPicture.asset(
-                      ImageConst.back,
-                    ),
-                  ),
-                ),
-              ),
+
       ),
       body: isLoading==true?Container(
         margin: EdgeInsets.only(
@@ -150,7 +134,7 @@ class _reachargeState extends State<reacharge> {
            Column(
                   children: [
                     Container(
-                      height: height * 0.45,
+                      height: height * 0.35,
                       width: width * 1,
                       decoration: BoxDecoration(
                           color: colorConst.lightgrey1,
@@ -166,7 +150,7 @@ class _reachargeState extends State<reacharge> {
                           Text(
                             "Confirm your Recharge?",
                             style: TextStyle(
-                                fontSize: width * 0.03,
+                                fontSize: width * 0.027,
                                 fontWeight: FontWeight.w900,
                                 color: colorConst.blue),
                           ),
@@ -189,7 +173,7 @@ class _reachargeState extends State<reacharge> {
                           ),
                           Expanded(
                             child: widget.number!=null?Container(
-                              width: width*0.8,
+                              width: width*0.5,
                               child: Text(
                                 widget.dash=="0"?"Please confirm your recharge of "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge of number "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
                                 textAlign: TextAlign.center,
@@ -199,7 +183,7 @@ class _reachargeState extends State<reacharge> {
                                     fontWeight: FontWeight.bold,),
                               ),
                             ):Container(
-                              width: width*0.8,
+                              width: width*0.5,
                               child: Text(
                                 widget.dash=="0"?"Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge " +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
                                 textAlign: TextAlign.center,
@@ -213,7 +197,7 @@ class _reachargeState extends State<reacharge> {
                           ),
 
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
 
                                   InkWell(
@@ -221,7 +205,7 @@ class _reachargeState extends State<reacharge> {
                                         Navigator.pop(context);
                                       },
                                       child: Container(
-                                        height: height * 0.12,
+                                        height: height * 0.09,
                                         width: width * 0.22,
                                         decoration: BoxDecoration(
                                             border:
@@ -232,12 +216,15 @@ class _reachargeState extends State<reacharge> {
                                             child: Text(
                                           "Cancel",
                                           style: TextStyle(
-                                              fontSize: width * 0.032,
-                                              color: Colors.blue,
+                                              fontSize: width * 0.022,
+                                              color: colorConst.blue,
                                               fontWeight: FontWeight.w500),
                                         )),
                                       ),
                                     ),
+                                  SizedBox(
+                                    width: width*0.03,
+                                  ),
                                   InkWell(
                                       onTap: () async {
                                         setState(() {
@@ -301,17 +288,17 @@ class _reachargeState extends State<reacharge> {
                                       },
                                       child: isTap?CircularProgressIndicator():
                                       Container(
-                                        height: height * 0.12,
+                                        height: height * 0.09,
                                         width: width * 0.22,
                                         decoration: BoxDecoration(
-                                            color: Colors.indigo,
+                                            color: colorConst.blue,
                                             borderRadius: BorderRadius.circular(
                                                 width * 0.018)),
                                         child: Center(
                                             child: Text(
                                           "Confirm",
                                           style: TextStyle(
-                                              fontSize: width * 0.032,
+                                              fontSize: width * 0.022,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         )),
