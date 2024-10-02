@@ -241,7 +241,6 @@ class _home_pageState extends State<home_page> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  gap,
                   Center(
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey.shade100,
@@ -251,54 +250,55 @@ class _home_pageState extends State<home_page> {
                       enabled: true,
                       child: Container(
                         height: height * 0.13,
-                        width: width * 0.93,
+                        width: width * 0.6,
                         decoration: BoxDecoration(
                             color: colorConst.lightgrey1,
                             borderRadius: BorderRadius.circular(width * 0.03))
                       ),
                     ),
                   ),
-                  gap,
                   SizedBox(
-                    height: width*0.02,
+                    height: height*0.02,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // SizedBox(width: width*0.06,),
                       Container(
-                        height: width * 0.18,
+                        height: width * 0.06,
                         width: width * 0.82,
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                  children: [
-                                    Shimmer.fromColors(
-                                      baseColor: Colors.grey.shade100,
-                                      highlightColor: Colors.white,
-                                      direction: ShimmerDirection.btt,
-                                      enabled: true,
-                                      child: Container(
-                                          height: width*0.14,
-                                          width: width*0.14,
-                                          decoration: BoxDecoration(
-                                            color: CupertinoColors.systemGrey4,
-                                            borderRadius: BorderRadius.circular(width*0.03),
-                                          ),
+                        child: Center(
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                    children: [
+                                      Shimmer.fromColors(
+                                        baseColor: Colors.grey.shade100,
+                                        highlightColor: Colors.white,
+                                        direction: ShimmerDirection.btt,
+                                        enabled: true,
+                                        child: Container(
+                                            height: height*0.08,
+                                            width: width*0.04,
+                                            decoration: BoxDecoration(
+                                              color: CupertinoColors.systemGrey4,
+                                              borderRadius: BorderRadius.circular(width*0.01),
+                                            ),
+                                        ),
                                       ),
-                                    ),
-                                  ]
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                width: width * 0.03,
-                              );
-                            },
-                            itemCount: 5),
+                                    ]
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: width * 0.03,
+                                );
+                              },
+                              itemCount: 5),
+                        ),
                       )
                     ],
                   ),
@@ -308,18 +308,18 @@ class _home_pageState extends State<home_page> {
                     direction: ShimmerDirection.btt,
                     enabled: true,
                     child: Container(
-                      height: width * 0.125,
-                      width: width * 0.56,
+                      height: width * 0.04,
+                      width: width * 0.4,
                       decoration: BoxDecoration(
                           color: CupertinoColors.systemGrey4,
                           borderRadius: BorderRadius.circular(width * 0.03)),
                     ),
                   ),
                   SizedBox(
-                    height: width * 0.03,
+                    height: height * 0.02,
                   ),
                   Container(
-                    height: width*0.15,
+                    height: width*0.07,
                     width: width*1,
                     child: ListView.separated(
                         shrinkWrap: true,
@@ -334,8 +334,8 @@ class _home_pageState extends State<home_page> {
                                 direction: ShimmerDirection.btt,
                                 enabled: true,
                                 child: Container(
-                                  height: width*0.088,
-                                  width: width*0.25,
+                                  height: width*0.035,
+                                  width: width*0.12,
                                   margin: EdgeInsets.only(left: width*0.035),
                                   decoration: BoxDecoration(
                                       color:  Colors.grey.shade100,
@@ -351,11 +351,11 @@ class _home_pageState extends State<home_page> {
                               width:width*0.01
                           );
                         },
-                        itemCount: 4
+                        itemCount: 6
                     ),
                   ),
                   Container(
-                    height: width*1.3,
+                    height: height*0.2,
                     child: GridView.builder(
                       itemCount: 12,
                       shrinkWrap: true,
@@ -365,7 +365,7 @@ class _home_pageState extends State<home_page> {
                           childAspectRatio: 0.9,
                           crossAxisSpacing: width*0.01,
                           mainAxisSpacing: width*0.01,
-                          crossAxisCount: 4),
+                          crossAxisCount: 8),
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
@@ -375,8 +375,8 @@ class _home_pageState extends State<home_page> {
                               direction: ShimmerDirection.btt,
                               enabled: true,
                               child: Container(
-                                height: width*0.17,
-                                width: width*0.17,
+                                height: width*0.08,
+                                width: width*0.08,
                                 decoration: BoxDecoration(
                                   // color: Colors.blue,
                                     borderRadius: BorderRadius.circular(width * 0.03),
@@ -401,11 +401,11 @@ class _home_pageState extends State<home_page> {
           child: Column(
             children: [
               SizedBox(
-                height: height*0.02,
+                height: height*0.01,
               ),
               Center(
                 child: Container(
-                  height: height * 0.14,
+                  height: height * 0.11,
                   width: width * 0.6,
                   decoration: BoxDecoration(
                       color: colorConst.blue,
@@ -423,13 +423,13 @@ class _home_pageState extends State<home_page> {
                                 // softWrap: true, // Allows text to wrap to the next line
                                 // maxLines: null, // Allows unlimited lines
                                 overflow: TextOverflow.visible,
-                                fontSize: width*0.023, color: Colors.white),
+                                fontSize: width*0.021, color: Colors.white),
                           ),
                           LocaleText(
                             "Tap here to claim your free discount vouchers",
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
-                                fontSize: width * 0.01, color: Colors.white),
+                                fontSize: width * 0.009, color: Colors.white),
                           ),
                         ],
                       ),
@@ -442,13 +442,13 @@ class _home_pageState extends State<home_page> {
                             "0",
                             style: GoogleFonts.poppins(
                               color: Colors.white,
-                              fontSize: width*0.045,
+                              fontSize: width*0.04,
                             )
                           ),
                           Text(
                             "%",
                             style: GoogleFonts.poppins(
-                                fontSize: width * 0.045,
+                                fontSize: width * 0.04,
                                 color: Colors.lightBlue.shade200),
                           ),
                         ],
@@ -459,10 +459,10 @@ class _home_pageState extends State<home_page> {
               ),
 
               SizedBox(
-                height: height*0.03,
+                height: height*0.013,
               ),
               Container(
-                height: height * 0.11,
+                height: height * 0.1,
                 // width: width * 0.46,
                 child: ListView.separated(
                     shrinkWrap: true,
@@ -473,7 +473,7 @@ class _home_pageState extends State<home_page> {
                         children: [
                         Container(
                         height: height*0.09,
-                        width: width*0.06,
+                        width: width*0.05,
                         decoration: BoxDecoration(
                             color: Colors.indigo.withOpacity(0.05),
                             borderRadius: BorderRadius.circular(width*0.02),
@@ -495,7 +495,7 @@ class _home_pageState extends State<home_page> {
                     itemCount: a.length),
               ),
               SizedBox(
-                height: height*0.02,
+                height: height*0.01,
               ),
               Container(
                 height: height * 0.07,
@@ -543,7 +543,7 @@ class _home_pageState extends State<home_page> {
                     ]),
               ),
               SizedBox(
-                height: height * 0.035,
+                height: height * 0.02,
               ),
               Flexible(
                 child: Container(

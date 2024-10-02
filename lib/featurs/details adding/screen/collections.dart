@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/featurs/details%20adding/screen/Recharge%20bill%20genarate.dart';
 import 'package:plexpay/featurs/details%20adding/screen/collection_bill_generate.dart';
@@ -148,50 +149,17 @@ class _CollectionsState extends State<Collections> {
         ),
       ),
       body: isLoading == true
-          ? SingleChildScrollView(
-            child: Column(
-              children: [
-                Shimmer.fromColors(
-                  baseColor: Colors.grey.shade100,
-                  highlightColor: Colors.white,
-                  direction: ShimmerDirection.btt,
-                  enabled: true,
-                  child: Container(
-                    height: height * 0.13,
-                    width: width * 0.86,
-                          decoration: BoxDecoration(
-                            color: colorConst.lightgrey1,
-                  // color: Colors.red,
-                    borderRadius: BorderRadius.circular(width * 0.03)),
-                        ),
-                ),
-                gap,
-                ListView.separated(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Shimmer.fromColors(
-                      baseColor: Colors.grey.shade100,
-                      highlightColor: Colors.white,
-                      direction: ShimmerDirection.btt,
-                      enabled: true,
-                      child: Container(
-                        height: height * 0.17,
-                        margin: EdgeInsets.only(left: width*0.03,right: width*0.03,bottom: width*0.01),
-                        decoration: BoxDecoration(
-                            color: colorConst.lightgrey1,
-                            borderRadius: BorderRadius.circular(width * 0.03)),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox();
-                  },
-                  itemCount: 8)
-              ],
-            ),
-          )
+          ? Center(
+        child: Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+          ,
+        ),
+      )
           :SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: AnimationLimiter(

@@ -273,14 +273,16 @@ class _billState extends State<bill> {
     return MediaQuery.of(context).size.width > 650?
       SafeArea(
       child: Scaffold(
-      body: isLoading==true?Container(
-        margin: EdgeInsets.only(
-            bottom: width*0.05,
-            left: width*0.05,
-            right: width*0.05
+      body: isLoading==true?Center(
+        child: Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+          ,
         ),
-        child: Center(child: Lottie.asset(ImageConst.loading1))
-        ,
       ):SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

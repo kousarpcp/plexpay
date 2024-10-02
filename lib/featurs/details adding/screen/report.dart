@@ -344,14 +344,16 @@ class _ReportsTabState extends State<ReportsTab> {
         title: Text("Report", style: TextStyle(
             fontSize: width * 0.027, fontWeight: FontWeight.w700),),
       ),
-      body: isLoading==true?Container(
-        margin: EdgeInsets.only(
-            bottom: width*0.05,
-            left: width*0.05,
-            right: width*0.05
+      body: isLoading==true?Center(
+        child: Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+          ,
         ),
-        child: Center(child: Lottie.asset(ImageConst.loading1))
-        ,
       ):Padding(
         padding:  EdgeInsets.all(width*0.03),
         child: SingleChildScrollView(

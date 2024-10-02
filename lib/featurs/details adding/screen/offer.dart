@@ -130,47 +130,16 @@ class _offerState extends State<offer> {
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             physics: widget.dash==0?NeverScrollableScrollPhysics():BouncingScrollPhysics(),
-            child:widget.voucher.toString()=="1"?isLoading?Column(
-              children: [
-                SizedBox(
-                  height: height*0.03,
+            child:widget.voucher.toString()=="1"?isLoading?Center(
+              child: Container(
+                margin: EdgeInsets.only(
+                    bottom: width*0.05,
+                    left: width*0.05,
+                    right: width*0.05
                 ),
-                Container(
-                   child:  ListView.separated(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Shimmer.fromColors(
-                                baseColor: Colors.grey.shade100,
-                                highlightColor: Colors.white,
-                                direction: ShimmerDirection.btt,
-                                enabled: true,
-                                child: Container(
-                                  height: width * 0.4,
-                                  width: width * 0.84,
-                                  decoration: BoxDecoration(
-                                      color: colorConst.lightgrey,
-                                      borderRadius:
-                                      BorderRadius.circular(width * 0.06)),
-                                ),
-                              ),
-                              SizedBox(
-                                height: height * 0.04,
-                              ),
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: width * 0.02,
-                          );
-                        },
-                        itemCount: 4)
-                ),
-              ],
+                child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+                ,
+              ),
             ):rsp["message"]=="Empty"?
             Container(
               margin: EdgeInsets.all(width*0.1),
@@ -429,10 +398,16 @@ class _offerState extends State<offer> {
                 height: height * 0.02,
               ),
               if (showTabs)
-                isLoading?Container(
-                  child: Center(child: CircularProgressIndicator(
-                    color: colorConst.blue,
-                  )),
+                isLoading?Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        bottom: width*0.05,
+                        left: width*0.05,
+                        right: width*0.05
+                    ),
+                    child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+                    ,
+                  ),
                 ):Column(
                   children: [
                     Container(

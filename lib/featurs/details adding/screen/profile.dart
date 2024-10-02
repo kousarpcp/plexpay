@@ -132,14 +132,16 @@ class _profileState extends State<profile> {
           style: TextStyle(fontSize: width * 0.025, fontWeight: FontWeight.w700),
         ),
       ),
-      body:isLoading==true?Container(
-        margin: EdgeInsets.only(
-            bottom: width*0.05,
-            left: width*0.05,
-            right: width*0.05
+      body:isLoading==true?Center(
+        child: Container(
+          margin: EdgeInsets.only(
+              bottom: width*0.05,
+              left: width*0.05,
+              right: width*0.05
+          ),
+          child: Center(child: Lottie.asset(ImageConst.loading1,width: width*0.3),)
+          ,
         ),
-        child: Center(child: Lottie.asset(ImageConst.loading1))
-        ,
       ): SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: AnimationLimiter(
@@ -356,11 +358,11 @@ class _profileState extends State<profile> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => debitcredit(),
-                                  ));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => debitcredit(),
+                              //     ));
                             },
                             child: Column(
                               children: [
@@ -727,67 +729,39 @@ class _profileState extends State<profile> {
               ),
               GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    anchorPoint: Offset(2, 5),
-
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(width*0.05)
-                    ),
-                    builder: (context) {
-                      return Container(
-                        height: height*0.3,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(width*0.05),topRight: Radius.circular(width*0.05)),
+                  showCupertinoModalPopup(
+                  barrierColor: Colors.black.withOpacity(0.5),
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      content: Text("Are you Sure\nYou Want to Log Out !",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: width * 0.018)),
+                      actions: [
+                        CupertinoDialogAction(
+                          textStyle:
+                          TextStyle(color: Colors.black),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Cancel"),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Text("Are you sure you want to log out?",style: TextStyle(
-                                  fontSize: 20,fontWeight: FontWeight.w600)),
-                            ),
-                            SizedBox(height: height*0.025,),
-                            InkWell(onTap: () async {
-                              var id = await removesharedPrefrence("userId", null);
-                              var token = await removesharedPrefrence("token", null);
-                              var name = await removesharedPrefrence("name", null);
-                              Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
-                            },
-                              child: Container(
-                                height: height*0.05,
-                                width:width*0.8,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(width*0.03),
-                                   color: colorConst.blue
-                                ),
-                                child: Center(child: Text("YES",style: TextStyle(
-                                    fontWeight: FontWeight.w600,color: Colors.white),)),
-                              ),
-                            ),
-                            SizedBox(height: height*0.025,),
-                            InkWell(onTap: () {
-                              Navigator.pop(context);
-                            },
-                              child: Container(
-                                height: height*0.05,
-                                width:width*0.8,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(width*0.03),
-                                    color: colorConst.blue
-                                ),
-                                child: Center(child: Text("NO",style: TextStyle(
-                                    fontWeight: FontWeight.w600,color: Colors.white),)),
-                              ),
-                            ),
-                          ],
+                        CupertinoDialogAction(
+                          isDefaultAction: true,
+                          textStyle: TextStyle(color: colorConst.blue),
+                          onPressed: () async {
+                            var id = await removesharedPrefrence("userId", null);
+                            var token = await removesharedPrefrence("token", null);
+                            var name = await removesharedPrefrence("name", null);
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
+                          },
+                          child: Text("Confirm"),
                         ),
-
-                      );
-                    },
-                  );
+                      ],
+                    );
+                  },
+                );
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height > 520 ?height*0.11:height * 0.16,
@@ -835,21 +809,7 @@ class _profileState extends State<profile> {
         scrolledUnderElevation: 0,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            height: height * 0.025,
-            width: width * 0.08,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.015),
-              child: SvgPicture.asset(
-                ImageConst.back,
-              ),
-            ),
-          ),
-        ),
+
         title: LocaleText(
           "Profile & Payments",
           style: TextStyle(fontSize: width * 0.05, fontWeight: FontWeight.w700),
@@ -1447,64 +1407,36 @@ class _profileState extends State<profile> {
               ),
               GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
+                  showCupertinoModalPopup(
+                    barrierColor: Colors.black.withOpacity(0.5),
                     context: context,
-                    isScrollControlled: true,
-                    anchorPoint: Offset(2, 5),
-
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(width*0.05)
-                    ),
                     builder: (context) {
-                      return Container(
-                        height: height*0.3,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(width*0.05),topRight: Radius.circular(width*0.05)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Text("Are you sure you want to log out?",style: TextStyle(
-                                  fontSize: 20,fontWeight: FontWeight.w600)),
-                            ),
-                            SizedBox(height: height*0.025,),
-                            InkWell(onTap: () async {
+                      return CupertinoAlertDialog(
+                        content: Text("Are you Sure\nYou Want to Log Out !",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: width * 0.035)),
+                        actions: [
+                          CupertinoDialogAction(
+                            textStyle:
+                            TextStyle(color: Colors.black),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Cancel"),
+                          ),
+                          CupertinoDialogAction(
+                            isDefaultAction: true,
+                            textStyle: TextStyle(color: colorConst.blue),
+                            onPressed: () async {
                               var id = await removesharedPrefrence("userId", null);
                               var token = await removesharedPrefrence("token", null);
                               var name = await removesharedPrefrence("name", null);
                               Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => Login(),), (route) => false);
                             },
-                              child: Container(
-                                height: height*0.05,
-                                width:width*0.8,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(width*0.03),
-                                   color: colorConst.blue
-                                ),
-                                child: Center(child: Text("YES",style: TextStyle(
-                                    fontWeight: FontWeight.w600,color: Colors.white),)),
-                              ),
-                            ),
-                            SizedBox(height: height*0.025,),
-                            InkWell(onTap: () {
-                              Navigator.pop(context);
-                            },
-                              child: Container(
-                                height: height*0.05,
-                                width:width*0.8,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(width*0.03),
-                                    color: colorConst.blue
-                                ),
-                                child: Center(child: Text("NO",style: TextStyle(
-                                    fontWeight: FontWeight.w600,color: Colors.white),)),
-                              ),
-                            ),
-                          ],
-                        ),
-
+                            child: Text("Confirm"),
+                          ),
+                        ],
                       );
                     },
                   );

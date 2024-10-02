@@ -39,7 +39,17 @@ class _SplashscreenState extends State<Splashscreen> {
     super.initState();
   }
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MediaQuery.of(context).size.width > 650?SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(child: Image.asset(ImageConst.plexpay,width: width*0.4,))
+          ],
+        ),
+      ),
+    ):SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
