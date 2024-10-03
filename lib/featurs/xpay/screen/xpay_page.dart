@@ -32,18 +32,18 @@ class _XpayPageState extends State<XpayPage> {
             gap,
             Container(
               width: width*0.2,
-              height: height*0.35,
+              height: height*0.26,
               child: Image(image: AssetImage(ImageConst.xpay)),
             ),
             Center(
               child: Container(
-                height: height*0.1,
+                height: height*0.09,
                 width: width*0.6,
                 margin: EdgeInsets.all(width*0.02),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(width*0.03),
                   border: Border.all(
-                    width: width*0.004,
+                    width: width*0.002,
                     color: colorConst.blue
                   )
                 ),
@@ -126,9 +126,12 @@ class _XpayPageState extends State<XpayPage> {
                 children: [
                   Text("Enter OTP",style: TextStyle(
                     color: colorConst.blue,
-                    fontSize: width*0.02,
+                    fontSize: width*0.016,
                     fontWeight: FontWeight.bold
                   ),),
+                  SizedBox(
+                    height: height*0.01,
+                  ),
                   Pinput(
                     length: 4,
                     controller: otpController,
@@ -167,7 +170,7 @@ class _XpayPageState extends State<XpayPage> {
                     },
                     child: Container(
                       width: width*0.25,
-                      height: height*0.1,
+                      height: height*0.08,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(width*0.03),
                           color: Colors.lightBlueAccent
@@ -183,7 +186,9 @@ class _XpayPageState extends State<XpayPage> {
                       ),
                     ),
                   ),
-                  gap,
+                 SizedBox(
+                   height: height*0.022,
+                 ),
                   GestureDetector(
                     onTap: () {
                       tap=false;
@@ -197,6 +202,9 @@ class _XpayPageState extends State<XpayPage> {
                   )
                 ],
               )
+            ),
+            SizedBox(
+              height: height*0.13,
             )
           ],
         ),
