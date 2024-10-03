@@ -40,6 +40,25 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Locales.init(['en','ar', 'hi']);
 
+// Get device width before running the app to set the orientation
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final mediaQueryData = WidgetsBinding.instance.window.physicalSize.width /
+        WidgetsBinding.instance.window.devicePixelRatio;
+
+    if (mediaQueryData <= 650) {
+      // Set the orientation to portraitUp for mobile phones
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+    } else {
+      // Set the orientation to allow multiple orientations for tablets
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
+  });
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -70,19 +89,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    if (MediaQuery.of(context).size.width <= 650) {
-      // Set the orientation to portraitUp for mobile phones
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-      ]);
-    } else {
-      // Set the orientation to allow both portrait and landscape for tablets
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    }
 
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
