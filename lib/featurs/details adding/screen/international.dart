@@ -150,7 +150,7 @@ class _internationalState extends State<international> {
                           ));
                     },
                     child: Container(
-                      height: width*0.07,
+                      height: height*0.14,
                       width: width*0.07,
                       decoration: BoxDecoration(
                         // color: Colors.blue,
@@ -205,11 +205,11 @@ class _internationalState extends State<international> {
                         ));
                   },
                   child: Container(
-                    height: height*0.077,
+                    height: MediaQuery.of(context).size.height> 520?height*0.077:height*0.08,
                     width: width*0.16,
                     decoration: BoxDecoration(
                       // color: Colors.blue,
-                        borderRadius: BorderRadius.circular(width * 0.04),
+                        borderRadius: BorderRadius.circular(width * 0.08),
                         border: Border.all(width: width * 0.0001),
                         image: DecorationImage(
                             image: CachedNetworkImageProvider(item['Cflag']),fit:BoxFit.cover)

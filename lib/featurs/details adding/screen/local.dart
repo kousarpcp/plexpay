@@ -242,7 +242,7 @@ class _localState extends State<local> {
   }
   Widget tab(){
     return MediaQuery.of(context).size.width > 650? Container(
-      height: height*0.06,
+      height: height*0.07,
       width: width*2,
       child: ListView.separated(
           shrinkWrap: true,
