@@ -55,7 +55,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.of(context).size.width > 600 ?
+    return MediaQuery.of(context).size.width > 650 ?
       SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -431,11 +431,11 @@ class _LoginState extends State<Login> {
                             ),
                             hintText: Locales.string(context, 'Enter your Username'),
                             hintStyle: TextStyle(
-                              fontSize: width*0.04,
+                              fontSize: MediaQuery.of(context).size.width > 600?width*0.03:width*0.04,
                             ),
                             prefixIcon: Icon(
                               Icons.person,
-                              size: width*0.06,
+                              size: MediaQuery.of(context).size.width > 600?width*0.05:width*0.06,
                             ),
                             prefixIconColor: colorConst.blue,
                             filled: true,
@@ -454,7 +454,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(
-                  height: height*0.03,
+                  height: height*0.02,
                 ),
                 Container(
                   height: height*0.11,
@@ -470,7 +470,7 @@ class _LoginState extends State<Login> {
                       LocaleText("Password"),
                       Container(
                         width: width*1,
-                        height: height*0.075,
+                        // height: height*0.075,
                         // color: Colors.yellow,
                         child: TextFormField(
                           controller: passwordController,
@@ -485,7 +485,7 @@ class _LoginState extends State<Login> {
                             ),
                             hintText: Locales.string(context, 'Enter your Password'),
                             hintStyle: TextStyle(
-                              fontSize: width*0.04,
+                              fontSize: MediaQuery.of(context).size.width > 600?width*0.03:width*0.04,
                             ),
                             suffixIcon: InkWell(
                               onTap: () {
@@ -496,17 +496,17 @@ class _LoginState extends State<Login> {
                               },
                               child: tap?Icon(
                                 Icons.visibility_off,
-                                size: width*0.06,
+                                size: MediaQuery.of(context).size.width > 600?width*0.05:width*0.06,
                               ):
                               Icon(
                                 Icons.visibility,
-                                size: width*0.06,
+                                size: MediaQuery.of(context).size.width > 600?width*0.05:width*0.06,
                               ),
                             ),
                             suffixIconColor: colorConst.blue,
                             prefixIcon: Icon(
                               CupertinoIcons.lock,
-                              size: width*0.06,
+                              size: MediaQuery.of(context).size.width > 600?width*0.05:width*0.06,
                             ),
                             prefixIconColor: colorConst.blue,
                             filled: true,
@@ -554,11 +554,11 @@ class _LoginState extends State<Login> {
                                 }
                               }),
                         )),
-                    SizedBox(width: width*0.03),
+                    SizedBox(width: MediaQuery.of(context).size.width > 600?width*0.015:width*0.03),
                     LocaleText("Remember Me",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: width*0.035,
+                          // fontSize: width*0.035,
                           fontWeight: FontWeight.bold,))
                   ]),
                 ),

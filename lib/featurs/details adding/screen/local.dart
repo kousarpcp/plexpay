@@ -95,6 +95,36 @@ class _localState extends State<local> {
       "text":"DTH",
     },
   ];
+  List AllTab = [
+    {
+      "Size":width*0.12,
+      "text":"All",
+    },
+    {
+      "Size":width*0.21,
+      "text":"Prepaid",
+    },
+    {
+      "Size":width*0.22,
+      "text":"Voucher",
+    },
+    {
+      "Size":width*0.26,
+      "text":"Gaming Card",
+    },
+    {
+      "Size":width*0.24,
+      "text":"Electricity",
+    },
+    {
+      "Size":width*0.23,
+      "text":"Gift Card",
+    },
+    {
+      "Size":width*0.14,
+      "text":"DTH",
+    },
+  ];
 
   int _selectedIndex = 0;
   bool tap=false;
@@ -285,7 +315,7 @@ class _localState extends State<local> {
           itemCount: All2.length
       ),
     ):Container(
-      height: height*0.05,
+      height: height*0.04,
       width: width*2,
       child: ListView.separated(
           shrinkWrap: true,
@@ -301,9 +331,9 @@ class _localState extends State<local> {
                     });
                   },
                   child: Container(
-                    height: width*0.088,
-                    width: All[index]["Size"],
-                    margin: EdgeInsets.only(left: width*0.035),
+                    height: height*0.04,
+                    width: MediaQuery.of(context).size.width > 600?AllTab[index]["Size"]:All[index]["Size"],
+                    margin: EdgeInsets.only(left: width*0.03),
                     decoration: BoxDecoration(
                         color:  _selectedIndex==index ? colorConst.blue : colorConst.lightgrey1,
                         borderRadius: BorderRadius.circular(width*0.03)
@@ -504,10 +534,10 @@ class _localState extends State<local> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.07,
+              childAspectRatio:MediaQuery.of(context).size.width > 600?1:1.07,
               crossAxisSpacing: width*0.01,
               mainAxisSpacing: width*0.01,
-              crossAxisCount: 2),
+              crossAxisCount:  MediaQuery.of(context).size.width > 600?3:2),
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -525,8 +555,8 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: height*0.17,
-                        width: width*0.37,
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                           image: DecorationImage(image: NetworkImage(prepaidCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
@@ -537,7 +567,7 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: height*0.01,),
-                Text(prepaidCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.04),)
+                Text(prepaidCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),)
               ],
             );
           },
@@ -612,10 +642,10 @@ class _localState extends State<local> {
             physics: NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1.07,
+                childAspectRatio:MediaQuery.of(context).size.width > 600?1:0.95,
                 crossAxisSpacing: width*0.01,
                 mainAxisSpacing: width*0.01,
-                crossAxisCount: 2),
+                crossAxisCount: MediaQuery.of(context).size.width > 600?3:2),
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -623,8 +653,8 @@ class _localState extends State<local> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: width*0.35,
-                        width: width*0.37,
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(voucherCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
@@ -634,7 +664,8 @@ class _localState extends State<local> {
                     ],
                   ),
                   SizedBox(height: width*0.01,),
-                  Text(voucherCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.037),)
+                  Text(voucherCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),textAlign:
+                    TextAlign.center,)
                 ],
               );
             },
@@ -721,10 +752,10 @@ class _localState extends State<local> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.07,
+              childAspectRatio:MediaQuery.of(context).size.width > 600?1:1.07,
               crossAxisSpacing: width*0.01,
               mainAxisSpacing: width*0.01,
-              crossAxisCount: 2),
+              crossAxisCount: MediaQuery.of(context).size.width > 600?3:2),
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -743,8 +774,8 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: width*0.35,
-                        width: width*0.37,
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(gamingCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
@@ -755,7 +786,8 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: width*0.01,),
-                Expanded(child: Text(gamingCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.037),textAlign: TextAlign.center,))
+                Expanded(child: Text(gamingCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),textAlign:
+            TextAlign.center)),
               ],
             );
           },
@@ -838,10 +870,10 @@ class _localState extends State<local> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.07,
+              childAspectRatio:MediaQuery.of(context).size.width > 600?1:1.07,
               crossAxisSpacing: width*0.01,
               mainAxisSpacing: width*0.01,
-              crossAxisCount: 2),
+              crossAxisCount: MediaQuery.of(context).size.width > 600?3:2),
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -859,8 +891,8 @@ class _localState extends State<local> {
                         ),));
                       },
                       child: Container(
-                        height: width*0.35,
-                        width: width*0.37,
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(electricityCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
@@ -871,7 +903,8 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: width*0.01,),
-                Text(electricityCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.037),)
+                Text(electricityCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),textAlign:
+                TextAlign.center,)
               ],
             );
           },
@@ -954,10 +987,10 @@ class _localState extends State<local> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.07,
+              childAspectRatio:MediaQuery.of(context).size.width > 600?1:1.07,
               crossAxisSpacing: width*0.01,
               mainAxisSpacing: width*0.01,
-              crossAxisCount: 2),
+              crossAxisCount: MediaQuery.of(context).size.width > 600?3:2),
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -976,8 +1009,8 @@ class _localState extends State<local> {
                         )));
                       },
                       child: Container(
-                        height: width*0.35,
-                        width: width*0.37,
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             image: DecorationImage(image: NetworkImage(giftCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
@@ -988,7 +1021,8 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: width*0.01,),
-                Text(giftCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.037),)
+                Text(giftCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),textAlign:
+                TextAlign.center,)
               ],
             );
           },
@@ -997,7 +1031,7 @@ class _localState extends State<local> {
     );
   }
   Widget DTH (){
-    return Column(
+    return MediaQuery.of(context).size.width > 650?Column(
       children: [
         Row(
           children: [
@@ -1045,6 +1079,64 @@ class _localState extends State<local> {
                 ),
                 SizedBox(height: height*0.01,),
                 Text(dthCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),)
+              ],
+            );
+          },
+        )
+      ],
+    ):Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: width*0.05,),
+            LocaleText("DTH",style: TextStyle(fontSize:width*0.06,fontWeight: FontWeight.w700),),
+          ],
+        ),
+        SizedBox(
+          height: width*0.013,
+        ),
+        GridView.builder(
+          itemCount: dthCategory.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio:MediaQuery.of(context).size.width > 600?1:1.07,
+              crossAxisSpacing: width*0.01,
+              mainAxisSpacing: width*0.01,
+              crossAxisCount: MediaQuery.of(context).size.width > 600?3:2),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
+                            name: dthCategory[index]["subcategory"],
+                            image: dthCategory[index]["sub_cat_logo"],
+                            code:dthCategory[index]["ProviderCode"],
+                            voucher:"1",
+                            dash: dthCategory[index]["dash"],
+                            iso:dthCategory[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+                        )));
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.width > 600?height*0.14:height*0.172,
+                        width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            image: DecorationImage(image: NetworkImage(dthCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(width*0.03)
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: width*0.01,),
+                Text(dthCategory[index]["subcategory"],style: TextStyle(fontSize:MediaQuery.of(context).size.width > 600?width*0.03: width*0.04),textAlign:
+                TextAlign.center,)
               ],
             );
           },

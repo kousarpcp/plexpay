@@ -44,7 +44,7 @@ Future<void> main() async {
   final mediaQueryData = WidgetsBinding.instance.window.physicalSize.width /
       WidgetsBinding.instance.window.devicePixelRatio;
 
-  if (mediaQueryData <= 650) {
+  if (mediaQueryData < 400) {
     // Mobile phone: allow only portrait mode
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

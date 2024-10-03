@@ -151,7 +151,7 @@ class _internationalState extends State<international> {
                     },
                     child: Container(
                       height: height*0.14,
-                      width: width*0.07,
+                      width: width*0.08,
                       decoration: BoxDecoration(
                         // color: Colors.blue,
                           borderRadius: BorderRadius.circular(width * 0.04),
@@ -206,7 +206,7 @@ class _internationalState extends State<international> {
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height> 520?height*0.077:height*0.08,
-                    width: width*0.16,
+                    width: MediaQuery.of(context).size.width > 600?width*0.12:width*0.16,
                     decoration: BoxDecoration(
                       // color: Colors.blue,
                         borderRadius: BorderRadius.circular(width * 0.08),

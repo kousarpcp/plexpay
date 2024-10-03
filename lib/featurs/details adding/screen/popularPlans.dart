@@ -355,7 +355,7 @@ class _popularState extends State<popular> {
                           },
                           child: Center(
                             child: Container(
-                              height: height * 0.205,
+                              height: height * 0.22,
                               width: width * 0.84,
                               decoration: BoxDecoration(
                                   color: Colors.white,

@@ -646,7 +646,7 @@ class _topUpState extends State<topUp> {
                           },
                           child: Center(
                             child: Container(
-                              height: height * 0.2,
+                              height: height * 0.22,
                               width: width * 0.84,
                               decoration: BoxDecoration(
                                   color: Colors.white,

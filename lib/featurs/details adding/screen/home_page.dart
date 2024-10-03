@@ -584,7 +584,7 @@ class _home_pageState extends State<home_page> {
             children: [
               Image(
                 image: AssetImage(ImageConst.plexpay),
-                width: width * 0.23,
+                width: MediaQuery.of(context).size.width > 600?width*0.17:width * 0.23,
               ),
               Row(
                 children: [
@@ -641,7 +641,7 @@ class _home_pageState extends State<home_page> {
                         ));
                   },
                   child: CircleAvatar(
-                    radius: width*0.05,
+                    radius: width*0.04,
                     backgroundColor: Colors.transparent,
                     child: Icon(
                       CupertinoIcons.person_circle_fill,
@@ -843,7 +843,7 @@ class _home_pageState extends State<home_page> {
                                 // softWrap: true, // Allows text to wrap to the next line
                                 // maxLines: null, // Allows unlimited lines
                                 overflow: TextOverflow.visible,
-                                fontSize: width*0.068, color: Colors.white),
+                                fontSize: MediaQuery.of(context).size.width > 600?width*0.063:width*0.068, color: Colors.white),
                           ),
                           LocaleText(
                             "Tap here to claim your free discount vouchers",
