@@ -153,61 +153,52 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
     return MediaQuery.of(context).size.width > 650 ?
       Scaffold(
       backgroundColor: Colors.white,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed:arrProdList.length==0?null: () {
-      //     _showDialog(context);
-      //     // Navigator.push(
-      //     //   context,
-      //     //   MaterialPageRoute(builder: (context) => TransactionPrint()),
-      //     // );
-      //   },
-      //   child: const Icon(Icons.print),
-      //   backgroundColor: arrProdList.length==0?Colors.grey:themeColor,
-      // ),
       appBar: AppBar(
         backgroundColor: colorConst.blue,
         // brightness: Brightness.dark,
         automaticallyImplyLeading: false,
-        title: Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height > 520 ?height*0.07:height*0.1,
-          decoration: BoxDecoration(
-              color: Colors.grey[50], borderRadius: BorderRadius.circular(width*0.01)),
-          child: Center(
-            child: TextField(
-              controller: searchController,
-              textInputAction: TextInputAction.search,
-              keyboardType: TextInputType.number,
-              autofocus: false,
-              focusNode: numFocus,
-              cursorColor: colorConst.blue,
-              onChanged: (key) async {
-              },
-              onSubmitted: (key) async {
-                print("keey");
-                var rsp = await getSearch(key);
-                print(rsp);
-              },
-              decoration: InputDecoration(
-                  prefixIcon:  Icon(Icons.search, color: Colors.black),
-                  suffixIcon: IconButton(
-                    icon:  Icon(
-                      Icons.clear,
+        title: Center(
+          child: Container(
+            width: width*0.95,
+            height: MediaQuery.of(context).size.height > 520 ?height*0.069:height*0.1,
+            decoration: BoxDecoration(
+                color: Colors.grey[50], borderRadius: BorderRadius.circular(width*0.01)),
+            child: Center(
+              child: TextField(
+                controller: searchController,
+                textInputAction: TextInputAction.search,
+                keyboardType: TextInputType.number,
+                autofocus: false,
+                focusNode: numFocus,
+                cursorColor: colorConst.blue,
+                onChanged: (key) async {
+                },
+                onSubmitted: (key) async {
+                  print("keey");
+                  var rsp = await getSearch(key);
+                  print(rsp);
+                },
+                decoration: InputDecoration(
+                    prefixIcon:  Icon(Icons.search, color: Colors.black),
+                    suffixIcon: IconButton(
+                      icon:  Icon(
+                        Icons.clear,
+                      ),
+                      onPressed: () {
+                        /* Clear the search field */
+
+                        setState(() {
+                          numFocus.unfocus();
+                          searchController.clear();
+                          historyList.clear();
+                          isLoading = false;
+
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      /* Clear the search field */
-
-                      setState(() {
-                        numFocus.unfocus();
-                        searchController.clear();
-                        historyList.clear();
-                        isLoading = false;
-
-                      });
-                    },
-                  ),
-                  hintText: 'Search...',
-                  border: InputBorder.none),
+                    hintText: 'Search...',
+                    border: InputBorder.none),
+              ),
             ),
           ),
         ),

@@ -594,10 +594,10 @@ class _plexbill_loginState extends State<plexbill_login> {
                       }
                     },
                     child: Container(
-                      width: width*0.8,
+                      width: width*0.55,
                       height: height*0.065,
                       decoration: BoxDecoration(
-                          borderRadius:  BorderRadius.circular(width*0.1),
+                          borderRadius:  BorderRadius.circular(width*0.022),
                           color: colorConst.blue
                       ),
                       child: Center(child: LocaleText("Sign in",style: TextStyle(

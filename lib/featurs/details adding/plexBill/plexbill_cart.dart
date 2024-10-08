@@ -66,19 +66,20 @@ class _cartState extends State<cart> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
-        height: height * 0.37,
+        height: width * 0.48,
         width: width * 0.91,
         color: Colors.white,
         child: Column(
           children: [
             Divider(
-              thickness: width * 0.001,
+              thickness: width * 0.005,
               color: Colors.black,
-              endIndent: width * 0.001,
-              indent: width * 0.003,
+              endIndent: width * 0.01,
+              indent: width * 0.01,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,14 +88,14 @@ class _cartState extends State<cart> {
                   "Subtotal",
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: width * 0.02,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 ),
                 Text(
                   "$total",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: width * 0.022,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 ),
               ],
@@ -106,14 +107,14 @@ class _cartState extends State<cart> {
                   "Vat",
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: width * 0.02,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 ),
                 Text(
                   "$vat",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: width * 0.022,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 )
               ],
@@ -125,29 +126,29 @@ class _cartState extends State<cart> {
                   "Total",
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: width * 0.02,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 ),
                 Text(
                   "${total + vat}".toString(),
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: width * 0.024,
+                      fontSize: width * 0.05,
                       color: Colors.black),
                 )
               ],
             ),
             SizedBox(
-              height: height * 0.03,
+              height: width * 0.03,
             ),
             Divider(
-              thickness: width * 0.001,
+              thickness: width * 0.005,
               color: Colors.black,
               endIndent: width * 0.2,
               indent: width * 0.2,
             ),
             SizedBox(
-              height: height * 0.018,
+              height: width * 0.018,
             ),
             InkWell(
               onTap: () {
@@ -159,17 +160,17 @@ class _cartState extends State<cart> {
                 );
               },
               child: Container(
-                height: height * 0.08,
-                width: width * 0.11,
+                height: width * 0.1,
+                width: width * 0.23,
                 decoration: BoxDecoration(
                     color: colorConst.blue,
-                    borderRadius: BorderRadius.circular(width * 0.016)),
+                    borderRadius: BorderRadius.circular(width * 0.03)),
                 child: Center(
                   child: Text(
                     "Print",
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: width * 0.026,
+                        fontSize: width * 0.06,
                         color: Colors.white),
                   ),
                 ),
@@ -188,10 +189,10 @@ class _cartState extends State<cart> {
             Navigator.pop(context);
           },
           child: Container(
-            height: height * 0.09,
-            width: width * 0.05,
+            height: width * 0.05,
+            width: width * 0.08,
             child: Padding(
-              padding: EdgeInsets.all(width * 0.01),
+              padding: EdgeInsets.all(width * 0.03),
               child: SvgPicture.asset(
                 ImageConst.back,
               ),
@@ -201,7 +202,7 @@ class _cartState extends State<cart> {
         title: Text(
           "Cart",
           style: TextStyle(
-              fontSize: width * 0.025, fontWeight: FontWeight.w700),
+              fontSize: width * 0.06, fontWeight: FontWeight.w700),
         ),
       ),
       body: Column(
@@ -227,7 +228,7 @@ class _cartState extends State<cart> {
                     children: [
                       Center(
                         child: Container(
-                          height: height * 0.14,
+                          height: width * 0.25,
                           width: width * 0.89,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -241,15 +242,15 @@ class _cartState extends State<cart> {
                                     blurRadius: 9)
                               ],
                               borderRadius: BorderRadius.circular(
-                                  width * 0.014)),
+                                  width * 0.03)),
                           child: Padding(
-                            padding: EdgeInsets.all(width * 0.01),
+                            padding: EdgeInsets.all(width * 0.03),
                             child: Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
-                                    height: height * 0.5,
+                                    height: width * 0.5,
                                     width: width * 0.47,
                                     child: Row(
                                       mainAxisAlignment:
@@ -257,8 +258,8 @@ class _cartState extends State<cart> {
                                           .spaceBetween,
                                       children: [
                                         Container(
-                                            height: height * 0.11,
-                                            width: width * 0.1,
+                                            height: width * 0.18,
+                                            width: width * 0.18,
                                             decoration: BoxDecoration(
                                               color: Colors.red,
                                               image: DecorationImage(
@@ -268,26 +269,25 @@ class _cartState extends State<cart> {
                                                   fit: BoxFit.fill),
                                               borderRadius:
                                               BorderRadius.circular(
-                                                  width * 0.013),
+                                                  width * 0.04),
                                             )),
-                                        Row(
+                                        Column(
                                           children: [
-
+                                            SizedBox(
+                                              height: width * 0.02,
+                                            ),
                                             Text(
                                               a[index]['text'],
                                               style: TextStyle(
                                                   fontSize: width *
-                                                      0.02),
-                                            ),
-                                            SizedBox(
-                                                  width: width*0.025,
+                                                      0.052),
                                             ),
                                             Text(
                                               a[index]["Price"]
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: width *
-                                                      0.02,fontWeight: FontWeight.w600),
+                                                      0.06),
                                             ),
                                           ],
                                         ),
@@ -296,8 +296,8 @@ class _cartState extends State<cart> {
                                   ),
                                   a[index]["quantity"] != 0
                                       ? Container(
-                                    height: height * 0.06,
-                                    width: width * 0.1,
+                                    height: width * 0.095,
+                                    width: width * 0.22,
                                     decoration: BoxDecoration(
                                         color: colorConst.blue,
                                         borderRadius:
@@ -322,7 +322,7 @@ class _cartState extends State<cart> {
                                             vatAdd();
                                             setState(() {});
                                           },
-                                          child: const Icon(
+                                          child:  Icon(
                                             Icons.remove,
                                             color: Colors.white,
                                           ),
@@ -357,8 +357,8 @@ class _cartState extends State<cart> {
                                       setState(() {});
                                     },
                                     child: Container(
-                                      height: height * 0.06,
-                                      width: width * 0.1,
+                                      height: width * 0.095,
+                                      width: width * 0.22,
                                       decoration: BoxDecoration(
                                         color: colorConst.blue,
                                         borderRadius:
@@ -378,20 +378,19 @@ class _cartState extends State<cart> {
                           ),
                         ),
                       ),
-
                     ],
                   );
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(
-                    height: height * 0.02,
+                    height: width * 0.025,
                   );
                 },
               ),
             ),
           ),
           SizedBox(
-            height: height * 0.37,
+            height: width * 0.46,
           )
         ],
       ),

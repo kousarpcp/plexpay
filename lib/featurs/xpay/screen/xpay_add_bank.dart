@@ -25,6 +25,11 @@ class _AddBankState extends State<AddBank> {
       Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Center(
@@ -352,6 +357,11 @@ class _AddBankState extends State<AddBank> {
       Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(

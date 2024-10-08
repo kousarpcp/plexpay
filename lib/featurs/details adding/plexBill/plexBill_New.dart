@@ -120,6 +120,7 @@ class _plexbillNewState extends State<plexbillNew> {
   List a = [];
   List b = [];
   List items = [];
+  int cartCount = 0;
 
   // Method to calculate and update items in the cart
   totalprice() {
@@ -307,31 +308,31 @@ class _plexbillNewState extends State<plexbillNew> {
                 style: TextStyle(
                     fontSize: width * 0.025, fontWeight: FontWeight.w700),
               ),
-              actions: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => cart(category: items),
-                        ));
-                  },
-                  child: Container(
-                      height: height * 0.05,
-                      width: width * 0.063,
-                      decoration: BoxDecoration(
-                          color: colorConst.blue,
-                          borderRadius: BorderRadius.circular(width * 0.01)),
-                      child: Center(
-                          child: Text(
-                        "Next",
-                        style: TextStyle(color: Colors.white),
-                      ))),
-                ),
-                SizedBox(
-                  width: width * 0.03,
-                )
-              ],
+              // actions: [
+              //   InkWell(
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => cart(category: items),
+              //           ));
+              //     },
+              //     child: Container(
+              //         height: height * 0.05,
+              //         width: width * 0.063,
+              //         decoration: BoxDecoration(
+              //             color: colorConst.blue,
+              //             borderRadius: BorderRadius.circular(width * 0.01)),
+              //         child: Center(
+              //             child: Text(
+              //           "Next",
+              //           style: TextStyle(color: Colors.white),
+              //         ))),
+              //   ),
+              //   SizedBox(
+              //     width: width * 0.03,
+              //   )
+              // ],
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -466,51 +467,60 @@ class _plexbillNewState extends State<plexbillNew> {
               scrolledUnderElevation: 0,
               elevation: 0,
               backgroundColor: Colors.white,
-              leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: width * 0.05,
-                  width: width * 0.08,
-                  child: Padding(
-                    padding: EdgeInsets.all(width * 0.03),
-                    child: SvgPicture.asset(
-                      ImageConst.back,
-                    ),
-                  ),
-                ),
-              ),
               title: LocaleText(
-                "PlexBill",
+                "Billing",
                 style: TextStyle(
                     fontSize: width * 0.06, fontWeight: FontWeight.w700),
               ),
-              actions: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => cart(category: items),
-                        ));
-                  },
-                  child: Container(
-                      height: width * 0.06,
-                      width: width * 0.11,
-                      decoration: BoxDecoration(
-                          color: colorConst.blue,
-                          borderRadius: BorderRadius.circular(width * 0.01)),
-                      child: Center(
-                          child: Text(
-                        "Next",
-                        style: TextStyle(color: Colors.white),
-                      ))),
-                ),
-                SizedBox(
-                  width: width * 0.05,
-                )
-              ],
+              // actions: [
+              //   InkWell(
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => cart(category: items),
+              //           ));
+              //     },
+              //       child: Stack(
+              //         children: [
+              //           Container(
+              //               height: width*0.08,
+              //               width: width*0.12,
+              //               child: Icon(Icons.shopping_cart)),
+              //           if(a.length>0)
+              //           Positioned(
+              //             left: width*0.069,
+              //             bottom: width*0.04,
+              //             child: CircleAvatar(
+              //               radius: width*0.02,
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 children: [
+              //                   Text( "${a.length}",style: TextStyle(fontSize: width*0.026),),
+              //                 ],
+              //               ),
+              //               backgroundColor: Colors.red,
+              //             ),
+              //           )
+              //         ],
+              //       )
+              //
+              //     // Container(
+              //     //     height: width * 0.06,
+              //     //     width: width * 0.11,
+              //     //     decoration: BoxDecoration(
+              //     //         color: colorConst.blue,
+              //     //         borderRadius: BorderRadius.circular(width * 0.01)),
+              //     //     child: Center(
+              //     //         child: Text(
+              //     //       "Next",
+              //     //       style: TextStyle(color: Colors.white),
+              //     //     ))),
+              //   ),
+              //   SizedBox(
+              //     width: width * 0.05,
+              //   )
+              // ],
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -743,13 +753,41 @@ class _plexbillNewState extends State<plexbillNew> {
                                             SizedBox(
                                               width: width * 0.02,
                                             ),
-                                            Icon(
-                                              All[index]["icon"],
-                                              size: width * 0.03,
-                                              color: _selectedIndex == index
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                            ),
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  height: height*0.07,
+                                                  width: width*0.05,
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(
+                                                        All[index]["icon"],
+                                                        size: width * 0.027,
+                                                        color:
+                                                        _selectedIndex == index ? Colors.white : Colors.black,
+
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                if (index == 2 && a.length > 0)
+                                                  Positioned(
+                                                    left: width*0.02,
+                                                    bottom: width*0.045,
+                                                    child: CircleAvatar(
+                                                      radius: width*0.001,
+                                                     backgroundColor: Colors.cyanAccent,
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Text('${a.length}',style: TextStyle(fontSize: width*0.02,color: Colors.red),),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                              ],
+                                            ) ,
                                           ],
                                         ),
                                       ),
@@ -777,253 +815,280 @@ class _plexbillNewState extends State<plexbillNew> {
               ),
             ],
           )
-        : Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(width * 0.03),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                LocaleText(
-                                  "Customer ID :",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  " 6",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("TRN Number :"),
-                                Text(
-                                  " 6456",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: width * 0.03,
-                        ),
-                        TextFormField(
-                          controller: nameController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                          decoration: InputDecoration(
-                              suffixIcon: Padding(
-                                padding: EdgeInsets.all(width * 0.002),
-                                child: Container(
-                                  height: width * 0.03,
-                                  width: width * 0.287,
-                                  decoration: BoxDecoration(
-                                      // color: colorConst.lightgrey1,
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight:
-                                              Radius.circular(width * 0.02),
-                                          topRight:
-                                              Radius.circular(width * 0.02))),
-                                  child: DropdownButton(
-                                      dropdownColor: Colors.white,
-                                      isExpanded: true,
-                                      // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
+        :  Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(width * 0.03),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          LocaleText(
+                            "Customer ID :",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            " 6",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("TRN Number :"),
+                          Text(
+                            " 6456",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: width * 0.03,
+                  ),
+                  TextFormField(
+                    controller: nameController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                    decoration: InputDecoration(
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.all(width * 0.002),
+                          child: Container(
+                            height: width * 0.03,
+                            width: width * 0.287,
+                            decoration: BoxDecoration(
+                              // color: colorConst.lightgrey1,
+                                borderRadius: BorderRadius.only(
+                                    bottomRight:
+                                    Radius.circular(width * 0.02),
+                                    topRight:
+                                    Radius.circular(width * 0.02))),
+                            child: DropdownButton(
+                                dropdownColor: Colors.white,
+                                isExpanded: true,
+                                // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
 
-                                      icon: Row(
-                                        children: [
-                                          Center(
-                                              child: Padding(
-                                            padding: EdgeInsets.only(
-                                                right: width * 0.07),
-                                            child: Icon(
-                                              Icons
-                                                  .keyboard_arrow_down_outlined,
-                                            ),
-                                          )),
-                                          InkWell(
-                                            onTap: () {
-                                              if (nameController
-                                                  .text.isNotEmpty) {
-                                                // Check if the name already exists in the list
-                                                if (!customer.contains(
-                                                    nameController.text)) {
-                                                  setState(() {
-                                                    // Add the typed name to the customer list
-                                                    customer.add(
-                                                        nameController.text);
-                                                    // Update the dropdown value with the newly added customer
-                                                    dropdownValue =
-                                                        nameController.text;
-                                                    // Clear the text field after adding
-                                                    nameController.clear();
-                                                  });
-                                                } else {
-                                                  // Optional: You can show a message or handle it gracefully if the name is already added
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                    content: Text(
-                                                        "Name already exists!"),
-                                                  ));
-                                                }
-                                              }
-                                            },
-                                            child: Container(
-                                              height: width * 0.06,
-                                              width: width * 0.12,
-                                              decoration: BoxDecoration(
-                                                  color: colorConst.blue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          width * 0.01)),
-                                              child: Center(
-                                                  child: Text(
-                                                "Add",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              )),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: width * 0.03,
-                                          )
-                                        ],
-                                      ),
-                                      underline: SizedBox(),
-                                      value: dropdownValue,
-                                      items: customer
-                                          .map<DropdownMenuItem<String>>(
-                                              (String? value) {
-                                        return DropdownMenuItem(
-                                          child: Center(
-                                              child: Text(
-                                            value!,
-                                            style: TextStyle(
-                                              fontSize: width * 0.05,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          )),
-                                          value: value,
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          dropdownValue;
-                                          nameController.text = newValue ?? '';
-                                        });
-                                      }),
-                                ),
-                              ),
-                              hintText: "Customer Name",
-                              contentPadding: EdgeInsets.all(width * 0.03),
-                              hintStyle: TextStyle(
-                                  fontSize: width * 0.052,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.02))),
-                        ),
-                        SizedBox(
-                          height: width * 0.03,
-                        ),
-                        Container(
-                          height: width * 0.10,
-                          width: width * 1,
-                          child: ListView.separated(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              // physics: BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Column(
+                                icon: Row(
                                   children: [
-                                    GestureDetector(
+                                    Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: width * 0.07),
+                                          child: Icon(
+                                            Icons
+                                                .keyboard_arrow_down_outlined,
+                                          ),
+                                        )),
+                                    InkWell(
                                       onTap: () {
-                                        setState(() {
-                                          _selectedIndex = index;
-                                          if (_selectedIndex == 2) {
-                                            b = items;
-                                            totalprice();
-                                            tascprice();
-                                            vatAdd();
+                                        if (nameController
+                                            .text.isNotEmpty) {
+                                          // Check if the name already exists in the list
+                                          if (!customer.contains(
+                                              nameController.text)) {
+                                            setState(() {
+                                              // Add the typed name to the customer list
+                                              customer.add(
+                                                  nameController.text);
+                                              // Update the dropdown value with the newly added customer
+                                              dropdownValue =
+                                                  nameController.text;
+                                              // Clear the text field after adding
+                                              nameController.clear();
+                                            });
+                                          } else {
+                                            // Optional: You can show a message or handle it gracefully if the name is already added
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  "Name already exists!"),
+                                            ));
                                           }
-                                        });
+                                        }
                                       },
                                       child: Container(
-                                        height: width * 0.095,
-                                        width: width * 0.299,
-                                        // margin: EdgeInsets.only(left: width*0.035),
+                                        height: width * 0.06,
+                                        width: width * 0.12,
                                         decoration: BoxDecoration(
-                                            color: _selectedIndex == index
-                                                ? colorConst.blue
-                                                : Colors.white,
-                                            borderRadius: BorderRadius.circular(
-                                                width * 0.02),
-                                            border: Border.all(
-                                                width: width * 0.002)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              All[index]["text"],
+                                            color: colorConst.blue,
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                width * 0.01)),
+                                        child: Center(
+                                            child: Text(
+                                              "Add",
                                               style: TextStyle(
-                                                  color: _selectedIndex == index
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 17.0),
-                                            ),
-                                            SizedBox(
-                                              width: width * 0.02,
-                                            ),
-                                            Icon(
-                                              All[index]["icon"],
-                                              size: width * 0.05,
-                                              color: _selectedIndex == index
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                            ),
-                                          ],
-                                        ),
+                                                  color: Colors.white),
+                                            )),
                                       ),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.03,
                                     )
                                   ],
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return SizedBox(width: width * 0.02);
-                              },
-                              itemCount: All.length),
+                                ),
+                                underline: SizedBox(),
+                                value: dropdownValue,
+                                items: customer
+                                    .map<DropdownMenuItem<String>>(
+                                        (String? value) {
+                                      return DropdownMenuItem(
+                                        child: Center(
+                                            child: Text(
+                                              value!,
+                                              style: TextStyle(
+                                                fontSize: width * 0.05,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            )),
+                                        value: value,
+                                      );
+                                    }).toList(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValue;
+                                    nameController.text = newValue ?? '';
+                                  });
+                                }),
+                          ),
                         ),
-                        // if(_selectedIndex==2&&category=="")
-                        //   Container(),
-                        // if(_selectedIndex==1)
-                        // -_selectedIndex==2?Cart():SizedBox(),
-
-                        // _selectedIndex==1?billItems(category:category):SizedBox(),
-
-                        // _selectedIndex==2? cart(category:category):SizedBox()
-                      ],
-                    ),
+                        hintText: "Customer Name",
+                        contentPadding: EdgeInsets.all(width * 0.03),
+                        hintStyle: TextStyle(
+                            fontSize: width * 0.052,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(width * 0.02))),
                   ),
-                ),
+                  SizedBox(
+                    height: width * 0.03,
+                  ),
+                  Container(
+                    height: width * 0.10,
+                    width: width * 1,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        // physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                    if (_selectedIndex == 2) {
+                                      b = items;
+                                      totalprice();
+                                      tascprice();
+                                      vatAdd();
+                                    }
+                                  });
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: width * 0.095,
+                                      width: width * 0.299,
+                                      // margin: EdgeInsets.only(left: width*0.035),
+                                      decoration: BoxDecoration(
+                                          color: _selectedIndex == index
+                                              ? colorConst.blue
+                                              : Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              width * 0.02),
+                                          border: Border.all(
+                                              width: width * 0.002)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            All[index]["text"],
+                                            style: TextStyle(
+                                                color: _selectedIndex == index
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 17.0),
+                                          ),
+                                          SizedBox(
+                                            width: width * 0.02,
+                                          ),
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                height: width*0.09,
+                                                width: width*0.08,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Icon(
+                                                      All[index]["icon"],
+                                                      size: width * 0.05,
+                                                      color:
+                                                      _selectedIndex == index ? Colors.white : Colors.black,
+
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              if (index == 2 && a.length > 0)
+                                                Positioned(
+                                                  left: width*0.032,
+                                                  bottom: width*0.045,
+                                                  child: CircleAvatar(
+                                                    radius: width*0.022,
+                                                    backgroundColor: Colors.red,
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Text('${a.length}',style: TextStyle(fontSize: width*0.0287),),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ) ,
+
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+
+                                ),
+                              ),
+
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(width: width * 0.02);
+                        },
+                        itemCount: All.length),
+                  ),
+                ],
               ),
-            ],
-          );
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget itemstab() {
@@ -1229,6 +1294,9 @@ class _plexbillNewState extends State<plexbillNew> {
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.white),
                                 ),
+                                SizedBox(
+                                  height: height * 0.002,
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -1250,7 +1318,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: height * 0.01,
+                                  height: height * 0.027,
                                 ),
                                 vegitalbles[index]["quantity"] != 0
                                     ? Container(
@@ -1270,6 +1338,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 setState(() {
                                                   vegitalbles[index]
                                                       ["quantity"]--;
+                                                  a.length--;
                                                 });
                                               },
                                               child: Icon(
@@ -1306,6 +1375,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                           setState(() {
                                             vegitalbles[index]["quantity"]++;
                                             items.add(vegitalbles[index]);
+                                            a.length++;
                                           });
                                         },
                                         child: Container(
@@ -1421,6 +1491,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                               onTap: () {
                                                 setState(() {
                                                   fruits[index]["quantity"]--;
+                                                  a.length--;
                                                 });
                                               },
                                               child: Icon(
@@ -1456,6 +1527,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                           setState(() {
                                             fruits[index]["quantity"]++;
                                             items.add(fruits[index]);
+                                            a.length++;
                                           });
                                         },
                                         child: Container(
@@ -1570,9 +1642,12 @@ class _plexbillNewState extends State<plexbillNew> {
                                               setState(() {
                                                 vegitalbles[index]
                                                     ["quantity"]--;
+
+                                                a.length--;
+                                                // cartCount--;
                                               });
                                             },
-                                            child: const Icon(
+                                            child:  Icon(
                                               Icons.remove,
                                               color: Colors.black,
                                               size: 20,
@@ -1590,6 +1665,8 @@ class _plexbillNewState extends State<plexbillNew> {
                                               setState(() {
                                                 vegitalbles[index]
                                                     ["quantity"]++;
+                                                // a.length++;
+                                                // cartCount++;
                                               });
                                             },
                                             child: Icon(
@@ -1606,6 +1683,8 @@ class _plexbillNewState extends State<plexbillNew> {
                                         setState(() {
                                           vegitalbles[index]["quantity"]++;
                                           items.add(vegitalbles[index]);
+                                          a.length++;
+                                          // cartCount++;
                                         });
                                       },
                                       child: Container(
@@ -1713,6 +1792,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                             onTap: () {
                                               setState(() {
                                                 fruits[index]["quantity"]--;
+                                                a.length--;
                                               });
                                             },
                                             child: const Icon(
@@ -1748,6 +1828,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                         setState(() {
                                           fruits[index]["quantity"]++;
                                           items.add(fruits[index]);
+                                          a.length++;
                                         });
                                       },
                                       child: Container(
@@ -2098,7 +2179,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                             vatAdd();
                                                             setState(() {});
                                                           },
-                                                          child: const Icon(
+                                                          child:  Icon(
                                                             Icons.remove,
                                                             color: Colors.white,
                                                           ),

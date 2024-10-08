@@ -14,6 +14,7 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 
 import '../../../Const/imageConst.dart';
+import '../../../Const/shared_preference.dart';
 import '../../../api/plexbillLogin_postApi.dart';
 import '../../../main.dart';
 
@@ -103,68 +104,40 @@ class _Plexbill_homeState extends State<Plexbill_home> {
           actions: [
             InkWell(
               onTap: () {
-
-                showModalBottomSheet(
+                showCupertinoModalPopup(
+                  barrierColor: Colors.black.withOpacity(0.5),
                   context: context,
-                  isScrollControlled: true,
-                  anchorPoint: Offset(2, 5),
-
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(width*0.05)
-                  ),
                   builder: (context) {
-                    return Container(
-                      height: height*0.5,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(width*0.05),topRight: Radius.circular(width*0.05)),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: Text("Are you sure you want to log out?",style: TextStyle(
-                                fontSize: 20,fontWeight: FontWeight.w600)),
-                          ),
-                          SizedBox(height: width*0.05,),
-                          InkWell(onTap: () async {
-                            var id= await removeplexbilllogin("userId1", null);
-                            var user= await removeplexbilllogin("username", null);
-                            var pass= await removeplexbilllogin("password", null);
-                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => BottomNavigation(),), (route) => false);
-                          },
-                            child: Container(
-                              height: width*0.1,
-                              width:width*0.8,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(width*0.03),
-                                  color: colorConst.blue
-                              ),
-                              child: Center(child: Text("YES",style: TextStyle(
-                                  fontWeight: FontWeight.w600,color: Colors.white),)),
-                            ),
-                          ),
-                          SizedBox(height: width*0.05,),
-                          InkWell(onTap: () {
+                    return CupertinoAlertDialog(
+                      content: Text("Are you Sure\nYou Want to Log Out !",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: width * 0.023)),
+                      actions: [
+                        CupertinoDialogAction(
+                          textStyle:
+                          TextStyle(color: Colors.black),
+                          onPressed: () {
                             Navigator.pop(context);
                           },
-                            child: Container(
-                              height: width*0.1,
-                              width:width*0.8,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(width*0.03),
-                                  color: colorConst.blue
-                              ),
-                              child: Center(child: Text("NO",style: TextStyle(
-                                  fontWeight: FontWeight.w600,color: Colors.white),)),
-                            ),
-                          ),
-                        ],
-                      ),
-
+                          child: Text("Cancel"),
+                        ),
+                        CupertinoDialogAction(
+                          isDefaultAction: true,
+                          textStyle: TextStyle(color: colorConst.blue),
+                          onPressed: () async {
+                            var id = await removesharedPrefrence("userId", null);
+                            var token = await removesharedPrefrence("token", null);
+                            var name = await removesharedPrefrence("name", null);
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => BottomNavigation(),), (route) => false);
+                          },
+                          child: Text("Confirm"),
+                        ),
+                      ],
                     );
                   },
                 );
+
               },
                 child: Container(child: Icon(Icons.logout,color: colorConst.blue,))),
             SizedBox(width: width*0.04,)

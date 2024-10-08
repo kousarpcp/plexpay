@@ -357,6 +357,7 @@ class _offerState extends State<offer> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: height*0.06,left: width*0.03),
                       suffixIcon: Container(
+                        height: height*0.1,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(width*0.05),

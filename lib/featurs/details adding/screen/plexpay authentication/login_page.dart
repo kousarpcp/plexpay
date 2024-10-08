@@ -318,10 +318,10 @@ class _LoginState extends State<Login> {
                     }
                   },
                   child: Container(
-                    width: width*0.3,
+                    width: width*0.55,
                     height: height*0.07,
                     decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.circular(width*0.01),
+                      borderRadius:  BorderRadius.circular(width*0.022),
                       color: colorConst.blue
                     ),
                     child: Center(child: Text("Login",style: TextStyle(
@@ -340,13 +340,13 @@ class _LoginState extends State<Login> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
+                    // Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
                   },
                   child: Container(
-                    width: width*0.3,
+                    width: width*0.55,
                     height: height*0.07,
                     decoration: BoxDecoration(
-                        borderRadius:  BorderRadius.circular(width*0.01),
+                        borderRadius:  BorderRadius.circular(width*0.022),
                         color: colorConst.blue
                     ),
                     child: Center(child: Text("Sign up",style: TextStyle(
@@ -355,7 +355,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(
-                  height: height*0.02,
+                  height: height*0.05,
                 )
 
                 // TextFormField(
@@ -641,7 +641,7 @@ class _LoginState extends State<Login> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
+                    // Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
                   },
                   child: Container(
                     width: width*0.8,

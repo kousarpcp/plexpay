@@ -39,67 +39,64 @@ class _customState extends State<custom> {
               SizedBox(
                 height: height * 0.12,
               ),
-              Center(
-                child: Container(
-                  height: height * 0.2,
-                  width: width * 0.48,
-                  child: Stack(children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: width * 0.4),
-                      child: Container(
-                        height: height * 0.088,
-                        width: width * 0.14,
-                        child: Icon(
-                          Icons.phone_android,
-                          color: Colors.white,
-                        ),
+              Container(
+                height: height * 0.2,
+                width: width * 0.48,
+                child: TextFormField(
+                    controller: numController,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(9)
+                    ],
+                    style: TextStyle(
+                        fontSize: width * 0.022, fontWeight: FontWeight.w600),
+                    decoration: InputDecoration(
+                      // labelText: "Number",
+                      // label: Text(""),
+                      labelStyle: TextStyle(
+                          fontSize: width * 0.05,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                      contentPadding: EdgeInsets.only(left: width*0.03),
+                      hintText:
+                      "    Number Without Country Code",
+                      hintStyle: TextStyle(
+                        fontSize: width * 0.017,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      suffixIcon: Container(
+                        height: height*0.1,
+                        width: width*0.09,
                         decoration: BoxDecoration(
-                            color: colorConst.blue,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(width * 0.05),
-                                bottomRight: Radius.circular(width * 0.05))),
-                      ),
-                    ),
-                    TextFormField(
-                      controller: numController,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(9)
-                      ],
-                      style: TextStyle(
-                          fontSize: width * 0.022, fontWeight: FontWeight.w600),
-                      decoration: InputDecoration(
-                        // labelText: "Number",
-                        // label: Text(""),
-                        labelStyle: TextStyle(
-                            fontSize: width * 0.05,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
-                        contentPadding: EdgeInsets.only(left: width*0.03),
-                        hintText:
-                        "    Number Without Country Code",
-                        hintStyle: TextStyle(
-                          fontSize: width * 0.017,
-                          fontWeight: FontWeight.w600,
+                              bottomRight: Radius.circular(width*0.05),
+                              topRight: Radius.circular(width*0.05),
+                            ),
+                            color: colorConst.blue
                         ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                          ),
-                          borderRadius: BorderRadius.circular(width * 0.05),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.circular(width * 0.05),
+
+                        child: IconButton(
+                          onPressed: () {
+                          },
+                          icon: Icon(Icons.phone_android,color: Colors.white,),
                         ),
                       ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.05),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(width * 0.05),
+                      ),
                     ),
-                  ]),
-                ),
+                  ),
               ),
 
               Center(
