@@ -1251,10 +1251,10 @@ class _plexbillNewState extends State<plexbillNew> {
                 GridView.builder(
                   itemCount: vegitalbles.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.6,
+                      childAspectRatio: 0.62,
                       crossAxisSpacing: width * 0.01,
                       mainAxisSpacing: width * 0.01,
-                      crossAxisCount: 6),
+                      crossAxisCount: 8),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -1264,21 +1264,20 @@ class _plexbillNewState extends State<plexbillNew> {
                         Padding(
                           padding: EdgeInsets.only(left: width * 0.02),
                           child: Container(
-                            height: MediaQuery.of(context).size.height > 520?height * 0.3:height * 0.36,
+                            height: MediaQuery.of(context).size.height > 520?height * 0.25:height * 0.36,
                             width: width * 0.125,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
                                 borderRadius:
-                                    BorderRadius.circular(width * 0.02)),
+                                    BorderRadius.circular(width * 0.012)),
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: height * 0.03,
+                                  height: height*0.022,
                                 ),
                                 Container(
                                   height: MediaQuery.of(context).size.height > 520?height * 0.07:height * 0.1,
-
-                                  width: width * 0.087,
+                                  width: width * 0.073,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       image: DecorationImage(
@@ -1287,15 +1286,12 @@ class _plexbillNewState extends State<plexbillNew> {
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius:
-                                          BorderRadius.circular(width * 0.01)),
+                                          BorderRadius.circular(width * 0.007)),
                                 ),
                                 Text(
                                   vegitalbles[index]["text"],
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                                SizedBox(
-                                  height: height * 0.002,
+                                      fontSize: 12, color: Colors.white),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -1304,7 +1300,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                       "AED",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 18,
+                                          fontSize: 15,
                                           color: Colors.white),
                                     ),
                                     SizedBox(
@@ -1313,12 +1309,12 @@ class _plexbillNewState extends State<plexbillNew> {
                                     Text(vegitalbles[index]["Price"].toString(),
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             color: Colors.white)),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: height * 0.027,
+                                  height: height * 0.01,
                                 ),
                                 vegitalbles[index]["quantity"] != 0
                                     ? Container(
@@ -1359,6 +1355,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 setState(() {
                                                   vegitalbles[index]
                                                       ["quantity"]++;
+                                                  a.length++;
                                                 });
                                               },
                                               child: Icon(
@@ -1411,7 +1408,7 @@ class _plexbillNewState extends State<plexbillNew> {
                       childAspectRatio: 0.62,
                       crossAxisSpacing: width * 0.01,
                       mainAxisSpacing: width * 0.01,
-                      crossAxisCount: 6),
+                      crossAxisCount: 8),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -1421,21 +1418,18 @@ class _plexbillNewState extends State<plexbillNew> {
                         Padding(
                           padding: EdgeInsets.only(left: width * 0.02),
                           child: Container(
-                            height: MediaQuery.of(context).size.height > 520?height * 0.3:height * 0.36,
+                            height: MediaQuery.of(context).size.height > 520?height * 0.25:height * 0.36,
                             width: width * 0.125,
                             decoration: BoxDecoration(
                                 color: colorConst.blue,
                                 borderRadius:
-                                    BorderRadius.circular(width * 0.02)),
+                                    BorderRadius.circular(width * 0.012)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
                                 Container(
                                   height: MediaQuery.of(context).size.height > 520?height * 0.07:height * 0.1,
-                                  width: width * 0.087,
+                                  width: width * 0.073,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       image: DecorationImage(
@@ -1444,12 +1438,12 @@ class _plexbillNewState extends State<plexbillNew> {
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius:
-                                          BorderRadius.circular(width * 0.012)),
+                                          BorderRadius.circular(width * 0.007)),
                                 ),
                                 Text(
                                   fruits[index]["text"],
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
+                                      fontSize: 12, color: Colors.white),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -1458,7 +1452,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                       "AED",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 18,
+                                          fontSize: 15,
                                           color: Colors.white),
                                     ),
                                     SizedBox(
@@ -1467,7 +1461,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                     Text(fruits[index]["Price"].toString(),
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             color: Colors.white)),
                                   ],
                                 ),
@@ -1511,6 +1505,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                               onTap: () {
                                                 setState(() {
                                                   fruits[index]["quantity"]++;
+                                                  a.length++;
                                                 });
                                               },
                                               child: Icon(
@@ -1665,7 +1660,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                               setState(() {
                                                 vegitalbles[index]
                                                     ["quantity"]++;
-                                                // a.length++;
+                                                a.length++;
                                                 // cartCount++;
                                               });
                                             },
@@ -1726,7 +1721,7 @@ class _plexbillNewState extends State<plexbillNew> {
                     return Column(
                       children: [
                         Container(
-                          height: width * 0.35,
+                          height: width * 0.39,
                           width: width * 0.26,
                           decoration: BoxDecoration(
                               color: colorConst.blue,
@@ -1795,7 +1790,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 a.length--;
                                               });
                                             },
-                                            child: const Icon(
+                                            child:  Icon(
                                               Icons.remove,
                                               color: Colors.black,
                                               size: 20,
@@ -1812,6 +1807,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                             onTap: () {
                                               setState(() {
                                                 fruits[index]["quantity"]++;
+                                                a.length++;
                                               });
                                             },
                                             child: Icon(

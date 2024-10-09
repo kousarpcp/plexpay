@@ -483,8 +483,11 @@ class _plexbill_loginState extends State<plexbill_login> {
                               filled: true,
                               fillColor: Colors.blueGrey.shade50,
                               border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(width*0.02)
+                                  borderSide: BorderSide(
+                                      color: Colors.red,
+                                      strokeAlign: width*0.01
+                                  ),
+                                  borderRadius: BorderRadius.circular(width*0.03)
                               ),
                             ),
                           ),
@@ -494,7 +497,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                   ),
                   gap,
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding:  EdgeInsets.symmetric(horizontal: 30),
                     child:   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                       SizedBox(
                           height: 24.0,
@@ -606,12 +609,6 @@ class _plexbill_loginState extends State<plexbill_login> {
                     ),
                   ),
 
-                  // TextFormField(
-                  //   controller: userController,
-                  //   textInputAction: TextInputAction.next,
-                  //   keyboardType: TextInputType.text,
-                  //
-                  // )
                 ],
               ),
             )

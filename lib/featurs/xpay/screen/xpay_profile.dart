@@ -23,7 +23,7 @@ class _XpayProfileState extends State<XpayProfile> {
   Widget build(BuildContext context) {
     return MediaQuery.of(context).size.width > 650?
       Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -341,7 +341,7 @@ class _XpayProfileState extends State<XpayProfile> {
       ),
     ):
       Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
