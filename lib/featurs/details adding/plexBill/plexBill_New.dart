@@ -857,124 +857,127 @@ class _plexbillNewState extends State<plexbillNew> {
                   SizedBox(
                     height: width * 0.03,
                   ),
-                  TextFormField(
-                    controller: nameController,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                    decoration: InputDecoration(
-                        suffixIcon: Padding(
-                          padding: EdgeInsets.all(width * 0.002),
-                          child: Container(
-                            height: width * 0.03,
-                            width: width * 0.287,
-                            decoration: BoxDecoration(
-                              // color: colorConst.lightgrey1,
-                                borderRadius: BorderRadius.only(
-                                    bottomRight:
-                                    Radius.circular(width * 0.02),
-                                    topRight:
-                                    Radius.circular(width * 0.02))),
-                            child: DropdownButton(
-                                dropdownColor: Colors.white,
-                                isExpanded: true,
-                                // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
+                  Container(
+                    height: height*0.06,
+                    child: TextFormField(
+                      controller: nameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                          fontSize: width*0.045, fontWeight: FontWeight.w500),
+                      decoration: InputDecoration(
+                          suffixIcon: Padding(
+                            padding: EdgeInsets.all(width * 0.002),
+                            child: Container(
+                              height: width * 0.03,
+                              width: width * 0.287,
+                              decoration: BoxDecoration(
+                                // color: colorConst.lightgrey1,
+                                  borderRadius: BorderRadius.only(
+                                      bottomRight:
+                                      Radius.circular(width * 0.02),
+                                      topRight:
+                                      Radius.circular(width * 0.02))),
+                              child: DropdownButton(
+                                  dropdownColor: Colors.white,
+                                  isExpanded: true,
+                                  // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
 
-                                icon: Row(
-                                  children: [
-                                    Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: width * 0.07),
-                                          child: Icon(
-                                            Icons
-                                                .keyboard_arrow_down_outlined,
-                                          ),
-                                        )),
-                                    InkWell(
-                                      onTap: () {
-                                        if (nameController
-                                            .text.isNotEmpty) {
-                                          // Check if the name already exists in the list
-                                          if (!customer.contains(
-                                              nameController.text)) {
-                                            setState(() {
-                                              // Add the typed name to the customer list
-                                              customer.add(
-                                                  nameController.text);
-                                              // Update the dropdown value with the newly added customer
-                                              dropdownValue =
-                                                  nameController.text;
-                                              // Clear the text field after adding
-                                              nameController.clear();
-                                            });
-                                          } else {
-                                            // Optional: You can show a message or handle it gracefully if the name is already added
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  "Name already exists!"),
-                                            ));
+                                  icon: Row(
+                                    children: [
+                                      Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: width * 0.07),
+                                            child: Icon(
+                                              Icons
+                                                  .keyboard_arrow_down_outlined,
+                                            ),
+                                          )),
+                                      InkWell(
+                                        onTap: () {
+                                          if (nameController
+                                              .text.isNotEmpty) {
+                                            // Check if the name already exists in the list
+                                            if (!customer.contains(
+                                                nameController.text)) {
+                                              setState(() {
+                                                // Add the typed name to the customer list
+                                                customer.add(
+                                                    nameController.text);
+                                                // Update the dropdown value with the newly added customer
+                                                dropdownValue =
+                                                    nameController.text;
+                                                // Clear the text field after adding
+                                                nameController.clear();
+                                              });
+                                            } else {
+                                              // Optional: You can show a message or handle it gracefully if the name is already added
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Name already exists!"),
+                                              ));
+                                            }
                                           }
-                                        }
-                                      },
-                                      child: Container(
-                                        height: width * 0.06,
-                                        width: width * 0.12,
-                                        decoration: BoxDecoration(
-                                            color: colorConst.blue,
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                width * 0.01)),
-                                        child: Center(
-                                            child: Text(
-                                              "Add",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
+                                        },
+                                        child: Container(
+                                          height: height * 0.035,
+                                          width: width * 0.12,
+                                          decoration: BoxDecoration(
+                                              color: colorConst.blue,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  width * 0.01)),
+                                          child: Center(
+                                              child: Text(
+                                                "Add",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.03,
-                                    )
-                                  ],
-                                ),
-                                underline: SizedBox(),
-                                value: dropdownValue,
-                                items: customer
-                                    .map<DropdownMenuItem<String>>(
-                                        (String? value) {
-                                      return DropdownMenuItem(
-                                        child: Center(
-                                            child: Text(
-                                              value!,
-                                              style: TextStyle(
-                                                fontSize: width * 0.05,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            )),
-                                        value: value,
-                                      );
-                                    }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    dropdownValue;
-                                    nameController.text = newValue ?? '';
-                                  });
-                                }),
+                                      SizedBox(
+                                        width: width * 0.03,
+                                      )
+                                    ],
+                                  ),
+                                  underline: SizedBox(),
+                                  value: dropdownValue,
+                                  items: customer
+                                      .map<DropdownMenuItem<String>>(
+                                          (String? value) {
+                                        return DropdownMenuItem(
+                                          child: Center(
+                                              child: Text(
+                                                value!,
+                                                style: TextStyle(
+                                                  fontSize: width * 0.05,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              )),
+                                          value: value,
+                                        );
+                                      }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownValue;
+                                      nameController.text = newValue ?? '';
+                                    });
+                                  }),
+                            ),
                           ),
-                        ),
-                        hintText: "Customer Name",
-                        contentPadding: EdgeInsets.all(width * 0.03),
-                        hintStyle: TextStyle(
-                            fontSize: width * 0.052,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.circular(width * 0.02))),
+                          hintText: "Customer Name",
+                          contentPadding: EdgeInsets.all(width * 0.03),
+                          hintStyle: TextStyle(
+                              fontSize: width * 0.052,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.circular(width * 0.02))),
+                    ),
                   ),
                   SizedBox(
                     height: width * 0.03,
@@ -1025,10 +1028,10 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 color: _selectedIndex == index
                                                     ? Colors.white
                                                     : Colors.black,
-                                                fontSize: 17.0),
+                                                fontSize: width*0.037),
                                           ),
                                           SizedBox(
-                                            width: width * 0.02,
+                                            width: width * 0.01,
                                           ),
                                           Stack(
                                             children: [
