@@ -59,6 +59,7 @@
    static const lottie1='assets/animations/success.json';
    static const loading='assets/animations/comingsoon.json';
    static const loading1='assets/animations/loading.json';
+   static const loadingWhite='assets/animations/loadingWhite.json';
 
 
 

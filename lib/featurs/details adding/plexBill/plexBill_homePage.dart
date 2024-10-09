@@ -149,7 +149,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
               left: width*0.05,
               right: width*0.05
           ),
-          child: Center(child: Lottie.asset(ImageConst.loading1))
+          child: Center(child: Lottie.asset(ImageConst.loadingWhite))
           ,
         ):SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -523,12 +523,13 @@ class _Plexbill_homeState extends State<Plexbill_home> {
           ],
         ),
         body: isLoading==true?Container(
+          // color: Colors.white,
           margin: EdgeInsets.only(
               bottom: width*0.05,
               left: width*0.05,
               right: width*0.05
           ),
-          child: Center(child: Lottie.asset(ImageConst.loading1))
+          child: Center(child: Lottie.asset(ImageConst.loadingWhite))
           ,
         ):SingleChildScrollView(
           physics: BouncingScrollPhysics(),
