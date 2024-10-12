@@ -38,7 +38,7 @@ var height;
 var width;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Locales.init(['en','ar', 'hi']);
+  await Locales.init(['ar','en', 'hi']);
 
 // Get the size of the device's screen before running the app
   final mediaQueryData = WidgetsBinding.instance.window.physicalSize.width /

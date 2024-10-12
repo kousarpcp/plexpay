@@ -8,6 +8,7 @@ import 'package:plexpay/featurs/details%20adding/plexBill/plexbill_cart.dart';
 import 'package:plexpay/featurs/details%20adding/plexBill/print.dart';
 
 import '../../../Const/imageConst.dart';
+import '../../../api/plexbill_billing_ API.dart';
 import '../../../main.dart';
 import 'bill_items.dart';
 
@@ -24,6 +25,35 @@ int total = 0;
 int vat = 0;
 
 class _plexbillNewState extends State<plexbillNew> {
+
+  var isCatLoading = true;
+  var customer_id ;
+  var trn_number;
+  // var customer_name;
+  var isLoading=false;
+
+  getData() async {
+    setState(() {
+      isLoading=true;
+    });
+
+    var rsp=await plexbillBillingApi();
+    if ( rsp['creditusers']!=null) {
+      customer_id= rsp["id"];
+      trn_number= rsp["trn_number"];
+      // customer_name= rsp["name"];
+
+      print("customer_id");
+      print("trn_number");
+      print(rsp);
+      print("oooooooooooooooooooooooooooooooooooooooooooooo");
+
+    }
+    setState(() {
+      isLoading=false;
+    });
+  }
+
   List fruits = [
     {
       "image1": ImageConst.apple,
@@ -113,6 +143,7 @@ class _plexbillNewState extends State<plexbillNew> {
   ];
   int _selectedIndex = 0;
   var category = "";
+
   late int catindex;
   TextEditingController nameController = TextEditingController();
 
@@ -158,6 +189,7 @@ class _plexbillNewState extends State<plexbillNew> {
     print(items);
     print("qqqqqqqqqqqqqqq");
 
+    getData();
     totalprice();
     tascprice();
     vatAdd();
@@ -558,7 +590,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Text(
-                                  " 6",
+                                  " ${customer_id}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
@@ -569,7 +601,7 @@ class _plexbillNewState extends State<plexbillNew> {
                               children: [
                                 Text("TRN Number :"),
                                 Text(
-                                  " 6456",
+                                  " ${trn_number}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),

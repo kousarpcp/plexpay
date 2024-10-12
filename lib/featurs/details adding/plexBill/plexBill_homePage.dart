@@ -7,6 +7,7 @@ import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/shared_preference1.dart';
 import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_New.dart';
 import 'package:plexpay/featurs/details%20adding/plexBill/plexBill_login.dart';
+import 'package:plexpay/featurs/details%20adding/plexBill/purchase.dart';
 import 'package:plexpay/featurs/details%20adding/screen/BottomNavigation.dart';
 import 'package:plexpay/featurs/details%20adding/screen/home_page.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -614,39 +615,44 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                     ),
                                   ),
                                 ),
-                                Center(
-                                  child: Container(
-                                    height: width * 0.25,
-                                    width: width * 0.4,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              blurStyle: BlurStyle.normal,
-                                              color: Colors.black.withOpacity(0.09),
-                                              offset: Offset(0, 2),
-                                              spreadRadius: 1,
-                                              blurRadius: 9)
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => purchase(),));
+                                  },
+                                  child: Center(
+                                    child: Container(
+                                      height: width * 0.25,
+                                      width: width * 0.4,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                blurStyle: BlurStyle.normal,
+                                                color: Colors.black.withOpacity(0.09),
+                                                offset: Offset(0, 2),
+                                                spreadRadius: 1,
+                                                blurRadius: 9)
+                                          ],
+                                          borderRadius: BorderRadius.circular(width * 0.03)),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.shopping_cart,
+                                            color: Colors.black,
+                                            size: width * 0.06,
+                                          ),
+                                          SizedBox(
+                                            height: width * 0.02,
+                                          ),
+                                          LocaleText(
+                                            "Purchase",
+                                            style: TextStyle(
+                                                fontSize: width * 0.052,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         ],
-                                        borderRadius: BorderRadius.circular(width * 0.03)),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.black,
-                                          size: width * 0.06,
-                                        ),
-                                        SizedBox(
-                                          height: width * 0.02,
-                                        ),
-                                        LocaleText(
-                                          "Purchase",
-                                          style: TextStyle(
-                                              fontSize: width * 0.052,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
