@@ -27,12 +27,14 @@ class _localState extends State<local> {
   var isCatLoading = false;
   List<Map<String, dynamic>> prepaidCategory = [];
   List<Map<String, dynamic>> voucherCategory = [];
+  List<Map<String, dynamic>> voucherAE = [];
   List<Map<String, dynamic>> gamingCategory = [];
   List<Map<String, dynamic>> electricityCategory = [];
   List<Map<String, dynamic>> giftCategory = [];
   List<Map<String, dynamic>> dthCategory = [];
   List<Map<String, dynamic>> items = [];
   List<Map<String, dynamic>> products = [];
+
 
 
    List All = [
@@ -95,6 +97,7 @@ class _localState extends State<local> {
       "text":"DTH",
     },
   ];
+  List Vouchers=[];
   List AllTab = [
     {
       "Size":width*0.12,
@@ -213,9 +216,12 @@ class _localState extends State<local> {
           if (item['Categoryname'] == 'Prepaid') {
             prepaidCategory.add(item);
           }
-          if (item['Categoryname'] == 'Voucher') {
+          if (item['Categoryname'] == 'Voucher' || item['Categoryname'] == 'United Arab Emirates') {
             voucherCategory.add(item);
           }
+          // if (item['Categoryname'] == "United Arab Emirates") {
+          //   voucherCategory.add(item);
+          // }
           if (item['Categoryname'] == 'Gaming Card') {
             gamingCategory.add(item);
           }
@@ -233,6 +239,7 @@ class _localState extends State<local> {
     }
 
 
+    print(voucherCategory);
     // print(dataList);
     print(prepaidCategory);
     print("hhhhhhhhhhhh");
@@ -657,7 +664,7 @@ class _localState extends State<local> {
                         width: MediaQuery.of(context).size.width > 600?width*0.22:width*0.37,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade100,
-                            image: DecorationImage(image: NetworkImage(voucherCategory[index]["sub_cat_logo"]),fit: BoxFit.fill),
+                            image: DecorationImage(image: NetworkImage(voucherCategory[index]["sub_cat_logo"]),fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(width*0.03)
                         ),
                       ),
