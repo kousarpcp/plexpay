@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/widgets.dart';
@@ -73,7 +74,7 @@ class _internationalState extends State<international> {
                   children: [
                     Icon(Icons.search_rounded,size: width*0.03,),
                     SizedBox(width: width*0.02,),
-                    Text("Search",style: TextStyle(
+                    LocaleText("Search",style: TextStyle(
                       fontSize: width * 0.022,
                       color: Colors.grey,
                       fontWeight: FontWeight.w500,

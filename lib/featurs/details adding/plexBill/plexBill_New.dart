@@ -13,8 +13,9 @@ import '../../../main.dart';
 import 'bill_items.dart';
 
 class plexbillNew extends StatefulWidget {
+  final id;
   const plexbillNew({
-    super.key,
+    super.key, this.id,
   });
 
   @override
@@ -29,28 +30,35 @@ class _plexbillNewState extends State<plexbillNew> {
   var isCatLoading = true;
   var customer_id ;
   var trn_number;
-  // var customer_name;
+  var creditusers;
+  var customer_name;
   var isLoading=false;
 
-  getData() async {
+  void getData() async {
     setState(() {
-      isLoading=true;
+      isLoading = true;
     });
 
-    var rsp=await plexbillBillingApi();
-    if ( rsp['creditusers']!=null) {
-      customer_id= rsp["id"];
-      trn_number= rsp["trn_number"];
-      // customer_name= rsp["name"];
+    var rsp=await plexbillBillingApi(widget.id.toString());
+    print(rsp);
+    print("ttttttttttt");
+    // if ( rsp['creditusers']!=null) {
+    creditusers=rsp["creditusers"];
+    print(creditusers);
+    print("hhhhhhhhh");
+
+      customer_id= rsp["creditusers"][0]["id"];
+      trn_number= rsp["creditusers"][0]["trn_number"];
+    customer_name = rsp["creditusers"].map<String>((user) => user["name"].toString()).toList();
 
       print("customer_id");
       print("trn_number");
-      print(rsp);
+      print(creditusers);
       print("oooooooooooooooooooooooooooooooooooooooooooooo");
 
-    }
+    // }
     setState(() {
-      isLoading=false;
+      isLoading = false;
     });
   }
 
@@ -134,6 +142,7 @@ class _plexbillNewState extends State<plexbillNew> {
     "customer1",
     "customer2",
     "customer3",
+    "customer4",
   ];
 
   List All = [
@@ -187,6 +196,9 @@ class _plexbillNewState extends State<plexbillNew> {
   @override
   void initState() {
     print(items);
+    print(creditusers);
+    print(customer_id);
+    print(trn_number);
     print("qqqqqqqqqqqqqqq");
 
     getData();
@@ -340,33 +352,12 @@ class _plexbillNewState extends State<plexbillNew> {
                 style: TextStyle(
                     fontSize: width * 0.025, fontWeight: FontWeight.w700),
               ),
-              // actions: [
-              //   InkWell(
-              //     onTap: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => cart(category: items),
-              //           ));
-              //     },
-              //     child: Container(
-              //         height: height * 0.05,
-              //         width: width * 0.063,
-              //         decoration: BoxDecoration(
-              //             color: colorConst.blue,
-              //             borderRadius: BorderRadius.circular(width * 0.01)),
-              //         child: Center(
-              //             child: Text(
-              //           "Next",
-              //           style: TextStyle(color: Colors.white),
-              //         ))),
-              //   ),
-              //   SizedBox(
-              //     width: width * 0.03,
-              //   )
-              // ],
             ),
-            body: SingleChildScrollView(
+            body: isLoading?Container(
+              child: Center(child: CircularProgressIndicator(
+                color: colorConst.blue,
+              )),
+            ):SingleChildScrollView(
               child: Container(
                 child: Wrap(
                   runSpacing: 20,
@@ -504,55 +495,7 @@ class _plexbillNewState extends State<plexbillNew> {
                 style: TextStyle(
                     fontSize: width * 0.06, fontWeight: FontWeight.w700),
               ),
-              // actions: [
-              //   InkWell(
-              //     onTap: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => cart(category: items),
-              //           ));
-              //     },
-              //       child: Stack(
-              //         children: [
-              //           Container(
-              //               height: width*0.08,
-              //               width: width*0.12,
-              //               child: Icon(Icons.shopping_cart)),
-              //           if(a.length>0)
-              //           Positioned(
-              //             left: width*0.069,
-              //             bottom: width*0.04,
-              //             child: CircleAvatar(
-              //               radius: width*0.02,
-              //               child: Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   Text( "${a.length}",style: TextStyle(fontSize: width*0.026),),
-              //                 ],
-              //               ),
-              //               backgroundColor: Colors.red,
-              //             ),
-              //           )
-              //         ],
-              //       )
-              //
-              //     // Container(
-              //     //     height: width * 0.06,
-              //     //     width: width * 0.11,
-              //     //     decoration: BoxDecoration(
-              //     //         color: colorConst.blue,
-              //     //         borderRadius: BorderRadius.circular(width * 0.01)),
-              //     //     child: Center(
-              //     //         child: Text(
-              //     //       "Next",
-              //     //       style: TextStyle(color: Colors.white),
-              //     //     ))),
-              //   ),
-              //   SizedBox(
-              //     width: width * 0.05,
-              //   )
-              // ],
+
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -587,12 +530,12 @@ class _plexbillNewState extends State<plexbillNew> {
                               children: [
                                 LocaleText(
                                   "Customer ID :",
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(fontSize: 14),
                                 ),
                                 Text(
                                   " ${customer_id}",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -603,7 +546,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                 Text(
                                   " ${trn_number}",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -619,7 +562,7 @@ class _plexbillNewState extends State<plexbillNew> {
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.text,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
+                              fontSize: 18, fontWeight: FontWeight.w500),
                           decoration: InputDecoration(
                               suffixIcon: Padding(
                                 padding: EdgeInsets.all(width * 0.002),
@@ -643,7 +586,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                           Center(
                                               child: Padding(
                                             padding: EdgeInsets.only(
-                                                right: width * 0.076,
+                                                right: width * 0.092,
                                                 left: width * 0.08),
                                             child: Icon(
                                               Icons
@@ -655,11 +598,11 @@ class _plexbillNewState extends State<plexbillNew> {
                                               if (nameController
                                                   .text.isNotEmpty) {
                                                 // Check if the name already exists in the list
-                                                if (!customer.contains(
+                                                if (!customer_name.contains(
                                                     nameController.text)) {
                                                   setState(() {
                                                     // Add the typed name to the customer list
-                                                    customer.add(
+                                                    customer_name.add(
                                                         nameController.text);
                                                     // Update the dropdown value with the newly added customer
                                                     dropdownValue =
@@ -678,18 +621,18 @@ class _plexbillNewState extends State<plexbillNew> {
                                               }
                                             },
                                             child: Container(
-                                              height: width * 0.036,
-                                              width: width * 0.076,
+                                              height: height * 0.053,
+                                              width: width * 0.07,
                                               decoration: BoxDecoration(
                                                   color: colorConst.blue,
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          width * 0.01)),
+                                                          width * 0.007)),
                                               child: Center(
                                                   child: Text(
                                                 "Add",
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.white,fontSize: width*0.016),
                                               )),
                                             ),
                                           ),
@@ -700,7 +643,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                       ),
                                       underline: SizedBox(),
                                       value: dropdownValue,
-                                      items: customer
+                                      items: customer_name
                                           .map<DropdownMenuItem<String>>(
                                               (String? value) {
                                         return DropdownMenuItem(
@@ -708,7 +651,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                               child: Text(
                                             value!,
                                             style: TextStyle(
-                                              fontSize: width * 0.02,
+                                              fontSize: width * 0.018,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           )),
@@ -720,24 +663,25 @@ class _plexbillNewState extends State<plexbillNew> {
                                           dropdownValue;
                                           nameController.text = newValue ?? '';
                                         });
-                                      }),
+                                      }
+                                      ),
                                 ),
                               ),
                               hintText: "Customer Name",
-                              contentPadding: EdgeInsets.all(width * 0.018),
+                              contentPadding: EdgeInsets.all(width * 0.01),
                               hintStyle: TextStyle(
-                                  fontSize: width * 0.018,
+                                  fontSize: width * 0.016,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black),
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.circular(width * 0.018))),
+                                      BorderRadius.circular(width * 0.012))),
                         ),
                         SizedBox(
                           height: height * 0.03,
                         ),
                         Container(
-                          height: height * 0.095,
+                          height: height * 0.082,
                           width: width * 1,
                           child: ListView.separated(
                               shrinkWrap: true,
@@ -759,7 +703,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                         });
                                       },
                                       child: Container(
-                                        height: height * 0.095,
+                                        height: height * 0.078,
                                         width: width * 0.299,
                                         // margin: EdgeInsets.only(left: width*0.035),
                                         decoration: BoxDecoration(
@@ -780,7 +724,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                   color: _selectedIndex == index
                                                       ? Colors.white
                                                       : Colors.black,
-                                                  fontSize: 15.0),
+                                                  fontSize: 14.0),
                                             ),
                                             SizedBox(
                                               width: width * 0.02,
@@ -795,7 +739,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                     children: [
                                                       Icon(
                                                         All[index]["icon"],
-                                                        size: width * 0.027,
+                                                        size: width * 0.024,
                                                         color:
                                                         _selectedIndex == index ? Colors.white : Colors.black,
 
@@ -866,7 +810,7 @@ class _plexbillNewState extends State<plexbillNew> {
                             style: TextStyle(fontSize: 16),
                           ),
                           Text(
-                            " 6",
+                            " ${customer_id}",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
@@ -877,7 +821,7 @@ class _plexbillNewState extends State<plexbillNew> {
                         children: [
                           Text("TRN Number :"),
                           Text(
-                            " 6456",
+                            " ${trn_number}",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
@@ -1134,7 +1078,7 @@ class _plexbillNewState extends State<plexbillNew> {
                 childAspectRatio: 0.62,
                 crossAxisSpacing: width * 0.01,
                 mainAxisSpacing: width * 0.01,
-                crossAxisCount: 6),
+                crossAxisCount: 7),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -1150,19 +1094,19 @@ class _plexbillNewState extends State<plexbillNew> {
                   child: Padding(
                     padding: EdgeInsets.only(left: width * 0.018),
                     child: Container(
-                        height: MediaQuery.of(context).size.height>520? height * 0.3:height*0.32,
-                        width: width * 0.12,
+                        height: MediaQuery.of(context).size.height>520? height * 0.262:height*0.32,
+                        width: width * 0.1,
                         decoration: BoxDecoration(
                             color: colorConst.blue,
-                            borderRadius: BorderRadius.circular(width * 0.02)),
+                            borderRadius: BorderRadius.circular(width * 0.01)),
                         child: Column(
                           children: [
                             SizedBox(
                               height: height * 0.022,
                             ),
                             Container(
-                              height: height * 0.1,
-                              width: width * 0.09,
+                              height: height * 0.07,
+                              width: width * 0.08,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   image: DecorationImage(
@@ -1171,7 +1115,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius:
-                                      BorderRadius.circular(width * 0.013)),
+                                      BorderRadius.circular(width * 0.007)),
                             ),
                             SizedBox(
                               height: height * 0.01,
@@ -1186,7 +1130,7 @@ class _plexbillNewState extends State<plexbillNew> {
                             ),
                             Container(
                               height: height * 0.06,
-                              width: width * 0.1,
+                              width: width * 0.08,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
@@ -1369,7 +1313,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 setState(() {
                                                   vegitalbles[index]
                                                       ["quantity"]--;
-                                                  a.length--;
+                                                  // a.length--;
                                                 });
                                               },
                                               child: Icon(
@@ -1390,7 +1334,7 @@ class _plexbillNewState extends State<plexbillNew> {
                                                 setState(() {
                                                   vegitalbles[index]
                                                       ["quantity"]++;
-                                                  a.length++;
+                                                  // a.length++;
                                                 });
                                               },
                                               child: Icon(

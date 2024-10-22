@@ -59,5 +59,22 @@
   "next": "Next",
   "customer_id_:": "Customer ID",
   "filter": "FILTER",
-  "transaction_id_:": "Transaction ID :"
+  "transaction_id_:": "Transaction ID :",
+  "change_password": "Change Password",
+  "search": "Search",
+  "notifications": "Notifications",
+  "please_enter_your_number": "Please Enter Your Number",
+  "search...": "Search...",
+  "select_date_range": "Select Date Range",
+  "cancel": "CANCEL",
+  "ok": "OK",
+  "save": "SAVE",
+  "invalid_format.": "Invalid format.",
+  "out_of_range.": "Out of range.",
+  "__enter_your_mobile_number": "  Enter Your Mobile Number",
+  "send_otp": "SEND OTP",
+  "enter_otp": "Enter OTP",
+  "submit": "SUBMIT",
+  "re-send_otp": "re-send OTP"
+
 }

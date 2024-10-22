@@ -38,7 +38,10 @@ var height;
 var width;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Locales.init(['ar','en', 'hi']);
+  await Locales.init(['en','ar', 'hi']);
+
+  // Set default locale to English
+  Locale defaultLocale = Locale('en');
 
 // Get the size of the device's screen before running the app
   final mediaQueryData = WidgetsBinding.instance.window.physicalSize.width /
@@ -59,30 +62,15 @@ Future<void> main() async {
   }
 
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(MyApp(defaultLocale: defaultLocale,));
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   // ]);
 }
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     width = MediaQuery.of(context).size.width;
-//     height = MediaQuery.of(context).size.height;
-//     return LocaleBuilder(
-//       builder: (locale) => MaterialApp(
-//         title: 'Flutter Locales',
-//         localizationsDelegates: Locales.delegates,
-//         supportedLocales: Locales.supportedLocales,
-//         locale: locale,
-//         home: Splashscreen(),
-//       ),
-//     );
-//   }
-// }
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale defaultLocale;
+  const MyApp({super.key, required this.defaultLocale});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +91,7 @@ class MyApp extends StatelessWidget {
                 title: 'Plexpay',
                 localizationsDelegates: Locales.delegates,
                 supportedLocales: Locales.supportedLocales,
-                locale: locale,
+                locale: locale??defaultLocale,
                 debugShowCheckedModeBanner: false,
                 home: Splashscreen()),
           ),

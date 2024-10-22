@@ -265,7 +265,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                           print("jjjjjjjjjjjjjjjjjjj");
                           print("rspppp");
                           print(rsp);
-                          if ( rsp['users']!=null) {
+                          if ( rsp['userdatas']!=null) {
                             print("jjjjjjjjjjjjjjjjjjj");
                             print(rsp);
                             var id = await plexbilllogin("userId1", rsp['userdatas'][0]["username"]);
@@ -483,11 +483,8 @@ class _plexbill_loginState extends State<plexbill_login> {
                               filled: true,
                               fillColor: Colors.blueGrey.shade50,
                               border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.red,
-                                      strokeAlign: width*0.01
-                                  ),
-                                  borderRadius: BorderRadius.circular(width*0.03)
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(width*0.02)
                               ),
                             ),
                           ),
@@ -547,7 +544,7 @@ class _plexbill_loginState extends State<plexbill_login> {
                           print("jjjjjjjjjjjjjjjjjjj");
                           print("rspppp");
                           print(rsp);
-                          if ( rsp['users']!=null) {
+                          if ( rsp['userdatas']!=null) {
                             print("jjjjjjjjjjjjjjjjjjj");
                             print(rsp);
                             var id = await plexbilllogin("userId1", rsp['userdatas'][0]["username"]);

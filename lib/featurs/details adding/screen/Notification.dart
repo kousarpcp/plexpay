@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../main.dart';
@@ -18,7 +19,7 @@ class _NotificationsState extends State<Notifications> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Notifications",style: TextStyle(fontWeight: FontWeight.w500),),
+        title: LocaleText("Notifications",style: TextStyle(fontWeight: FontWeight.w500),),
       ),
     );
   }

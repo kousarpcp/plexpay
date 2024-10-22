@@ -36,6 +36,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
   var todays_payments;
   var currency;
   var isLoading=false;
+  var id;
 
 
   getData() async {
@@ -49,6 +50,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
     print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     var rsp=await plexbillLoginApi(username.toString(),password.toString());
     if ( rsp['userdatas']!=null) {
+      id=rsp["userdatas"][0]["id"];
       todays_sale= rsp["todaysale"];
       todays_purchase= rsp["todayreturn"];
       todays_receipt= rsp["todayreceipt"];
@@ -127,10 +129,10 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                           isDefaultAction: true,
                           textStyle: TextStyle(color: colorConst.blue),
                           onPressed: () async {
-                            var id = await removesharedPrefrence("userId", null);
-                            var token = await removesharedPrefrence("token", null);
-                            var name = await removesharedPrefrence("name", null);
-                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => BottomNavigation(),), (route) => false);
+                            // var id = await removesharedPrefrence("userId", null);
+                            // var token = await removesharedPrefrence("token", null);
+                            // var name = await removesharedPrefrence("name", null);
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder:(context) => plexbill_login(),), (route) => false);
                           },
                           child: Text("Confirm"),
                         ),
@@ -185,7 +187,7 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(),));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(id: id,),));
                                 },
                                 child: Center(
                                   child: Container(
@@ -224,39 +226,44 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                                   ),
                                 ),
                               ),
-                              Center(
-                                child: Container(
-                                  height: width * 0.06,
-                                  width: width * 0.4,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurStyle: BlurStyle.normal,
-                                            color: Colors.black.withOpacity(0.09),
-                                            offset: Offset(0, 2),
-                                            spreadRadius: 1,
-                                            blurRadius: 9)
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => purchase(),));
+                                },
+                                child: Center(
+                                  child: Container(
+                                    height: width * 0.06,
+                                    width: width * 0.4,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurStyle: BlurStyle.normal,
+                                              color: Colors.black.withOpacity(0.09),
+                                              offset: Offset(0, 2),
+                                              spreadRadius: 1,
+                                              blurRadius: 9)
+                                        ],
+                                        borderRadius: BorderRadius.circular(width * 0.018)),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.shopping_cart,
+                                          color: Colors.black,
+                                          size: width * 0.027,
+                                        ),
+                                        SizedBox(
+                                          width: width * 0.02,
+                                        ),
+                                        LocaleText(
+                                          "Purchase",
+                                          style: TextStyle(
+                                              fontSize: width * 0.02,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ],
-                                      borderRadius: BorderRadius.circular(width * 0.018)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.shopping_cart,
-                                        color: Colors.black,
-                                        size: width * 0.027,
-                                      ),
-                                      SizedBox(
-                                        width: width * 0.02,
-                                      ),
-                                      LocaleText(
-                                        "Purchase",
-                                        style: TextStyle(
-                                            fontSize: width * 0.02,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -576,7 +583,9 @@ class _Plexbill_homeState extends State<Plexbill_home> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(),));
+                                    print("oooo");
+                                    print(id);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => plexbillNew(id: id,),));
                                   },
                                   child: Center(
                                     child: Container(

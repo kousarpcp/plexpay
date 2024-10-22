@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:lottie/lottie.dart';
@@ -243,7 +244,7 @@ class _countryFieldState extends State<countryField> {
                           fontSize: width * 0.045,
                           fontWeight: FontWeight.w300,
                           color: Colors.black),
-                      hintText: "Please Enter Your Number",
+                      hintText: Locales.string(context, 'Please Enter Your Number'),
                       hintStyle: TextStyle(
                         fontSize: width * 0.017,
                         fontWeight: FontWeight.w600,

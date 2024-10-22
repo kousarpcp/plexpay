@@ -352,7 +352,9 @@ class _profileState extends State<profile> {
                               SizedBox(
                                 height: height * 0.017,
                               ),
-                              Text("Bank\nAccounts",textAlign: TextAlign.center,style: TextStyle(
+                              LocaleText("Bank",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015,)),
+                              LocaleText("Accounts",textAlign: TextAlign.center,style: TextStyle(
                                 fontSize: width*0.015,)),
                             ],
                           ),
@@ -371,7 +373,9 @@ class _profileState extends State<profile> {
                                   color: Colors.indigo,
                                   width: width * 0.055,
                                 ),
-                                Text("Debit &\nCredit Cards",textAlign: TextAlign.center,style: TextStyle(
+                                LocaleText("Debit &",textAlign: TextAlign.center,style: TextStyle(
+                                  fontSize: width*0.015)),
+                                LocaleText("Credit Cards",textAlign: TextAlign.center,style: TextStyle(
                                   fontSize: width*0.015)),
                               ],
                             ),
@@ -386,7 +390,9 @@ class _profileState extends State<profile> {
                               SizedBox(
                                 height: height * 0.017,
                               ),
-                              Text("PlexPe\nWallet",textAlign: TextAlign.center,style: TextStyle(
+                              LocaleText("PlexPe",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015),),
+                              LocaleText("Wallet",textAlign: TextAlign.center,style: TextStyle(
                                 fontSize: width*0.015),)
                             ],
                           ),
@@ -400,7 +406,10 @@ class _profileState extends State<profile> {
                               SizedBox(
                                 height: height * 0.01,
                               ),
-                              Text("PlexPe\nGift Card",textAlign: TextAlign.center,style: TextStyle(
+                              LocaleText("PlexPe",textAlign: TextAlign.center,style: TextStyle(
+                                fontSize: width*0.015,
+                              ),),
+                              LocaleText("Gift Card",textAlign: TextAlign.center,style: TextStyle(
                                 fontSize: width*0.015,
                               ),),
                               // LocaleText(""),
@@ -424,7 +433,7 @@ class _profileState extends State<profile> {
                               SizedBox(
                                 height: height * 0.025,
                               ),
-                              Text("UPI Lite",textAlign: TextAlign.center,style: TextStyle(
+                              LocaleText("UPI Lite",textAlign: TextAlign.center,style: TextStyle(
                                 fontSize: width*0.015,))
                             ],
                           )
@@ -629,7 +638,7 @@ class _profileState extends State<profile> {
                             color: colorConst.blue,
                           ),
                         ),
-                        title: Text(
+                        title: LocaleText(
                           "Change Password",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: width * 0.023),

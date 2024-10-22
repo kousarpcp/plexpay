@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -115,12 +116,12 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
       ),
       firstDate: DateTime(DateTime.now().year + -5),
       lastDate: DateTime(DateTime.now().year + 2),
-      helpText: 'Select Date Range',
-      cancelText: 'CANCEL',
-      confirmText: 'OK',
-      saveText: 'SAVE',
-      errorFormatText: 'Invalid format.',
-      errorInvalidText: 'Out of range.',
+      helpText: Locales.string(context, 'Select Date Range'),
+      cancelText: Locales.string(context, 'CANCEL'),
+      confirmText: Locales.string(context, 'OK'),
+      saveText: Locales.string(context, 'SAVE'),
+      errorFormatText: Locales.string(context, 'Invalid format.'),
+      errorInvalidText: Locales.string(context, 'Out of range.'),
       errorInvalidRangeText: 'Invalid range.',
       fieldStartHintText: 'Start Date',
       fieldEndLabelText: 'End Date',
@@ -196,7 +197,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                         });
                       },
                     ),
-                    hintText: 'Search...',
+                    hintText: Locales.string(context, 'Search...'),
                     border: InputBorder.none),
               ),
             ),
@@ -267,7 +268,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Center(
-                                      child: Text(
+                                      child: LocaleText(
                                         "FILTER",
                                         style: TextStyle(
                                             fontSize: width * 0.014,
@@ -358,7 +359,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                     },
                   ),
                   contentPadding: EdgeInsets.only(top: width*0.01),
-                  hintText: 'Search...',
+                  hintText: Locales.string(context, 'Search...'),
                   border: InputBorder.none),
             ),
           ),

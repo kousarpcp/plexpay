@@ -59,5 +59,21 @@
   "next": "مقبل",
   "customer_id_:": "الرقم التعريفي للعميل",
   "filter": "راووق",
-  "transaction_id_:": "معرف المعاملة :"
+  "transaction_id_:": "معرف المعاملة :",
+  "change_password": "تغيير كلمة المرور",
+  "search": "بحث",
+  "notifications": "الاخطارات",
+  "please_enter_your_number": "الرجاء ادخال رقمك",
+  "search...": "بحث...",
+  "select_date_range": "حدد النطاق الزمني",
+  "cancel": "إلغاء الأمر",
+  "ok": "موافق",
+  "save": "أنقذ",
+  "invalid_format.": "تنسيق غير صالح.",
+  "out_of_range.": "خارج النطاق.",
+  "__enter_your_mobile_number": "  أدخل رقم هاتفك المحمول",
+  "send_otp": "إرسال كلمة المرور لمرة واحدة",
+  "enter_otp": "أدخل كلمة المرور لمرة واحد ",
+  "submit": "إرسال",
+  "re-send_otp": "إعادة إرسال كلمة المرور لمرة واحدة"
 }

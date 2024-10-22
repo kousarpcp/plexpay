@@ -68,8 +68,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
         bottomNavigationBar:  MediaQuery.of(context).size.width > 650?
         CurvedNavigationBar(
+          buttonBackgroundColor: colorConst.darkblue,
           height: height*0.118,
-          backgroundColor:  Colors.white,
+          backgroundColor: Colors.white,
 
           key: _bottomNavigationKey,
           items: [

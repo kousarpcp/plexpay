@@ -59,5 +59,21 @@
   "next": "अगला",
   "customer_id_:": "कस्टमर  परिचय",
   "filter": "छानना",
-  "transaction_id_:": "लेन-देन आईडी :"
+  "transaction_id_:": "लेन-देन आईडी :",
+  "change_password": "पासवर्ड बदलें",
+  "search": "ढूँढ",
+  "notifications": "सूचनाएँ",
+  "please_enter_your_number": "कृपया अपना नंबर दर्ज करें",
+  "search...": "ढूँढ।।।",
+  "select_date_range": "तारीख की सीमा चुनें",
+  "cancel": "रद्द करना",
+  "ok": "ठीक है",
+  "save": "रक्षा कर",
+  "invalid_format.": "अमान्य प्रारूप।",
+  "out_of_range.": "सीमा से बाहर।",
+  "__enter_your_mobile_number": "  अपना मोबाइल नंबर दर्ज करें",
+  "send_otp": "भेजना ओटीपी",
+  "enter_otp": "घुसना ओटीपी",
+  "submit": "जमा करें",
+  "re-send_otp": "पुन्हा पाठवा ओटीपी"
 }

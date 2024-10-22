@@ -122,7 +122,7 @@ final ksebBillUrl = 'api/KsebBill';
 final  ksebRechargeUrl= 'api/rechargeNow_Two';
 final  loginpost= 'loginsubmit';
 final  loginget= 'userlogin';
-final  billing= 'api/billing?id=1';
+final  billing= 'api/billing';
 
 final plansByNumberUrl = 'api/plansBy_Number';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_locales/flutter_locales.dart';
 import 'package:pinput/pinput.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/widgets.dart';
@@ -67,7 +68,7 @@ class _XpayPageState extends State<XpayPage> {
                         fontSize: width*0.017,
                         color: colorConst.blue
                       ),
-                    labelText: "Enter Your Mobile Number",
+                    labelText: Locales.string(context, '  Enter Your Mobile Number'),
                     contentPadding: EdgeInsets.only(top: width*0.01,left: width*0.022),
                     labelStyle: TextStyle(
                       color: colorConst.blue,
@@ -75,7 +76,7 @@ class _XpayPageState extends State<XpayPage> {
                     floatingLabelStyle: TextStyle(
                       color: Colors.transparent
                     ),
-                    hintText: " Enter Your Mobile Number",
+                    hintText: Locales.string(context, '  Enter Your Mobile Number'),
                     hintStyle: TextStyle(
                       color: colorConst.blue
                     ),
@@ -105,7 +106,7 @@ class _XpayPageState extends State<XpayPage> {
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("SEND OTP",
+                    LocaleText("SEND OTP",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -124,7 +125,7 @@ class _XpayPageState extends State<XpayPage> {
                 ),
               ): Column(
                 children: [
-                  Text("Enter OTP",style: TextStyle(
+                  LocaleText("Enter OTP",style: TextStyle(
                     color: colorConst.blue,
                     fontSize: width*0.016,
                     fontWeight: FontWeight.bold
@@ -176,7 +177,7 @@ class _XpayPageState extends State<XpayPage> {
                           color: Colors.lightBlueAccent
                       ),
                       child:Center(
-                        child: Text("SUBMIT",
+                        child: LocaleText("SUBMIT",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -196,7 +197,7 @@ class _XpayPageState extends State<XpayPage> {
                       setState(() {
                       });
                     },
-                    child: Text("re-send OTP",style: TextStyle(
+                    child: LocaleText("re-send OTP",style: TextStyle(
                       color: colorConst.blue
                     ),),
                   )
@@ -252,14 +253,14 @@ class _XpayPageState extends State<XpayPage> {
                       fontSize: width*0.05,
                       color: colorConst.blue
                     ),
-                  labelText: "    Enter Your Mobile Number",
+                  labelText: Locales.string(context, '   Enter Your Mobile Number'),
                   labelStyle: TextStyle(
                     color: colorConst.blue,
                   ),
                   floatingLabelStyle: TextStyle(
                     color: Colors.transparent
                   ),
-                  hintText: "Enter Your Mobile Number",
+                  hintText: Locales.string(context, '  Enter Your Mobile Number'),
                   hintStyle: TextStyle(
                     color: colorConst.blue
                   ),
@@ -289,7 +290,7 @@ class _XpayPageState extends State<XpayPage> {
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("SEND OTP",
+                  LocaleText("SEND OTP",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -308,7 +309,7 @@ class _XpayPageState extends State<XpayPage> {
               ),
             ): Column(
               children: [
-                Text("Enter OTP",style: TextStyle(
+                LocaleText("Enter OTP",style: TextStyle(
                   color: colorConst.blue,
                   fontSize: width*0.04,
                   fontWeight: FontWeight.bold
@@ -356,7 +357,7 @@ class _XpayPageState extends State<XpayPage> {
                         color: Colors.lightBlueAccent
                     ),
                     child:Center(
-                      child: Text("SUBMIT",
+                      child: LocaleText("SUBMIT",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -374,7 +375,7 @@ class _XpayPageState extends State<XpayPage> {
                     setState(() {
                     });
                   },
-                  child: Text("re-send OTP",style: TextStyle(
+                  child: LocaleText("re-send OTP",style: TextStyle(
                     color: colorConst.blue
                   ),),
                 )
