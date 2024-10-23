@@ -62,6 +62,7 @@ dependencies:
   flutter_locales: ^3.0.2
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0
+  flutter_animated_button: ^2.0.3
 
 
 

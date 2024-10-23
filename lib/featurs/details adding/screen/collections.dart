@@ -357,7 +357,7 @@ class _CollectionsState extends State<Collections> {
                               child: Text(
                                 start + "  to  " + end,
                                 maxLines: 2,
-                                style: TextStyle(fontSize: width * 0.043),
+                                style: TextStyle(fontSize: width * 0.038),
                                 // style: Theme.of(context).textTheme.subtitle2,
                               ),
                             ),

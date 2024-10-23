@@ -367,7 +367,7 @@ class _reachargeState extends State<reacharge> {
            Column(
                   children: [
                     Container(
-                      height: width * 0.742,
+                      height: widget.voucher=="2"?height*0.45:height * 0.4,
                       width: width * 1,
                       decoration: BoxDecoration(
                           color: colorConst.lightgrey1,
@@ -383,25 +383,41 @@ class _reachargeState extends State<reacharge> {
                           Text(
                             "Confirm your Recharge?",
                             style: TextStyle(
-                                fontSize: width * 0.063,
+                                fontSize: width * 0.053,
                                 fontWeight: FontWeight.w900,
                                 color: colorConst.blue),
                           ),
                           widget.dash=="1"?Text(
                             SendCurrencyIso +" "+Our_SendValue ,
                             style: TextStyle(
-                                fontSize:height * 0.028,
+                                fontSize:width * 0.04,
                                 color: colorConst.blue,
                                 fontWeight: FontWeight.bold),
                           ):Container(),
-                          Text(
-                            CoupenTitle!=null?CoupenTitle:"" ,
-                            style: TextStyle(
-                                fontSize: height * 0.02,
-
-                                fontWeight: FontWeight.bold),
+                          SizedBox(
+                            height: height*0.01,
                           ),
-                          gap,
+                          FittedBox(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(width*0.03),
+
+                              ),
+                              child: Padding(
+                                padding:  EdgeInsets.all(width*0.02),
+                                child: Text(
+                                  CoupenTitle!=null?CoupenTitle:"" ,
+                                  style: TextStyle(
+                                      fontSize: width * 0.033,
+
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: height*0.01,
+                          ),
                           Expanded(
                             child: widget.number!=null?Container(
                               width: width*0.8,
@@ -409,7 +425,7 @@ class _reachargeState extends State<reacharge> {
                                 widget.dash=="0"?"Please confirm your recharge of "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+Our_SendValue+" by "+ ProviderName:  "Please confirm your recharge of number "+widget.number.toString() +" of "+ ReceiveCurrencyIso +" "+ReceiveValue+" by "+ ProviderName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize:height * 0.023,
+                                    fontSize:width * 0.045,
                                     color: colorConst.blue,
                                     fontWeight: FontWeight.bold,),
                               ),
@@ -426,9 +442,7 @@ class _reachargeState extends State<reacharge> {
                               ),
                             )
                           ),
-                          SizedBox(
-                            height: width * 0.02,
-                          ),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -537,7 +551,7 @@ class _reachargeState extends State<reacharge> {
                             ],
                           ),
                           SizedBox(
-                            height: width * 0.12,
+                            height: height * 0.03,
                           ),
                         ],
                       ),

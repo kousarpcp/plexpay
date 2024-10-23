@@ -8,10 +8,11 @@ import '../../../main.dart';
 import 'Reacharge.dart';
 
 class popular extends StatefulWidget {
-  const popular({super.key, required this.number, required this.name, required this.plan, required this.providerinfo, required this.dash, });
+  const popular({super.key, required this.number, required this.name, required this.plan, required this.providerinfo, required this.dash, this.rsp, });
   final String number;
   final String name;
   final String dash;
+  final rsp;
   final plan;
   final providerinfo;
 
@@ -28,13 +29,17 @@ class _popularState extends State<popular> {
     print(widget.dash);
     print(widget.number);
     dash=widget.dash;
-    super.initState(); 
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MediaQuery.of(context).size.width > 650?
-    SafeArea(
+    widget.rsp["message"]=="Empty"?
+    Container(
+      margin: EdgeInsets.all(width*0.1),
+      child: Center(child: Text("No Vouchers Found!")),
+    ):SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -267,7 +272,11 @@ class _popularState extends State<popular> {
         ),
       ),
     ):
-    SafeArea(
+    widget.rsp["message"]=="Empty"?
+    Container(
+      margin: EdgeInsets.all(width*0.1),
+      child: Center(child: Text("No Vouchers Found!")),
+    ):SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

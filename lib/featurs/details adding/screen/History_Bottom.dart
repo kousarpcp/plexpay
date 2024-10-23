@@ -440,7 +440,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                           start + "  to  " + end,
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: width*0.043
+                              fontSize: width*0.038
                           ),
                           // style: Theme.of(context).textTheme.subtitle2,
                         ),

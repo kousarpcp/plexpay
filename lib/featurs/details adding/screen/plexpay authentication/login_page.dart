@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_locales/flutter_locales.dart';
 import 'package:plexpay/Const/colorConst.dart';
 import 'package:plexpay/Const/imageConst.dart';
@@ -262,11 +263,91 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 gap,
-                InkWell(
-                  onTap: () async {
-
+                // InkWell(
+                //   onTap: () async {
+                //
+                //     if(userController.text.isNotEmpty&&
+                //     passwordController.text.isNotEmpty)
+                //     {
+                //       var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
+                //
+                //       print("rspppp");
+                //       print(rsp);
+                //       if (rsp['success'] == true) {
+                //         var id = await sharedPrefrence("userId", rsp['user_id']);
+                //         var token = await sharedPrefrence("token", rsp['access_token']);
+                //
+                //         var name = await sharedPrefrence(shopname, rsp['name']);
+                //         username=name;
+                //         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+                //         showToast("Login Success!");
+                //         print("wrking");
+                //         print(rsp['user_id']);
+                //         print(rsp['access_token']);
+                //
+                //       } else {
+                //         showToast("Invalid Credentials!");
+                //         setState(() {
+                //         });
+                //       }
+                //
+                //
+                //
+                //     }else{
+                //       if(userController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your Username',
+                //         );
+                //         return;
+                //       }
+                //       if(passwordController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your password',
+                //         );
+                //         return;
+                //       }
+                //     }
+                //   },
+                //   child: Container(
+                //     width: width*0.55,
+                //     height: height*0.07,
+                //     decoration: BoxDecoration(
+                //       borderRadius:  BorderRadius.circular(width*0.022),
+                //       color: colorConst.blue
+                //     ),
+                //     child: Center(child: Text("Login",style: TextStyle(
+                //         color: Colors.white,fontSize: width*0.02
+                //     ),)),
+                //   ),
+                // ),
+                AnimatedButton(
+                  width: width*0.55,
+                  height: height*0.07,
+                  borderRadius: width*0.022,
+                  text: "Login",
+                  backgroundColor: colorConst.blue,
+                  animationDuration: Duration(seconds: 1),
+                  textStyle: TextStyle(
+                      fontSize: width*0.02,
+                      color: Colors.white
+                  ),
+                  selectedText: "Please wait...",
+                  selectedBackgroundColor: Colors.white,
+                  selectedTextColor: colorConst.blue,
+                  transitionType: TransitionType.CENTER_LR_OUT,
+                  onPress: () async {
                     if(userController.text.isNotEmpty&&
-                    passwordController.text.isNotEmpty)
+                        passwordController.text.isNotEmpty)
                     {
                       var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
 
@@ -317,17 +398,6 @@ class _LoginState extends State<Login> {
                       }
                     }
                   },
-                  child: Container(
-                    width: width*0.55,
-                    height: height*0.07,
-                    decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.circular(width*0.022),
-                      color: colorConst.blue
-                    ),
-                    child: Center(child: Text("Login",style: TextStyle(
-                        color: Colors.white,fontSize: width*0.02
-                    ),)),
-                  ),
                 ),
                 SizedBox(
                   height: height*0.02,
@@ -442,7 +512,7 @@ class _LoginState extends State<Login> {
                             fillColor: Colors.blueGrey.shade50,
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.red,
+                                  color: colorConst.blue,
                                   strokeAlign: width*0.01
                                 ),
                                 borderRadius: BorderRadius.circular(width*0.03)
@@ -512,7 +582,7 @@ class _LoginState extends State<Login> {
                             filled: true,
                             fillColor: Colors.blueGrey.shade50,
                             border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
+                                borderSide: BorderSide(color: colorConst.blue),
                                 borderRadius: BorderRadius.circular(width*0.03)
                             ),
                           ),
@@ -563,72 +633,140 @@ class _LoginState extends State<Login> {
                   ]),
                 ),
                 gap,
-                InkWell(
-                  onTap: () async {
-
-                    if(userController.text.isNotEmpty&&
-                    passwordController.text.isNotEmpty)
-                    {
-                      var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
-
-                      print("rspppp");
-                      print(rsp);
-                      if (rsp['success'] == true) {
-                        var id = await sharedPrefrence("userId", rsp['user_id']);
-                        var token = await sharedPrefrence("token", rsp['access_token']);
-
-                        var name = await sharedPrefrence(shopname, rsp['name']);
-                        username=name;
-                        Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
-                        showToast("Login Success!");
-                        print("wrking");
-                        print(rsp['user_id']);
-                        print(rsp['access_token']);
-
-                      } else {
-                        showToast("Invalid Credentials!");
-                        setState(() {
-                        });
-                      }
-
-
-
-                    }else{
-                      if(userController.text ==""){
-                        QuickAlert.show(
-                          barrierDismissible: false,
-                          confirmBtnColor: Colors.red.shade600,
-                          context: context,
-                          type: QuickAlertType.error,
-                          title: 'Oops...',
-                          text: 'Sorry, please Enter your Username',
-                        );
-                        return;
-                      }
-                      if(passwordController.text ==""){
-                        QuickAlert.show(
-                          barrierDismissible: false,
-                          confirmBtnColor: Colors.red.shade600,
-                          context: context,
-                          type: QuickAlertType.error,
-                          title: 'Oops...',
-                          text: 'Sorry, please Enter your password',
-                        );
-                        return;
-                      }
-                    }
-                  },
-                  child: Container(
+                // InkWell(
+                //   onTap: () async {
+                //
+                //     if(userController.text.isNotEmpty&&
+                //     passwordController.text.isNotEmpty)
+                //     {
+                //       var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
+                //
+                //       print("rspppp");
+                //       print(rsp);
+                //       if (rsp['success'] == true) {
+                //         var id = await sharedPrefrence("userId", rsp['user_id']);
+                //         var token = await sharedPrefrence("token", rsp['access_token']);
+                //
+                //         var name = await sharedPrefrence(shopname, rsp['name']);
+                //         username=name;
+                //         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+                //         showToast("Login Success!");
+                //         print("wrking");
+                //         print(rsp['user_id']);
+                //         print(rsp['access_token']);
+                //
+                //       } else {
+                //         showToast("Invalid Credentials!");
+                //         setState(() {
+                //         });
+                //       }
+                //
+                //
+                //
+                //     }else{
+                //       if(userController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your Username',
+                //         );
+                //         return;
+                //       }
+                //       if(passwordController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your password',
+                //         );
+                //         return;
+                //       }
+                //     }
+                //   },
+                //   child: Container(
+                //     width: width*0.8,
+                //     height: height*0.065,
+                //     decoration: BoxDecoration(
+                //       borderRadius:  BorderRadius.circular(width*0.1),
+                //       color: colorConst.blue
+                //     ),
+                //     child: Center(child: Text("Login",style: TextStyle(
+                //         color: Colors.white
+                //     ),)),
+                //   ),
+                // ),
+                AnimatedButton(
                     width: width*0.8,
                     height: height*0.065,
-                    decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.circular(width*0.1),
-                      color: colorConst.blue
+                    borderRadius: width*0.07,
+                    text: "Login",
+                    backgroundColor: colorConst.blue,
+                    animationDuration: Duration(seconds: 1),
+                    textStyle: TextStyle(
+                      color: Colors.white
                     ),
-                    child: Center(child: Text("Login",style: TextStyle(
-                        color: Colors.white
-                    ),)),
-                  ),
+                    selectedText: "Please wait...",
+                    selectedBackgroundColor: Colors.white,
+                    selectedTextColor: colorConst.blue,
+                    transitionType: TransitionType.CENTER_LR_OUT,
+                    onPress: () async {
+                      if(userController.text.isNotEmpty&&
+                          passwordController.text.isNotEmpty)
+                      {
+                        var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
+
+                        print("rspppp");
+                        print(rsp);
+                        if (rsp['success'] == true) {
+                          var id = await sharedPrefrence("userId", rsp['user_id']);
+                          var token = await sharedPrefrence("token", rsp['access_token']);
+
+                          var name = await sharedPrefrence(shopname, rsp['name']);
+                          username=name;
+                          Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+                          showToast("Login Success!");
+                          print("wrking");
+                          print(rsp['user_id']);
+                          print(rsp['access_token']);
+
+                        } else {
+                          showToast("Invalid Credentials!");
+                          setState(() {
+                          });
+                        }
+
+
+
+                      }else{
+                        if(userController.text ==""){
+                          QuickAlert.show(
+                            barrierDismissible: false,
+                            confirmBtnColor: Colors.red.shade600,
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Oops...',
+                            text: 'Sorry, please Enter your Username',
+                          );
+                          return;
+                        }
+                        if(passwordController.text ==""){
+                          QuickAlert.show(
+                            barrierDismissible: false,
+                            confirmBtnColor: Colors.red.shade600,
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Oops...',
+                            text: 'Sorry, please Enter your password',
+                          );
+                          return;
+                        }
+                      }
+                    },
                 ),
                 SizedBox(
                   height: height*0.032,
@@ -641,7 +779,7 @@ class _LoginState extends State<Login> {
                 ),
                 InkWell(
                   onTap: () {
-                    // Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
+                    Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
                   },
                   child: Container(
                     width: width*0.8,

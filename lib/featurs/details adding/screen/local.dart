@@ -172,11 +172,12 @@ class _localState extends State<local> {
     }
     if(items[index]["type"]=="DTH"){
       Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
-        code: items[index]['ProviderCode'].toString(),
-        name: items[index]['subcategory'].toString(),
-        iso: items[index]['CountryIso'].toString(),
-        dash: items[index]['dash'].toString(),
-        image: items[index]['sub_cat_logo'].toString(),
+          name: items[index]["subcategory"],
+          image: items[index]["sub_cat_logo"],
+          code:items[index]["ProviderCode"],
+          voucher:"2",
+          dash: items[index]["dash"],
+          iso:items[index]["CountryIso"]!=null?items[index]["CountryIso"]:""
       ),));
     }
     if(items[index]["type"]=="Gift Card"){
@@ -1065,11 +1066,12 @@ class _localState extends State<local> {
                     InkWell(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
-                          code: dthCategory[index]['ProviderCode'].toString(),
-                          name: dthCategory[index]['subcategory'].toString(),
-                          iso: dthCategory[index]['CountryIso'].toString(),
-                          dash: dthCategory[index]['dash'].toString(),
-                          image: dthCategory[index]['sub_cat_logo'].toString(),
+                            name: dthCategory[index]["subcategory"],
+                            image: dthCategory[index]["sub_cat_logo"],
+                            code:dthCategory[index]["ProviderCode"],
+                            voucher:"2",
+                            dash: dthCategory[index]["dash"],
+                            iso:dthCategory[index]["CountryIso"]!=null?dthCategory[index]["CountryIso"]:""
                         ),));
                       },
                       child: Container(
@@ -1124,9 +1126,9 @@ class _localState extends State<local> {
                             name: dthCategory[index]["subcategory"],
                             image: dthCategory[index]["sub_cat_logo"],
                             code:dthCategory[index]["ProviderCode"],
-                            voucher:"1",
+                            voucher:"2",
                             dash: dthCategory[index]["dash"],
-                            iso:dthCategory[index]["CountryIso"]!=null?giftCategory[index]["CountryIso"]:""
+                            iso:dthCategory[index]["CountryIso"]!=null?dthCategory[index]["CountryIso"]:""
                         )));
                       },
                       child: Container(
