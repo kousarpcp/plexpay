@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plexpay/Const/colorConst.dart';
+import 'package:plexpay/Const/imageConst.dart';
 
 import '../../../main.dart';
 
@@ -22,6 +24,11 @@ class _purchaseState extends State<purchase> {
   TextEditingController PurchaseVATController=TextEditingController();
   TextEditingController SellCostController=TextEditingController();
   TextEditingController VATController=TextEditingController();
+  TextEditingController RateController=TextEditingController();
+  TextEditingController InclusiveRateController=TextEditingController();
+  TextEditingController InclusiveVATAmountController=TextEditingController();
+
+  String rate = "0.00";
 
 
   var start = DateTime.now().year.toString() +
@@ -84,9 +91,66 @@ class _purchaseState extends State<purchase> {
     "Kg",
   ];
 
+  var bikes=[
+    "unicorn",
+    "pulsar",
+    "activa",
+    "MT",
+    "HIMALAYAN",
+  ];
+
   TextEditingController yearController = TextEditingController();
   TextEditingController monthController = TextEditingController();
   TextEditingController dayController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Add listeners to calculate rate whenever buy cost or VAT changes
+    BuyCostController.addListener(calculateRate);
+    PurchaseVATController.addListener(calculateRate);
+
+    // Add listeners to calculate inclusive rate and VAT amount whenever sell cost or VAT changes
+    SellCostController.addListener(calculateInclusiveValues);
+    VATController.addListener(calculateInclusiveValues);
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers when not needed
+    BuyCostController.dispose();
+    PurchaseVATController.dispose();
+    RateController.dispose();
+
+    // Dispose controllers when not needed
+    SellCostController.dispose();
+    VATController.dispose();
+    InclusiveRateController.dispose();
+    InclusiveVATAmountController.dispose();
+    super.dispose();
+  }
+
+  void calculateRate() {
+    double buyCost = double.tryParse(BuyCostController.text) ?? 0;
+    double purchaseVat = double.tryParse(PurchaseVATController.text) ?? 0;
+    double rate = buyCost + (buyCost * purchaseVat / 100);
+    RateController.text = rate.toStringAsFixed(2); // Display rate with 2 decimal places
+  }
+
+  void calculateInclusiveValues() {
+    double sellCost = double.tryParse(SellCostController.text) ?? 0;
+    double vatPercent = double.tryParse(VATController.text) ?? 0;
+
+    // Calculate Inclusive Rate
+    double inclusiveRate = sellCost / (1 + (vatPercent / 100));
+    InclusiveRateController.text = inclusiveRate.toStringAsFixed(2);
+
+    // Calculate Inclusive VAT Amount
+    double inclusiveVATAmount = sellCost - inclusiveRate;
+    InclusiveVATAmountController.text = inclusiveVATAmount.toStringAsFixed(2);
+  }
+
 
 
   @override
@@ -180,7 +244,7 @@ class _purchaseState extends State<purchase> {
                       ),
                       child: TextFormField(
                         controller: monthController,
-                        keyboardType:TextInputType.number ,
+                        keyboardType:TextInputType.number,
                         textInputAction: TextInputAction.next,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -469,39 +533,51 @@ class _purchaseState extends State<purchase> {
                                     ),
                                     Container(
                                       height: height*0.07,
-                                      width: width*0.9,
+                                      width: width*0.88,
                                         decoration: BoxDecoration(
                                           color: colorConst.lightgrey1,
                                           border: Border.all(width: width*0.001,color: Colors.black45),
-                                          borderRadius: BorderRadius.circular(width*0.01),
+                                          // borderRadius: BorderRadius.circular(width*0.01),
                                         ),
-                                      child:Material(
-                                        child: DropdownButton<String>(
-                                          dropdownColor: Colors.white,
-                                          isExpanded: true,
-                                          hint:  Text("Select The Items"), // Use const here
-                                          icon:  Row(
-                                            children: [
-                                              Icon(Icons.keyboard_arrow_down_outlined),
-                                            ],
+                                      child:GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            dropdownValue = "Numbers"; // Set any item you want to display initially
+                                          });
+                                        },
+                                        child: AnimatedContainer(
+                                          duration: Duration(milliseconds: 250), // Adjust this to change animation speed
+                                          curve: Curves.easeInOut,
+                                          child: Material(
+                                            child: DropdownButton<String>(
+                                              dropdownColor: Colors.white,
+                                              focusNode: FocusScopeNode(),
+                                              isExpanded: true,
+                                              padding: EdgeInsets.only(left: width*0.01,right: width*0.01),
+                                              hint:  Text("Select The Items"),// Use const here
+                                              icon:  Row(
+                                                children: [
+                                                  Icon(Icons.keyboard_arrow_down_outlined),
+                                                ],
+                                              ),
+                                              borderRadius: BorderRadius.circular(width*0.02),
+                                              underline: SizedBox(),// Use const here
+                                              value: dropdownValue,
+                                              items: product.map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  dropdownValue = newValue;  // Simply set to the selected value
+                                                });
+                                              },
+                                            ),
                                           ),
-                                          borderRadius: BorderRadius.circular(width*0.02),
-                                          underline: SizedBox(),// Use const here
-                                          value: dropdownValue,
-                                          items: product.map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              dropdownValue = newValue;  // Simply set to the selected value
-                                            });
-                                          },
                                         ),
                                       )
-
 
 
 
@@ -537,8 +613,11 @@ class _purchaseState extends State<purchase> {
                                             child: TextFormField(
                                               controller: BuyCostController,
                                               autovalidateMode: AutovalidateMode.onUserInteraction,
-                                              keyboardType: TextInputType.text,
+                                              keyboardType: TextInputType.number,
                                               textInputAction: TextInputAction.next,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(5)
+                                              ],
                                               decoration: InputDecoration(
                                                   contentPadding: EdgeInsets.only(bottom: width*0.07,left: width*0.01),
                                                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
@@ -574,8 +653,11 @@ class _purchaseState extends State<purchase> {
                                             child: TextFormField(
                                               controller: PurchaseVATController,
                                               autovalidateMode: AutovalidateMode.onUserInteraction,
-                                              keyboardType: TextInputType.text,
+                                              keyboardType: TextInputType.number,
                                               textInputAction: TextInputAction.next,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(5)
+                                              ],
                                               decoration: InputDecoration(
                                                   contentPadding: EdgeInsets.only(bottom: width*0.07,left: width*0.01),
                                                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
@@ -606,6 +688,26 @@ class _purchaseState extends State<purchase> {
                                             border: Border.all(width: width*0.001,color: Colors.black45),
                                             borderRadius: BorderRadius.circular(width*0.01),
                                           ),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: TextFormField(
+                                              controller: RateController,
+                                                readOnly: true,
+                                                decoration: InputDecoration(
+                                                  contentPadding: EdgeInsets.only(bottom: width * 0.07, left: width * 0.01),
+                                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
+                                                  focusColor: colorConst.lightgrey1,
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(width * 0.01),
+                                                    borderSide: BorderSide(color: colorConst.lightgrey1),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(width * 0.01),
+                                                    borderSide: BorderSide(color: colorConst.lightgrey1),
+                                                  ),
+                                                ),
+                                            ),
+                                          )
 
                                         ),
                                       ],
@@ -635,8 +737,11 @@ class _purchaseState extends State<purchase> {
                                             child: TextFormField(
                                               controller: SellCostController,
                                               autovalidateMode: AutovalidateMode.onUserInteraction,
-                                              keyboardType: TextInputType.multiline,  // Allow multiline input
-                                              textInputAction: TextInputAction.newline,  // Pressing enter creates a new line
+                                              keyboardType: TextInputType.number,  // Allow multiline input
+                                              textInputAction: TextInputAction.newline,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(5)
+                                              ],// Pressing enter creates a new line
                                               maxLines: null,  // Allows the text to grow to multiple lines
                                               decoration: InputDecoration(
                                                   contentPadding: EdgeInsets.only(left: width*0.01),
@@ -673,8 +778,11 @@ class _purchaseState extends State<purchase> {
                                             child: TextFormField(
                                               controller: VATController,
                                               autovalidateMode: AutovalidateMode.onUserInteraction,
-                                              keyboardType: TextInputType.multiline,  // Allow multiline input
-                                              textInputAction: TextInputAction.newline,  // Pressing enter creates a new line
+                                              keyboardType: TextInputType.number,  // Allow multiline input
+                                              textInputAction: TextInputAction.newline,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(5)
+                                              ],// Pressing en// Pressing enter creates a new line
                                               maxLines: null,  // Allows the text to grow to multiple lines
                                               decoration: InputDecoration(
                                                   contentPadding: EdgeInsets.only(left: width*0.01),
@@ -717,6 +825,25 @@ class _purchaseState extends State<purchase> {
                                             border: Border.all(width: width*0.001,color: Colors.black45),
                                             borderRadius: BorderRadius.circular(width*0.01),
                                           ),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: TextFormField(
+                                              controller: InclusiveRateController,
+                                              readOnly: true,
+                                              decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.only(left: width * 0.01),
+                                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(width * 0.01),
+                                                  borderSide: BorderSide(color: Colors.grey[200]!),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(width * 0.01),
+                                                  borderSide: BorderSide(color: Colors.grey[200]!),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         SizedBox(
                                           width: width*0.024,
@@ -728,6 +855,25 @@ class _purchaseState extends State<purchase> {
                                             color: colorConst.lightgrey1,
                                             border: Border.all(width: width*0.001,color: Colors.black45),
                                             borderRadius: BorderRadius.circular(width*0.01),
+                                          ),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: TextFormField(
+                                              controller: InclusiveVATAmountController,
+                                                readOnly: true,
+                                                decoration: InputDecoration(
+                                                  contentPadding: EdgeInsets.only(left: width * 0.01),
+                                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(width * 0.01),
+                                                    borderSide: BorderSide(color: Colors.grey[200]!),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(width * 0.01),
+                                                    borderSide: BorderSide(color: Colors.grey[200]!),
+                                                  ),
+                                                ),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -832,7 +978,7 @@ class _purchaseState extends State<purchase> {
                             keyboardType: TextInputType.text,
                             textInputAction: TextInputAction.next,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
-        
+
                             // autocorrect: true,
                             // cursorColor: colorConst.blue,
                             decoration: InputDecoration(
@@ -923,54 +1069,6 @@ class _purchaseState extends State<purchase> {
                           ),
                           Row(
                             children: [
-                              Text("Product Description"),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: height*0.1,
-                                width: width*0.9,
-                                decoration: BoxDecoration(
-                                  color: colorConst.lightgrey1,
-                                  border: Border.all(width: width*0.001,color: Colors.black45),
-                                  borderRadius: BorderRadius.circular(width*0.01),
-                                ),
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: TextFormField(
-                                    controller: DescriptionController,
-                                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    keyboardType: TextInputType.multiline,  // Allow multiline input
-                                    textInputAction: TextInputAction.newline,  // Pressing enter creates a new line
-                                    maxLines: null,  // Allows the text to grow to multiple lines
-                                    decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(left: width*0.01),
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
-                                        focusColor: colorConst.lightgrey1,
-                                        enabledBorder: OutlineInputBorder(borderRadius:BorderRadius.circular(width*0.01),
-                                            borderSide: BorderSide(
-                                                color: colorConst.lightgrey1
-                                            )
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(width*0.01),
-                                            borderSide: BorderSide(
-                                                color: colorConst.lightgrey1
-                                            )
-                                        )
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: height*0.02,
-                          ),
-                          Row(
-                            children: [
                               Text("Unit"),
                             ],
                           ),
@@ -995,9 +1093,9 @@ class _purchaseState extends State<purchase> {
                               SizedBox(
                                 width: width*0.122,
                               ),
-                              Text("Purchase VAT"),
+                              Text("Mode"),
                               SizedBox(
-                                width: width*0.097,
+                                width: width*0.146,
                               ),
                               Text("Rate"),
                             ],
@@ -1017,8 +1115,11 @@ class _purchaseState extends State<purchase> {
                                   child: TextFormField(
                                     controller: BuyCostController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.next,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(5)
+                                    ],
                                     decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(bottom: width*0.07,left: width*0.01),
                                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
@@ -1054,8 +1155,11 @@ class _purchaseState extends State<purchase> {
                                   child: TextFormField(
                                     controller: PurchaseVATController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.next,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(5)
+                                    ],
                                     decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(bottom: width*0.07,left: width*0.01),
                                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
@@ -1095,8 +1199,8 @@ class _purchaseState extends State<purchase> {
                           ),
                           Row(
                             children: [
-                              Text("Sell Cost"),
-                              SizedBox(width: width*0.222,),
+                              Text("Selling Cost"),
+                              SizedBox(width: width*0.21,),
                               Text("VAT"),
                             ],
                           ),
@@ -1115,8 +1219,11 @@ class _purchaseState extends State<purchase> {
                                   child: TextFormField(
                                     controller: SellCostController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    keyboardType: TextInputType.multiline,  // Allow multiline input
-                                    textInputAction: TextInputAction.newline,  // Pressing enter creates a new line
+                                    keyboardType: TextInputType.number,  // Allow multiline input
+                                    textInputAction: TextInputAction.newline,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(5)
+                                    ],// Pressing enter creates a new line
                                     maxLines: null,  // Allows the text to grow to multiple lines
                                     decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(left: width*0.01),
@@ -1153,8 +1260,11 @@ class _purchaseState extends State<purchase> {
                                   child: TextFormField(
                                     controller: VATController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    keyboardType: TextInputType.multiline,  // Allow multiline input
-                                    textInputAction: TextInputAction.newline,  // Pressing enter creates a new line
+                                    keyboardType: TextInputType.number,  // Allow multiline input
+                                    textInputAction: TextInputAction.newline,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(5)
+                                    ],// Pressing enter creates a new line
                                     maxLines: null,  // Allows the text to grow to multiple lines
                                     decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(left: width*0.01),
@@ -1182,9 +1292,9 @@ class _purchaseState extends State<purchase> {
                           ),
                           Row(
                             children: [
-                              Text("Inclusive Rate"),
-                              SizedBox(width: width*0.194,),
-                              Text("Inclusive VAT Amount"),
+                              Text("Total( Without VAT)"),
+                              SizedBox(width: width*0.158,),
+                              Text("Total( With VAT)	"),
                             ],
                           ),
                           Row(
@@ -1214,20 +1324,6 @@ class _purchaseState extends State<purchase> {
                           ),
                           SizedBox(
                             height: height*0.02,
-                          ),
-                          Row(
-                            children: [
-                              Text("Category")
-                            ],
-                          ),
-                          Container(
-                            height: height*0.07,
-                            width: width*1,
-                            decoration: BoxDecoration(
-                              color: colorConst.lightgrey1,
-                              border: Border.all(width: width*0.001,color: Colors.black45),
-                              borderRadius: BorderRadius.circular(width*0.01),
-                            ),
                           ),
                           SizedBox(
                             height: height*0.04,
@@ -1274,6 +1370,283 @@ class _purchaseState extends State<purchase> {
                 ),
               ),
             ),
+            SizedBox(
+              height: height*0.05,
+            ),
+            Container(
+              height: height * 0.05,
+              width: width * 0.823,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: width*0.01,
+                  ),
+                  SvgPicture.asset(ImageConst.tagbill,width: width*0.017,),
+                  SizedBox(width: width*0.01,),
+                  Text("Bill",style: TextStyle(fontSize: 15),)
+                ],
+              ),
+              color: colorConst.lightgrey1,
+              // child:,
+            ),
+            SizedBox(
+              height: height*0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.24,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Center(child: Text("Product",style: TextStyle(fontSize: width*0.016,fontWeight: FontWeight.w600),)),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.05,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Padding(
+                    padding:  EdgeInsets.only(left: width*0.01),
+                    child: Center(child: Text("Buy Cost",style: TextStyle(fontSize: width*0.014,fontWeight: FontWeight.w600),)),
+                  ),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.07,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Center(child: Text("VAT(%)",style: TextStyle(fontSize: width*0.014,fontWeight: FontWeight.w600),)),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.05,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Center(child: Text("Rate",style: TextStyle(fontSize: width*0.014,fontWeight: FontWeight.w600),)),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.07,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Padding(
+                    padding:  EdgeInsets.only(left: width*0.012),
+                    child: Center(child: Text("Selling Cost",style: TextStyle(fontSize: width*0.014,fontWeight: FontWeight.w600),)),
+                  ),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.12,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Center(child: Text("Mode",style: TextStyle(fontSize: width*0.0145,fontWeight: FontWeight.w600),)),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.05,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Center(child: Text("Unit",style: TextStyle(fontSize: width*0.015,fontWeight: FontWeight.w600),)),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.09,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Padding(
+                    padding:  EdgeInsets.only(left: width*0.01),
+                    child: Center(child: Text("Total( Without VAT)",style: TextStyle(fontSize: width*0.0147,fontWeight: FontWeight.w600),)),
+                  ),
+                ),
+                SizedBox(
+                  width: width*0.002,
+                ),
+                Container(
+                  height: height * 0.08,
+                  width: width * 0.07,
+                  decoration: BoxDecoration(
+                    color: colorConst.lightgrey1,
+                    border: Border.all(width: width*0.001,color: Colors.black45),
+                  ),
+                  child:Padding(
+                    padding:  EdgeInsets.only(left: width*0.002),
+                    child: Padding(
+                      padding:  EdgeInsets.all(width*0.001),
+                      child: Center(child: Text("Total( With VAT)	",style: TextStyle(fontSize: width*0.014,fontWeight: FontWeight.w600),)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: height*0.01,
+            ),
+        ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.24,
+                      decoration: BoxDecoration(
+                      color: colorConst.lightgrey1,
+                      border: Border.all(width: width*0.001,color: Colors.black45),
+                    ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.05,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.07,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.05,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.07,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.12,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.05,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.09,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                    SizedBox(
+                      width: width*0.002,
+                    ),
+                    Container(
+                      height: height * 0.05,
+                      width: width * 0.07,
+                      decoration: BoxDecoration(
+                        color: colorConst.lightgrey1,
+                        border: Border.all(width: width*0.001,color: Colors.black45),
+                      ),
+                      // child:,
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: height * 0.01,
+            );
+          },
+          itemCount: 7,
+        ),
             SizedBox(
               height: height*0.03,
             )

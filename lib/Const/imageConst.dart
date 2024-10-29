@@ -65,4 +65,5 @@
 
    /// Svg
    static const back = "assets/icons/back.svg";
+   static const tagbill = "assets/icons/tags.svg";
  }
