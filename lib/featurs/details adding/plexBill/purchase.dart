@@ -15,11 +15,10 @@ class purchase extends StatefulWidget {
 }
 
 class _purchaseState extends State<purchase> {
-  TextEditingController nameController=TextEditingController();
   TextEditingController numController=TextEditingController();
   TextEditingController supplierController=TextEditingController();
   TextEditingController numberController=TextEditingController();
-  TextEditingController ProductController=TextEditingController();
+  TextEditingController productController=TextEditingController();
   TextEditingController DescriptionController=TextEditingController();
   TextEditingController BuyCostController=TextEditingController();
   TextEditingController PurchaseVATController=TextEditingController();
@@ -28,19 +27,8 @@ class _purchaseState extends State<purchase> {
   TextEditingController RateController=TextEditingController();
   TextEditingController InclusiveRateController=TextEditingController();
   TextEditingController InclusiveVATAmountController=TextEditingController();
-  TextEditingController CategoryController=TextEditingController();
-
-  // TextEditingController productController=TextEditingController();
-  TextEditingController unitController=TextEditingController();
-  TextEditingController buycostController=TextEditingController();
-  TextEditingController rateController=TextEditingController();
-  TextEditingController sellingcostController=TextEditingController();
-  TextEditingController vatController=TextEditingController();
-  TextEditingController totalController=TextEditingController();
-  TextEditingController totalwithvatController=TextEditingController();
 
   String rate = "0.00";
-
 
 
   var start = DateTime.now().year.toString() +
@@ -96,7 +84,6 @@ class _purchaseState extends State<purchase> {
     }
   }
   String? dropdownValue= "Select Unit";
-  String? dropdownValue1= "Select Category";
 
   List<String> product=[
     "Select Unit",
@@ -104,42 +91,21 @@ class _purchaseState extends State<purchase> {
     "Kg",
   ];
 
-  var category=[
-    "Select Category",
-    "Food",
-  ];
-
-  var mode=[
-    "Select Mode",
-    "Quantity",
-    "Box",
-    "Dozen",
+  var bikes=[
+    "unicorn",
+    "pulsar",
+    "activa",
+    "MT",
+    "HIMALAYAN",
   ];
 
   TextEditingController yearController = TextEditingController();
   TextEditingController monthController = TextEditingController();
   TextEditingController dayController = TextEditingController();
 
-  void _updateRate() {
-    final buyCost = double.tryParse(buycostController.text) ?? 0.0;
-    final vat = double.tryParse(vatController.text) ?? 0.0;
-
-    // Calculate rate
-    final rate = buyCost + (buyCost * vat / 100);
-
-    // Update rateController text
-    rateController.text = rate.toStringAsFixed(2); // Adjust decimal places as needed
-  }
-
-
   @override
   void initState() {
     super.initState();
-
-    // Add listeners to calculate the rate whenever buy cost or VAT changes
-    buycostController.addListener(_updateRate);
-    vatController.addListener(_updateRate);
-
 
     // Add listeners to calculate rate whenever buy cost or VAT changes
     BuyCostController.addListener(calculateRate);
@@ -149,48 +115,21 @@ class _purchaseState extends State<purchase> {
     SellCostController.addListener(calculateInclusiveValues);
     VATController.addListener(calculateInclusiveValues);
   }
-  final ValueNotifier<String?> dropdownNotifier = ValueNotifier<String?>(null);
-  final ValueNotifier<String?> dropdownNotifier1 = ValueNotifier<String?>(null);
 
   @override
-
   void dispose() {
-    nameController.dispose();
-    dropdownNotifier.dispose();
-    CategoryController.dispose();
-    dropdownNotifier1.dispose();
-    buycostController.dispose();
-    vatController.dispose();
-    rateController.dispose();
+    // Dispose controllers when not needed
+    BuyCostController.dispose();
+    PurchaseVATController.dispose();
+    RateController.dispose();
 
+    // Dispose controllers when not needed
+    SellCostController.dispose();
+    VATController.dispose();
+    InclusiveRateController.dispose();
+    InclusiveVATAmountController.dispose();
     super.dispose();
   }
-
-  // void dispose() {
-  //   // Dispose controllers when not needed
-  //   BuyCostController.dispose();
-  //   PurchaseVATController.dispose();
-  //   RateController.dispose();
-  //
-  //   // Dispose controllers when not needed
-  //   SellCostController.dispose();
-  //   VATController.dispose();
-  //   InclusiveRateController.dispose();
-  //   InclusiveVATAmountController.dispose();
-  //   numController.dispose();
-  //   supplierController.dispose();
-  //   numberController.dispose();
-  //   productController.dispose();
-  //   DescriptionController.dispose();
-  //   BuyCostController.dispose();
-  //   PurchaseVATController.dispose();
-  //   SellCostController.dispose();
-  //   VATController.dispose();
-  //   RateController.dispose();
-  //   InclusiveRateController.dispose();
-  //   InclusiveVATAmountController.dispose();
-  //   super.dispose();
-  // }
 
   void calculateRate() {
     double buyCost = double.tryParse(BuyCostController.text) ?? 0;
@@ -211,16 +150,9 @@ class _purchaseState extends State<purchase> {
     double inclusiveVATAmount = sellCost - inclusiveRate;
     InclusiveVATAmountController.text = inclusiveVATAmount.toStringAsFixed(2);
   }
-  List<dynamic> favourites = [];
-// Define a map to store data
 
 
 
-
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    favourites.clear();  // Clear the list each time the sheet is opened
-  }
   @override
   Widget build(BuildContext context) {
     return MediaQuery.of(context).size.width > 650?
@@ -520,7 +452,7 @@ class _purchaseState extends State<purchase> {
                                       child: Material(
                                         color: Colors.transparent,
                                         child: TextFormField(
-                                          controller: ProductController,
+                                          controller: productController,
                                           autovalidateMode: AutovalidateMode.onUserInteraction,
                                           keyboardType: TextInputType.text,
                                           textInputAction: TextInputAction.next,
@@ -538,8 +470,7 @@ class _purchaseState extends State<purchase> {
                                                   borderSide: BorderSide(
                                                       color: colorConst.lightgrey1
                                                   )
-                                              ),
-
+                                              )
                                           ),
                                         ),
                                       ),
@@ -603,82 +534,53 @@ class _purchaseState extends State<purchase> {
                                     Container(
                                       height: height*0.07,
                                       width: width*0.88,
-                                      child: Material(
-                                        child: TextFormField(
-                                          controller: nameController,
-                                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                                          textInputAction: TextInputAction.next,
-                                          keyboardType: TextInputType.text,
-                                          style: TextStyle(
-                                              fontSize: width*0.016, fontWeight: FontWeight.w500),
-                                          decoration: InputDecoration(
-                                              suffixIcon: Container(
-                                                height: width * 0.012,
-                                                width: width * 0.12,
-
-                                                child:ValueListenableBuilder<String?>(
-                              valueListenable: dropdownNotifier,
-                              builder: (context, value, child) {
-                                return  DropdownButton(
-                                    dropdownColor: Colors.white,
-                                    isExpanded: true,
-                                    // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
-
-                                    icon: Padding(
-                                      padding:  EdgeInsets.only(left: width*0.065),
-                                      child: Row(
-                                        children: [
-                                          Center(
-                                              child: Icon(
-                                                Icons
-                                                    .keyboard_arrow_down_outlined,
-                                              )),
-                                          SizedBox(
-                                            width: width * 0.03,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    underline: SizedBox(),
-                                    value: dropdownValue,
-                                    items: product
-                                        .map<DropdownMenuItem<String>>(
-                                            (String? value) {
-                                          return DropdownMenuItem(
-                                            child: Center(
-                                                child: Text(
-                                                  value!,
-                                                  style: TextStyle(
-                                                    fontSize: width * 0.016,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                )),
-                                            value: value,
-                                          );
-                                        }).toList(),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        dropdownNotifier.value = newValue;
-                                        nameController.text = newValue ?? '';
-                                      });
-                                    }
-                                );
-                              }
-                              )
-
-
-                                              ),
-                                              hintText: "Select Unit",
-                                              contentPadding: EdgeInsets.only(bottom:height * 0.028,left: width*0.014),
-                                              hintStyle: TextStyle(
-                                                  fontSize: width * 0.016,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(width * 0.01))),
+                                        decoration: BoxDecoration(
+                                          color: colorConst.lightgrey1,
+                                          border: Border.all(width: width*0.001,color: Colors.black45),
+                                          // borderRadius: BorderRadius.circular(width*0.01),
                                         ),
-                                      ),
+                                      child:GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            dropdownValue = "Numbers"; // Set any item you want to display initially
+                                          });
+                                        },
+                                        child: AnimatedContainer(
+                                          duration: Duration(milliseconds: 250), // Adjust this to change animation speed
+                                          curve: Curves.easeInOut,
+                                          child: Material(
+                                            child: DropdownButton<String>(
+                                              dropdownColor: Colors.white,
+                                              focusNode: FocusScopeNode(),
+                                              isExpanded: true,
+                                              padding: EdgeInsets.only(left: width*0.01,right: width*0.01),
+                                              hint:  Text("Select The Items"),// Use const here
+                                              icon:  Row(
+                                                children: [
+                                                  Icon(Icons.keyboard_arrow_down_outlined),
+                                                ],
+                                              ),
+                                              borderRadius: BorderRadius.circular(width*0.02),
+                                              underline: SizedBox(),// Use const here
+                                              value: dropdownValue,
+                                              items: product.map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  dropdownValue = newValue;  // Simply set to the selected value
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      )
+
+
+
                                     ),
                                     SizedBox(
                                       height: height*0.02,
@@ -986,189 +888,28 @@ class _purchaseState extends State<purchase> {
                                     ),
                                     Container(
                                       height: height*0.07,
-                                      width: width*0.88,
-                                      child: Material(
-                                        child: TextFormField(
-                                          controller: CategoryController,
-                                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                                          textInputAction: TextInputAction.next,
-                                          keyboardType: TextInputType.text,
-                                          style: TextStyle(
-                                              fontSize: width*0.016, fontWeight: FontWeight.w500),
-                                          decoration: InputDecoration(
-                                              suffixIcon: Container(
-                                                  height: width * 0.012,
-                                                  width: width * 0.12,
-                                                  child:ValueListenableBuilder<String?>(
-                                                      valueListenable: dropdownNotifier1,
-                                                      builder: (context, value, child) {
-                                                        return  DropdownButton(
-                                                            dropdownColor: Colors.white,
-                                                            isExpanded: true,
-                                                            // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
-
-                                                            icon: Padding(
-                                                              padding:  EdgeInsets.only(left: width*0.065),
-                                                              child: Row(
-                                                                children: [
-                                                                  Center(
-                                                                      child: Icon(
-                                                                        Icons
-                                                                            .keyboard_arrow_down_outlined,
-                                                                      )),
-                                                                  SizedBox(
-                                                                    width: width * 0.03,
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            underline: SizedBox(),
-                                                            value: dropdownValue1,
-                                                            items: category
-                                                                .map<DropdownMenuItem<String>>(
-                                                                    (String? value) {
-                                                                  return DropdownMenuItem(
-                                                                    child: Center(
-                                                                        child: Text(
-                                                                          value!,
-                                                                          style: TextStyle(
-                                                                            fontSize: width * 0.016,
-                                                                            fontWeight: FontWeight.w600,
-                                                                          ),
-                                                                        )),
-                                                                    value: value,
-                                                                  );
-                                                                }).toList(),
-                                                            onChanged: (String? newValue) {
-                                                              setState(() {
-                                                                dropdownNotifier1.value = newValue;
-                                                                CategoryController.text = newValue ?? '';
-                                                              });
-                                                            }
-                                                        );
-                                                      }
-                                                  )
-
-
-                                              ),
-                                              hintText: "Select Category",
-                                              contentPadding: EdgeInsets.only(bottom:height * 0.028,left: width*0.014),
-                                              hintStyle: TextStyle(
-                                                  fontSize: width * 0.016,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(width * 0.01))),
-                                        ),
+                                      width: width*1,
+                                      decoration: BoxDecoration(
+                                        color: colorConst.lightgrey1,
+                                        border: Border.all(width: width*0.001,color: Colors.black45),
+                                        borderRadius: BorderRadius.circular(width*0.01),
                                       ),
                                     ),
                                     SizedBox(
                                       height: height*0.04,
                                     ),
-                                    CupertinoButton(
-                                      onPressed: () {
-
-                                        if (nameController
-                                            .text.isNotEmpty) {
-                                          // Check if the name already exists in the list
-                                          if (!product.contains(
-                                              nameController.text)) {
-                                            setState(() {
-                                              // Add the typed name to the customer list
-                                              product.add(
-                                                  nameController.text);
-                                              // Update the dropdown value with the newly added customer
-                                              dropdownNotifier.value = nameController.text;
-                                              // Clear the text field after adding
-                                              nameController.clear();
-                                            });
-                                          } else {
-                                            // Optional: You can show a message or handle it gracefully if the name is already added
-                                            // ScaffoldMessenger.of(context)
-                                            //     .showSnackBar(SnackBar(
-                                            //   content: Text(
-                                            //       ""),
-                                            // ));
-                                          }
-                                        }
-
-                                        if (CategoryController
-                                            .text.isNotEmpty) {
-                                          // Check if the name already exists in the list
-                                          if (!category.contains(
-                                              CategoryController.text)) {
-                                            setState(() {
-                                              // Add the typed name to the customer list
-                                              category.add(
-                                                  CategoryController.text);
-                                              // Update the dropdown value with the newly added customer
-                                              dropdownNotifier1.value = CategoryController.text;
-                                              // Clear the text field after adding
-                                              CategoryController.clear();
-                                            });
-                                          } else {
-                                            // Optional: You can show a message or handle it gracefully if the name is already added
-                                            // ScaffoldMessenger.of(context)
-                                            //     .showSnackBar(SnackBar(
-                                            //   content: Text(
-                                            //       ""),
-                                            // )
-                                            // );
-                                          }
-                                        }
-
-                                        Map<String, dynamic> storedData = {
-                                          'dropdownValue':  dropdownNotifier.value,
-                                          'product': ProductController.text,
-                                          'description': DescriptionController.text,
-                                          'buyCost': BuyCostController.text,
-                                          'purchaseVAT': PurchaseVATController.text,
-                                          'sellCost': SellCostController.text,
-                                          'vat': VATController.text,
-                                          'rate': RateController.text,
-                                          'inclusiveRate': InclusiveRateController.text,
-                                          'inclusiveVATAmount': InclusiveVATAmountController.text,
-                                          'category': CategoryController.text,
-                                        };
-                                        /// Collect data from controllers and dropdown
-                                        favourites.add(storedData);
-                                         dropdownValue=dropdownNotifier.value;
-
-                                         ProductController.clear;
-                                         DescriptionController.clear;
-                                        BuyCostController.clear;
-                                         PurchaseVATController.clear;
-                                     SellCostController.clear;
-                                         VATController.clear;
-                                         RateController.clear;
-                                         InclusiveRateController.clear;
-                                        InclusiveVATAmountController.clear;
-                                        CategoryController.clear;
-                                        // Navigator.push(context, CupertinoPageRoute(builder: (context) => purchase(),));
-
-                                        // Check for duplicates if necessary, then add new data to favourites
-                                        if (!favourites.contains(storedData)) {
-                                          favourites.add(storedData);
-                                        }
-                                        setState(() {
-
-                                        });
-                                        // Navigator.pop(context);
-                                        print(favourites);
-                                      },
-                                      child: Container(
-                                        height: height*0.07,
-                                        width: width*0.2,
-                                        decoration: BoxDecoration(
-                                          color: colorConst.blue,
-                                          border: Border.all(width: width*0.001,color: Colors.black45),
-                                          borderRadius: BorderRadius.circular(width*0.01),
-                                        ),
-                                          child: Center(child: Text("ADD",style: TextStyle(fontSize: width*0.015,fontWeight: FontWeight.w600,color: CupertinoColors.white),))
+                                    Container(
+                                      height: height*0.07,
+                                      width: width*0.2,
+                                      decoration: BoxDecoration(
+                                        color: colorConst.lightgrey1,
+                                        border: Border.all(width: width*0.001,color: Colors.black45),
+                                        borderRadius: BorderRadius.circular(width*0.01),
                                       ),
-                                    )
-                                  ]
+                                      child: Center(child: Text("ADD",style: TextStyle(fontSize: width*0.015,fontWeight: FontWeight.w600,color: CupertinoColors.black),)),
+                                    ),
+
+                                  ],
                                 ) ,
                                 actions: [],
                               );
@@ -1290,86 +1031,38 @@ class _purchaseState extends State<purchase> {
                             ],
                           ),
                           Container(
-                              height: height*0.07,
-                              width: width*0.9,
-                              decoration: BoxDecoration(
-                                color: colorConst.lightgrey1,
-                                border: Border.all(width: width*0.001,color: Colors.black45),
-                                borderRadius: BorderRadius.circular(width*0.01),
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: TextFormField(
-                                  controller: CategoryController,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                      suffixIcon: Container(
-                                          height: width * 0.012,
-                                          width: width * 0.12,
-                                          child:ValueListenableBuilder<String?>(
-                                              valueListenable: dropdownNotifier1,
-                                              builder: (context, value, child) {
-                                                return  DropdownButton(
-                                                    dropdownColor: Colors.white,
-                                                    isExpanded: true,
-                                                    // hint: Center(child: Text("Select Customer",style: TextStyle(fontSize: width*0.046,fontWeight: FontWeight.w800),)),
-
-                                                    icon: Padding(
-                                                      padding:  EdgeInsets.only(left: width*0.065),
-                                                      child: Row(
-                                                        children: [
-                                                          Center(
-                                                              child: Icon(
-                                                                Icons
-                                                                    .keyboard_arrow_down_outlined,
-                                                              )),
-                                                          SizedBox(
-                                                            width: width * 0.03,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    underline: SizedBox(),
-                                                    value: dropdownValue1,
-                                                    items: category
-                                                        .map<DropdownMenuItem<String>>(
-                                                            (String? value) {
-                                                          return DropdownMenuItem(
-                                                            child: Center(
-                                                                child: Text(
-                                                                  value!,
-                                                                  style: TextStyle(
-                                                                    fontSize: width * 0.016,
-                                                                    fontWeight: FontWeight.w600,
-                                                                  ),
-                                                                )),
-                                                            value: value,
-                                                          );
-                                                        }).toList(),
-                                                    onChanged: (String? newValue) {
-                                                      setState(() {
-                                                        dropdownNotifier1.value = newValue;
-                                                        CategoryController.text = newValue ?? '';
-                                                      });
-                                                    }
-                                                );
-                                              }
-                                          )
-
-
-                                      ),
-                                      hintText: "Select Category",
-                                      contentPadding: EdgeInsets.only(bottom:height * 0.015,left: width*0.014),
-                                      hintStyle: TextStyle(
-                                          fontSize: width * 0.016,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black),
-                                      border: InputBorder.none
-
-                                  ),
+                            height: height*0.07,
+                            width: width*0.9,
+                            decoration: BoxDecoration(
+                              color: colorConst.lightgrey1,
+                              border: Border.all(width: width*0.001,color: Colors.black45),
+                              borderRadius: BorderRadius.circular(width*0.01),
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: TextFormField(
+                                controller: productController,
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                keyboardType: TextInputType.text,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(bottom: width*0.07,left: width*0.01),
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
+                                    focusColor: colorConst.lightgrey1,
+                                    enabledBorder: OutlineInputBorder(borderRadius:BorderRadius.circular(width*0.01),
+                                        borderSide: BorderSide(
+                                            color: colorConst.lightgrey1
+                                        )
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(width*0.01),
+                                        borderSide: BorderSide(
+                                            color: colorConst.lightgrey1
+                                        )
+                                    )
                                 ),
-                              )
-
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: height*0.02,
@@ -1387,26 +1080,7 @@ class _purchaseState extends State<purchase> {
                                 border: Border.all(width: width*0.001,color: Colors.black45),
                                 borderRadius: BorderRadius.circular(width*0.01),
                               ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: TextFormField(
-                                  controller: unitController,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.only(bottom: width * 0.07, left: width * 0.01),
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
-                                    focusColor: colorConst.lightgrey1,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(width * 0.01),
-                                      borderSide: BorderSide(color: colorConst.lightgrey1),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(width * 0.01),
-                                      borderSide: BorderSide(color: colorConst.lightgrey1),
-                                    ),
-                                  ),
-                                ),
-                              )
+
 
 
                           ),
@@ -1419,7 +1093,7 @@ class _purchaseState extends State<purchase> {
                               SizedBox(
                                 width: width*0.122,
                               ),
-                              Text("VAT(%)"),
+                              Text("Mode"),
                               SizedBox(
                                 width: width*0.146,
                               ),
@@ -1439,7 +1113,7 @@ class _purchaseState extends State<purchase> {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: TextFormField(
-                                    controller: buycostController,
+                                    controller: BuyCostController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
                                     keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.next,
@@ -1479,7 +1153,7 @@ class _purchaseState extends State<purchase> {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: TextFormField(
-                                    controller: vatController,
+                                    controller: PurchaseVATController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
                                     keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.next,
@@ -1516,26 +1190,7 @@ class _purchaseState extends State<purchase> {
                                   border: Border.all(width: width*0.001,color: Colors.black45),
                                   borderRadius: BorderRadius.circular(width*0.01),
                                 ),
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: TextFormField(
-                                      controller: rateController,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(bottom: width * 0.07, left: width * 0.01),
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
-                                        focusColor: colorConst.lightgrey1,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                      ),
-                                    ),
-                                  )
+
                               ),
                             ],
                           ),
@@ -1546,7 +1201,7 @@ class _purchaseState extends State<purchase> {
                             children: [
                               Text("Selling Cost"),
                               SizedBox(width: width*0.21,),
-                              Text("Mode"),
+                              Text("VAT"),
                             ],
                           ),
                           Row(
@@ -1562,7 +1217,7 @@ class _purchaseState extends State<purchase> {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: TextFormField(
-                                    controller: sellingcostController,
+                                    controller: SellCostController,
                                     autovalidateMode: AutovalidateMode.onUserInteraction,
                                     keyboardType: TextInputType.number,  // Allow multiline input
                                     textInputAction: TextInputAction.newline,
@@ -1600,7 +1255,35 @@ class _purchaseState extends State<purchase> {
                                   border: Border.all(width: width*0.001,color: Colors.black45),
                                   borderRadius: BorderRadius.circular(width*0.01),
                                 ),
-
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: TextFormField(
+                                    controller: VATController,
+                                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                                    keyboardType: TextInputType.number,  // Allow multiline input
+                                    textInputAction: TextInputAction.newline,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(5)
+                                    ],// Pressing enter creates a new line
+                                    maxLines: null,  // Allows the text to grow to multiple lines
+                                    decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.only(left: width*0.01),
+                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(width*0.01)),
+                                        focusColor: colorConst.lightgrey1,
+                                        enabledBorder: OutlineInputBorder(borderRadius:BorderRadius.circular(width*0.01),
+                                            borderSide: BorderSide(
+                                                color: colorConst.lightgrey1
+                                            )
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(width*0.01),
+                                            borderSide: BorderSide(
+                                                color: colorConst.lightgrey1
+                                            )
+                                        )
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -1624,26 +1307,6 @@ class _purchaseState extends State<purchase> {
                                   border: Border.all(width: width*0.001,color: Colors.black45),
                                   borderRadius: BorderRadius.circular(width*0.01),
                                 ),
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: TextFormField(
-                                      controller: totalController,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(bottom: width * 0.07, left: width * 0.01),
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
-                                        focusColor: colorConst.lightgrey1,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                      ),
-                                    ),
-                                  )
                               ),
                               SizedBox(
                                 width: width*0.024,
@@ -1656,26 +1319,6 @@ class _purchaseState extends State<purchase> {
                                   border: Border.all(width: width*0.001,color: Colors.black45),
                                   borderRadius: BorderRadius.circular(width*0.01),
                                 ),
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: TextFormField(
-                                      controller: totalwithvatController,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(bottom: width * 0.07, left: width * 0.01),
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(width * 0.01)),
-                                        focusColor: colorConst.lightgrey1,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(width * 0.01),
-                                          borderSide: BorderSide(color: colorConst.lightgrey1),
-                                        ),
-                                      ),
-                                    ),
-                                  )
                               ),
                             ],
                           ),
