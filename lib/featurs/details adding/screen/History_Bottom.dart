@@ -161,7 +161,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
         title: Center(
           child: Container(
             width: width*0.95,
-            height: MediaQuery.of(context).size.height > 520 ?height*0.069:height*0.1,
+            height: MediaQuery.of(context).size.height > 520 ?height*0.055:height*0.1,
             decoration: BoxDecoration(
                 color: Colors.grey[50], borderRadius: BorderRadius.circular(width*0.01)),
             child: Center(
@@ -197,6 +197,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                         });
                       },
                     ),
+                    contentPadding: EdgeInsets.only(top: height*0.006),
                     hintText: Locales.string(context, 'Search...'),
                     border: InputBorder.none),
               ),
@@ -322,7 +323,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
         automaticallyImplyLeading: false,
         title: Container(
           width: double.infinity,
-          height: 40,
+          height: height*0.05,
           decoration: BoxDecoration(
               color: Colors.grey[50], borderRadius: BorderRadius.circular(width*0.03)),
           child: Center(
@@ -358,7 +359,7 @@ class _HistoryBottom3State extends State<HistoryBottom3> {
                       });
                     },
                   ),
-                  contentPadding: EdgeInsets.only(top: width*0.01),
+                  contentPadding: EdgeInsets.only(top: width*0.007),
                   hintText: Locales.string(context, 'Search...'),
                   border: InputBorder.none),
             ),

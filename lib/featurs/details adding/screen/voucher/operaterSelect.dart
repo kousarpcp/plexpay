@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/featurs/details%20adding/screen/offer_details.dart';
@@ -185,7 +186,7 @@ class _OperaterSelectState extends State<OperaterSelect> {
     return MediaQuery.of(context).size.width > 650?
     InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           code: item['ProviderCode'].toString(),
           voucher: widget.voucher.toString(),
           image: item["logo"].toString(),
@@ -229,7 +230,7 @@ class _OperaterSelectState extends State<OperaterSelect> {
       ),
     ):GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           code: item['ProviderCode'].toString(),
           voucher: widget.voucher.toString(),
           image: item["logo"].toString(),

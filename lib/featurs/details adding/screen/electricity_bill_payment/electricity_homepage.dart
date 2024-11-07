@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
@@ -46,7 +47,7 @@ class _ElcHomeState extends State<ElcHome> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => ElcPaynow(data: rsp,ProviderCode: widget.code,CountryIso:widget.iso,image:widget.image,consumer: consumerController.text,)),
+        CupertinoPageRoute(builder: (context) => ElcPaynow(data: rsp,ProviderCode: widget.code,CountryIso:widget.iso,image:widget.image,consumer: consumerController.text,)),
       );
 
 

@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -88,7 +89,7 @@ class _ElcPaynowState extends State<ElcPaynow> {
       Navigator.pushReplacement(
         context,
         // MaterialPageRoute(builder: (context) => bill(id: rsp['transaction_id'].toString())),);
-        MaterialPageRoute(builder: (context) => bill(id: rsp['transaction_id'].toString(),)),);
+        CupertinoPageRoute(builder: (context) => bill(id: rsp['transaction_id'].toString(),)),);
 
       // Navigator.pushReplacement(
       //   context,

@@ -51,7 +51,8 @@ class _internationalState extends State<international> {
     );
   }
   Widget TextField (){
-    return MediaQuery.of(context).size.width > 650? InkWell(
+    return MediaQuery.of(context).size.width > 650?
+    InkWell(
         onTap: () {
           Navigator.push(
               context,
@@ -236,7 +237,7 @@ class _internationalState extends State<international> {
   Widget IntVouchers(){
     return MediaQuery.of(context).size.width > 650?InkWell(
         onTap: () {
-          Navigator.push(context,MaterialPageRoute(builder: (context) => VoucherCountry(),));
+          Navigator.push(context,CupertinoPageRoute(builder: (context) => VoucherCountry(),));
         },
         child: Center(
           child: Container(
@@ -257,7 +258,7 @@ class _internationalState extends State<international> {
         ),
       ):InkWell(
       onTap: () {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => VoucherCountry(),));
+        Navigator.push(context,CupertinoPageRoute(builder: (context) => VoucherCountry(),));
       },
       child: Center(
         child: Container(

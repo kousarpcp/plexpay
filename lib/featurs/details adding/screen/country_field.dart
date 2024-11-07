@@ -43,6 +43,7 @@ class _countryFieldState extends State<countryField> {
   var ProviderName;
   var providerinfo;
   var selectedCountry ="91";
+  var rsp;
 
   TextEditingController numberController = TextEditingController();
 
@@ -69,7 +70,7 @@ class _countryFieldState extends State<countryField> {
       isLoading = true;
     });
 
-    var rsp = await plansByNumberApi(num.toString(), widget.dash);
+    rsp = await plansByNumberApi(num.toString(), widget.dash);
 
     print("responsee");
     print(rsp);
@@ -392,8 +393,9 @@ class _countryFieldState extends State<countryField> {
                       child: TabBarView(
                         children: [
                           popular(
-                            number:selectedCountry+numberController.text.toString(),
-                            name:providerinfo["ProviderName"], dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
+                              number:numberController.text.toString(),
+                              name:providerinfo["ProviderName"], dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
+                              rsp: rsp
 
                           ),
                           dataPacks(
@@ -674,9 +676,9 @@ class _countryFieldState extends State<countryField> {
                       child: TabBarView(
                         children: [
                           popular(
-                            number:selectedCountry+numberController.text.toString(),
+                            number:numberController.text.toString(),
                             name:providerinfo["ProviderName"], dash: widget.dash, plan: planLIst, providerinfo: providerinfo,
-
+                              rsp: rsp
                           ),
                           dataPacks(
                             number:numberController.text,

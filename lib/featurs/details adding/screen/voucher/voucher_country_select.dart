@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plexpay/Const/colorConst.dart';
@@ -131,7 +132,7 @@ class _VoucherCountryState extends State<VoucherCountry> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
               builder: (context) =>
                   OperaterSelect(id: item['CountryIso'].toString(),voucher: "1",dash:"1")),
         );
@@ -152,7 +153,7 @@ class _VoucherCountryState extends State<VoucherCountry> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
               builder: (context) =>
                   OperaterSelect(id: item['CountryIso'].toString(),voucher: "1",dash:"1")),
         );

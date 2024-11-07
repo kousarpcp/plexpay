@@ -483,7 +483,7 @@ class _profileState extends State<profile> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReportsTab(),));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => ReportsTab(),));
                       },
                       child: ListTile(
                         leading: Image.asset(
@@ -500,7 +500,7 @@ class _profileState extends State<profile> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Funds(),));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => Funds(),));
                       },
                       child: ListTile(
                         leading: Image.asset(
@@ -519,7 +519,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => HistoryBottom3(),
                             ));
                       },
@@ -541,7 +541,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => Collections(),
                             ));
                       },
@@ -562,7 +562,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => dueSummary(),
                             ));
                       },
@@ -583,7 +583,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => profitSummary(),
                             ));
                       },
@@ -604,7 +604,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => refundHistory(),
                             ));
                       },
@@ -625,7 +625,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => ChangePIN(),
                             ));
                       },
@@ -1167,7 +1167,7 @@ class _profileState extends State<profile> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReportsTab(),));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => ReportsTab(),));
                       },
                       child: ListTile(
                         leading: Image.asset(
@@ -1184,7 +1184,7 @@ class _profileState extends State<profile> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Funds(),));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => Funds(),));
                       },
                       child: ListTile(
                         leading: Image.asset(
@@ -1203,7 +1203,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => HistoryBottom3(),
                             ));
                       },
@@ -1225,7 +1225,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => Collections(),
                             ));
                       },
@@ -1246,7 +1246,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => dueSummary(),
                             ));
                       },
@@ -1267,7 +1267,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => profitSummary(),
                             ));
                       },
@@ -1288,7 +1288,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => refundHistory(),
                             ));
                       },
@@ -1309,7 +1309,7 @@ class _profileState extends State<profile> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => ChangePIN(),
                             ));
                       },

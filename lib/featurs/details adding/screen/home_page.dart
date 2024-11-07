@@ -192,7 +192,7 @@ class _home_pageState extends State<home_page> {
                   onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => Notifications(),
                         ));
                   },
@@ -213,7 +213,7 @@ class _home_pageState extends State<home_page> {
                     onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => profile(
                           ),
                         ));
@@ -612,7 +612,7 @@ class _home_pageState extends State<home_page> {
                   onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => Notifications(),
                         ));
                   },
@@ -635,7 +635,7 @@ class _home_pageState extends State<home_page> {
                     onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => profile(
                           ),
                         ));

@@ -152,7 +152,7 @@ class _localState extends State<local> {
 
     }
     if(items[index]["type"]=="Gaming Card"){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           name: items[index]["subcategory"],
           image: items[index]["sub_cat_logo"],
           code:items[index]["ProviderCode"],
@@ -171,7 +171,7 @@ class _localState extends State<local> {
       ),));
     }
     if(items[index]["type"]=="DTH"){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
           name: items[index]["subcategory"],
           image: items[index]["sub_cat_logo"],
           code:items[index]["ProviderCode"],
@@ -713,7 +713,7 @@ class _localState extends State<local> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
                             name: gamingCategory[index]["subcategory"],
                             image: gamingCategory[index]["sub_cat_logo"],
                             code:gamingCategory[index]["ProviderCode"],
@@ -772,7 +772,7 @@ class _localState extends State<local> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
                             name: gamingCategory[index]["subcategory"],
                             image: gamingCategory[index]["sub_cat_logo"],
                             code:gamingCategory[index]["ProviderCode"],
@@ -861,7 +861,8 @@ class _localState extends State<local> {
           },
         )
       ],
-    ):Column(
+    ):
+    Column(
       children: [
         Row(
           children: [
@@ -1065,7 +1066,7 @@ class _localState extends State<local> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OfferDetails(
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => OfferDetails(
                             name: dthCategory[index]["subcategory"],
                             image: dthCategory[index]["sub_cat_logo"],
                             code:dthCategory[index]["ProviderCode"],

@@ -11,17 +11,20 @@ class XpayComingsoon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: height*0.4,
-              width: width*1,
-              child: Center(
-                child:Lottie.asset(ImageConst.loading),
+            Center(
+              child: Container(
+                height: height*0.4,
+                width: width*0.7,
+                child: Center(
+                  child:Lottie.asset(ImageConst.loading),
+                ),
               ),
             )
           ],

@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Const/colorConst.dart';
 import '../../../main.dart';
+import '../../xpay/screen/xpay_comingsoon.dart';
 import '../../xpay/screen/xpay_page.dart';
 import '../plexBill/plexBill_homePage.dart';
 import '../plexBill/plexBill_login.dart';
@@ -38,14 +39,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
    List<Widget> Ann = [
     home_page(),
     Collections(),
-    XpayPage(),
+    XpayComingsoon(),
     HistoryBottom3(),
     plexbill_login(),
   ];
   List<Widget> Ann1 = [
     home_page(),
     Collections(),
-    XpayPage(),
+    XpayComingsoon(),
     HistoryBottom3(),
     Plexbill_home(),
   ];
@@ -68,7 +69,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
         bottomNavigationBar:  MediaQuery.of(context).size.width > 650?
         CurvedNavigationBar(
-          buttonBackgroundColor: colorConst.darkblue,
+          buttonBackgroundColor: colorConst.blue,
+
           height: height*0.118,
           backgroundColor: Colors.white,
 
@@ -76,9 +78,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
           items: [
             CurvedNavigationBarItem(label:Locales.string(context, 'Home'),labelStyle: TextStyle(
               fontSize: width*0.015
-            ) , child:  Icon(Icons.home,size: width*0.03)),
+            ) , child:  Icon(Icons.home,size: width*0.03,color: colorConst.lightgrey,)),
             CurvedNavigationBarItem(
-                child:  Icon(CupertinoIcons.chart_pie,size: width*0.03),
+                child:  Icon(CupertinoIcons.chart_pie,size: width*0.03,color: colorConst.lightgrey,),
                 label:Locales.string(context, 'Collections'),
                 labelStyle: TextStyle(
                 fontSize: width*0.015
@@ -95,13 +97,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
             ),
             CurvedNavigationBarItem(
-              child: Icon(Icons.history,size: width*0.03),
+              child: Icon(Icons.history,size: width*0.03,color: colorConst.lightgrey,),
               label: Locales.string(context, 'History'),labelStyle: TextStyle(
                 fontSize: width*0.015
             )
             ),
             CurvedNavigationBarItem(
-                child: Icon(Icons.sticky_note_2_outlined,size: width*0.03,),
+                child: Icon(Icons.sticky_note_2_outlined,size: width*0.03,color: colorConst.lightgrey,),
                 label:Locales.string(context, 'PlexBill'),labelStyle: TextStyle(
                 fontSize: width*0.015
             )

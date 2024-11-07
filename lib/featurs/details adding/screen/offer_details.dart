@@ -46,11 +46,11 @@ class _OfferDetailsState extends State<OfferDetails> {
           title: Text(
             widget.name,
             style:
-                TextStyle(fontSize: width * 0.03, fontWeight: FontWeight.w700),
+                TextStyle(fontSize: width * 0.02, fontWeight: FontWeight.w700),
           ),
           actions: [
             CircleAvatar(
-              radius: width*0.021,
+              radius: width*0.018,
                 backgroundImage:NetworkImage(widget.image,),
               backgroundColor: Colors.white,
                 ),
@@ -104,12 +104,12 @@ class _OfferDetailsState extends State<OfferDetails> {
             Expanded(
               child: TabBarView(children: [
                 offer(
-                  name:widget.name,
-                  image:widget.image,
-                  code:widget.code,
-                  dash:widget.dash,
-                  iso:widget.iso,
-                  voucher:widget.voucher
+                    name:widget.name,
+                    image:widget.image,
+                    code:widget.code,
+                    dash:widget.dash,
+                    iso:widget.iso,
+                    voucher:widget.voucher
 
                 ),
                 custom(
@@ -133,21 +133,6 @@ class _OfferDetailsState extends State<OfferDetails> {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Colors.white,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              height: width * 0.05,
-              width: width * 0.08,
-              child: Padding(
-                padding: EdgeInsets.all(width * 0.03),
-                child: SvgPicture.asset(
-                  ImageConst.back,
-                ),
-              ),
-            ),
-          ),
           title: Text(
             widget.name,
             style:
