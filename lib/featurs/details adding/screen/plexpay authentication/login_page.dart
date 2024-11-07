@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
     return MediaQuery.of(context).size.width > 650 ?
       SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset:true ,
         backgroundColor: Colors.white,
         body: Form(
           key: formKey,
@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 Container(
-                  height: height*0.135,
+                  height: height*0.139,
                   width: width*1,
                   margin: EdgeInsets.only(
                       top: width*0.035
@@ -120,7 +120,7 @@ class _LoginState extends State<Login> {
                           fontWeight: FontWeight.w900
                       ),),
                       Center(child: Image.asset(ImageConst.plexpay,width: width*0.183,)),
-
+            
                     ],
                   ),
                 ),
@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
                           controller: userController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-
+            
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           autocorrect: true,
                           cursorColor: colorConst.blue,
@@ -230,7 +230,7 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 tap=!tap;
                                 setState(() {
-
+            
                                 });
                               },
                               child: tap?Icon(
@@ -279,10 +279,10 @@ class _LoginState extends State<Login> {
                                 onChanged: (v)async{
                                   setState(() {
                                     isCheck=v!;
-
-
+            
+            
                                   });
-
+            
                                   if(isCheck==true&&userController.text.isNotEmpty&&passwordController.text.isNotEmpty){
                                     var un = await sharedPrefrence(currentusername, userController.text.toString() );
                                     var pass = await sharedPrefrence(currentpassword, passwordController.text.toString());
@@ -291,7 +291,7 @@ class _LoginState extends State<Login> {
                                     var un = await sharedPrefrence(userController, null );
                                     var pass = await sharedPrefrence(passwordController, null);
                                     var ck = await sharedPrefrence(chek, null);
-
+            
                                   }
                                 }),
                           )),
@@ -304,21 +304,101 @@ class _LoginState extends State<Login> {
                     ]),
                   ),
                 ),
-
-                InkWell(
-                  onTap: () async {
-
+                gap,
+                // InkWell(
+                //   onTap: () async {
+                //
+                //     if(userController.text.isNotEmpty&&
+                //     passwordController.text.isNotEmpty)
+                //     {
+                //       var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
+                //
+                //       print("rspppp");
+                //       print(rsp);
+                //       if (rsp['success'] == true) {
+                //         var id = await sharedPrefrence("userId", rsp['user_id']);
+                //         var token = await sharedPrefrence("token", rsp['access_token']);
+                //
+                //         var name = await sharedPrefrence(shopname, rsp['name']);
+                //         username=name;
+                //         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
+                //         showToast("Login Success!");
+                //         print("wrking");
+                //         print(rsp['user_id']);
+                //         print(rsp['access_token']);
+                //
+                //       } else {
+                //         showToast("Invalid Credentials!");
+                //         setState(() {
+                //         });
+                //       }
+                //
+                //
+                //
+                //     }else{
+                //       if(userController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your Username',
+                //         );
+                //         return;
+                //       }
+                //       if(passwordController.text ==""){
+                //         QuickAlert.show(
+                //           barrierDismissible: false,
+                //           confirmBtnColor: Colors.red.shade600,
+                //           context: context,
+                //           type: QuickAlertType.error,
+                //           title: 'Oops...',
+                //           text: 'Sorry, please Enter your password',
+                //         );
+                //         return;
+                //       }
+                //     }
+                //   },
+                //   child: Container(
+                //     width: width*0.55,
+                //     height: height*0.07,
+                //     decoration: BoxDecoration(
+                //       borderRadius:  BorderRadius.circular(width*0.022),
+                //       color: colorConst.blue
+                //     ),
+                //     child: Center(child: Text("Login",style: TextStyle(
+                //         color: Colors.white,fontSize: width*0.02
+                //     ),)),
+                //   ),
+                // ),
+                AnimatedButton(
+                  width: width*0.55,
+                  height: height*0.07,
+                  borderRadius: width*0.022,
+                  text: "Login",
+                  backgroundColor: colorConst.blue,
+                  animationDuration: Duration(seconds: 1),
+                  textStyle: TextStyle(
+                      fontSize: width*0.02,
+                      color: Colors.white
+                  ),
+                  selectedText: "Please wait...",
+                  selectedBackgroundColor: Colors.white,
+                  selectedTextColor: colorConst.blue,
+                  transitionType: TransitionType.CENTER_LR_OUT,
+                  onPress: () async {
                     if(userController.text.isNotEmpty&&
-                    passwordController.text.isNotEmpty)
+                        passwordController.text.isNotEmpty)
                     {
                       var rsp=await loginApi(userController.text.toString(),passwordController.text.toString());
-
+            
                       print("rspppp");
                       print(rsp);
                       if (rsp['success'] == true) {
                         var id = await sharedPrefrence("userId", rsp['user_id']);
                         var token = await sharedPrefrence("token", rsp['access_token']);
-
+            
                         var name = await sharedPrefrence(shopname, rsp['name']);
                         username=name;
                         Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation(),), (route) => false);
@@ -326,15 +406,15 @@ class _LoginState extends State<Login> {
                         print("wrking");
                         print(rsp['user_id']);
                         print(rsp['access_token']);
-
+            
                       } else {
                         showToast("Invalid Credentials!");
                         setState(() {
                         });
                       }
-
-
-
+            
+            
+            
                     }else{
                       if(userController.text ==""){
                         QuickAlert.show(
@@ -360,17 +440,6 @@ class _LoginState extends State<Login> {
                       }
                     }
                   },
-                  child: Container(
-                    width: width*0.55,
-                    height: height*0.07,
-                    decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.circular(width*0.022),
-                      color: colorConst.blue
-                    ),
-                    child: Center(child: Text("Login",style: TextStyle(
-                        color: Colors.white,fontSize: width*0.02
-                    ),)),
-                  ),
                 ),
                 SizedBox(
                   height: height*0.02,
@@ -381,73 +450,26 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: height*0.01,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
-                      },
-                      child: Container(
-                        width: width*0.24,
-                        height: height*0.07,
-                        decoration: BoxDecoration(
-                            borderRadius:  BorderRadius.circular(width*0.022),
-                            color: colorConst.blue
-                        ),
-                        child: Center(child: Text("Sign up",style: TextStyle(
-                            color: Colors.white,fontSize: width*0.016
-                        ),)),
-                      ),
+                InkWell(
+                  onTap: () {
+                    // Navigator.push(context, CupertinoPageRoute(builder: (context) => NumberSubmitPage(),));
+                  },
+                  child: Container(
+                    width: width*0.55,
+                    height: height*0.07,
+                    decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.circular(width*0.022),
+                        color: colorConst.blue
                     ),
-
-                    Container(
-                      width: width*0.24,
-                      height: height*0.07,
-                      decoration: BoxDecoration(
-                          borderRadius:  BorderRadius.circular(width*0.1),
-                          color: colorConst.blue
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              width: width*0.04,
-                              height: height*0.03,
-                              child: Image(image: NetworkImage("https://uaepass.ae/images/finger-print.png"))),
-                          Text("Sign up with UAE Pass",textAlign: TextAlign.center,style: TextStyle(
-                              fontSize: width*0.016,
-                              color: Colors.white
-                          ),),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-
-                      },
-                      child: Container(
-                        width: width*0.24,
-                        height: height*0.07,
-                        decoration: BoxDecoration(
-                          borderRadius:  BorderRadius.circular(width*0.1),
-                          color: colorConst.blue,
-                        ),
-                        child: Center(
-                          child: Text("Sign up with Google",textAlign: TextAlign.center,style: TextStyle(
-                              fontSize: width*0.016,
-                              color: Colors.white
-                          ),),
-                        ),
-                      ),
-                    ),
-                  ],
+                    child: Center(child: Text("Sign up",style: TextStyle(
+                        color: Colors.white,fontSize: width*0.02
+                    ),)),
+                  ),
                 ),
                 SizedBox(
-                  height: height*0.03,
+                  height: height*0.05,
                 )
-
-
+            
                 // TextFormField(
                 //   controller: userController,
                 //   textInputAction: TextInputAction.next,
@@ -759,7 +781,7 @@ class _LoginState extends State<Login> {
                             color: colorConst.blue
                         ),
                         child: Center(child: Text("Sign up",style: TextStyle(
-                            fontSize: width*0.03,
+                            fontSize: width*0.035,
                             color: Colors.white
                         ),)),
                       ),
@@ -782,7 +804,7 @@ class _LoginState extends State<Login> {
                               height: height*0.07,
                               child: Image(image: NetworkImage("https://uaepass.ae/images/finger-print.png"))),
                           Text("Sign up with\nUAE Pass",textAlign: TextAlign.center,style: TextStyle(
-                            fontSize: width*0.027,
+                            fontSize: width*0.032,
                               color: Colors.white
                           ),),
                         ],
@@ -791,7 +813,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
                 SizedBox(
-                  height: height*0.02,
+                  height: height*0.01,
                 ),
                 InkWell(
                   onTap: () {
@@ -799,14 +821,14 @@ class _LoginState extends State<Login> {
                   },
                   child: Container(
                     width: width*0.35,
-                    height: height*0.055,
+                    height: height*0.06,
                     decoration: BoxDecoration(
                         borderRadius:  BorderRadius.circular(width*0.1),
-                        color: colorConst.blue,
+                        color: colorConst.blue
                     ),
                     child: Center(
                       child: Text("Sign up with\nGoogle",textAlign: TextAlign.center,style: TextStyle(
-                          fontSize: width*0.027,
+                          fontSize: width*0.032,
                           color: Colors.white
                       ),),
                     ),

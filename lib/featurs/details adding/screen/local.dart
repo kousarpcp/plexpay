@@ -624,7 +624,7 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: height*0.01,),
-                Text(voucherCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.02),overflow: TextOverflow.ellipsis,)
+                Text(voucherCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.018),overflow: TextOverflow.ellipsis,)
               ],
             );
           },
@@ -855,7 +855,7 @@ class _localState extends State<local> {
                   ],
                 ),
                 SizedBox(height: height*0.01,),
-                Text(electricityCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.002),)
+                Text(electricityCategory[index]["subcategory"],style: TextStyle(fontSize: width*0.018),)
               ],
             );
           },
